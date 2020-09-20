@@ -105,6 +105,9 @@ class UUID:
         else:
             raise Exception("Wrong argument type for UUID:", type(identifier))
 
+    def print_matrix(self):
+        print_binmatrix(self.m)
+
     @staticmethod  # Needs to be static to avoid self.__hash__ starting calculation of lazy values
     @lru_cache()
     def _lazy_upper_limit(side: int) -> int:

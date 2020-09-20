@@ -114,7 +114,7 @@ def print_binmatrix(m):
         None
     """
     for row in m:
-        print(" ".join(format(2 ** row, f"0{len(m)}b")), row)
+        print(" ".join(format(2 ** row, f"0{len(m)}b")), "  ", row)
 
 
 def int2fac(number):
