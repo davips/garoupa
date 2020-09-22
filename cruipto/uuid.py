@@ -181,6 +181,25 @@ class UUID:
             file = file.replace("{id}", self.id)
         avatar(self, file)
 
+
+    @staticmethod
+    def load_avatar(file="/tmp/avatar.jpg"):
+        # chars = alph.letters800
+        langs = "afr+all+amh+ara+asm+aze+aze-cyrl+bel+ben+bod+bos+bre+bul+cat+ceb+ces+chi-sim+chi-sim-vert+chi-tra" \
+                "+chi-tra-vert+chr+cos+cym+dan+deu+div+dzo+ell+eng+enm+epo+est+eus+fao+fas+fil+fin+fra+frk+frm+fry" \
+                "+gla+gle+glg+guj+hat+heb+hin+hrv+hun+hye+iku+ind+isl+ita+ita-old+jav+jpn+jpn-vert+kan+kat+kat-old" \
+                "+kaz+khm+kir+kor+kor-vert+kur-ara+lao+lat+lav+lit+ltz+mal+mar+mkd+mlt+mon+mri+msa+mya+nep+nld+nor" \
+                "+oci+ori+osd+pan+pol+por+pus+que+ron+rus+san+script-arab+script-armn+script-beng+script-cans+script" \
+                "-cher+script-cyrl+script-deva+script-ethi+script-frak+script-geor+script-grek+script-gujr+script" \
+                "-guru+script-hang+script-hang-vert+script-hans+script-hans-vert+script-hant+script-hant-vert+script" \
+                "-hebr+script-jpan+script-jpan-vert+script-khmr+script-knda+script-laoo+script-latn+script-mlym" \
+                "+script-mymr+script-orya+script-sinh+script-syrc+script-taml+script-telu+script-thaa+script-thai" \
+                "+script-tibt+script-viet+sin+slk+slv+snd+spa+spa-old+sqi+srp+srp-latn+sun+swa+swe+syr+tam+tat+tel" \
+                "+tgk+tha+tir+ton+tur+uig+ukr+urd+uzb+uzb-cyrl+vie+yid+yor"
+        # txt = image_to_string(Image.open(file), lang=langs, config=f"-c tessedit_char_whitelist={chars}")
+        txt = image_to_string(Image.open(file), lang="por")
+        return txt.replace("\n", "")
+
     def __mul__(self, other):
         """Flexible merge/unmerge with another UUID.
 
