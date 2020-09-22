@@ -12,28 +12,40 @@ def __getattr__(name: str) -> Optional[Dict[str, int]]:
 
 # UTF-8, but only uses 1-2 bytes. փ
 # TheIdMatrixxxx
+# letters800 = "_1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"  # noqa
 letters800 = "0123456789ABCDEFGHͷJKLəNOPQRSŃUVWXYZȮbcƵËfgբŇjklmοopqƔs_uvwքyzµÀÁιÃÄΊΊÇÈÉÊeÌÍÎÏω_ÒÓÔtÖØÙÚÛÜÝÞßàáâãäχæçèéêëìíîïðñòρôõöøùúûüýþÿĀāĂăĄąĆćĈĉĊΊČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİμĵĶķĸύĺĻļĽTΊdTńŅņiňŉŊŋŌōŎxŐőŔŕŖρŘřŚśŜŝŞşŠšŢţŤťŦŧŨũxūŬŭŮůŰűŲųŴŵλŷŸŹźŻżŽžſƀƁƂƃƄƅƆƇƈƉƊƋƌƍƎρƐωrƓrƕƖtƘƙƚƛƜƝƞƟxơƢƣƤƥƦƧƨƩƪƫƬλoƯưƱμƳƴdƶƷƸƹƺοƼƽƾƿaǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞiǠǡǢǣǦǧǨǩǪǫǬǭǮǯǰǴǵǶǸǹǼǽǾǿȀȁȂȃȄȅȆιȈȉȊȋȌȍȎȏȐȑȒȓȔȕȖȗȘșȚțμȟȠȡ_ȥȦȧȨȩȪȫȬȭaȯȰȱȲȳȷȺȻȼɃɄɅɌɍɐɑɒɓɔɕɖɗɘMɛɜɟɠɡɢɥɦɧɩɪɫɬɯɰɱɲɳɴɵɶɷɸɹɺɻύɽɾɿʀʁʂʃʄʅʆʇρʉʊʋʌςʎʏʐʑʒʓʘʙʛʜʝʞʟʠͶIͻͿΆpΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜλΞΟΠΡμΤιΦΧΨΩΪΫάύήίΰαβoδεζηθικλμνξοIρdστυφχψoϊϋόύιϐϑϒϓϔϕϖpϘpϚϛϜϝϰϱϲϳϴϵϷϸϹϺϻϼϽЀЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕ_ЗИЙКЛМНОПРСТУФχЦЧpχЪЫЬЭЮЯабвгдежзχйклмнопрсπeфхцчшщъыьэюяdёђѓєѕіїјљњћќѝўџѢѣѲѳҐґҒғҔҕoҗҘҙҚқҢңIҥҪҫҬҭύMҰұҲҳҺһӀӁӂӃӄӇӈӋӌӐӑӒӓxӕӖӗӘәӚӛӜӝӞӟӠӡӢӣӤӥӦӧӨIӪӫӬωhӯӰӱӲӳoӵӶӷӸӹԐԑԚԛԜԝՓՕIաhգդdզοըթժիխծλհձղճմնշոչպջռսվտրցւփxֆ"  # noqa
-# ent = "ÅóÂʍÑтƻկĹЩϗÐΣƮ"
-# # sai = "TheIdMatrixxxx"
-# sai = "Ίρις_πολύχpωμo"
-# m = dict(zip(ent, sai))
-# o = dict(zip(sai, ent))
-# print(m)
-# print(o)
-# oldletters800 = letters800
-# r = ""
-# for l in letters800:
-#     if l in m:
-#         print("m", l, m[l])
-#         x = m[l]
-#     else:
-#         x = l
-#     r += x
-# rold = r
-# letters800 = rold
-# print(oldletters800)
+
+def hack(inp, out, al):
+    both = inp + out
+    # if len(set(both)) < len(list(set(inp)) + list(set(out))):
+    #     raise Exception("colliding")
+    # sai = "TheIdMatrixxxx"
+    # sai = "Ίρις_πολύχpωμo"
+    m = dict(zip(inp, out))
+    o = dict(zip(out, inp))
+    r = ""
+    for l in al:
+        if l in m:
+            x = m[l]
+            # if l in o:
+            #     exit()
+        elif l in o:
+            x = o[l]
+            # if l in m:
+            #     exit()
+        else:
+            x = l
+        r += x
+    if len(r) != len(set(r)):
+        print("repetiu")
+        exit()
+    return r
+
 # print(letters800)
+# print(hack(inp, out, letters800))
+# letters800=hack(inp, out, letters800)
 #
+
 # This commented section bellow includes PIL package and alternative alphabets.
 # Not really needed by now..............................................................................................
 # def pixel_width(unicode_text):
