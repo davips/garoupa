@@ -24,7 +24,7 @@ def md5_int(bytes_content: bytes):
     -------
         a big integer in [0; 2^128[
     """
-    return int.from_bytes(hashlib.md5(bytes_content).digest(), "big")
+    return int.from_bytes(hashlib.md5(bytes_content).digest(), "big")  # or little? or whatever?
 
 
 def enc(number: int, alphabet: str = alph.letters800, padding: int = 14) -> str:
@@ -181,7 +181,7 @@ def integers2bytes(lst: List[int]) -> bytes:
 def bytes2integers(bytes_content: bytes) -> List[int]:
     """Each 4 bytes become an int."""
     n = len(bytes_content)
-    return [int.from_bytes(bytes_content[i : i + 4], "big") for i in range(0, n, 4)]
+    return [int.from_bytes(bytes_content[i: i + 4], "big") for i in range(0, n, 4)]
 
 
 # Dirty and fast encoders, ....
