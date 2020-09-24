@@ -15,10 +15,8 @@ def __getattr__(name: str) -> Optional[Dict[str, int]]:
 # letters800 = "_1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"  # noqa
 letters800 = "0123456789ABCDEFGHͷJKLəNOPQRSŃUVWXYZȮbcƵËfgբŇjklmοopqƔs_uvwքyzµÀÁιÃÄΊΊÇÈÉÊeÌÍÎÏω_ÒÓÔtÖØÙÚÛÜÝÞßàáâãäχæçèéêëìíîïðñòρôõöøùúûüýþÿĀāĂăĄąĆćĈĉĊΊČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİμĵĶķĸύĺĻļĽTΊdTńŅņiňŉŊŋŌōŎxŐőŔŕŖρŘřŚśŜŝŞşŠšŢţŤťŦŧŨũxūŬŭŮůŰűŲųŴŵλŷŸŹźŻżŽžſƀƁƂƃƄƅƆƇƈƉƊƋƌƍƎρƐωrƓrƕƖtƘƙƚƛƜƝƞƟxơƢƣƤƥƦƧƨƩƪƫƬλoƯưƱμƳƴdƶƷƸƹƺοƼƽƾƿaǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞiǠǡǢǣǦǧǨǩǪǫǬǭǮǯǰǴǵǶǸǹǼǽǾǿȀȁȂȃȄȅȆιȈȉȊȋȌȍȎȏȐȑȒȓȔȕȖȗȘșȚțμȟȠȡ_ȥȦȧȨȩȪȫȬȭaȯȰȱȲȳȷȺȻȼɃɄɅɌɍɐɑɒɓɔɕɖɗɘMɛɜɟɠɡɢɥɦɧɩɪɫɬɯɰɱɲɳɴɵɶɷɸɹɺɻύɽɾɿʀʁʂʃʄʅʆʇρʉʊʋʌςʎʏʐʑʒʓʘʙʛʜʝʞʟʠͶIͻͿΆpΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜλΞΟΠΡμΤιΦΧΨΩΪΫάύήίΰαβoδεζηθικλμνξοIρdστυφχψoϊϋόύιϐϑϒϓϔϕϖpϘpϚϛϜϝϰϱϲϳϴϵϷϸϹϺϻϼϽЀЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕ_ЗИЙКЛМНОПРСТУФχЦЧpχЪЫЬЭЮЯабвгдежзχйклмнопрсπeфхцчшщъыьэюяdёђѓєѕіїјљњћќѝўџѢѣѲѳҐґҒғҔҕoҗҘҙҚқҢңIҥҪҫҬҭύMҰұҲҳҺһӀӁӂӃӄӇӈӋӌӐӑӒӓxӕӖӗӘәӚӛӜӝӞӟӠӡӢӣӤӥӦӧӨIӪӫӬωhӯӰӱӲӳoӵӶӷӸӹԐԑԚԛԜԝՓՕIաhգդdզοըթժիխծλհձղճմնշոչպջռսվտրցւփxֆ"  # noqa
 
+
 def hack(inp, out, al):
-    both = inp + out
-    # if len(set(both)) < len(list(set(inp)) + list(set(out))):
-    #     raise Exception("colliding")
     # sai = "TheIdMatrixxxx"
     # sai = "Ίρις_πολύχpωμo"
     m = dict(zip(inp, out))
@@ -43,7 +41,8 @@ def hack(inp, out, al):
 
 # print(letters800)
 # print(hack(inp, out, letters800))
-# letters800=hack(inp, out, letters800)
+# print("hackkkkkkkkkkkkkkkkkk")
+# letters800=hack("HЅεКӰΠМΊÀĘțΑïժ", "Ίρις_πολύχpωμo", letters800)
 #
 
 # This commented section bellow includes PIL package and alternative alphabets.
