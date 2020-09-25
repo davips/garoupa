@@ -173,15 +173,25 @@ def decrypt(encrypted_msg: bytes, key: bytes) -> bytes:
     return cipher.decrypt(encrypted_msg)
 
 
-def integers2bytes(lst: List[int]) -> bytes:
+def integers2bytes(*lst) -> bytes:
     """Each int becomes 4 bytes. max=4294967294"""
-    return b"".join([n.to_bytes(4, byteorder="big") for n in lst])
+    return b"".join([n.to_bytes(4, byteorder="little") for n in lst])
 
 
 def bytes2integers(bytes_content: bytes) -> List[int]:
     """Each 4 bytes become an int."""
     n = len(bytes_content)
-    return [int.from_bytes(bytes_content[i: i + 4], "big") for i in range(0, n, 4)]
+    return [int.from_bytes(bytes_content[i: i + 4], "little") for i in range(0, n, 4)]
+
+
+# def float2bytes(*lst) -> bytes:
+#     """Each float becomes 8 bytes. max=4294967294"""
+#     return struct.pack("!" + str(len(lst)) + "d", *lst)
+#
+#
+# def bytes2float(bytes_content: bytes) -> List[float]:
+#     """Each 8 bytes become a float."""
+#     return struct.unpack("!" + str(len(bytes_content) // 8) + "d", bytes_content)
 
 
 # Dirty and fast encoders, ....
