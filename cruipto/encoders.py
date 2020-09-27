@@ -1,6 +1,7 @@
 # encoders
 
 import hashlib
+import struct
 from typing import Dict, List
 
 import cruipto.alphabets as alph
@@ -173,15 +174,15 @@ def decrypt(encrypted_msg: bytes, key: bytes) -> bytes:
     return cipher.decrypt(encrypted_msg)
 
 
-def integers2bytes(*lst) -> bytes:
-    """Each int becomes 4 bytes. max=4294967294"""
-    return b"".join([n.to_bytes(4, byteorder="little") for n in lst])
+def integers2bytes(lst, n=4) -> bytes:
+    """Each int becomes N bytes. max=4294967294 for 4 bytes"""
+    return bytes([n.to_bytes(n, byteorder="little") for n in lst])
 
 
-def bytes2integers(bytes_content: bytes) -> List[int]:
+def bytes2integers(bytes_content: bytes, n=4) -> List[int]:
     """Each 4 bytes become an int."""
     n = len(bytes_content)
-    return [int.from_bytes(bytes_content[i: i + 4], "little") for i in range(0, n, 4)]
+    return [int.from_bytes(bytes_content[i: i + n], "little") for i in range(0, n, n)]
 
 
 # def float2bytes(*lst) -> bytes:

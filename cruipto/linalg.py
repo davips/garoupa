@@ -1,8 +1,11 @@
+import math
 from dataclasses import dataclass
 from functools import lru_cache, cached_property
+from hashlib import md5
 from math import factorial
 
 from cruipto.decorator import classproperty
+from cruipto.encoders import md5_int, bytes2integers, integers2bytes
 
 
 def int2pmat(number, side=35):
@@ -196,13 +199,83 @@ def fac2int(digits):
     return res
 
 
-def lazyhash(msg: bytes):
+def lazyhash(msg: bytes, length=16):
     """Algebraic hash function: incremental/decremental, associative etc.
     Provide all non-abelian group niceties over permutation matrix multiplication."""
-    r = range(34, -1, -1)
+    side = unfac(2 ** (length * 8)) - 1
+    r = int2pmat(255 - msg[0], side=side)
     for b in msg:
-        r = pmat_mult(r, int2pmat(b))  # HINT: a byte is just an int for Python.
-    return pmat2int(r)
+        r = pmat_mult(r, int2pmat(b, side=side))  # HINT: a byte is just an int for Python.
+    return pmat2int(r).to_bytes(length, byteorder="little")
+
+
+def bytes2int(byts):
+    n = 0
+    idx = 0
+    while idx < len(byts):
+        n += byts[idx] * pow(256, idx)
+        idx += 1
+    return n
+
+
+def int2bytes(num):
+    byts = []
+    res = num
+    while res > 0:
+        res, rem = divmod(res, 256)
+        byts.append(rem.to_bytes(1, "little")[0])
+    return byts
+
+
+def unfac(n):
+    tofac = 1
+    res, rem = n, 1
+    while res > 0:
+        tofac += 1
+        res, rem = divmod(res, tofac)
+    if tofac < 6:  # 6x6 to represent at least 1 byte as key
+        tofac = 6
+    return tofac
+
+
+def lazyencrypt(msg, key):
+    n = bytes2int(key)
+    side = unfac(n)
+    keymat = int2pmat(n, side=side)
+    t = []
+    resbytes = [0] + list(msg[:len(key) - 1])
+    for l in msg:
+        resbytes = resbytes[1:] + [l]
+        resmat = int2pmat(bytes2int(resbytes), side=side)
+        resmat = pmat_mult(resmat, keymat)
+        resbytes = int2bytes(pmat2int(resmat))
+        print(l, resbytes)
+
+        # use only first byte of resulting matrix for output, the rest becomes the next key
+        t.append(resbytes[0])
+    return bytes(t + resbytes[1:])
+
+
+def lazydecrypt(encrypted, key):
+    n = bytes2int(key)
+    side = unfac(n)
+    keymat = int2pmat(n, side=side)
+    t = []
+    i = len(encrypted) - len(key)
+    pref = list(encrypted[len(key) + 1:])
+    while i >= 0:
+        print(i, "pref", pref, encrypted)
+        seg = [encrypted[i]] + pref
+        segmat = int2pmat(bytes2int(seg), side=side)
+        resmat = pmat_mult(segmat, pmat_transpose(keymat))
+        resbytes = int2bytes(pmat2int(resmat))
+        print('i', i, resbytes)
+
+        # use only first byte of resulting matrix for output, the rest becomes the next key
+        t.append(resbytes[-1])
+        i -= 1
+        pref = resbytes[:-1]
+    return bytes(reversed(t + pref))
 
 
 @dataclass(frozen=False)
