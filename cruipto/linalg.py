@@ -239,6 +239,7 @@ def unfac(n):
 
 
 def lazyencrypt(msg, key):
+    print("not finished!")
     n = bytes2int(key)
     side = unfac(n)
     keymat = int2pmat(n, side=side)
@@ -257,6 +258,7 @@ def lazyencrypt(msg, key):
 
 
 def lazydecrypt(encrypted, key):
+    print("not finished!")
     n = bytes2int(key)
     side = unfac(n)
     keymat = int2pmat(n, side=side)
