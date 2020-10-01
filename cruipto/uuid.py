@@ -176,8 +176,10 @@ class UUID:
             self._isfirst = self.m == self.first_matrix
         return self._isfirst
 
-    def generate_avatar(self, file="/tmp/avatar_{id}.jpg"):
-        """Colorful visual representation of UUID."""
+    def generate_avatar(self, file="uuid-avatar-{id}.jpg"):
+        """Colorful visual representation of UUID.
+
+        <$id> at the filename will be replace by the string representation of this UUID object."""
         if "{id}" in file:
             file = file.replace("{id}", self.id)
         avatar(self, file)

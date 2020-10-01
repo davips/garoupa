@@ -18,7 +18,12 @@ def move(fc, aft):
     return dr, dg, db
 
 
-def avatar(uuid, f="/tmp/text.jpg"):
+def avatar(uuid, f="uuid-avatar-$id.jpg"):
+    """Generate a colorful image.
+
+    <$id> at the filename will be replaced by the provided uuid."""
+    if "$id" in f:
+        f.replace("$id", uuid)
     n = uuid.n
     tt = " " + uuid.id
 
