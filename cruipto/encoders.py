@@ -176,13 +176,12 @@ def decrypt(encrypted_msg: bytes, key: bytes) -> bytes:
 
 def integers2bytes(lst, n=4) -> bytes:
     """Each int becomes N bytes. max=4294967294 for 4 bytes"""
-    return bytes([n.to_bytes(n, byteorder="little") for n in lst])
+    return b"".join(d.to_bytes(n, byteorder="little") for d in lst)
 
 
 def bytes2integers(bytes_content: bytes, n=4) -> List[int]:
     """Each 4 bytes become an int."""
-    n = len(bytes_content)
-    return [int.from_bytes(bytes_content[i: i + n], "little") for i in range(0, n, n)]
+    return [int.from_bytes(bytes_content[i: i + n], "little") for i in range(0, len(bytes_content), n)]
 
 
 # def float2bytes(*lst) -> bytes:
