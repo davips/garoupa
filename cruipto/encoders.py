@@ -28,7 +28,7 @@ def md5_int(bytes_content: bytes):
     return int.from_bytes(hashlib.md5(bytes_content).digest(), "big")  # or little? or whatever?
 
 
-def enc(number: int, alphabet: str = alph.letters800, padding: int = 14) -> str:
+def enc(number: int, alphabet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", padding: int = 23) -> str:
     """Encode an integer to base-n. n = len(alphabet).
 
     The default is base-800 since it is enough to represent MD5 as 18 chars in
@@ -134,7 +134,7 @@ Out[7]: 22.32449128323706
     return "".join(res)[::-1].rjust(padding, "0")
 
 
-def dec(digits: str, lookup: Dict[str, int] = alph.lookup800) -> int:
+def dec(digits: str, lookup: Dict[str, int] = {char: idx for idx, char in enumerate("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")}) -> int:
     """Decode digits from base-len(alphabet).
     
     See enc() for more info.

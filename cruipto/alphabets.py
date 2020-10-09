@@ -1,44 +1,6 @@
 """Alphabets carefully chosen to provide clickable, recognizable and short codes.
 Dictionaries for fast lookup are also provided"""
 
-from typing import Dict, Optional
-
-
-def __getattr__(name: str) -> Optional[Dict[str, int]]:
-    if name == "lookup800":
-        return {char: idx for idx, char in enumerate(letters800)}
-    raise AttributeError
-
-
-# UTF-8, but only uses 1-2 bytes. փ
-# TheIdMatrixxxx
-# letters800 = "_1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"  # noqa
-letters800 = "0123456789ABCDEFGHͷJKLəNOPQRSŃUVWXYZȮbcƵËfgբŇjklmοopqƔs_uvwքyzµÀÁιÃÄΊΊÇÈÉÊeÌÍÎÏω_ÒÓÔtÖØÙÚÛÜÝÞßàáâãäχæçèéêëìíîïðñòρôõöøùúûüýþÿĀāĂăĄąĆćĈĉĊΊČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİμĵĶķĸύĺĻļĽTΊdTńŅņiňŉŊŋŌōŎxŐőŔŕŖρŘřŚśŜŝŞşŠšŢţŤťŦŧŨũxūŬŭŮůŰűŲųŴŵλŷŸŹźŻżŽžſƀƁƂƃƄƅƆƇƈƉƊƋƌƍƎρƐωrƓrƕƖtƘƙƚƛƜƝƞƟxơƢƣƤƥƦƧƨƩƪƫƬλoƯưƱμƳƴdƶƷƸƹƺοƼƽƾƿaǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞiǠǡǢǣǦǧǨǩǪǫǬǭǮǯǰǴǵǶǸǹǼǽǾǿȀȁȂȃȄȅȆιȈȉȊȋȌȍȎȏȐȑȒȓȔȕȖȗȘșȚțμȟȠȡ_ȥȦȧȨȩȪȫȬȭaȯȰȱȲȳȷȺȻȼɃɄɅɌɍɐɑɒɓɔɕɖɗɘMɛɜɟɠɡɢɥɦɧɩɪɫɬɯɰɱɲɳɴɵɶɷɸɹɺɻύɽɾɿʀʁʂʃʄʅʆʇρʉʊʋʌςʎʏʐʑʒʓʘʙʛʜʝʞʟʠͶIͻͿΆpΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜλΞΟΠΡμΤιΦΧΨΩΪΫάύήίΰαβoδεζηθικλμνξοIρdστυφχψoϊϋόύιϐϑϒϓϔϕϖpϘpϚϛϜϝϰϱϲϳϴϵϷϸϹϺϻϼϽЀЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕ_ЗИЙКЛМНОПРСТУФχЦЧpχЪЫЬЭЮЯабвгдежзχйклмнопрсπeфхцчшщъыьэюяdёђѓєѕіїјљњћќѝўџѢѣѲѳҐґҒғҔҕoҗҘҙҚқҢңIҥҪҫҬҭύMҰұҲҳҺһӀӁӂӃӄӇӈӋӌӐӑӒӓxӕӖӗӘәӚӛӜӝӞӟӠӡӢӣӤӥӦӧӨIӪӫӬωhӯӰӱӲӳoӵӶӷӸӹԐԑԚԛԜԝՓՕIաhգդdզοըթժիխծλհձղճմնշոչպջռսվտրցւփxֆ"  # noqa
-
-
-def hack(inp, out, al):
-    # sai = "TheIdMatrixxxx"
-    # sai = "Ίρις_πολύχpωμo"
-    m = dict(zip(inp, out))
-    o = dict(zip(out, inp))
-    r = ""
-    for l in al:
-        if l in m:
-            x = m[l]
-            # if l in o:
-            #     exit()
-        elif l in o:
-            x = o[l]
-            # if l in m:
-            #     exit()
-        else:
-            x = l
-        r += x
-    if len(r) != len(set(r)):
-        print("repetiu")
-        exit()
-    return r
-
 # print(letters800)
 # print(hack(inp, out, letters800))
 # print("hackkkkkkkkkkkkkkkkkk")

@@ -8,7 +8,10 @@ from cruipto.encoders import enc, dec
 from cruipto.linalg import int2pmat, pmat_transpose, pmat_mult, pmat2int, print_binmatrix
 
 
-# HINT: 6ÉÄÁӖɟψЮǯɶvǨСӳ is the last MD5 value, so no original uuid starts with a digit larger than 6.
+# HINT: xxxxxxxxxxxx is the last MD5 value, so no original uuid starts with a digit larger than x.  <- TODO define x
+# number of digits >= log(factorial(35) - 1, len("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")) = 22.32449128323706
+# last number = 35! - 1 = 10333147966386144929666651337523199999999
+
 class UUID:
     """Flexible representation of a (non-standard) universal unique identifier.
     Intended to be an extension and "replacement" of MD5 (or SHA256) hashes.
@@ -53,11 +56,11 @@ class UUID:
     # Default values for 128 bits.
     bits = 128
     side = 35
-    digits = 14
+    digits = 23
 
-    alphabet = alph.letters800
-    alphabetrev = alph.lookup800
-    lower_limit = 1  # Zero has cyclic inversions, Z*Z=I  Z-¹=Z
+    alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    alphabetrev = {char: idx for idx, char in enumerate("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")}
+    lower_limit = 1  # Zero has cyclic inversions and should not be used: Z*Z=I  Z-¹=Z
     identity = ClassProperty("identity_")
 
     # Lazy starters.
