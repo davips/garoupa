@@ -1,8 +1,7 @@
 from functools import lru_cache
 from math import factorial
 
-import cruipto.alphabets as alph
-from cruipto.avatar import avatar
+from cruipto.avatar14 import avatar
 from cruipto.classproperty import ClassProperty
 from cruipto.encoders import enc, dec
 from cruipto.linalg import int2pmat, pmat_transpose, pmat_mult, pmat2int, print_binmatrix

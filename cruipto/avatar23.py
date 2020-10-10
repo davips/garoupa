@@ -1,4 +1,7 @@
 import math
+from statistics import mean
+
+from cruipto.uuid import UUID
 
 
 def toint(l):
@@ -22,35 +25,31 @@ def toints(id, limit):
     return l
 
 
-def fgcolors(id, cols=6):
+def colors(id, cols=6, incr=10, threshold=127):
     # starts with darker two thirds based on bgcolor
-    cor = map(lambda x: (x - 166) * 2, bgcolor(id))
-
-    ns = toints(id, 166)
+    ns = toints(id, threshold)
+    cor = ns[0:3]
     ns = ns + ns[:2]
     l = []
     i = 0
     while i < len(id):
-        cor = [ini + 10 if ini < fim else ini - 10 for ini, fim in zip(cor, ns[i:i + 3])]
+        cor = [ini + incr if ini < fim else ini - incr for ini, fim in zip(cor, ns[i:i + 3])]
 
         # mirror value, if outside limits
-        cor = [2 * 166 - c if c > 166 else abs(c) for c in cor]
+        cor = [2 * threshold - c if c > threshold else abs(c) for c in cor]
+
+        # new starting color for each row (5+6+6+6 = 23)
+        if i % cols == cols - 1:
+            cor = ns[i:i + 3]
 
         l.append(cor)
         i += 1
-
-        # new starting color for each row (5+6+6+6 = 23)
-        if i % cols > 0:
-            cor = ns[i:i + 3]
-
-    return l
+    return [[int(round((255 - threshold) * x / threshold + threshold)) for x in cor]] + l
 
 
-def bgcolor(id):
-    return [int(round(x + 166)) for x in toints(id[-3:], 83)]
-
-
-def avatar(id, f="uuid-avatar-$id.jpg", rows=4, font_filename="DejaVuSansMono-Bold.ttf", font_size=48, fontw=31,
+def avatar(id, f="uuid-avatar-$id.jpg", rows=4, incr=10, threshold=166, font_filename="DejaVuSansMono-Bold.ttf",
+           font_size=48,
+           fontw=31,
            fonth=57, margin=3):
     """Generate a colorful image from a base62 id containing 23 chars.
     <$id> at the filename will be replaced by the provided id."""
@@ -63,17 +62,13 @@ def avatar(id, f="uuid-avatar-$id.jpg", rows=4, font_filename="DejaVuSansMono-Bo
     if "$id" in f:
         f.replace("$id", id)
     text = " " + id
-
-    back_ground_color = bgcolor(text)
-
-    im = Image.new("RGB", (width, height), tuple(back_ground_color))
+    cs = colors(id, cols, incr, threshold)
+    im = Image.new("RGB", (width, height), tuple(cs[0]))
     draw = ImageDraw.Draw(im)
     unicode_font = ImageFont.truetype(font_filename, font_size)
 
-    colors = [back_ground_color] + fgcolors(id, cols)
-
     x = y = margin
-    for l, c in zip(text, colors):
+    for l, c in zip(text, cs):
         draw.text((x, y), l, font=unicode_font, fill=tuple(c))
         x += fontw
         if x + fontw + margin > width:
@@ -82,4 +77,8 @@ def avatar(id, f="uuid-avatar-$id.jpg", rows=4, font_filename="DejaVuSansMono-Bo
 
     im.save(f)
 
-# avatar("1PB2C52SP0Ccsqxc8SkrGyF")  # IRIS
+
+# u = UUID(12)
+# u *= u
+# print(u.id)
+# avatar(u.id, incr=18, threshold=170)  # IRIS
