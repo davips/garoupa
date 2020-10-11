@@ -144,3 +144,5 @@ test.tupi
 token.txt
 .branch_before_stashed
 .commit_before_stashed
+*.db
+tatu-*
