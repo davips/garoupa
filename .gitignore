@@ -127,3 +127,20 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.idea/
+*.arff
+out/
+*.kra
+
+classes_*.pdf
+packages_*.pdf
+*.iml
+.idea
+
+config.json
+*m-lime*.svg
+test.tupi
+token.txt
+.branch_before_stashed
+.commit_before_stashed
