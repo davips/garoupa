@@ -223,8 +223,8 @@ class UUID:
 
     def __truediv__(self, other):
         """Bounded unmerge from last merged UUID."""
-        if self.m == self.first_matrix:
-            raise Exception(f"Cannot divide by UUID={self}!")
+        if other == self.first_matrix:
+            raise Exception(f"Cannot divide : {self} / {other}!")
         return UUID(pmat_mult(self.m, other.t.m), ignore_call=self.ignore_call)
 
     def __eq__(self, other):
