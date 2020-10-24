@@ -6,6 +6,7 @@ class TraceCalls(object):
     """ Use as a decorator on functions that should be traced. Several
         functions can be decorated - they will all be indented according
         to their call depth.
+        TODO check whether this comes from StackOverFlow and reference the post
     """
 
     def __init__(self, stream=sys.stdout, indent_step=2, show_ret=False):
