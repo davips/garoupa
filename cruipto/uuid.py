@@ -1,23 +1,25 @@
 #  Copyright (c) 2020. Davi Pereira dos Santos
-#      This file is part of the cruipto project.
-#      Please respect the license. Removing authorship by any means
-#      (by code make up or closing the sources) or ignoring property rights
-#      is a crime and is unethical regarding the effort and time spent here.
-#      Relevant employers or funding agencies will be notified accordingly.
+#  This file is part of the cruipto project.
+#  Please respect the license - more about this in the section (*) below.
 #
-#      cruipto is free software: you can redistribute it and/or modify
-#      it under the terms of the GNU General Public License as published by
-#      the Free Software Foundation, either version 3 of the License, or
-#      (at your option) any later version.
+#  cruipto is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
 #
-#      cruipto is distributed in the hope that it will be useful,
-#      but WITHOUT ANY WARRANTY; without even the implied warranty of
-#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#      GNU General Public License for more details.
+#  cruipto is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
 #
-#      You should have received a copy of the GNU General Public License
-#      along with cruipto.  If not, see <http://www.gnu.org/licenses/>.
+#  You should have received a copy of the GNU General Public License
+#  along with cruipto.  If not, see <http://www.gnu.org/licenses/>.
 #
+#  (*) Removing authorship by any means, e.g. by distribution of derived
+#  works or verbatim, obfuscated, compiled or rewritten versions of any
+#  part of this work is a crime and is unethical regarding the effort and
+#  time spent here.
+#  Relevant employers or funding agencies will be notified accordingly.
 
 from functools import lru_cache
 from math import factorial
@@ -215,16 +217,16 @@ class UUID:
     def load_avatar(file="/tmp/avatar.jpg"):
         # chars = alph.letters800
         # langs = "afr+all+amh+ara+asm+aze+aze-cyrl+bel+ben+bod+bos+bre+bul+cat+ceb+ces+chi-sim+chi-sim-vert+chi-tra" \
-        #         "+chi-tra-vert+chr+cos+cym+dan+deu+div+dzo+ell+eng+enm+epo+est+eus+fao+fas+fil+fin+fra+frk+frm+fry" \
-        #         "+gla+gle+glg+guj+hat+heb+hin+hrv+hun+hye+iku+ind+isl+ita+ita-old+jav+jpn+jpn-vert+kan+kat+kat-old" \
-        #         "+kaz+khm+kir+kor+kor-vert+kur-ara+lao+lat+lav+lit+ltz+mal+mar+mkd+mlt+mon+mri+msa+mya+nep+nld+nor" \
-        #         "+oci+ori+osd+pan+pol+por+pus+que+ron+rus+san+script-arab+script-armn+script-beng+script-cans+script" \
-        #         "-cher+script-cyrl+script-deva+script-ethi+script-frak+script-geor+script-grek+script-gujr+script" \
-        #         "-guru+script-hang+script-hang-vert+script-hans+script-hans-vert+script-hant+script-hant-vert+script" \
-        #         "-hebr+script-jpan+script-jpan-vert+script-khmr+script-knda+script-laoo+script-latn+script-mlym" \
-        #         "+script-mymr+script-orya+script-sinh+script-syrc+script-taml+script-telu+script-thaa+script-thai" \
-        #         "+script-tibt+script-viet+sin+slk+slv+snd+spa+spa-old+sqi+srp+srp-latn+sun+swa+swe+syr+tam+tat+tel" \
-        #         "+tgk+tha+tir+ton+tur+uig+ukr+urd+uzb+uzb-cyrl+vie+yid+yor"
+        #     "+chi-tra-vert+chr+cos+cym+dan+deu+div+dzo+ell+eng+enm+epo+est+eus+fao+fas+fil+fin+fra+frk+frm+fry" \
+        #     "+gla+gle+glg+guj+hat+heb+hin+hrv+hun+hye+iku+ind+isl+ita+ita-old+jav+jpn+jpn-vert+kan+kat+kat-old" \
+        #     "+kaz+khm+kir+kor+kor-vert+kur-ara+lao+lat+lav+lit+ltz+mal+mar+mkd+mlt+mon+mri+msa+mya+nep+nld+nor" \
+        #     "+oci+ori+osd+pan+pol+por+pus+que+ron+rus+san+script-arab+script-armn+script-beng+script-cans+script" \
+        #     "-cher+script-cyrl+script-deva+script-ethi+script-frak+script-geor+script-grek+script-gujr+script" \
+        #     "-guru+script-hang+script-hang-vert+script-hans+script-hans-vert+script-hant+script-hant-vert+script" \
+        #     "-hebr+script-jpan+script-jpan-vert+script-khmr+script-knda+script-laoo+script-latn+script-mlym" \
+        #     "+script-mymr+script-orya+script-sinh+script-syrc+script-taml+script-telu+script-thaa+script-thai" \
+        #     "+script-tibt+script-viet+sin+slk+slv+snd+spa+spa-old+sqi+srp+srp-latn+sun+swa+swe+syr+tam+tat+tel" \
+        #     "+tgk+tha+tir+ton+tur+uig+ukr+urd+uzb+uzb-cyrl+vie+yid+yor"
         # txt = image_to_string(Image.open(file), lang=langs, config=f"-c tessedit_char_whitelist={chars}")
         from pytesseract import image_to_string
         from PIL import Image

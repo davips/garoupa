@@ -2,25 +2,27 @@
 Dictionaries for fast lookup are also provided"""
 
 #  Copyright (c) 2020. Davi Pereira dos Santos
-#      This file is part of the cruipto project.
-#      Please respect the license. Removing authorship by any means
-#      (by code make up or closing the sources) or ignoring property rights
-#      is a crime and is unethical regarding the effort and time spent here.
-#      Relevant employers or funding agencies will be notified accordingly.
+#  This file is part of the cruipto project.
+#  Please respect the license - more about this in the section (*) below.
 #
-#      cruipto is free software: you can redistribute it and/or modify
-#      it under the terms of the GNU General Public License as published by
-#      the Free Software Foundation, either version 3 of the License, or
-#      (at your option) any later version.
+#  cruipto is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
 #
-#      cruipto is distributed in the hope that it will be useful,
-#      but WITHOUT ANY WARRANTY; without even the implied warranty of
-#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#      GNU General Public License for more details.
+#  cruipto is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
 #
-#      You should have received a copy of the GNU General Public License
-#      along with cruipto.  If not, see <http://www.gnu.org/licenses/>.
+#  You should have received a copy of the GNU General Public License
+#  along with cruipto.  If not, see <http://www.gnu.org/licenses/>.
 #
+#  (*) Removing authorship by any means, e.g. by distribution of derived
+#  works or verbatim, obfuscated, compiled or rewritten versions of any
+#  part of this work is a crime and is unethical regarding the effort and
+#  time spent here.
+#  Relevant employers or funding agencies will be notified accordingly.
 
 # print(letters800)
 # print(hack(inp, out, letters800))
@@ -41,12 +43,12 @@ Dictionaries for fast lookup are also provided"""
 #     im = Image.new("RGB", (width, height), back_ground_color)
 #     draw = ImageDraw.Draw(im)
 #     unicode_font = ImageFont.truetype(
-#         "./usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", font_size)
+#     "./usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", font_size)
 #     draw.text((0, 0), unicode_text, font=unicode_font, fill=font_color)
 #     im.save("/dev/shm/text.png")
 #     box = Image.open("/dev/shm/text.png").getbbox()
 #     if box:
-#         return box[2] - box[0]
+#     return box[2] - box[0]
 #     return 0
 #
 # def find_alphabet():
@@ -54,17 +56,17 @@ Dictionaries for fast lookup are also provided"""
 #
 #     # DejaVuSans Mono 3206 visible width-respecting characters on Konsole:
 #     ttf = TTFont('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 0,
-#                  verbose=0, allowVID=0, ignoreDecompileErrors=True,
-#                  fontNumber=-1)
+#              verbose=0, allowVID=0, ignoreDecompileErrors=True,
+#              fontNumber=-1)
 #     uni = list(chain.from_iterable([chr(y[0])
-#                                     for y in x.cmap.items()]
-#                                    for x in ttf["cmap"].tables))
+#                                 for y in x.cmap.items()]
+#                                for x in ttf["cmap"].tables))
 #     valid = sorted(''.join(set(uni)))[:65534]
 #     excl = [0, 8, 9, 13, 29, 173, 1557, 3761] + list(range(128, 160)) + \
-#            list(range(768, 866)) + list(range(1611, 1627)) + \
-#            list(range(3764, 3790))
+#        list(range(768, 866)) + list(range(1611, 1627)) + \
+#        list(range(3764, 3790))
 #     usable = [l for l in valid if
-#               pixel_width(l * 3) > 5 and ord(l) not in excl]
+#           pixel_width(l * 3) > 5 and ord(l) not in excl]
 #
 #     # Picking only the 1966 word chars...
 #     regx = re.compile(r'\w')
