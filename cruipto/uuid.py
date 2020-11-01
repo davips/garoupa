@@ -264,4 +264,5 @@ class UUID:
     def __call__(self, uuid):
         return self if self.ignore_call else self * uuid
 
-    # __repr__ = __str__  # TODO: is this needed?
+    def __repr__(self):
+        return f"U({str(self)})"
