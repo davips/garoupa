@@ -92,7 +92,7 @@ def pmat_mult(a, b):
     -------
 
     """
-    return [b[-row - 1] for row in a]
+    return [a[x] for x in b]
 
 
 def pmat_transpose(m):
@@ -325,13 +325,13 @@ class M:
     @classproperty
     @lru_cache()
     def z(cls):
-        return M(0)
+        return M(n=cls.last)
 
     # @classmethod
     @classproperty
     @lru_cache()
     def i(cls):
-        return M(n=cls.last)
+        return M(0)
 
     @staticmethod
     @lru_cache()
