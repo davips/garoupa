@@ -28,7 +28,7 @@ import numpy as np
 from numpy.core.multiarray import ndarray
 
 from cruipto.encoders import dec, enc
-from cruipto.hashmath import bmm, bm2int, int2bm, bminv, int2cycledbm
+from cruipto.hashmath import bmm, bm2int, int2bm, bminv, int2cycledbm, bytes2bm
 
 
 class Hash:
@@ -59,6 +59,8 @@ class Hash:
                 self._hex = identifier
             else:
                 raise Exception(f"String identifier should have 22 or 32 chars! Not {size}!")
+        elif isinstance(identifier, bytes) and len(identifier) == 16:
+            self._bytes = identifier
         elif isinstance(identifier, bytes):
             self._hex = hashlib.md5(identifier).hexdigest()
         else:
@@ -83,6 +85,8 @@ class Hash:
                 self._n = bm2int(self._m)
             elif self._id is not None:
                 self._n = dec(self._id, lookup=self.base62rev)
+            elif self._bytes is not None:
+                self._n = int.from_bytes(self._bytes, byteorder="big")
             else:
                 raise Exception("Missing hash starting point!")
         return self._n
@@ -92,6 +96,8 @@ class Hash:
         if self._m is None:
             if self._n is not None or self._hex is not None or self._id is not None:
                 self._m = int2bm(self.n)
+            elif self._bytes is not None:
+                self._m = bytes2bm(self._bytes)
             else:
                 raise Exception("Missing hash starting point!")
         return self._m
@@ -101,6 +107,8 @@ class Hash:
         if self._hex is None:
             if self._m is not None or self._id is not None or self._n is not None:
                 self._hex = hex(self.n)[2:].rjust(22, "0")
+            elif self._bytes is not None:
+                self._hex = self._bytes.hex()
             else:
                 raise Exception("Missing hash starting point!")
         return self._hex
@@ -108,7 +116,7 @@ class Hash:
     @property
     def id(self):
         if self._id is None:
-            if self._m is not None or self._hex is not None or self._n is not None:
+            if self._m is not None or self._hex is not None or self._n is not None or self._bytes is not None:
                 self._id = enc(self.n, alphabet=self.base62)
             else:
                 raise Exception("Missing hash starting point!")

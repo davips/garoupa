@@ -434,3 +434,39 @@ def bmmap():
             else:
                 print(bitpos(i, j), end="\t")
         print()
+
+
+# def int2bm(n):
+#     m = np.eye(17)
+#     b = 127
+#     for i in range(12):
+#         if i < 3:
+#             for j in range(i + 1, 4):
+#                 m[i, j] = n >> b & 1
+#                 b -= 1
+#         for j in range(max(5, i + 1), 17):
+#             m[i, j] = n >> b & 1
+#             b -= 1
+#     for i in range(13, 17):
+#         for j in range(max(12, i + 1), 17):
+#             m[i, j] = n >> b & 1
+#             b -= 1
+#     return m
+
+
+# def bm2int(m):
+#     n = 0
+#     b = 127
+#     for i in range(12):
+#         if i < 3:
+#             for j in range(i + 1, 4):
+#                 n += int(m[i, j]) << b
+#                 b -= 1
+#         for j in range(max(5, i + 1), 17):
+#             n += int(m[i, j]) << b
+#             b -= 1
+#     for i in range(13, 17):
+#         for j in range(max(12, i + 1), 17):
+#             n += int(m[i, j]) << b
+#             b -= 1
+#     return n
