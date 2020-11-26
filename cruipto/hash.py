@@ -23,23 +23,25 @@
 #
 
 import hashlib
+import numpy as np
 
 from numpy.core.multiarray import ndarray
 
 from cruipto.encoders import dec, enc
-from cruipto.hashmath import bmatmul, bmat2int, int2bmat, bmatinv
+from cruipto.hashmath import bmm, bm2int, int2bm, bminv, int2cycledbm
 
 
 class Hash:
-    last = 2 ** 128 - 1
+    last_n = 2 ** 128 - 1
     base62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     base62rev = {char: idx for idx, char in enumerate("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")}
-    _hex, _n, _id, _inv = None, None, None, None
+    _m, _hex, _n, _id, _inv = None, None, None, None, None
+    _bitindexes = None
 
     def __init__(self, identifier):
         if isinstance(identifier, int):
-            if identifier > self.last or identifier < 0:
-                raise Exception(f"Number should be in the interval [0," f"{self.last}]!")
+            if identifier > self.last_n or identifier < 0:
+                raise Exception(f"Number should be in the interval [0," f"{self.last_n}]!")
             self._n = identifier
         elif isinstance(identifier, ndarray):
             if identifier.shape != (17, 17):
@@ -63,13 +65,23 @@ class Hash:
             raise Exception("Wrong argument type for UUID:", type(identifier))
 
     @property
+    def bitindexes(self):
+        if self._bitindexes is None:
+            self._bitindexes = [i for i, b in enumerate(np.concatenate(self.m)) if b == 1]
+        return self._bitindexes
+
+    @property
+    def last(self):
+        return Hash(self.last_n)
+
+    @property
     def n(self):
         if self._n is None:
-            if self._hex:
+            if self._hex is not None:
                 self._n = int(self._hex, 16)
-            elif self._m:
-                self._n = bmat2int(self._m)
-            elif self._id:
+            elif self._m is not None:
+                self._n = bm2int(self._m)
+            elif self._id is not None:
                 self._n = dec(self._id, lookup=self.base62rev)
             else:
                 raise Exception("Missing hash starting point!")
@@ -78,8 +90,8 @@ class Hash:
     @property
     def m(self):
         if self._m is None:
-            if self._hex or self._id or self._n:
-                self._m = int2bmat(self.n)
+            if self._n is not None or self._hex is not None or self._id is not None:
+                self._m = int2bm(self.n)
             else:
                 raise Exception("Missing hash starting point!")
         return self._m
@@ -87,7 +99,7 @@ class Hash:
     @property
     def hex(self):
         if self._hex is None:
-            if self._m or self._id or self._n:
+            if self._m is not None or self._id is not None or self._n is not None:
                 self._hex = hex(self.n)[2:].rjust(22, "0")
             else:
                 raise Exception("Missing hash starting point!")
@@ -96,7 +108,7 @@ class Hash:
     @property
     def id(self):
         if self._id is None:
-            if self._m or self._hex or self._n:
+            if self._m is not None or self._hex is not None or self._n is not None:
                 self._id = enc(self.n, alphabet=self.base62)
             else:
                 raise Exception("Missing hash starting point!")
@@ -104,8 +116,8 @@ class Hash:
 
     @property
     def inv(self):
-        return Hash(bmatinv(self.m))
+        return Hash(bminv(self.m))
 
     def __mul__(self, other):
-        return Hash(bmatmul(self.m, other.m))
-
+        # return Hash(bmm(self.m, int2cycledbm(other.n)))  # 600us [além de mais lento, não completamente reversível: A¹AB != B]
+        return Hash(bmm(self.m, other.m))  # 10us (60us sem numba)
