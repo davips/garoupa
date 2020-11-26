@@ -103,6 +103,17 @@ class Hash:
         return self._m
 
     @property
+    def bytes(self):
+        if self._bytes is None:
+            if self._m is not None or self._id is not None or self._n is not None:
+                self._bytes = self.n.to_bytes(16, byteorder="big")
+            elif self._hex is not None:
+                self._bytes = bytes.fromhex(self._hex)
+            else:
+                raise Exception("Missing hash starting point!")
+        return self._bytes
+
+    @property
     def hex(self):
         if self._hex is None:
             if self._m is not None or self._id is not None or self._n is not None:
@@ -129,3 +140,6 @@ class Hash:
     def __mul__(self, other):
         # return Hash(bmm(self.m, int2cycledbm(other.n)))  # 600us [além de mais lento, não completamente reversível: A¹AB != B]
         return Hash(bmm(self.m, other.m))  # 10us (60us sem numba)
+
+    def __truediv__(self, other):
+        return Hash(bmm(self.m, other.inv.m))
