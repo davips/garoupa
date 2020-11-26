@@ -16,8 +16,6 @@ print((a * b) * b)
 print((a * b) * b.t)
 print((a * b) * c)
 
-fac = int2fac(2 ** 128 + 3214134)
-
 # Check for collisions.
 s = set()
 r = set()
@@ -32,6 +30,8 @@ for i in range(100000):
     a = int2pmat(aa)
     b = int2pmat(bb)
     n = pmat2int(pmat_mult(a, b))
+    s.add(a)
+    s.add(b)
     s.add(n)
     if i > len(s) - 1:
         print(i, a, b, n)
