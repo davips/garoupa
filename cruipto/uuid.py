@@ -154,7 +154,7 @@ class UUID:
         """UUID corresponding to a 35x35 identity permutation matrix.
         It is enough to represent MD5 hashes."""
         if cls._identity is None:
-            cls._identity = UUID(int2pmat(UUID._lazy_upper_limit(side) + 1, side=side))
+            cls._identity = UUID(int2pmat(0, side=side))
         return cls._identity
 
     @property
