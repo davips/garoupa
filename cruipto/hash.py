@@ -117,7 +117,7 @@ class Hash:
     def hex(self):
         if self._hex is None:
             if self._m is not None or self._id is not None or self._n is not None:
-                self._hex = hex(self.n)[2:].rjust(22, "0")
+                self._hex = hex(self.n)[2:].rjust(32, "0")
             elif self._bytes is not None:
                 self._hex = self._bytes.hex()
             else:
