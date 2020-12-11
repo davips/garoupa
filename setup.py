@@ -27,13 +27,13 @@ import cruipto
 
 NAME = "cruipto"
 
-VERSION = 0.1
+VERSION = 0.20.12-a
 
 AUTHOR = 'Davi Pereira-Santos'
 
 AUTHOR_EMAIL = ''
 
-DESCRIPTION = 'Incremental cryptography and flexible universal unique identifier'
+DESCRIPTION = 'Incremental cryptography and flexible hash'
 
 with open('README.md', 'r') as fh:
     LONG_DESCRIPTION = fh.read()
@@ -49,7 +49,7 @@ CLASSIFIERS = ['Intended Audience :: Science/Research',
                'Natural Language :: English',
                'Programming Language :: Python',
                'Topic :: Scientific/Engineering',
-               'Operating System :: Linux',
+               'Operating System' :: 'POSIX' :: 'Linux',
                'Programming Language :: Python :: 3.8']
 
 INSTALL_REQUIRES = [
