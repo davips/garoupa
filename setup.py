@@ -27,7 +27,7 @@ import cruipto
 
 NAME = "cruipto"
 
-VERSION = 0.20.12-a
+VERSION = "0.20.12-a"
 
 AUTHOR = 'Davi Pereira-Santos'
 
