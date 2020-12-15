@@ -1,10 +1,10 @@
 from random import random
 from timeit import timeit
 
-from cruipto.hash import Hash
-from cruipto.linalg import int2pmat, pmat2int, \
+from garoupa.hash import Hash
+from garoupa.linalg import int2pmat, pmat2int, \
     pmat_mult
-from cruipto.uuid import UUID
+from garoupa.uuid import UUID
 
 # Show output of operations.
 a = UUID(int2pmat(2 ** 128 - 1))

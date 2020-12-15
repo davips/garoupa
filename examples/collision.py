@@ -5,8 +5,8 @@ import fastrand
 import psutil as psutil
 
 # Check collisions. (seems unnecessary, due to the nature of the mult op.
-from cruipto.hash import Hash
-from cruipto.hashmath import int2bm, bmm, bm2int
+from garoupa.hash import Hash
+from garoupa.hashmath import int2bm, bmm, bm2int
 
 s, re = {}, {}
 lim = 2 ** 128 - 1

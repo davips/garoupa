@@ -1,19 +1,19 @@
 #  Copyright (c) 2020. Davi Pereira dos Santos
-#  This file is part of the cruipto project.
+#  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
 #
-#  cruipto is free software: you can redistribute it and/or modify
+#  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  cruipto is distributed in the hope that it will be useful,
+#  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
-#  along with cruipto.  If not, see <http://www.gnu.org/licenses/>.
+#  along with garoupa.  If not, see <http://www.gnu.org/licenses/>.
 #
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
@@ -27,8 +27,8 @@ import numpy as np
 
 from numpy.core.multiarray import ndarray
 
-from cruipto.encoders import dec, enc
-from cruipto.hashmath import bmm, bm2int, int2bm, bminv, int2cycledbm, bytes2bm
+from garoupa.encoders import dec, enc
+from garoupa.hashmath import bmm, bm2int, int2bm, bminv, int2cycledbm, bytes2bm
 
 
 class Hash:

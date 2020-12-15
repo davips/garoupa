@@ -1,4 +1,4 @@
-from cruipto.linalg import lazydecrypt, lazyhash, lazyencrypt
+from garoupa.linalg import lazydecrypt, lazyhash, lazyencrypt
 
 txt = "ut".encode()
 key = "a".encode()
