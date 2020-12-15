@@ -31,7 +31,7 @@ VERSION = "0.20.12-a"
 
 AUTHOR = 'Davi Pereira-Santos'
 
-AUTHOR_EMAIL = ''
+AUTHOR_EMAIL = 'dpsabc@gmail.com'
 
 DESCRIPTION = 'Incremental cryptography and flexible hash'
 
