@@ -1,2 +1,2 @@
 # garoupa
-Incremental cryptography and flexible universal unique identifier
+Incremental cryptography and flexible hash
