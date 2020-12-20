@@ -1,5 +1,5 @@
 # garoupa
-**WARNING: This project will undergo major changes in the next rewrite.**
+**WARNING: This project is still subject to major changes, e.g., in the next rewrite.**
 
 Incremental cryptography and flexible hash
 
