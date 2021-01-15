@@ -24,7 +24,7 @@
 
 from unittest import TestCase
 
-from garoupa.hashmath import bytes2cycledbm, bm2int
+from garoupa.hashmath import bm2int, bytes2cycledbm
 
 
 class Test(TestCase):

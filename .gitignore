@@ -146,3 +146,4 @@ token.txt
 .commit_before_stashed
 *.db
 tatu-*
+.run
