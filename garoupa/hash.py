@@ -23,12 +23,12 @@
 #
 
 import hashlib
+
 import numpy as np
-
-from numpy.core.multiarray import ndarray
-
 from garoupa.encoders import dec, enc
-from garoupa.hashmath import bmm, bm2int, int2bm, bminv, int2cycledbm, bytes2bm
+from garoupa.hashmath import bmm, bmm_compiled, bm2int, bm2int_compiled, int2bm, int2bm_compiled, bytes2bm, \
+    bytes2bm_compiled, bminv_compiled, bminv
+from numpy.core.multiarray import ndarray
 
 
 class Hash:
@@ -38,7 +38,14 @@ class Hash:
     _m, _hex, _n, _id, _inv = None, None, None, None, None
     _bitindexes = None
 
-    def __init__(self, identifier):
+    def __init__(self, identifier, compiled=False):
+        self.compiled = compiled
+        self.bmm = bmm_compiled if compiled else bmm
+        self.bm2int = bm2int_compiled if compiled else bm2int
+        self.int2bm = int2bm_compiled if compiled else int2bm
+        self.bytes2bm = bytes2bm_compiled if compiled else bytes2bm
+        self.bminv = bminv_compiled if compiled else bminv
+
         if isinstance(identifier, int):
             if identifier > self.last_n or identifier < 0:
                 raise Exception(f"Number should be in the interval [0," f"{self.last_n}]!")
@@ -82,7 +89,7 @@ class Hash:
             if self._hex is not None:
                 self._n = int(self._hex, 16)
             elif self._m is not None:
-                self._n = bm2int(self._m)
+                self._n = self.bm2int(self._m)
             elif self._id is not None:
                 self._n = dec(self._id, lookup=self.base62rev)
             elif self._bytes is not None:
@@ -95,9 +102,9 @@ class Hash:
     def m(self):
         if self._m is None:
             if self._n is not None or self._hex is not None or self._id is not None:
-                self._m = int2bm(self.n)
+                self._m = self.int2bm(self.n)
             elif self._bytes is not None:
-                self._m = bytes2bm(self._bytes)
+                self._m = self.bytes2bm(self._bytes)
             else:
                 raise Exception("Missing hash starting point!")
         return self._m
@@ -135,11 +142,11 @@ class Hash:
 
     @property
     def inv(self):
-        return Hash(bminv(self.m))
+        return Hash(self.bminv(self.m))
 
     def __mul__(self, other):
         # return Hash(bmm(self.m, int2cycledbm(other.n)))  # 600us [além de mais lento, não completamente reversível: A¹AB != B]
-        return Hash(bmm(self.m, other.m))  # 10us (60us sem numba)
+        return Hash(self.bmm(self.m, other.m))  # 10us (60us sem numba)
 
     def __truediv__(self, other):
-        return Hash(bmm(self.m, other.inv.m))
+        return Hash(self.bmm(self.m, other.inv.m))
