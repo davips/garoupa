@@ -23,11 +23,9 @@
 
 import setuptools
 
-import garoupa
-
 NAME = "garoupa"
 
-VERSION = "0.20.12-a"
+VERSION = "0.2021.0"
 
 AUTHOR = 'Davi Pereira-Santos'
 
@@ -49,11 +47,11 @@ CLASSIFIERS = ['Intended Audience :: Science/Research',
                'Natural Language :: English',
                'Programming Language :: Python',
                'Topic :: Scientific/Engineering',
-#               'Operating System' :: 'POSIX' :: 'Linux',
-               'Programming Language :: Python :: 3.8']
+               #               'Operating System' :: 'POSIX' :: 'Linux',
+               'Programming Language :: Python :: 3.7']
 
 INSTALL_REQUIRES = [
-    'numpy', "Pillow"
+    'scipy', 'numpy', "Pillow", "numba"  # pip>v19 required for numba
 ]
 
 EXTRAS_REQUIRE = {
@@ -77,6 +75,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     setup_requires=SETUP_REQUIRES,
     url=URL,
+    # scripts=['xxxxx']
 )
 
-package_dir = {'': 'garoupa'}  # For IDEs like Intellij to recognize the package.
+package_dir = {'': 'garoupa'}  # So IDE (e.g. Intellij) can recognize the working dir when running with ctr+shift+F10.
