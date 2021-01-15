@@ -92,6 +92,8 @@ class Hash:
                 self._n = self.bm2int(self._m)
             elif self._id is not None:
                 self._n = dec(self._id, lookup=self.base62rev)
+                if self._n > self.last_n:
+                    raise Exception(f"Id {self._id} converted to number is higher than {self.last_n}.")
             elif self._bytes is not None:
                 self._n = int.from_bytes(self._bytes, byteorder="big")
             else:
