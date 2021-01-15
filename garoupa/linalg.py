@@ -21,14 +21,11 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-import math
 from dataclasses import dataclass
-from functools import lru_cache, cached_property
-from hashlib import md5
+from functools import lru_cache
 from math import factorial
 
 from garoupa.decorator import classproperty
-from garoupa.encoders import md5_int, bytes2integers, integers2bytes
 
 
 def int2pmat(number, side=35):
@@ -312,6 +309,7 @@ class M:
     n: int = None
     m: list = None
     side: int = 35
+    _t = None
 
     def __post_init__(self):
         if self.m is None:
@@ -343,9 +341,11 @@ class M:
     def _lazy_last(side):
         return factorial(side) - 1
 
-    @cached_property
+    @property
     def t(self):
-        return self._lazy_t(tuple(self.m))
+        if self._t is None:
+            self._t = self._lazy_t(tuple(self.m))
+        return self._t
 
     # @classmethod
     @classproperty
