@@ -30,7 +30,7 @@ pkg_resources.require(['pip >= 20.3.3'])  # Needed by numba.
 
 NAME = "garoupa"
 
-VERSION = "0.2101.5"
+VERSION = "0.2101.6"
 
 AUTHOR = 'Davi Pereira-Santos'
 
