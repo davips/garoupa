@@ -150,3 +150,6 @@ class Hash:
 
     def __truediv__(self, other):
         return Hash(self.bmm(self.m, other.inv.m))
+
+    def __str__(self):
+        return self.id

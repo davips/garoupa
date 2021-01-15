@@ -51,7 +51,7 @@ def md5_int(bytes_content: bytes):
     return int.from_bytes(hashlib.md5(bytes_content).digest(), "big")  # or little? or whatever?
 
 
-def enc(number: int, alphabet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", padding: int = 23) -> str:
+def enc(number: int, alphabet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", padding: int = 22) -> str:
     """Encode an integer to base-n. n = len(alphabet).
 
     The default is base-800 since it is enough to represent MD5 as 18 chars in
@@ -74,7 +74,7 @@ def enc(number: int, alphabet="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm
     24 28
     41 24 # reducing from 32 to 24 is kind of a improvement
     48 23
-    57 22 # possible to type with an US keyboard
+    57 22 # possible to type with a US keyboard
     69 21
     85 20 # base64 library provides base85, but it is not double_click_friendly
     107 19 # super friendly (our default choice)
