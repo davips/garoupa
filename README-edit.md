@@ -12,11 +12,12 @@ Incremental cryptography and flexible hash
 ### as a standalone lib.
 ```bash
 # Set up a virtualenv. 
-python3 -m venv venv
+python3.7 -m venv venv
 source venv/bin/activate
 
 # Install from PyPI...
-pip install garoupa
+pip install --upgrade pip
+pip install -U garoupa
 
 # ...or, install from updated source code.
 pip install git+https://github.com/davips/garoupa
@@ -27,6 +28,7 @@ pip install git+https://github.com/davips/garoupa
 cd your-project
 source venv/bin/activate
 git clone https://github.com/davips/garoupa ../garoupa
+pip install --upgrade pip
 pip install -e ../garoupa
 ```
 
