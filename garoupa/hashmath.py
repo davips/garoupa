@@ -27,7 +27,10 @@ import numpy as np
 
 
 def numba():
-    from numba import njit
+    try:
+        from numba import njit
+    except ModuleNotFoundError as e:
+        print("Install numba to use compiled version of Hash:\npip install numba")
 
     @njit
     def bytes2bm_compiled(bs):

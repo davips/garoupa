@@ -36,15 +36,13 @@ class Hash:
     base62rev = {char: idx for idx, char in enumerate("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")}
     _m, _hex, _n, _id, _inv = None, None, None, None, None
     _bitindexes = None
-    bytes2bm_compiled, bmm_compiled, bm2int_compiled, bminv_compiled, int2bm_compiled= numba()
 
     def __init__(self, identifier, compiled=False):
+        if compiled:
+            Hash.bytes2bm, Hash.bmm, Hash.bm2int, Hash.bminv, Hash.int2bm = numba()
+        else:
+            Hash.bytes2bm, Hash.bmm, Hash.bm2int, Hash.bminv, Hash.int2bm = bytes2bm, bmm, bm2int, bminv, int2bm
         self.compiled = compiled
-        self.bmm = Hash.bmm_compiled if compiled else bmm
-        self.bm2int = Hash.bm2int_compiled if compiled else bm2int
-        self.int2bm = Hash.int2bm_compiled if compiled else int2bm
-        self.bytes2bm = Hash.bytes2bm_compiled if compiled else bytes2bm
-        self.bminv = Hash.bminv_compiled if compiled else bminv
 
         if isinstance(identifier, int):
             if identifier > self.last_n or identifier < 0:
@@ -104,9 +102,9 @@ class Hash:
     def m(self):
         if self._m is None:
             if self._n is not None or self._hex is not None or self._id is not None:
-                self._m = self.int2bm(self.n)
+                self._m = Hash.int2bm(self.n)
             elif self._bytes is not None:
-                self._m = self.bytes2bm(self._bytes)
+                self._m = Hash.bytes2bm(self._bytes)
             else:
                 raise Exception("Missing hash starting point!")
         return self._m
@@ -144,14 +142,14 @@ class Hash:
 
     @property
     def inv(self):
-        return Hash(self.bminv(self.m))
+        return Hash(Hash.bminv(self.m))
 
     def __mul__(self, other):
         # return Hash(bmm(self.m, int2cycledbm(other.n)))  # 600us [além de mais lento, não completamente reversível: A¹AB != B]
-        return Hash(self.bmm(self.m, other.m))  # 10us (60us sem numba)
+        return Hash(Hash.bmm(self.m, other.m))  # 10us (60us sem numba)
 
     def __truediv__(self, other):
-        return Hash(self.bmm(self.m, other.inv.m))
+        return Hash(Hash.bmm(self.m, other.inv.m))
 
     def __str__(self):
         return self.id
