@@ -26,8 +26,7 @@ import hashlib
 
 import numpy as np
 from garoupa.encoders import dec, enc
-from garoupa.hashmath import bmm, bmm_compiled, bm2int, bm2int_compiled, int2bm, int2bm_compiled, bytes2bm, \
-    bytes2bm_compiled, bminv_compiled, bminv
+from garoupa.hashmath import bmm, bm2int, int2bm, bytes2bm, bminv, numba
 from numpy.core.multiarray import ndarray
 
 
@@ -37,14 +36,15 @@ class Hash:
     base62rev = {char: idx for idx, char in enumerate("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")}
     _m, _hex, _n, _id, _inv = None, None, None, None, None
     _bitindexes = None
+    bytes2bm_compiled, bmm_compiled, bm2int_compiled, bminv_compiled, int2bm_compiled= numba()
 
     def __init__(self, identifier, compiled=False):
         self.compiled = compiled
-        self.bmm = bmm_compiled if compiled else bmm
-        self.bm2int = bm2int_compiled if compiled else bm2int
-        self.int2bm = int2bm_compiled if compiled else int2bm
-        self.bytes2bm = bytes2bm_compiled if compiled else bytes2bm
-        self.bminv = bminv_compiled if compiled else bminv
+        self.bmm = Hash.bmm_compiled if compiled else bmm
+        self.bm2int = Hash.bm2int_compiled if compiled else bm2int
+        self.int2bm = Hash.int2bm_compiled if compiled else int2bm
+        self.bytes2bm = Hash.bytes2bm_compiled if compiled else bytes2bm
+        self.bminv = Hash.bminv_compiled if compiled else bminv
 
         if isinstance(identifier, int):
             if identifier > self.last_n or identifier < 0:
