@@ -21,12 +21,7 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-__requires__ = ['pip >= 20.3.3']  # Needed by numba.
-
-import pkg_resources
 import setuptools
-
-pkg_resources.require(['pip >= 20.3.3'])  # Needed by numba.
 
 NAME = "garoupa"
 
@@ -56,7 +51,8 @@ CLASSIFIERS = ['Intended Audience :: Science/Research',
                'Programming Language :: Python :: 3.7']
 
 INSTALL_REQUIRES = [
-    'scipy', 'numpy', "Pillow", "numba"  # pip>v19 required for numba
+    'scipy', 'numpy', "Pillow", 
+    # "numba"  # pip>v19 required for numba, so the user installs it if needed
 ]
 
 EXTRAS_REQUIRE = {
