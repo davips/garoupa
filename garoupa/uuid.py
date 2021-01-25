@@ -139,13 +139,13 @@ class UUID:
         print_binmatrix(self.m)
 
     @staticmethod  # Needs to be static to avoid self.__hash__ starting calculation of lazy values
-    @lru_cache()
+    ###@lru_cache()
     def _lazy_upper_limit(side: int) -> int:
         # Identity matrix has special properties: A*I=A  I-¹=I
         return factorial(side) - 2  # (side! - 1) is identity
 
     @staticmethod  # Needs to be static to avoid self.__hash__ starting calculation of lazy values
-    @lru_cache()
+    ###@lru_cache()
     def _lazy_first_matrix(side):
         return int2pmat(1, side=side)
 

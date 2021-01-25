@@ -118,7 +118,7 @@ def pmat_transpose(m):
 # Useful, but not really used functions. ====================================
 
 
-@lru_cache()
+###@lru_cache()
 def fact(n):
     """Cached factorial to speed up repetitive calls."""
     return factorial(n)
@@ -321,23 +321,23 @@ class M:
 
     # @classmethod
     @classproperty
-    @lru_cache()
+    ###@lru_cache()
     def z(cls):
         return M(n=cls.last)
 
     # @classmethod
     @classproperty
-    @lru_cache()
+    ###@lru_cache()
     def i(cls):
         return M(0)
 
     @staticmethod
-    @lru_cache()
+    ###@lru_cache()
     def _lazy_t(l):
         return M(m=pmat_transpose(l), side=len(l))
 
     @staticmethod
-    @lru_cache()
+    ###@lru_cache()
     def _lazy_last(side):
         return factorial(side) - 1
 
@@ -349,7 +349,7 @@ class M:
 
     # @classmethod
     @classproperty
-    @lru_cache()
+    ###@lru_cache()
     def last(cls):
         return cls._lazy_last(cls.side)
 
