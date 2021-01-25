@@ -87,7 +87,7 @@ class Hash:
             if self._hex is not None:
                 self._n = int(self._hex, 16)
             elif self._m is not None:
-                self._n = self.bm2int(self._m)
+                self._n = Hash.bm2int(self._m)
             elif self._id is not None:
                 self._n = dec(self._id, lookup=self.base62rev)
                 if self._n > self.last_n:
