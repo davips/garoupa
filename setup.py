@@ -79,4 +79,4 @@ setuptools.setup(
     # scripts=['xxxxx']
 )
 
-package_dir = {'': 'garoupa'}  # So IDE (e.g. Intellij) can recognize the working dir when running with ctr+shift+F10.
+package_dir = {'': 'garoupa'}  # So IDEs (e.g. Intellij) can recognize the working dir when running with ctr+shift+F10.
