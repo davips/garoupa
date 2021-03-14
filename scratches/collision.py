@@ -15,7 +15,7 @@ n = lim - 10_000_000  # factorial(35) - 2
 c, t = 0, 0
 for i in range(lim, lim - 10, -1):
     while True:
-        ii = ((fastrand.xorshift128plus() + 2 ** 63) << 64) + (fastrand.xorshift128plus() + 2 ** 63)
+        ii = (fastrand.xorshift128plus() << 64) + fastrand.xorshift128plus()
         if ii not in s:
             break
         print("another ii", ii)
@@ -24,7 +24,7 @@ for i in range(lim, lim - 10, -1):
     c += 1
     for j in range(m, n, -1):
         while True:
-            jj = ((fastrand.xorshift128plus() + 2 ** 63) << 64) + (fastrand.xorshift128plus() + 2 ** 63)
+            jj = (fastrand.xorshift128plus() << 64) + fastrand.xorshift128plus()
             if jj not in s:
                 break
             print("another jj", jj)

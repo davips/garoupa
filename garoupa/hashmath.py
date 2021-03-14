@@ -321,6 +321,61 @@ def int2bm(n):
     return bytes2bm(n.to_bytes(16, byteorder='big'))
 
 
+def int2bm5(n):
+    m = np.eye(5)
+    m[0, 2] = float(n >> 7 & 1)
+    m[0, 3] = float(n >> 6 & 1)
+    m[0, 4] = float(n >> 5 & 1)
+
+    m[1, 2] = float(n >> 4 & 1)
+    m[1, 3] = float(n >> 3 & 1)
+    m[1, 4] = float(n >> 2 & 1)
+
+    m[2, 3] = float(n >> 1 & 1)
+    m[2, 4] = float(n & 1)
+    return m
+
+
+def int2bm6(n):
+    m = np.eye(6)
+    m[0, 1] = float(n >> 14 & 1)
+    m[0, 2] = float(n >> 13 & 1)
+    m[0, 3] = float(n >> 12 & 1)
+    m[0, 4] = float(n >> 11 & 1)
+    m[0, 5] = float(n >> 10 & 1)
+
+    m[1, 2] = float(n >> 9 & 1)
+    m[1, 3] = float(n >> 8 & 1)
+    m[1, 4] = float(n >> 7 & 1)
+    m[1, 5] = float(n >> 6 & 1)
+
+    m[2, 3] = float(n >> 5 & 1)
+    m[2, 4] = float(n >> 4 & 1)
+    m[2, 5] = float(n >> 3 & 1)
+
+    m[3, 4] = float(n >> 2 & 1)
+    m[3, 5] = float(n >> 1 & 1)
+
+    m[4, 5] = float(n & 1)
+    return m
+
+
+def bm2int5(m):
+    n = (int(m[0, 2]) << 7) + (int(m[0, 3]) << 6) + (int(m[0, 4]) << 5)
+    n += (int(m[1, 2]) << 4) + (int(m[1, 3]) << 3) + (int(m[1, 4]) << 2)
+    n += (int(m[2, 3]) << 1) + int(m[2, 4])
+    return n
+
+
+def bm2int6(m):
+    n = (int(m[0, 1]) << 14) + (int(m[0, 2]) << 13) + (int(m[0, 3]) << 12) + (int(m[0, 4]) << 11) + (int(m[0, 5]) << 10)
+    n += (int(m[1, 2]) << 9) + (int(m[1, 3]) << 8) + (int(m[1, 4]) << 7) + (int(m[1, 5]) << 6)
+    n += (int(m[2, 3]) << 5) + (int(m[2, 4]) << 4) + (int(m[2, 5]) << 3)
+    n += (int(m[3, 4]) << 2) + (int(m[3, 5]) << 1)
+    n += int(m[4, 5])
+    return n
+
+
 def bmm(a, b):
     """unitriangular bmatrix multiplication"""
     return (a @ b) % 2
@@ -535,7 +590,6 @@ def bytes2cycledbm(bs):
 #
 # def int2cycledbm(n):
 #     return bytes2cycledbm(n.to_bytes(16, byteorder='big'))
-
 
 def bm2int(m):
     n = 0
