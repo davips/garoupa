@@ -1,0 +1,49 @@
+[[package]]
+name = "autoreadme"
+version = "0.2102.20"
+description = "Haskell-like intervals for Python"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "blake3"
+version = "0.1.8"
+description = "Python bindings for the Rust blake3 crate"
+category = "main"
+optional = false
+python-versions = "*"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.8"
+content-hash = "939675d4b706ab2e96fedf35fccbf30f8197338bb7ece34f8c77602eee80caaf"
+
+[metadata.files]
+autoreadme = [
+    {file = "autoreadme-0.2102.20-py3-none-any.whl", hash = "sha256:e43eb3ca24f1968cb4ee8e0c656ff5578ae34b4952ea45a1e7af099f8f936f0b"},
+    {file = "autoreadme-0.2102.20.tar.gz", hash = "sha256:149dadc00dbc263179afb4433f3875709e9bb4079fa00543c2f313a2013b75ab"},
+]
+blake3 = [
+    {file = "blake3-0.1.8-cp35-cp35m-macosx_10_7_x86_64.whl", hash = "sha256:71f1a49ca7b8b5cbefcac64cfb23d432493e4ae9e4ed421b1834484815ccba2e"},
+    {file = "blake3-0.1.8-cp35-cp35m-manylinux2010_x86_64.whl", hash = "sha256:62198369bd794087882216db94fb1deb2ad8144d3ea5ac5c8c200a5b7c2180bf"},
+    {file = "blake3-0.1.8-cp35-none-win32.whl", hash = "sha256:5b3f48ae9adc3d6bfc97f3a3aebd8f27a579505e5453e05a2f8ee63fb81eb975"},
+    {file = "blake3-0.1.8-cp35-none-win_amd64.whl", hash = "sha256:8b6f925b454d58a194deed54f15d24131da45dfdd21714f103a33b0ffbe3e318"},
+    {file = "blake3-0.1.8-cp36-cp36m-macosx_10_7_x86_64.whl", hash = "sha256:d1af4a89e3755e78d95e54c05c1c967d2bc0da1939b5bc034766fa5131f35fc0"},
+    {file = "blake3-0.1.8-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:28d02decd14bbbc65e0f04bf8c9b389f31c53e4cc3685cfbb5f7ba3e123e7670"},
+    {file = "blake3-0.1.8-cp36-none-win32.whl", hash = "sha256:f6d34840dc0c8b2a9c920a91db1e9c4917c4ff156af42f247f87fa85f19850f1"},
+    {file = "blake3-0.1.8-cp36-none-win_amd64.whl", hash = "sha256:1b58114cd1cc849c0af6e63e8b543c89f5c5804a34ec61b82d8baaffa4e11d94"},
+    {file = "blake3-0.1.8-cp37-cp37m-macosx_10_7_x86_64.whl", hash = "sha256:8c174da153b739e2aa46d362a11a5d224420e50e29f32d1ba0b3220babbbc22e"},
+    {file = "blake3-0.1.8-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:897717f157b6d9f7fd1670cd0b07bb58e761f3147b1a0e5e542412210f581f02"},
+    {file = "blake3-0.1.8-cp37-none-win32.whl", hash = "sha256:3c94995ea9477200e438451d42ddfedc210c596f166415068ed87e6db2abfa03"},
+    {file = "blake3-0.1.8-cp37-none-win_amd64.whl", hash = "sha256:891fa7fd3062cc0c59b0458e0ef971f6c65ab5a54b8b4efd99901b47c05a7de4"},
+    {file = "blake3-0.1.8-cp38-cp38-macosx_10_7_x86_64.whl", hash = "sha256:5f0f2c9ec12175c54f593a55b49e467a1fa8839db9087b11a6297b2afe6c8c25"},
+    {file = "blake3-0.1.8-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:a2cbeeda01fee7d71e1198eb2b9a7dbca53b1bf4ecdf69bf8f65b4ef7aeb3642"},
+    {file = "blake3-0.1.8-cp38-none-win32.whl", hash = "sha256:494cbc6d3ec0da44e196cbe1dbfd7dd01cd1ba32420c19d53e47bbc909921654"},
+    {file = "blake3-0.1.8-cp38-none-win_amd64.whl", hash = "sha256:5422f98d49afb3a89f0c2e56045275148b63370ff8aa25357ee4739b34f5c8a9"},
+    {file = "blake3-0.1.8-cp39-cp39-macosx_10_7_x86_64.whl", hash = "sha256:13f460849ed4f399d53129353723524c0ac5b67e3bed7c50152e57e20deb54ff"},
+    {file = "blake3-0.1.8-cp39-cp39-manylinux2010_x86_64.whl", hash = "sha256:9a97aba70bcc131d9b4f059a7a295717ec434a3a82b84290e86b95cfa61c9272"},
+    {file = "blake3-0.1.8-cp39-none-win32.whl", hash = "sha256:b70c0d157fe12ca3e43c630da86afd2122be206b5ad6cd29bdf8660be7e03656"},
+    {file = "blake3-0.1.8-cp39-none-win_amd64.whl", hash = "sha256:c5d1cd1218089e105f75b5472878bd7cabfaad13f83c5511dab326858fff9890"},
+    {file = "blake3-0.1.8.tar.gz", hash = "sha256:b131129196ac4242bc9127a425daad46a8e7a451daef21a9337fcec17db445a8"},
+]
