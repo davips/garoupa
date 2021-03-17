@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hoshy"
-version = "0.2103.5"
+version = "0.210317.0"
 description = "Cryptographic hash (half-blake3) and operators - see package hosh for a faster, native (compiled) approach"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
