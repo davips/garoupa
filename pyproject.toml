@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "hoshy"
-version = "0.2103.1"
+version = "0.2103.5"
 description = "Cryptographic hash (half-blake3) and operators - see package hosh for a faster, native (compiled) approach"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
 readme = 'README.md'
 packages = [
-    { include = "hosh.py", from = "src" },
+    { include = "hosh", from = "src" },
 ]
 
 [tool.poetry.dependencies]

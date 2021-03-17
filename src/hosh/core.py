@@ -22,8 +22,8 @@
 #  Relevant employers or funding agencies will be notified accordingly.
 from blake3 import blake3
 
-from core.base62 import b62enc, b62dec
-from core.math import int2pmat, pmat2int
+from hosh.base62 import b62enc, b62dec
+from hosh.math import int2pmat, pmat2int
 
 
 def n_bin_id_fromblob(blob):
