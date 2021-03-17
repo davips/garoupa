@@ -14,10 +14,18 @@ category = "main"
 optional = false
 python-versions = "*"
 
+[[package]]
+name = "colored"
+version = "1.4.2"
+description = "Simple library for color and formatting to terminal"
+category = "main"
+optional = false
+python-versions = "*"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "939675d4b706ab2e96fedf35fccbf30f8197338bb7ece34f8c77602eee80caaf"
+content-hash = "ea518f4fb711afd7b910c6cc88b50ce8064b83ad0161ec879333ebab55909fcd"
 
 [metadata.files]
 autoreadme = [
@@ -46,4 +54,7 @@ blake3 = [
     {file = "blake3-0.1.8-cp39-none-win32.whl", hash = "sha256:b70c0d157fe12ca3e43c630da86afd2122be206b5ad6cd29bdf8660be7e03656"},
     {file = "blake3-0.1.8-cp39-none-win_amd64.whl", hash = "sha256:c5d1cd1218089e105f75b5472878bd7cabfaad13f83c5511dab326858fff9890"},
     {file = "blake3-0.1.8.tar.gz", hash = "sha256:b131129196ac4242bc9127a425daad46a8e7a451daef21a9337fcec17db445a8"},
+]
+colored = [
+    {file = "colored-1.4.2.tar.gz", hash = "sha256:056fac09d9e39b34296e7618897ed1b8c274f98423770c2980d829fd670955ed"},
 ]
