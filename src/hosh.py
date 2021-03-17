@@ -1,5 +1,3 @@
-__version__ = '0.2103.0'
-
 #  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the hoshy project.
 #  Please respect the license - more about this in the section (*) below.
