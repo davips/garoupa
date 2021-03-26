@@ -5,6 +5,8 @@
 Cryptographic hash (half-blake3) and operators - see package hosh for a faster, native (compiled) approach.
 The only external dependence is blake3.
 
+Hoshy hosts also some niceties for group theory experimentation.
+
 ## Python installation
 ### from package
 ```bash
@@ -27,6 +29,7 @@ pip install -e ../hoshy
 ### Examples
 <<operation>>
 
+<<groups>>
 
 
 

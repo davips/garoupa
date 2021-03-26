@@ -5,6 +5,8 @@
 Cryptographic hash (half-blake3) and operators - see package hosh for a faster, native (compiled) approach.
 The only external dependence is blake3.
 
+Hoshy hosts also some niceties for group theory experimentation.
+
 ## Python installation
 ### from package
 ```bash
@@ -49,6 +51,14 @@ print(f"{b} * {~b} = {b * ~b} = 0")
 """
 211eErwhEiGnit0beo4tjo
 04orKjYHAZraYORILOVwos * 211eErwhEiGnit0beo4tjo = 0000000000000000000000 = 0
+"""
+```
+
+```python3
+
+print(f"{b} * {Hash(0)} = {b * Hash(0)} = b")
+"""
+04orKjYHAZraYORILOVwos * 0000000000000000000000 = 04orKjYHAZraYORILOVwos = b
 """
 ```
 
@@ -104,6 +114,45 @@ print(f"{a * (b * c)} = {(a * b) * c}")
 </p>
 </details>
 
+**Abstract algebra module**
+<details>
+<p>
+
+```python3
+from itertools import islice
+from hosh.algebra.cyclic import Z
+from hosh.algebra.dihedral import D
+from hosh.algebra.symmetric import S
+
+# Direct product between:
+#   symmetric group S4;
+#   cyclic group Z5; and,
+#   dihedral group D4.
+G = S(4) * Z(5) * D(4)
+print(G)
+"""
+S4×Z5×D4
+"""
+```
+
+```python3
+
+# Sampling and operating over some pairs.
+fetch5 = islice(G, 0, 5)
+for a, b in zip(fetch5, G):
+    print(a, "*", b, "=", a * b, sep="\t")
+"""
+«[2, 0, 3, 1], 0, s7»	*	«[3, 0, 1, 2], 1, s3»	=	«[1, 2, 0, 3], 1, r0»
+«[0, 3, 1, 2], 3, s4»	*	«[1, 0, 3, 2], 0, r5»	=	«[3, 0, 2, 1], 3, s3»
+«[0, 1, 2, 3], 3, s3»	*	«[2, 0, 3, 1], 3, s3»	=	«[2, 0, 3, 1], 1, r0»
+«[1, 2, 0, 3], 2, r7»	*	«[1, 2, 0, 3], 1, s2»	=	«[2, 0, 1, 3], 3, s1»
+«[0, 2, 1, 3], 1, r1»	*	«[0, 3, 1, 2], 2, s1»	=	«[0, 3, 2, 1], 3, s2»
+"""
+```
+
+
+</p>
+</details>
 
 
 
