@@ -120,14 +120,18 @@ print(f"{a * (b * c)} = {(a * b) * c}")
 
 ```python3
 from itertools import islice
+from math import factorial
+
 from hosh.algebra.cyclic import Z
 from hosh.algebra.dihedral import D
-from hosh.algebra.symmetric import S
 
 # Direct product between:
 #   symmetric group S4;
 #   cyclic group Z5; and,
 #   dihedral group D4.
+from hosh.algebra.symmetric import S
+from hosh.algebra.symmetric.perm import Perm
+
 G = S(4) * Z(5) * D(4)
 print(G)
 """
@@ -142,11 +146,60 @@ fetch5 = islice(G, 0, 5)
 for a, b in zip(fetch5, G):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 0, 3, 1], 0, s7»	*	«[3, 0, 1, 2], 1, s3»	=	«[1, 2, 0, 3], 1, r0»
-«[0, 3, 1, 2], 3, s4»	*	«[1, 0, 3, 2], 0, r5»	=	«[3, 0, 2, 1], 3, s3»
-«[0, 1, 2, 3], 3, s3»	*	«[2, 0, 3, 1], 3, s3»	=	«[2, 0, 3, 1], 1, r0»
-«[1, 2, 0, 3], 2, r7»	*	«[1, 2, 0, 3], 1, s2»	=	«[2, 0, 1, 3], 3, s1»
-«[0, 2, 1, 3], 1, r1»	*	«[0, 3, 1, 2], 2, s1»	=	«[0, 3, 2, 1], 3, s2»
+«[0, 2, 1, 3], 2, r4»	*	«[2, 0, 3, 1], 0, s1»	=	«[1, 0, 3, 2], 2, s1»
+«[3, 1, 0, 2], 1, s2»	*	«[1, 0, 3, 2], 0, r0»	=	«[1, 3, 2, 0], 1, s2»
+«[1, 0, 3, 2], 1, s7»	*	«[3, 0, 1, 2], 1, r6»	=	«[2, 1, 0, 3], 2, s1»
+«[0, 2, 1, 3], 2, r1»	*	«[2, 1, 0, 3], 2, s1»	=	«[1, 2, 0, 3], 4, s2»
+«[1, 3, 0, 2], 1, s4»	*	«[3, 0, 1, 2], 3, r4»	=	«[2, 1, 3, 0], 4, s0»
+"""
+```
+
+```python3
+
+# Operator ~ is another way of sampling. Group S35 modulo 2^128.
+G = S(35, 2 ** 128)
+print(~G)
+"""
+[17, 32, 23, 1, 20, 26, 16, 28, 13, 21, 27, 0, 31, 24, 29, 14, 4, 8, 7, 19, 10, 11, 18, 2, 30, 12, 34, 33, 3, 15, 22, 5, 6, 9, 25]
+"""
+```
+
+```python3
+
+# Manual element creation. Group S35 modulo 2^128.
+last_perm_i = factorial(35) - 1
+last_128bit = 2 ** 128 - 1
+a = Perm(i=last_perm_i, n=35, m=last_128bit)
+print(a.i, "=", last_perm_i % last_128bit, sep="\t")
+"""
+124676958757991025765413114570153656349	=	124676958757991025765413114570153656349
+"""
+```
+
+```python3
+
+# Inverse element. Group S4 modulo 20.
+a = Perm(i=21, n=4, m=20)
+b = Perm(i=17, n=4, m=20)
+print(a, "*", -a, "=", (a * -a).i, "=", a * -a)
+"""
+[1, 0, 2, 3] * [1, 0, 2, 3] = 0 = [0, 1, 2, 3]
+"""
+```
+
+```python3
+
+print(a, "*", b, "=", a * b)
+"""
+[1, 0, 2, 3] * [1, 2, 3, 0] = [0, 2, 3, 1]
+"""
+```
+
+```python3
+
+print(a, "*", b, "*", -b, "=", a * b * -b)
+"""
+[1, 0, 2, 3] * [1, 2, 3, 0] * [3, 0, 1, 2] = [1, 0, 2, 3]
 """
 ```
 

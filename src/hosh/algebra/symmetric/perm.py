@@ -1,34 +1,28 @@
+import sys
 from math import factorial
 
 from hosh.algebra.abs.element import Element
+from hosh.math import pmat_inv, pmat_mult, pmat2int, int2pmat
 
 
 class Perm(Element):
-    def __init__(self, i, n):
+    def __init__(self, i, n, m=sys.maxsize, _perm=None):
         super().__init__()
-        self.i, self.n = i, n
+        self.i, self.n = i % m, n
         self.order = factorial(n)
-        available = list(range(n))
-        mat = []
-        for div in range(n, 0, -1):
-            i, r = divmod(i, div)
-            mat.append(available.pop(r))
-        mat.extend(available)
-        self.perm = mat
+        if i == self.i and _perm:
+            self.perm = _perm
+        else:
+            self.perm = int2pmat(self.i, self.n)
+        self.m = m
 
     def __mul__(self, other):
-        perm = [self.perm[x] for x in other.perm]
-        radix = self.n
-        available = list(range(self.n))
-        i = 1
-        res = 0
-        for row in perm:
-            idx = available.index(row)
-            del available[idx]
-            res += idx * i
-            i *= radix
-            radix -= 1
-        return Perm(res, self.n)
+        perm = pmat_mult(self.perm, other.perm)
+        return Perm(pmat2int(perm), self.n, self.m, _perm=perm)
 
     def __repr__(self):
         return f"{self.perm}"
+
+    def __neg__(self):
+        perm = pmat_inv(self.perm)
+        return Perm(pmat2int(perm), self.n, self.m, _perm=perm)
