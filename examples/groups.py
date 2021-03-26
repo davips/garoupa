@@ -1,5 +1,5 @@
+# Abstract algebra module
 from itertools import islice
-
 from hosh.algebra.cyclic import Z
 from hosh.algebra.dihedral import D
 from hosh.algebra.symmetric import S

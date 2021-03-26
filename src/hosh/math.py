@@ -22,7 +22,7 @@
 #  Relevant employers or funding agencies will be notified accordingly.
 
 
-def int2pmat(number, side=34):
+def int2pmat(number, side):
     """Convert number into permutation.
 
     Pads to side.
@@ -83,6 +83,8 @@ def pmat_mult(a, b):
     -------
 
     """
+    if len(a) != len(b):
+        raise Exception("a and b should have same length.")
     return [a[x] for x in b]
 
 
@@ -111,7 +113,8 @@ def pmat_transpose(m):
 
 
 def pmat_inv(m):
-    r = list(range(34))
-    for i in range(34):
+    size = len(m)
+    r = list(range(size))
+    for i in range(size):
         r[m[i]] = i
     return r

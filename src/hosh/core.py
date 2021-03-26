@@ -26,27 +26,35 @@ from hosh.base62 import b62enc, b62dec
 from hosh.math import int2pmat, pmat2int
 
 
-def n_bin_id_fromblob(blob):
-    digest = blake3(blob).digest()[16:]
-    n = int.from_bytes(digest, byteorder="big") & (2 ** 127 - 1)
-    bin = int2pmat(n)
-    id = b62enc(n)
+def n_bin_id_fromblob(blob, size):
+    if size == 57:
+        skip = 0
+        mask = 2 ** 254 - 1
+    elif size == 34:
+        skip = 16
+        mask = 2 ** 127 - 1
+    else:
+        raise Exception("Wrong size:", size)
+    digest = blake3(blob).digest()[skip:]
+    n = int.from_bytes(digest, byteorder="big") & mask
+    bin = int2pmat(n, size)
+    id = b62enc(n, size)
     return n, bin, id
 
 
-def n_id_fromperm(bin):
+def n_id_fromperm(bin, size):
     n = pmat2int(bin)
-    id = b62enc(n)
+    id = b62enc(n, size)
     return n, id
 
 
-def n_bin_fromid(id):
+def n_bin_fromid(id, size):
     n = b62dec(id)
-    bin = int2pmat(n)
+    bin = int2pmat(n, size)
     return n, bin
 
 
-def bin_id_fromn(n):
-    bin = int2pmat(n)
-    id = b62enc(n)
+def bin_id_fromn(n, size):
+    bin = int2pmat(n, size)
+    id = b62enc(n, size)
     return bin, id

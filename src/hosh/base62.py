@@ -45,9 +45,10 @@ def b62dec(string):
     return num
 
 
-def b62enc(num):
+def b62enc(num, size):
     encoded = ""
     while num:
         num, rem = divmod(num, 62)
         encoded = alphabet[rem] + encoded
-    return encoded.rjust(22, "0")
+    chars = 22 if size == 34 else 43
+    return encoded.rjust(chars, "0")
