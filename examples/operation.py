@@ -12,6 +12,9 @@ print(~b)
 print(f"{b} * {~b} = {b * ~b} = 0")
 # ...
 
+print(f"{b} * {Hash(0)} = {b * Hash(0)} = b")
+# ...
+
 print(f"{c} * {~b} = {c * ~b} = {a} = a")
 # ...
 
