@@ -1,6 +1,7 @@
 import operator
 from functools import reduce
 from itertools import product, cycle
+from math import log
 
 from hosh.algebra.product.tuple import Tuple
 
@@ -11,6 +12,7 @@ class Product:
         self.groups = groups
         self.sorted = lambda: (Tuple(*es) for es in product(*(g.sorted() for g in self.groups)))
         self.id = Tuple(*(g.id for g in self.groups))
+        self.bits = int(log(self.order, 2))
 
     def __iter__(self):
         its = [cycle(iter(g)) for g in self.groups]

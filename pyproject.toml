@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hoshy"
-version = "0.210317.0"
-description = "Cryptographic hash (half-blake3) and operators - see package hosh for a faster, native (compiled) approach"
+version = "0.210317.1"
+description = "Cryptographic hash, abstract algebra and operators - see package hosh for a faster, native (compiled) hash/ops approach"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
 readme = 'README.md'
