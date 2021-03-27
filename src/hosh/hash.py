@@ -6,6 +6,12 @@ from hosh.math import pmat_mult, pmat_inv
 
 
 class Hash:
+    # def __init__(self, n=None, /, blob=None, id=None, bin=None):
+    #     """First 128 bits as S{35mod2^128}    and    next 128 bits as Z{2^128}."""
+    #     if blob:
+    #         self._n, self._bin, self._id = n_bin_id_fromblob(blob)
+    #     else:
+    #         self._n, self._id, self._bin = n, id, bin
     def __init__(self, n=None, /, blob=None, id=None, bin=None, size=34):
         """size can be 34 or 57: 127/128-bit or 254/256-bit"""
         self.size = size
