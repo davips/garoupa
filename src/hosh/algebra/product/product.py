@@ -9,7 +9,7 @@ class Product:
     def __init__(self, *groups):
         self.order = reduce(operator.mul, [g.order for g in groups])
         self.groups = groups
-        self.sorted = lambda: (Tuple(*es) for es in product(*self.groups))
+        self.sorted = lambda: (Tuple(*es) for es in product(*(g.sorted() for g in self.groups)))
         self.id = Tuple(*(g.id for g in self.groups))
 
     def __iter__(self):

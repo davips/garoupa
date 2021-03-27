@@ -25,6 +25,10 @@ from blake3 import blake3
 from hosh.base62 import b62enc, b62dec
 from hosh.math import int2pmat, pmat2int
 
+# def n_bin_id_fromblob(blob):
+#     digest = blake3(blob).digest()
+#     msb = int.from_bytes(digest[:16], byteorder="big")
+#     lsb = int.from_bytes(digest[16:16], byteorder="big")
 
 def n_bin_id_fromblob(blob, size):
     if size == 57:
