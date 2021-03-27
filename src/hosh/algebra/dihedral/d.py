@@ -1,6 +1,8 @@
+import operator
 import random as rnd
 from dataclasses import dataclass
-from itertools import chain
+from functools import reduce
+from itertools import chain, repeat
 from math import log
 
 from hosh.algebra.dihedral.r import R
@@ -29,3 +31,8 @@ class D:
 
     def __repr__(self):
         return f"D{self.n}"
+
+    def __xor__(self, other):
+        return reduce(operator.mul, repeat(self, other))
+
+    __pow__ = __xor__
