@@ -18,6 +18,7 @@ class S:
         self.id = Perm(0, self.n)
         self.bits = int(log(self.order, 2))
 
+    @property
     def comm_degree(self):
         """Asymptotic commutativity degree (value is between Sn and An)"""
         num = exp(2 * pi * sqrt(self.n / 6))
