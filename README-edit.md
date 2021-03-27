@@ -2,8 +2,7 @@
 [![codecov](https://codecov.io/gh/davips/hoshy/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/hoshy)
 
 # hoshy
-Cryptographic hash (half-blake3) and operators - see package hosh for a faster, native (compiled) approach.
-The only external dependence is blake3.
+Cryptographic hash, abstract algebra and operators - see package hosh for a faster, native (compiled) hash/ops approach.
 
 Hoshy hosts also some niceties for group theory experimentation.
 

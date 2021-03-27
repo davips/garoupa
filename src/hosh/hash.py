@@ -76,6 +76,9 @@ class Hash:
             self._repr = colorize128bit(self.id)
         return self._repr
 
+    def __str__(self):
+        return self.id
+
     @classmethod
     def muls(cls, size, /, *perms):  # 23.6 µs
         return Hash(bin=reduce(pmat_mult, [p.bin for p in perms]), size=size)
