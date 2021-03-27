@@ -1,11 +1,14 @@
 from functools import reduce, lru_cache
 from math import factorial
 
+from hosh.colors import colorize128bit
 from hosh.core import n_bin_id_fromblob, bin_id_fromn, n_bin_fromid, n_id_fromperm
 from hosh.math import pmat_mult, pmat_inv
 
 
 class Hash:
+    _repr = None
+
     # def __init__(self, n=None, /, blob=None, id=None, bin=None):
     #     """First 128 bits as S{35mod2^128}    and    next 128 bits as Z{2^128}."""
     #     if blob:
@@ -68,11 +71,10 @@ class Hash:
     def __sub__(self, other):  # 530ns
         return Hash((self.n - other.n) % self.order, size=self.size)
 
-    def __str__(self):
-        return self.id
-
     def __repr__(self):
-        return self.id
+        if self._repr is None:
+            self._repr = colorize128bit(self.id)
+        return self._repr
 
     @classmethod
     def muls(cls, size, /, *perms):  # 23.6 µs
