@@ -339,3 +339,24 @@ def bm2int8bit(m):
     n += (int(m[1, 2]) << 4) + (int(m[1, 3]) << 3) + (int(m[1, 4]) << 2)
     n += (int(m[2, 3]) << 1) + int(m[2, 4])
     return n
+
+
+def int2bml(n, l, bits):
+    m = np.eye(l)
+    b = bits - 1
+    for i in range(l - 1):
+        for j in range(i + 1, l):
+            m[i, j] = float(n >> b & 1)
+            b -= 1
+    return m
+
+
+def bm2intl(m, bits):
+    n = 0
+    l = len(m)
+    b = bits - 1
+    for i in range(l - 1):
+        for j in range(i + 1, l):
+            n += (int(m[i, j]) << b)
+            b -= 1
+    return n

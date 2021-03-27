@@ -1,7 +1,8 @@
-# Commutativity degree of groups
-from itertools import product
+# Tendence of commutativity on Mn.
+from itertools import chain
 
-from hosh.algebra.dihedral import D
+from hosh.algebra.matrix.m import M
+from hosh.algebra.matrix.m8bit import M8bit
 
 
 def traverse(G):
@@ -17,22 +18,18 @@ def traverse(G):
           f"\t{100 * count / i} %", sep="")
 
 
-traverse(D(8))
+M1_4 = map(M, range(1, 5))
+for G in chain(M1_4, [M8bit(), M(5)]):
+    traverse(G)
 # ...
-
-traverse(D(8) ^ 2)
-# ...
-
-# Large groups (sampling is needed).
-Gs = [D(8) ^ 3, D(8) ^ 4, D(8) ^ 5]
-for G in Gs:
+for G in map(M, range(6, 16)):
     i, count = 0, 0
-    for a, b in product(G, G):
+    for a, b in zip(G, G):
         if a * b == b * a:
             count += 1
-        if i >= 300_000:
-            break
         i += 1
+        if i >= 1_000_000:
+            break
     print(f"|{G}| = ".rjust(20, ' '),
           f"{G.order}:".ljust(10, ' '),
           f"{count}/{i}:".rjust(15, ' '), f"  {G.bits} bits",

@@ -1,4 +1,7 @@
+import random as rnd
 from hosh.algebra.abs.element import Element
+from hosh.algebra.matrix.mat import Mat
+from hosh.algebra.product import Product
 
 
 class M(Element):
@@ -12,14 +15,18 @@ class M(Element):
         super().__init__()
         self.n = n
         self.bits = sum(range(1, n))
-        self.order = self.bits ** 2
-        raise Exception("Not implemented. Use M17")
+        self.order = 2 ** self.bits
+        self.sorted = lambda: (Mat(i, self.n) for i in range(self.order))
+
+    def __iter__(self):
+        for i in range(self.order):
+            yield Mat(rnd.getrandbits(self.bits), self.n)
 
     def __mul__(self, other):
-        raise Exception("Not implemented. Use M17")
+        return Product(self, other)
 
     def __repr__(self):
         return f"M{self.n}"
 
-    def __neg__(self):
-        raise Exception("Not implemented. Use M17")
+    def __invert__(self):
+        return Mat(rnd.getrandbits(self.bits), self.n)

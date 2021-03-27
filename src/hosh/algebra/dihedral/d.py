@@ -33,6 +33,6 @@ class D:
         return f"D{self.n}"
 
     def __xor__(self, other):
-        return reduce(operator.mul, repeat(self, other))
+        return Product(*repeat(self, other))
 
     __pow__ = __xor__
