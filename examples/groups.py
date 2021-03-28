@@ -2,15 +2,15 @@
 from itertools import islice
 from math import factorial
 
-from hosh.algebra.cyclic import Z
-from hosh.algebra.dihedral import D
+from garoupa.algebra.cyclic import Z
+from garoupa.algebra.dihedral import D
 
 # Direct product between:
 #   symmetric group S4;
 #   cyclic group Z5; and,
 #   dihedral group D4.
-from hosh.algebra.symmetric import S
-from hosh.algebra.symmetric.perm import Perm
+from garoupa.algebra.symmetric import S
+from garoupa.algebra.symmetric.perm import Perm
 
 G = S(4) * Z(5) * D(4)
 print(G)

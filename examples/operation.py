@@ -1,5 +1,5 @@
 # Basic operations
-from hosh import Hash
+from garoupa import Hash
 
 # Hashes can be multiplied.
 a = Hash(blob=b"Some large binary content...")

@@ -1,10 +1,10 @@
-![test](https://github.com/davips/hoshy/workflows/test/badge.svg)
-[![codecov](https://codecov.io/gh/davips/hoshy/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/hoshy)
+![test](https://github.com/davips/garoupa/workflows/test/badge.svg)
+[![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
-# hoshy
+# garoupa
 Cryptographic hash, abstract algebra and operators - see package hosh for a faster, native (compiled) hash/ops approach.
 
-Hoshy hosts also some niceties for group theory experimentation.
+Garoupa hosts also some niceties for group theory experimentation.
 
 ## Python installation
 ### from package
@@ -14,14 +14,14 @@ python3 -m venv venv
 source venv/bin/activate
 
 # Install from PyPI
-pip install hoshy
+pip install garoupa
 ```
 
 ### from source
 ```bash
 cd my-project
-git clone https://github.com/davips/hoshy ../hoshy
-pip install -e ../hoshy
+git clone https://github.com/davips/garoupa ../garoupa
+pip install -e ../garoupa
 ```
 
 
@@ -31,7 +31,7 @@ pip install -e ../hoshy
 <p>
 
 ```python3
-from hosh import Hash
+from garoupa import Hash
 
 # Hashes can be multiplied.
 a = Hash(blob=b"Some large binary content...")
@@ -121,15 +121,15 @@ print(f"{a * (b * c)} = {(a * b) * c}")
 from itertools import islice
 from math import factorial
 
-from hosh.algebra.cyclic import Z
-from hosh.algebra.dihedral import D
+from garoupa.algebra.cyclic import Z
+from garoupa.algebra.dihedral import D
 
 # Direct product between:
 #   symmetric group S4;
 #   cyclic group Z5; and,
 #   dihedral group D4.
-from hosh.algebra.symmetric import S
-from hosh.algebra.symmetric.perm import Perm
+from garoupa.algebra.symmetric import S
+from garoupa.algebra.symmetric.perm import Perm
 
 G = S(4) * Z(5) * D(4)
 print(G)
@@ -144,11 +144,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 1, 0, 3], 1, s4»	*	«[3, 2, 0, 1], 0, s7»	=	«[3, 0, 2, 1], 1, r1»
-«[0, 1, 2, 3], 2, s5»	*	«[1, 0, 3, 2], 3, r0»	=	«[1, 0, 3, 2], 0, s1»
-«[0, 2, 1, 3], 1, r6»	*	«[2, 0, 1, 3], 1, r5»	=	«[1, 0, 2, 3], 2, r3»
-«[1, 3, 0, 2], 2, r5»	*	«[3, 0, 1, 2], 0, s3»	=	«[2, 1, 3, 0], 2, s0»
-«[0, 1, 2, 3], 2, r3»	*	«[1, 0, 2, 3], 3, s3»	=	«[1, 0, 2, 3], 0, s2»
+«[2, 3, 0, 1], 3, s7»	*	«[1, 0, 3, 2], 0, s2»	=	«[3, 2, 1, 0], 3, r1»
+«[1, 2, 0, 3], 2, r3»	*	«[3, 0, 2, 1], 0, r2»	=	«[3, 1, 0, 2], 2, r1»
+«[0, 2, 1, 3], 2, s7»	*	«[2, 1, 0, 3], 2, s4»	=	«[1, 2, 0, 3], 4, r3»
+«[3, 0, 1, 2], 1, r2»	*	«[0, 3, 1, 2], 0, r7»	=	«[3, 2, 0, 1], 1, r1»
+«[2, 3, 0, 1], 3, s7»	*	«[2, 3, 0, 1], 0, s3»	=	«[0, 1, 2, 3], 3, r0»
 """
 ```
 
@@ -158,7 +158,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[11, 7, 0, 10, 2, 5, 4, 1, 3, 8, 6, 9]
+[10, 1, 2, 9, 5, 7, 11, 6, 8, 3, 0, 4]
 """
 ```
 
@@ -216,7 +216,7 @@ print(a, "*", b, "*", -b, "=", a * b * -b, "= a")
 ```python3
 from itertools import product
 
-from hosh.algebra.dihedral import D
+from garoupa.algebra.dihedral import D
 
 
 def traverse(G):
@@ -263,8 +263,8 @@ for G in Gs:
           f"{count}/{i}:".rjust(15, ' '), f"  {G.bits} bits",
           f"\t~{100 * count / i} %", sep="")
 """
-       |D8×D8×D8| = 4096:       10558/300000:  12 bits	~3.5193333333333334 %
-    |D8×D8×D8×D8| = 65536:      20480/300000:  16 bits	~6.826666666666667 %
+       |D8×D8×D8| = 4096:       14336/300000:  12 bits	~4.778666666666667 %
+    |D8×D8×D8×D8| = 65536:      28672/300000:  16 bits	~9.557333333333334 %
  |D8×D8×D8×D8×D8| = 1048576:        0/300000:  20 bits	~0.0 %
 """
 ```
@@ -280,8 +280,8 @@ for G in Gs:
 ```python3
 from itertools import chain
 
-from hosh.algebra.matrix.m import M
-from hosh.algebra.matrix.m8bit import M8bit
+from garoupa.algebra.matrix.m import M
+from garoupa.algebra.matrix.m8bit import M8bit
 
 
 def traverse(G):

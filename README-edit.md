@@ -1,10 +1,18 @@
-![test](https://github.com/davips/hoshy/workflows/test/badge.svg)
-[![codecov](https://codecov.io/gh/davips/hoshy/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/hoshy)
+![test](https://github.com/davips/garoupa/workflows/test/badge.svg)
+[![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
-# hoshy
+# garoupa
 Cryptographic hash, abstract algebra and operators - see package hosh for a faster, native (compiled) hash/ops approach.
 
-Hoshy hosts also some niceties for group theory experimentation.
+<center>
+<a title="fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Malabar_grouper_melb_aquarium.jpg"><img width="120" alt="Malabar grouper melb aquarium" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg"></a>
+</center>
+
+
+
+[Latest version](https://github.com/davips/garoupa)
+
+Garoupa hosts also some niceties for group theory experimentation.
 
 ## Python installation
 ### from package
@@ -14,14 +22,14 @@ python3 -m venv venv
 source venv/bin/activate
 
 # Install from PyPI
-pip install hoshy
+pip install garoupa
 ```
 
 ### from source
 ```bash
 cd my-project
-git clone https://github.com/davips/hoshy ../hoshy
-pip install -e ../hoshy
+git clone https://github.com/davips/garoupa ../garoupa
+pip install -e ../garoupa
 ```
 
 
@@ -39,8 +47,8 @@ pip install -e ../hoshy
 ```python3
 from itertools import chain
 
-from hosh.algebra.matrix.m import M
-from hosh.algebra.matrix.m8bit import M8bit
+from garoupa.algebra.matrix.m import M
+from garoupa.algebra.matrix.m8bit import M8bit
 
 
 def traverse(G):

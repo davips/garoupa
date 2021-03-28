@@ -1,7 +1,7 @@
 # Commutativity degree of groups
 from itertools import product
 
-from hosh.algebra.dihedral import D
+from garoupa.algebra.dihedral import D
 
 
 def traverse(G):

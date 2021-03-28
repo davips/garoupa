@@ -1,8 +1,8 @@
 # Tendence of commutativity on Mn
 from itertools import chain
 
-from hosh.algebra.matrix.m import M
-from hosh.algebra.matrix.m8bit import M8bit
+from garoupa.algebra.matrix.m import M
+from garoupa.algebra.matrix.m8bit import M8bit
 
 
 def traverse(G):
