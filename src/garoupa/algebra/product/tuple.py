@@ -24,15 +24,17 @@ from garoupa.algebra.abs.element import Element
 
 
 class Tuple(Element):
-    def __init__(self, *items):
+    def __init__(self, *subelements):
         super().__init__()
-        self.items = items
-        itemsrv = list(reversed(items))
-        lst = zip([1] + [(elema.order) for elema in itemsrv[:-1]], [elemb.i for elemb in itemsrv])
-        self.i = sum(x * y for x, y in lst)
+        self.subelements = subelements
+        e = 1
+        self.i = 0
+        for a in reversed(subelements):
+            self.i += e * a.i
+            e *= a.order
 
     def __mul__(self, other):
-        return Tuple(*(a * b for a, b in zip(self.items, other.items)))
+        return Tuple(*(a * b for a, b in zip(self.subelements, other.subelements)))
 
     def __repr__(self):
-        return f"«{', '.join([str(a) for a in self.items])}»"
+        return f"«{', '.join([str(a) for a in self.subelements])}»"
