@@ -4,6 +4,14 @@
 # garoupa
 Cryptographic hash, abstract algebra and operators - see package hosh for a faster, native (compiled) hash/ops approach.
 
+<center>
+<a title="fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Malabar_grouper_melb_aquarium.jpg"><img width="120" alt="Malabar grouper melb aquarium" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg"></a>
+</center>
+
+
+
+[Latest version](https://github.com/davips/garoupa)
+
 Garoupa hosts also some niceties for group theory experimentation.
 
 ## Python installation
@@ -144,11 +152,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 3, 0, 1], 3, s7»	*	«[1, 0, 3, 2], 0, s2»	=	«[3, 2, 1, 0], 3, r1»
-«[1, 2, 0, 3], 2, r3»	*	«[3, 0, 2, 1], 0, r2»	=	«[3, 1, 0, 2], 2, r1»
-«[0, 2, 1, 3], 2, s7»	*	«[2, 1, 0, 3], 2, s4»	=	«[1, 2, 0, 3], 4, r3»
-«[3, 0, 1, 2], 1, r2»	*	«[0, 3, 1, 2], 0, r7»	=	«[3, 2, 0, 1], 1, r1»
-«[2, 3, 0, 1], 3, s7»	*	«[2, 3, 0, 1], 0, s3»	=	«[0, 1, 2, 3], 3, r0»
+«[1, 0, 3, 2], 0, s2»	*	«[3, 2, 0, 1], 1, s3»	=	«[2, 3, 1, 0], 1, r3»
+«[0, 1, 3, 2], 1, r1»	*	«[1, 2, 0, 3], 0, r0»	=	«[1, 3, 0, 2], 1, r1»
+«[3, 0, 2, 1], 3, r1»	*	«[0, 2, 1, 3], 1, s3»	=	«[3, 2, 0, 1], 4, s0»
+«[3, 0, 2, 1], 2, r1»	*	«[3, 0, 2, 1], 2, s2»	=	«[1, 3, 2, 0], 4, s3»
+«[0, 1, 2, 3], 1, s3»	*	«[2, 0, 3, 1], 2, s0»	=	«[2, 0, 3, 1], 3, r3»
 """
 ```
 
@@ -158,7 +166,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[10, 1, 2, 9, 5, 7, 11, 6, 8, 3, 0, 4]
+[11, 8, 0, 6, 9, 10, 2, 5, 7, 4, 1, 3]
 """
 ```
 
@@ -263,8 +271,8 @@ for G in Gs:
           f"{count}/{i}:".rjust(15, ' '), f"  {G.bits} bits",
           f"\t~{100 * count / i} %", sep="")
 """
-       |D8×D8×D8| = 4096:       14336/300000:  12 bits	~4.778666666666667 %
-    |D8×D8×D8×D8| = 65536:      28672/300000:  16 bits	~9.557333333333334 %
+       |D8×D8×D8| = 4096:       27392/300000:  12 bits	~9.130666666666666 %
+    |D8×D8×D8×D8| = 65536:      13561/300000:  16 bits	~4.520333333333333 %
  |D8×D8×D8×D8×D8| = 1048576:        0/300000:  20 bits	~0.0 %
 """
 ```
