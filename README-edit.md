@@ -2,11 +2,15 @@
 [![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
 # garoupa
-Cryptographic hash, abstract algebra and operators - see package hosh for a faster, native (compiled) hash/ops approach.
+Cryptographic hash, abstract algebra and operators - see package [hosh](https://github.com/davips/hosh) for a faster, native (compiled) hash/ops approach.
 
-<center>
+<p>
 <a title="fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Malabar_grouper_melb_aquarium.jpg"><img width="120" alt="Malabar grouper melb aquarium" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg"></a>
-</center>
+<a href="https://github.com/davips/hosh/blob/main/colored-id.png">
+<img src="https://raw.githubusercontent.com/davips/hosh/main/colored-id.png" alt="Colored base-62 representation" width="500" height="130">
+</a>
+</p>
+
 
 
 
