@@ -27,7 +27,8 @@ rev_alphabet = dict((c, v) for v, c in enumerate(alphabet))
 
 def b62dec(string):
     """
-    >>> b62dec("AA") == 10*62 + 10
+    Usage:
+    >>> b62dec("AA") == (0, 10*62 + 10)
     True
 
     Parameters
@@ -41,13 +42,26 @@ def b62dec(string):
     num = 0
     for char in string:
         num = num * 62 + rev_alphabet[char]
-    return num
+    s, z = divmod(num, 2 ** 128)
+    return s, z
 
 
-def b62enc(num, size):
+def b62enc(s, z):
+    """
+    Usage:
+    >>> b62enc(123, 456)
+    '00000000000000000000FSL0OJRorrriZQUQzLO9WlE'
+    >>> n = b62dec(b62enc(123, 456))
+    >>> n == (123, 456)
+    True
+
+    :param s:
+    :param z:
+    :return:
+    """
     encoded = ""
+    num = s * 2 ** 128 + z
     while num:
         num, rem = divmod(num, 62)
         encoded = alphabet[rem] + encoded
-    chars = 22 if size == 34 else 43
-    return encoded.rjust(chars, "0")
+    return encoded.rjust(43, "0")

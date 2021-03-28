@@ -25,40 +25,40 @@ from blake3 import blake3
 from garoupa.base62 import b62enc, b62dec
 from garoupa.math import int2pmat, pmat2int
 
-# def n_bin_id_fromblob(blob):
-#     digest = blake3(blob).digest()
-#     msb = int.from_bytes(digest[:16], byteorder="big")
-#     lsb = int.from_bytes(digest[16:16], byteorder="big")
 
-def n_bin_id_fromblob(blob, size):
-    if size == 57:
-        skip = 0
-        mask = 2 ** 254 - 1
-    elif size == 34:
-        skip = 16
-        mask = 2 ** 127 - 1
-    else:
-        raise Exception("Wrong size:", size)
-    digest = blake3(blob).digest()[skip:]
-    n = int.from_bytes(digest, byteorder="big") & mask
-    bin = int2pmat(n, size)
-    id = b62enc(n, size)
-    return n, bin, id
-
-
-def n_id_fromperm(bin, size):
-    n = pmat2int(bin)
-    id = b62enc(n, size)
-    return n, id
+def s_z_perm_id_fromblob(blob):
+    """
+    Four i64 segments: A, B, C, D
+    Two numbers:
+        S = 2^64*A + D
+        Z = 2^64*B + C
+    |   ~64 bits S34   |   ~64 bits Z128-159   |   64 bits Z128-159   |   64 bits S34   |
+    """
+    digest = blake3(blob).digest()
+    A = int.from_bytes(digest[:8], byteorder="big")
+    B = int.from_bytes(digest[8:16], byteorder="big")
+    C = int.from_bytes(digest[16:24], byteorder="big")
+    D = int.from_bytes(digest[24:], byteorder="big")
+    s = 2 ** 64 * A + D
+    z = 2 ** 64 * B + C
+    perm = int2pmat(s, 34)
+    id = b62enc(s, z)
+    return s, z, id, perm
 
 
-def n_bin_fromid(id, size):
-    n = b62dec(id)
-    bin = int2pmat(n, size)
-    return n, bin
+def s_id_fromzperm(z: int, perm: bytes):
+    s = pmat2int(perm)
+    id = b62enc(s, z)
+    return s, id
 
 
-def bin_id_fromn(n, size):
-    bin = int2pmat(n, size)
-    id = b62enc(n, size)
-    return bin, id
+def s_z_perm_fromid(id):
+    s, z = b62dec(id)
+    perm = int2pmat(s, 34)
+    return s, z, perm
+
+
+def perm_id_fromsz(s, z):
+    perm = int2pmat(s, 34)
+    id = b62enc(s, z)
+    return perm, id

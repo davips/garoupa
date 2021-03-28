@@ -24,6 +24,20 @@ from garoupa.algebra.abs.element import Element
 
 
 class Nat(Element):
+    """
+    Usage:
+    >>> a = Nat(1414343245,2**32)
+    >>> b = Nat(77639,2**32)
+    >>> b
+    77639
+    >>> ~b
+    4294889657
+    >>> a * b
+    1414420884
+    >>> a * b * ~b == a
+    True
+
+    """
     def __init__(self, i, n):
         super().__init__()
         self.i, self.n = i, n
@@ -34,3 +48,6 @@ class Nat(Element):
 
     def __repr__(self):
         return f"{self.i}"
+
+    def __invert__(self):
+        return Nat(self.order - self.i, self.n)

@@ -43,6 +43,6 @@ class Mat(Element):
     def __repr__(self):
         return f"{self.m}"
 
-    def __neg__(self):
+    def __invert__(self):
         m = bminv(self.m)
         return Mat(bm2intl(m, self.bits), self.n, _m=m)

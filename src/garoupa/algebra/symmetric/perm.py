@@ -44,6 +44,6 @@ class Perm(Element):
     def __repr__(self):
         return f"{self.perm}"
 
-    def __neg__(self):
+    def __invert__(self):
         perm = pmat_inv(self.perm)
         return Perm(pmat2int(perm), self.n, _perm=perm)
