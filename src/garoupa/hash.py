@@ -20,8 +20,7 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-from functools import reduce, lru_cache
-from math import factorial
+from hashlib import md5
 
 from garoupa.colors import colorize128bit
 from garoupa.core import s_z_perm_id_fromblob, s_z_perm_fromid, perm_id_fromsz, s_id_fromzperm
@@ -40,31 +39,98 @@ class Hash:
     bits = |   ~64 bits ZM127   |   ~64 bits S34   |   64 bits S34   |   64 bits ZM127   |
 
     Usage:
-    >>> a = Hash(2345, 234)
-    >>> b = Hash(3210, 789)
+    >>> a = Hash(b"lots of data")
+    >>> b = Hash(b"lots of data 2")
+    >>> a
+    \x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;211m\x1b[1mQ\x1b[0m\x1b[38;5;176m\x1b[1mr\x1b[0m\x1b[38;5;211m\x1b[1mQ\x1b[0m\x1b[38;5;212m\x1b[1mt\x1b[0m\x1b[38;5;169m\x1b[1mG\x1b[0m\x1b[38;5;216m\x1b[1mE\x1b[0m\x1b[38;5;211m\x1b[1mc\x1b[0m\x1b[38;5;175m\x1b[1mO\x1b[0m\x1b[38;5;205m\x1b[1mZ\x1b[0m\x1b[38;5;174m\x1b[1m4\x1b[0m\x1b[38;5;206m\x1b[1mo\x1b[0m\x1b[38;5;176m\x1b[1mv\x1b[0m\x1b[38;5;175m\x1b[1mf\x1b[0m\x1b[38;5;212m\x1b[1ms\x1b[0m\x1b[38;5;168m\x1b[1m1\x1b[0m\x1b[38;5;216m\x1b[1mF\x1b[0m\x1b[38;5;176m\x1b[1mv\x1b[0m\x1b[38;5;180m\x1b[1mC\x1b[0m\x1b[38;5;169m\x1b[1mG\x1b[0m\x1b[38;5;7m\x1b[1mi\x1b[0m\x1b[38;5;212m\x1b[1mx\x1b[0m\x1b[38;5;216m\x1b[1mF\x1b[0m\x1b[38;5;175m\x1b[1mb\x1b[0m\x1b[38;5;211m\x1b[1mg\x1b[0m\x1b[38;5;168m\x1b[1m1\x1b[0m\x1b[38;5;180m\x1b[1mC\x1b[0m\x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;181m\x1b[1mj\x1b[0m\x1b[38;5;211m\x1b[1mh\x1b[0m\x1b[38;5;217m\x1b[1mU\x1b[0m\x1b[38;5;217m\x1b[1mV\x1b[0m\x1b[38;5;176m\x1b[1mr\x1b[0m\x1b[38;5;210m\x1b[1m7\x1b[0m\x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;211m\x1b[1md\x1b[0m\x1b[38;5;175m\x1b[1mf\x1b[0m\x1b[38;5;211m\x1b[1md\x1b[0m\x1b[38;5;210m\x1b[1mA\x1b[0m\x1b[38;5;174m\x1b[1m4\x1b[0m\x1b[38;5;175m\x1b[1me\x1b[0m\x1b[38;5;212m\x1b[1mw\x1b[0m\x1b[38;5;174m\x1b[1m9\x1b[0m
     >>> str(a)
-    '00000000000000000004kgldjfdRDKqooNfP6fKwdCM'
+    'TQrQtGEcOZ4ovfs1FvCGixFbg1CTjhUVr7TdfdA4ew9'
+    >>> a * b
+    \x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;73m\x1b[1mf\x1b[0m\x1b[38;5;72m\x1b[1mP\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;72m\x1b[1mM\x1b[0m\x1b[38;5;108m\x1b[1mR\x1b[0m\x1b[38;5;79m\x1b[1mi\x1b[0m\x1b[38;5;73m\x1b[1mu\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;73m\x1b[1mu\x1b[0m\x1b[38;5;72m\x1b[1m4\x1b[0m\x1b[38;5;73m\x1b[1mr\x1b[0m\x1b[38;5;245m\x1b[1mJ\x1b[0m\x1b[38;5;72m\x1b[1mM\x1b[0m\x1b[38;5;67m\x1b[1mY\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;78m\x1b[1mE\x1b[0m\x1b[38;5;73m\x1b[1mf\x1b[0m\x1b[38;5;67m\x1b[1mX\x1b[0m\x1b[38;5;72m\x1b[1m6\x1b[0m\x1b[38;5;78m\x1b[1mS\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;78m\x1b[1mD\x1b[0m\x1b[38;5;114m\x1b[1mF\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;73m\x1b[1mc\x1b[0m\x1b[38;5;66m\x1b[1mG\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;73m\x1b[1mb\x1b[0m\x1b[38;5;72m\x1b[1m9\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;79m\x1b[1mk\x1b[0m\x1b[38;5;67m\x1b[1mn\x1b[0m\x1b[38;5;73m\x1b[1mw\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mK\x1b[0m\x1b[38;5;78m\x1b[1mS\x1b[0m\x1b[38;5;67m\x1b[1mY\x1b[0m\x1b[38;5;72m\x1b[1m5\x1b[0m
     >>> str(a * b)
-    '000000000000000001k7sBgku1gWz02CQZ7ryQ5T6cB'
+    'hfPQMRiuCu4rJMYhEfX6ShDFpQhcGpQb9CknwCpKSY5'
     >>> a * b * ~b == a
     True
-    >>> c = Hash(457, 45674)
+    >>> c = Hash(b"lots of data 3")
     >>> (a * b) * c == a * (b * c)
     True
-
+    >>> old_128bit_hash = md5(b"lots of data for a commuting element").digest()
+    >>> d = Hash.from128bit(old_128bit_hash)
+    >>> d.bits  # four 64-bit parts: zeros, half for 's', zeros, half for 'z'
+    '0000000000000000000000000000000000000000000000000000000000000000000101011110101101011011111011101101000010100100000100110110111100000000000000000000000000000000000000000000000000000000000000001100011000100101001110110110101100101000010010110011011010100010'
     """
     _repr = None
     orders = 295232799039604140847618609643520000000  # 34!
     orderz = 340282366920938463463374607431768211297  # 2**128-159
     _2_128 = 2 ** 128
-    _n = None
-    _bits = None
+    _n, _id, _s, _z, _perm = None, None, None, None, None
+    _bits, _sz = None, None
 
-    def __init__(self, s=None, z=None, blob=None, id=None, perm=None):
+    def __init__(self, blob):
         if blob:
             self._s, self._z, self._id, self._perm = s_z_perm_id_fromblob(blob)
-        else:
-            self._s, self._z, self._id, self._perm = s, z, id, perm
+
+    @classmethod
+    def fromperm(cls, perm, z):
+        hash = Hash(None)
+        hash._z, hash._perm = z, perm
+        return hash
+
+    @classmethod
+    def fromsz(cls, s, z):
+        hash = Hash(None)
+        hash._s, hash._z = s, z
+        return hash
+
+    @classmethod
+    def fromid(cls, id):
+        """
+        Usage:
+        >>> Hash.fromid("HpHx15miyc2amaxUwSQiv0Z0XtM73NdL0paVyy1inV9").s
+        99929999938476344564747343999999245678
+
+        :param id:
+        :return:
+        """
+        hash = Hash(None)
+        hash._id = id
+        return hash
+
+    @classmethod
+    def from128bit(cls, digest: bytes):
+        """Return hash representing the given 16 bytes: 64 bits for 's', 64 bits for 'z'
+
+        Usage:
+        >>> bits = md5(b"This digest represents a hash comming from some external database.").digest()
+        >>> bits
+        b'G\\xa9Cm\\xd4>\\x07\\xacy\\xaf\\xc0?xI\\x01O'
+        >>> h = Hash.from128bit(bits)
+        >>> h
+        \x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;71m\x1b[1mw\x1b[0m\x1b[38;5;240m\x1b[1m1\x1b[0m\x1b[38;5;101m\x1b[1mZ\x1b[0m\x1b[38;5;240m\x1b[1mH\x1b[0m\x1b[38;5;71m\x1b[1mv\x1b[0m\x1b[38;5;101m\x1b[1m7\x1b[0m\x1b[38;5;71m\x1b[1mg\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;101m\x1b[1m7\x1b[0m\x1b[38;5;71m\x1b[1me\x1b[0m\x1b[38;5;71m\x1b[1me\x1b[0m\x1b[38;5;71m\x1b[1mz\x1b[0m\x1b[38;5;71m\x1b[1mg\x1b[0m\x1b[38;5;71m\x1b[1mT\x1b[0m\x1b[38;5;107m\x1b[1mh\x1b[0m\x1b[38;5;71m\x1b[1mO\x1b[0m\x1b[38;5;239m\x1b[1mW\x1b[0m\x1b[38;5;65m\x1b[1ma\x1b[0m\x1b[38;5;71m\x1b[1mU\x1b[0m\x1b[38;5;65m\x1b[1mc\x1b[0m\x1b[38;5;65m\x1b[1mK\x1b[0m\x1b[38;5;240m\x1b[1mm\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;71m\x1b[1mj\x1b[0m\x1b[38;5;65m\x1b[1mc\x1b[0m\x1b[38;5;101m\x1b[1mZ\x1b[0m\x1b[38;5;65m\x1b[1mM\x1b[0m\x1b[38;5;71m\x1b[1mP\x1b[0m\x1b[38;5;65m\x1b[1mL\x1b[0m\x1b[38;5;101m\x1b[1m3\x1b[0m\x1b[38;5;71m\x1b[1m9\x1b[0m
+        >>> str(h)
+        '00000000000lw1ZHv7gl7eezgThOWaUcKmljcZMPL39'
+        >>> h.bits
+        '0000000000000000000000000000000000000000000000000000000000000000010001111010100101000011011011011101010000111110000001111010110000000000000000000000000000000000000000000000000000000000000000000111100110101111110000000011111101111000010010010000000101001111'
+        """
+        hash = Hash(None)
+        hash._s = int.from_bytes(digest[:8], byteorder="big")
+        hash._z = int.from_bytes(digest[8:], byteorder="big")
+        return hash
+
+    def to128bit(self):
+        """The most significant parts of 's' and 'z' should be zero,
+         keep only: 64 bits for 's', 64 bits for 'z'.
+
+        Usage:
+        >>> h = Hash.fromid('00000000000L3IuQhryVYXaWfSwF9NnZrx4M4bSH6U9')
+        >>> h
+        \x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;173m\x1b[1mL\x1b[0m\x1b[38;5;203m\x1b[1m3\x1b[0m\x1b[38;5;167m\x1b[1mI\x1b[0m\x1b[38;5;137m\x1b[1mu\x1b[0m\x1b[38;5;173m\x1b[1mQ\x1b[0m\x1b[38;5;209m\x1b[1mh\x1b[0m\x1b[38;5;173m\x1b[1mr\x1b[0m\x1b[38;5;143m\x1b[1my\x1b[0m\x1b[38;5;215m\x1b[1mV\x1b[0m\x1b[38;5;167m\x1b[1mY\x1b[0m\x1b[38;5;167m\x1b[1mX\x1b[0m\x1b[38;5;137m\x1b[1ma\x1b[0m\x1b[38;5;131m\x1b[1mW\x1b[0m\x1b[38;5;173m\x1b[1mf\x1b[0m\x1b[38;5;143m\x1b[1mS\x1b[0m\x1b[38;5;173m\x1b[1mw\x1b[0m\x1b[38;5;215m\x1b[1mF\x1b[0m\x1b[38;5;173m\x1b[1m9\x1b[0m\x1b[38;5;209m\x1b[1mN\x1b[0m\x1b[38;5;167m\x1b[1mn\x1b[0m\x1b[38;5;203m\x1b[1mZ\x1b[0m\x1b[38;5;173m\x1b[1mr\x1b[0m\x1b[38;5;209m\x1b[1mx\x1b[0m\x1b[38;5;137m\x1b[1m4\x1b[0m\x1b[38;5;173m\x1b[1mM\x1b[0m\x1b[38;5;137m\x1b[1m4\x1b[0m\x1b[38;5;173m\x1b[1mb\x1b[0m\x1b[38;5;143m\x1b[1mS\x1b[0m\x1b[38;5;167m\x1b[1mH\x1b[0m\x1b[38;5;173m\x1b[1m6\x1b[0m\x1b[38;5;179m\x1b[1mU\x1b[0m\x1b[38;5;173m\x1b[1m9\x1b[0m
+        >>> str(h)
+        '00000000000L3IuQhryVYXaWfSwF9NnZrx4M4bSH6U9'
+        """
+        a = self.s.to_bytes(8, byteorder="big")
+        b = self.z.to_bytes(8, byteorder="big")
+        return a + b
 
     def calculate(self):
         if self._perm:
@@ -75,6 +141,10 @@ class Hash:
             self._perm, self._id = perm_id_fromsz(self._s, self._z)
         else:
             raise Exception("Missing argument.")
+        if self.s >= self.orders:
+            raise Exception(f"Element 's' part outside allowed range: {self.s} >= {self.orders}")
+        if self.z >= self.orderz:
+            raise Exception(f"Element 'z' part outside allowed range: {self.z} >= {self.orderz}")
 
     @property
     def perm(self):
@@ -87,6 +157,12 @@ class Hash:
         if self._n is None:
             self._n = self.s * self._2_128 + self.z
         return self._n
+
+    @property
+    def sz(self):
+        if self._sz is None:
+            self._sz = self.s, self.z
+        return self._sz
 
     @property
     def id(self):
@@ -113,19 +189,19 @@ class Hash:
         return self._z
 
     def __mul__(self, other):
-        return Hash(z=(self.z + other.z) % self.orderz, perm=pmat_mult(self.perm, other.perm))
+        return Hash.fromperm(perm=pmat_mult(self.perm, other.perm), z=(self.z + other.z) % self.orderz)
 
     def __invert__(self):
-        return Hash(z=self.orderz - self.z, perm=pmat_inv(self.perm))
+        return Hash.fromperm(perm=pmat_inv(self.perm), z=self.orderz - self.z)
 
     def __truediv__(self, other):
-        return Hash(z=(self.z - other.z) % self.orderz, perm=pmat_mult(self.perm, pmat_inv(other.perm)))
+        return Hash.fromperm(perm=pmat_mult(self.perm, pmat_inv(other.perm)), z=(self.z - other.z) % self.orderz)
 
     def __add__(self, other):
-        return Hash((self.s + other.s) % self.orders, (self.z + other.z) % self.orderz)
+        return Hash.fromsz((self.s + other.s) % self.orders, (self.z + other.z) % self.orderz)
 
     def __sub__(self, other):
-        return Hash((self.s - other.s) % self.orders, (self.z - other.z) % self.orderz)
+        return Hash.fromsz((self.s - other.s) % self.orders, (self.z - other.z) % self.orderz)
 
     def __repr__(self):
         if self._repr is None:
