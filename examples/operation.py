@@ -2,6 +2,8 @@
 from garoupa import Hash
 
 # Hashes can be multiplied.
+from garoupa.hash import identity
+
 a = Hash(blob=b"Some large binary content...")
 b = Hash(blob=b"Some other binary content. Might be, e.g., an action or another large content.")
 c = a * b
@@ -12,7 +14,7 @@ print(~b)
 print(f"{b} * {~b} = {b * ~b} = 0")
 # ...
 
-print(f"{b} * {Hash(0)} = {b * Hash(0)} = b")
+print(f"{b} * {identity} = {b * identity} = b")
 # ...
 
 print(f"{c} * {~b} = {c * ~b} = {a} = a")

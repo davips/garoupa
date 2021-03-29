@@ -1,6 +1,7 @@
 # Commutativity degree of groups
 from itertools import product
 
+from garoupa.algebra.cyclic import Z
 from garoupa.algebra.dihedral import D
 
 
@@ -17,10 +18,15 @@ def traverse(G):
           f"\t{100 * count / i} %", sep="")
 
 
+# Dihedral
 traverse(D(8))
 # ...
 
 traverse(D(8) ^ 2)
+# ...
+
+# Z4!
+traverse(Z(4) * Z(3) * Z(2))
 # ...
 
 # Large groups (sampling is needed).

@@ -35,12 +35,12 @@ print("Last element of S35:", a)
 # Inverse element. Group S4.
 a = Perm(i=21, n=4)
 b = Perm(i=17, n=4)
-print(a, "*", -a, "=", (a * -a).i, "=", a * -a, "= identity")
+print(a, "*", ~a, "=", (a * ~a).i, "=", a * ~a, "= identity")
 # ...
 
 print(a, "*", b, "=", a * b)
 # ...
 
-print(a, "*", b, "*", -b, "=", a * b * -b, "= a")
+print(a, "*", b, "*", ~b, "=", a * b * ~b, "= a")
 # ...
 

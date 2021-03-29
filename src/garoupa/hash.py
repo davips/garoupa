@@ -67,7 +67,7 @@ class Hash:
     _bits, _sz = None, None
 
     def __init__(self, blob):
-        if blob:
+        if blob is not None:
             self._s, self._z, self._id, self._perm = s_z_perm_id_fromblob(blob)
 
     @classmethod
@@ -221,3 +221,6 @@ class Hash:
     # def pairmuls(cls, size, /, *pairs):  # 5.34 µs
     #     results = map(lambda a, b: pmat_mult(a.perm, b.perm), pairs[::2], pairs[1::2])
     #     return [Hash(perm=res) for res in results]
+
+
+identity = Hash.fromsz(0, 0)
