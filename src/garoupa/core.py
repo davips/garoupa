@@ -26,7 +26,7 @@ from garoupa.base62 import b62enc, b62dec
 from garoupa.math import int2pmat, pmat2int
 
 
-def s_z_perm_id_fromblob(blob):
+def s_z_perm_id_fromblob(blob, commutative):
     """
     Four i64 segments: A, B, C, D
     Two numbers:
@@ -35,12 +35,9 @@ def s_z_perm_id_fromblob(blob):
     |   ~64 bits S34   |   ~64 bits Z128-159   |   64 bits Z128-159   |   64 bits S34   |
     """
     digest = blake3(blob).digest()
-    A = int.from_bytes(digest[:8], byteorder="big")
-    B = int.from_bytes(digest[8:16], byteorder="big")
-    C = int.from_bytes(digest[16:24], byteorder="big")
-    D = int.from_bytes(digest[24:], byteorder="big")
-    s = 2 ** 64 * A + D
-    z = 2 ** 64 * B + C
+    from garoupa import Hash
+    s = 0 if commutative else int.from_bytes(digest[:16], byteorder="big") % Hash.orders
+    z = int.from_bytes(digest[16:], byteorder="big") % Hash.orderz
     perm = int2pmat(s, 34)
     id = b62enc(s, z)
     return s, z, id, perm

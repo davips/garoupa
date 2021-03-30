@@ -31,7 +31,7 @@ class M8bit(Group):
         super().__init__(Mat8bit(0), lambda: (Mat8bit(i) for i in range(self.order)))
 
     def __iter__(self):
-        for i in range(self.order):
+        while True:
             yield Mat8bit(rnd.getrandbits(int(self.bits)))
 
     def __mul__(self, other):

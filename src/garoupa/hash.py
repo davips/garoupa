@@ -41,14 +41,12 @@ class Hash:
     Usage:
     >>> a = Hash(b"lots of data")
     >>> b = Hash(b"lots of data 2")
-    >>> a
-    \x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;211m\x1b[1mQ\x1b[0m\x1b[38;5;176m\x1b[1mr\x1b[0m\x1b[38;5;211m\x1b[1mQ\x1b[0m\x1b[38;5;212m\x1b[1mt\x1b[0m\x1b[38;5;169m\x1b[1mG\x1b[0m\x1b[38;5;216m\x1b[1mE\x1b[0m\x1b[38;5;211m\x1b[1mc\x1b[0m\x1b[38;5;175m\x1b[1mO\x1b[0m\x1b[38;5;205m\x1b[1mZ\x1b[0m\x1b[38;5;174m\x1b[1m4\x1b[0m\x1b[38;5;206m\x1b[1mo\x1b[0m\x1b[38;5;176m\x1b[1mv\x1b[0m\x1b[38;5;175m\x1b[1mf\x1b[0m\x1b[38;5;212m\x1b[1ms\x1b[0m\x1b[38;5;168m\x1b[1m1\x1b[0m\x1b[38;5;216m\x1b[1mF\x1b[0m\x1b[38;5;176m\x1b[1mv\x1b[0m\x1b[38;5;180m\x1b[1mC\x1b[0m\x1b[38;5;169m\x1b[1mG\x1b[0m\x1b[38;5;7m\x1b[1mi\x1b[0m\x1b[38;5;212m\x1b[1mx\x1b[0m\x1b[38;5;216m\x1b[1mF\x1b[0m\x1b[38;5;175m\x1b[1mb\x1b[0m\x1b[38;5;211m\x1b[1mg\x1b[0m\x1b[38;5;168m\x1b[1m1\x1b[0m\x1b[38;5;180m\x1b[1mC\x1b[0m\x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;181m\x1b[1mj\x1b[0m\x1b[38;5;211m\x1b[1mh\x1b[0m\x1b[38;5;217m\x1b[1mU\x1b[0m\x1b[38;5;217m\x1b[1mV\x1b[0m\x1b[38;5;176m\x1b[1mr\x1b[0m\x1b[38;5;210m\x1b[1m7\x1b[0m\x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;211m\x1b[1md\x1b[0m\x1b[38;5;175m\x1b[1mf\x1b[0m\x1b[38;5;211m\x1b[1md\x1b[0m\x1b[38;5;210m\x1b[1mA\x1b[0m\x1b[38;5;174m\x1b[1m4\x1b[0m\x1b[38;5;175m\x1b[1me\x1b[0m\x1b[38;5;212m\x1b[1mw\x1b[0m\x1b[38;5;174m\x1b[1m9\x1b[0m
     >>> a.id
-    'TQrQtGEcOZ4ovfs1FvCGixFbg1CTjhUVr7TdfdA4ew9'
-    >>> a * b
-    \x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;73m\x1b[1mf\x1b[0m\x1b[38;5;72m\x1b[1mP\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;72m\x1b[1mM\x1b[0m\x1b[38;5;108m\x1b[1mR\x1b[0m\x1b[38;5;79m\x1b[1mi\x1b[0m\x1b[38;5;73m\x1b[1mu\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;73m\x1b[1mu\x1b[0m\x1b[38;5;72m\x1b[1m4\x1b[0m\x1b[38;5;73m\x1b[1mr\x1b[0m\x1b[38;5;245m\x1b[1mJ\x1b[0m\x1b[38;5;72m\x1b[1mM\x1b[0m\x1b[38;5;67m\x1b[1mY\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;78m\x1b[1mE\x1b[0m\x1b[38;5;73m\x1b[1mf\x1b[0m\x1b[38;5;67m\x1b[1mX\x1b[0m\x1b[38;5;72m\x1b[1m6\x1b[0m\x1b[38;5;78m\x1b[1mS\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;78m\x1b[1mD\x1b[0m\x1b[38;5;114m\x1b[1mF\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;73m\x1b[1mc\x1b[0m\x1b[38;5;66m\x1b[1mG\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;73m\x1b[1mb\x1b[0m\x1b[38;5;72m\x1b[1m9\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;79m\x1b[1mk\x1b[0m\x1b[38;5;67m\x1b[1mn\x1b[0m\x1b[38;5;73m\x1b[1mw\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mK\x1b[0m\x1b[38;5;78m\x1b[1mS\x1b[0m\x1b[38;5;67m\x1b[1mY\x1b[0m\x1b[38;5;72m\x1b[1m5\x1b[0m
+    'TQrQtGEcOZ666oBPwiT4G0QtAh0vW5HW4Vcw4hTD0Ls'
     >>> (a * b).id
-    'hfPQMRiuCu4rJMYhEfX6ShDFpQhcGpQb9CknwCpKSY5'
+    'me15uumcp52MXjdiR1ei3Qx8jB6dss4RrNjaDBsNfE2'
+    >>> (b * a).id
+    'OT9Z3AKZ35u4ABiFcoGO34VWWui4xomCVPpNuM3fqPC'
     >>> a * b * ~b == a
     True
     >>> c = Hash(b"lots of data 3")
@@ -58,6 +56,12 @@ class Hash:
     >>> d = Hash.from128bit(old_128bit_hash)
     >>> d.bits  # four 64-bit parts: zeros, half for 's', zeros, half for 'z'
     '0000000000000000000000000000000000000000000000000000000000000000000101011110101101011011111011101101000010100100000100110110111100000000000000000000000000000000000000000000000000000000000000001100011000100101001110110110101100101000010010110011011010100010'
+    >>> e = Hash(b"lots of data", commutative=True)
+    >>> f = Hash(b"lots of data 2")
+    >>> e * f == f * e
+    True
+    >>> a * b == b * a
+    False
     """
     _repr = None
     orders = 295232799039604140847618609643520000000  # 34!
@@ -66,9 +70,9 @@ class Hash:
     _n, _id, _s, _z, _perm = None, None, None, None, None
     _bits, _sz = None, None
 
-    def __init__(self, blob):
+    def __init__(self, blob, commutative=False):
         if blob is not None:
-            self._s, self._z, self._id, self._perm = s_z_perm_id_fromblob(blob)
+            self._s, self._z, self._id, self._perm = s_z_perm_id_fromblob(blob, commutative)
 
     @classmethod
     def fromperm(cls, perm, z):

@@ -1,5 +1,4 @@
 # Commutativity degree of groups
-from itertools import product
 
 from garoupa.algebra.cyclic import Z
 from garoupa.algebra.dihedral import D

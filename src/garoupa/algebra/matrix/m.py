@@ -44,7 +44,7 @@ class M(Group):
         self.n, self.mod = n, mod
 
     def __iter__(self):
-        for i in range(self.order):
+        while True:
             yield Mat(rnd.getrandbits(int(self.bits)), self.n, self.mod)
 
     def __mul__(self, other):

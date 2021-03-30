@@ -24,14 +24,16 @@ from garoupa.algebra.abs.element import Element
 
 
 class S(Element):
-    def __init__(self, i, n):
-        super().__init__(i, 2 * n)
+    def __init__(self, j, n):
+        super().__init__(j, 2 * n)
+        self.j = j
         self.n = n
+        self.name = self.name.split("_")[0] + str(self.j)
 
     def __mul__(self, other):
-        i = (self.i - other.i) % self.n
+        j = (self.j - other.j) % self.n
         if isinstance(other, S):
             from garoupa.algebra.dihedral.r import R
-            return R(i, self.n)
+            return R(j, self.n)
         else:
-            return S(i, self.n)
+            return S(j, self.n)

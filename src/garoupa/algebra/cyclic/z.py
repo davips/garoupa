@@ -36,7 +36,7 @@ class Z(Group):
         self.n = n
 
     def __iter__(self):
-        for i in range(self.order):
+        while True:
             yield Nat(rnd.getrandbits(int(self.bits)), self.n)
 
     def __mul__(self, other):

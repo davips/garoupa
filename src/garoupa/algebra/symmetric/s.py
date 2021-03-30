@@ -52,7 +52,7 @@ class S(Group):
     #     return num / den
 
     def __iter__(self):
-        for i in range(self.order):
+        while True:
             yield Perm(rnd.getrandbits(int(self.bits)), self.n)
 
     def __mul__(self, other):

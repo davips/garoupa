@@ -42,7 +42,7 @@ class Element(ABC):
         return self.name
 
     def __eq__(self, other):
-        return repr(self) == repr(other)
+        return self.name == other.name
 
     def __hash__(self):
         return hash(repr(self))

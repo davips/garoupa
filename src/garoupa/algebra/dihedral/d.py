@@ -35,7 +35,7 @@ class D(Group):
     def __init__(self, n):
         self.r = lambda: (R(r, n) for r in range(n))
         self.s = lambda: (S(s, n) for s in range(n))
-        sorted = lambda: chain(self.r(), self.s())
+        sorted = lambda: chain(self.s(), self.r())
         super().__init__(R(0, n), sorted)
         self.n = n
 
@@ -47,7 +47,7 @@ class D(Group):
         return num / den
 
     def __iter__(self):
-        for i in range(self.order):
+        while True:
             yield rnd.choice([R, S])(rnd.getrandbits(int(self.bits)), self.n)
 
     def __mul__(self, other):

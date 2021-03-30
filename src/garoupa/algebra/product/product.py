@@ -38,7 +38,7 @@ class Product(Group):
 
     def __iter__(self):
         its = [cycle(iter(g)) for g in self.groups]
-        for i in range(self.order):
+        while True:
             yield Tuple(*(next(it) for it in its))
 
     def __repr__(self):

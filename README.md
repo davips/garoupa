@@ -53,7 +53,7 @@ b = Hash(blob=b"Some other binary content. Might be, e.g., an action or another 
 c = a * b
 print(f"{a} * {b} = {c}")
 """
-3dJZQ80zDmZ0d2EhdruHwBs3acMQtezc91uMCjUQR1A * XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B = i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL0lwdAXlNX
+3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 * XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk
 """
 ```
 
@@ -62,8 +62,8 @@ print(~b)
 # Multiplication can be reverted by the inverse hash. Zero is the identity hash.
 print(f"{b} * {~b} = {b * ~b} = 0")
 """
-Cz69OcxEd0v7BKuKqkGkiMGj80b5VfOc6Z9VJXPUH1S
-XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B * Cz69OcxEd0v7BKuKqkGkiMGj80b5VfOc6Z9VJXPUH1S = 0000000000000000000000000000000000000000000 = 0
+IdNlCrGCIPtypjF4xCZd4yb9YFeDiycRIwVM39yRIIJ
+XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * IdNlCrGCIPtypjF4xCZd4yb9YFeDiycRIwVM39yRIIJ = 0000000000000000000000000000000000000000000 = 0
 """
 ```
 
@@ -71,7 +71,7 @@ XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B * Cz69OcxEd0v7BKuKqkGkiMGj80b5VfOc6Z
 
 print(f"{b} * {identity} = {b * identity} = b")
 """
-XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B * 0000000000000000000000000000000000000000000 = XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B = b
+XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * 0000000000000000000000000000000000000000000 = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = b
 """
 ```
 
@@ -79,7 +79,7 @@ XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B * 0000000000000000000000000000000000
 
 print(f"{c} * {~b} = {c * ~b} = {a} = a")
 """
-i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL0lwdAXlNX * Cz69OcxEd0v7BKuKqkGkiMGj80b5VfOc6Z9VJXPUH1S = 3dJZQ80zDmZ0d2EhdruHwBs3acMQtezc91uMCjUQR1A = 3dJZQ80zDmZ0d2EhdruHwBs3acMQtezc91uMCjUQR1A = a
+R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk * IdNlCrGCIPtypjF4xCZd4yb9YFeDiycRIwVM39yRIIJ = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = a
 """
 ```
 
@@ -87,7 +87,7 @@ i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL0lwdAXlNX * Cz69OcxEd0v7BKuKqkGkiMGj80b5VfOc6Z
 
 print(f"{~a} * {c} = {~a * c} = {b} = b")
 """
-WCFaSatsNteo7XQqg4vYj1ovIFrBmlougnckldBwnuf * i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL0lwdAXlNX = XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B = XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B = b
+ncbPkmmO3z9Bskk3dweIvlWghWyGZpfcE7Zqh6AZ4tj * R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = b
 """
 ```
 
@@ -96,7 +96,7 @@ WCFaSatsNteo7XQqg4vYj1ovIFrBmlougnckldBwnuf * i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL
 # Division is shorthand for reversion.
 print(f"{c} / {b} = {c / b} = a")
 """
-i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL0lwdAXlNX / XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a0muwVB92B = 3dJZQ80zDmZ0d2EhdruHwBs3acMQtezc91uMCjUQR1A = a
+R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk / XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = a
 """
 ```
 
@@ -105,7 +105,7 @@ i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL0lwdAXlNX / XdQj1SPgqbr4kwx38O2JznVJI7j7Pax67a
 # Hash multiplication is not expected to be commutative.
 print(f"{a * b} != {b * a}")
 """
-i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL0lwdAXlNX != Tm9M9q8WIQbCyMAxyiMYs4O9RN9QJnWZXJ4zaRgpEaF
+R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk != eP4HWUGNBLd8fNiqMpPaGsT7iFL3nSPjdgbpxMgF4BA
 """
 ```
 
@@ -114,7 +114,7 @@ i9dyLxtlaQqf8aMQegwcCNVLiHNkJlmPJL0lwdAXlNX != Tm9M9q8WIQbCyMAxyiMYs4O9RN9QJnWZX
 # Hash multiplication is associative.
 print(f"{a * (b * c)} = {(a * b) * c}")
 """
-cJBwPoh2kg2pzExxTOE5vtNrlcahIoMitcRoIbJbR8A = cJBwPoh2kg2pzExxTOE5vtNrlcahIoMitcRoIbJbR8A
+M7Acfgmx7M9uv1ZJ7YryKY9xfqnX6oL31gCaSssid6d = M7Acfgmx7M9uv1ZJ7YryKY9xfqnX6oL31gCaSssid6d
 """
 ```
 
@@ -158,11 +158,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 1, 0, 3], 2, r_7»	*	«[1, 2, 0, 3], 2, r_7»	=	«[1, 0, 2, 3], 4, r_2»
-«[0, 1, 2, 3], 1, s_1»	*	«[3, 0, 1, 2], 2, r_0»	=	«[3, 0, 1, 2], 3, s_1»
-«[1, 0, 3, 2], 1, s_2»	*	«[0, 2, 1, 3], 1, r_1»	=	«[1, 3, 0, 2], 2, s_1»
-«[1, 0, 3, 2], 0, r_6»	*	«[2, 0, 1, 3], 2, r_7»	=	«[3, 1, 0, 2], 2, r_1»
-«[1, 0, 2, 3], 1, r_3»	*	«[0, 3, 1, 2], 3, s_4»	=	«[1, 3, 0, 2], 4, s_3»
+«[2, 0, 3, 1], 2, s3»	*	«[3, 0, 1, 2], 2, r0»	=	«[1, 2, 0, 3], 4, s3»
+«[0, 1, 3, 2], 3, r7»	*	«[3, 0, 2, 1], 2, r2»	=	«[2, 0, 3, 1], 0, r1»
+«[0, 2, 1, 3], 3, s6»	*	«[2, 3, 0, 1], 3, s1»	=	«[1, 3, 0, 2], 1, r1»
+«[2, 1, 0, 3], 1, s4»	*	«[2, 3, 0, 1], 0, r2»	=	«[0, 3, 2, 1], 1, s2»
+«[1, 0, 3, 2], 3, s1»	*	«[0, 2, 1, 3], 3, r4»	=	«[1, 3, 0, 2], 1, s1»
 """
 ```
 
@@ -172,7 +172,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[6, 0, 5, 7, 11, 1, 8, 9, 3, 2, 4, 10]
+[1, 2, 10, 8, 9, 0, 4, 11, 5, 6, 3, 7]
 """
 ```
 
@@ -228,7 +228,7 @@ print(a, "*", b, "*", ~b, "=", a * b * ~b, "= a")
 <p>
 
 ```python3
-from itertools import product
+from itertools import product, repeat, cycle
 
 from garoupa.algebra.cyclic import Z
 from garoupa.algebra.dihedral import D
@@ -292,9 +292,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          1024/4096:  12.0 bits	~25.0 %
-    |D8×D8×D8×D8| = 65536:         625/10000:  16.0 bits	~6.25 %
- |D8×D8×D8×D8×D8| = 1048576:         0/10000:  20.0 bits	~0.0 %
+       |D8×D8×D8| = 4096:          805/10000:  12.0 bits	~8.05 %
+    |D8×D8×D8×D8| = 65536:         363/10000:  16.0 bits	~3.63 %
+ |D8×D8×D8×D8×D8| = 1048576:       154/10000:  20.0 bits	~1.54 %
 """
 ```
 
