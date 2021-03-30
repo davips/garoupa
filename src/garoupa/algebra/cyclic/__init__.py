@@ -21,3 +21,4 @@
 #  time spent here.
 
 from .z import Z
+from .nat import Nat

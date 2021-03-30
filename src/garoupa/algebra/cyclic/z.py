@@ -25,22 +25,19 @@ from dataclasses import dataclass
 from math import log
 
 from garoupa.algebra.cyclic.nat import Nat
+from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.product.product import Product
 
 
-@dataclass
-class Z:
-    n: int
-
-    def __post_init__(self):
-        self.order = self.n
-        self.sorted = lambda: (Nat(i, self.n) for i in range(self.order))
-        self.identity = Nat(0, self.n)
-        self.bits = int(log(self.order, 2))
+class Z(Group):
+    def __init__(self, n):
+        sorted = lambda: (Nat(i, n) for i in range(n))
+        super().__init__(Nat(0, n), sorted)
+        self.n = n
 
     def __iter__(self):
         for i in range(self.order):
-            yield Nat(rnd.getrandbits(self.bits), self.n)
+            yield Nat(rnd.getrandbits(int(self.bits)), self.n)
 
     def __mul__(self, other):
         return Product(self, other)

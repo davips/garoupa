@@ -20,23 +20,19 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 import random as rnd
-from dataclasses import dataclass
 
+from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.matrix.mat8bit import Mat8bit
 from garoupa.algebra.product.product import Product
 
 
-@dataclass
-class M8bit:
-    def __post_init__(self):
-        self.order = 256
-        self.sorted = lambda: (Mat8bit(i) for i in range(self.order))
-        self.identity = Mat8bit(0)
-        self.bits = 8
+class M8bit(Group):
+    def __init__(self):
+        super().__init__(Mat8bit(0), lambda: (Mat8bit(i) for i in range(self.order)))
 
     def __iter__(self):
         for i in range(self.order):
-            yield Mat8bit(rnd.getrandbits(self.bits))
+            yield Mat8bit(rnd.getrandbits(int(self.bits)))
 
     def __mul__(self, other):
         return Product(self, other)
@@ -45,4 +41,4 @@ class M8bit:
         return self.__class__.__name__
 
     def __invert__(self):
-        return Mat8bit(rnd.getrandbits(self.bits))
+        return Mat8bit(rnd.getrandbits(int(self.bits)))

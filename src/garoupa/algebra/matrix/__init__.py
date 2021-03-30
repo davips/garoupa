@@ -19,3 +19,6 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
+from .m import M
+from .m8bit import M8bit
+from .mat8bit import Mat8bit

@@ -38,15 +38,10 @@ class Mat(Element):
          [0 0 0 0 1 0]
          [0 0 0 0 0 1]]
         """
-        super().__init__()
-        self.i, self.n, self.o = i, n, o
         self.cells = sum(range(1, n))
-        self.order = o ** self.cells
-        self.bits = int(log(self.order, 2))
-        if i == self.i and _m is not None:
-            self.m = _m
-        else:
-            self.m = int2ml(i, o, n)
+        super().__init__(i, o ** self.cells)
+        self.n, self.o = n, o
+        self.m = int2ml(i, o, n) if _m is None else _m
 
     def __mul__(self, other):
         m = bmm(self.m, other.m)

@@ -21,20 +21,25 @@
 #  time spent here.
 
 from abc import abstractmethod, ABC
+from dataclasses import dataclass
+from math import log
 
 
+@dataclass
 class Element(ABC):
     i: int
+    order: int
 
-    def __init__(self):
-        self.sym = self.__class__.__name__.lower()
+    def __post_init__(self):
+        self.name = f"{self.__class__.__name__.lower()}_{self.i}"
+        self.bits = log(self.order, 2)
 
     @abstractmethod
     def __mul__(self, other):
         pass
 
     def __repr__(self):
-        return f"{self.sym}{self.i}"
+        return self.name
 
     def __eq__(self, other):
         return repr(self) == repr(other)

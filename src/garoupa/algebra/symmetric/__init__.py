@@ -20,4 +20,5 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
+from .perm import Perm
 from .s import S

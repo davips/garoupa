@@ -21,3 +21,4 @@
 #  time spent here.
 
 from .product import Product
+from .tuple import Tuple

@@ -27,20 +27,17 @@ from math import log
 
 from garoupa.algebra.dihedral.r import R
 from garoupa.algebra.dihedral.s import S
+from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.product.product import Product
 
 
-@dataclass
-class D:
-    n: int
-
-    def __post_init__(self):
-        self.order = self.n * 2
-        self.r = lambda: (R(r, self.n) for r in range(self.n))
-        self.s = lambda: (S(s, self.n) for s in range(self.n))
-        self.sorted = lambda: chain(self.r(), self.s())
-        self.identity = R(0, self.n)
-        self.bits = int(log(self.order, 2))
+class D(Group):
+    def __init__(self, n):
+        self.r = lambda: (R(r, n) for r in range(n))
+        self.s = lambda: (S(s, n) for s in range(n))
+        sorted = lambda: chain(self.r(), self.s())
+        super().__init__(R(0, n), sorted)
+        self.n = n
 
     @property
     def comm_degree(self):
@@ -51,7 +48,7 @@ class D:
 
     def __iter__(self):
         for i in range(self.order):
-            yield rnd.choice([R, S])(rnd.getrandbits(self.bits), self.n)
+            yield rnd.choice([R, S])(rnd.getrandbits(int(self.bits)), self.n)
 
     def __mul__(self, other):
         return Product(self, other)

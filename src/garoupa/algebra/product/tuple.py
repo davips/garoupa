@@ -25,13 +25,13 @@ from garoupa.algebra.abs.element import Element
 
 class Tuple(Element):
     def __init__(self, *subelements):
-        super().__init__()
         self.subelements = subelements
-        e = 1
-        self.i = 0
+        order = 1
+        i = 0
         for a in reversed(subelements):
-            self.i += e * a.i
-            e *= a.order
+            i += order * a.i
+            order *= a.order
+        super().__init__(i, order)
 
     def __mul__(self, other):
         return Tuple(*(a * b for a, b in zip(self.subelements, other.subelements)))

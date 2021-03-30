@@ -26,19 +26,17 @@ from dataclasses import dataclass
 from functools import reduce
 from math import log, pi, sqrt, exp, factorial
 
+from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.product.product import Product
 from garoupa.algebra.symmetric.perm import Perm
 
 
-@dataclass
-class S:
-    n: int
-
-    def __post_init__(self):
-        self.order = reduce(operator.mul, range(1, self.n + 1))
-        self.sorted = lambda: (Perm(i, self.n) for i in range(self.order))
-        self.identity = Perm(0, self.n)
-        self.bits = int(log(self.order, 2))
+class S(Group):
+    def __init__(self, n):
+        identity = Perm(0, n)
+        sorted = lambda: (Perm(i, self.n) for i in range(identity.order))
+        super().__init__(identity, sorted)
+        self.n = n
 
     @property
     def comm_degree(self):
@@ -55,7 +53,7 @@ class S:
 
     def __iter__(self):
         for i in range(self.order):
-            yield Perm(rnd.getrandbits(self.bits), self.n)
+            yield Perm(rnd.getrandbits(int(self.bits)), self.n)
 
     def __mul__(self, other):
         return Product(self, other)
@@ -64,4 +62,4 @@ class S:
         return f"S{self.n}"
 
     def __invert__(self):
-        return Perm(rnd.getrandbits(self.bits), self.n)
+        return Perm(rnd.getrandbits(int(self.bits)), self.n)

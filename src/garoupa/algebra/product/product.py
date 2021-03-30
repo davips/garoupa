@@ -25,16 +25,16 @@ from functools import reduce
 from itertools import product, cycle
 from math import log
 
+from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.product.tuple import Tuple
 
 
-class Product:
+class Product(Group):
     def __init__(self, *groups):
-        self.order = reduce(operator.mul, [g.order for g in groups])
         self.groups = groups
-        self.sorted = lambda: (Tuple(*es) for es in product(*(g.sorted() for g in self.groups)))
-        self.identity = Tuple(*(g.identity for g in self.groups))
-        self.bits = int(log(self.order, 2))
+        identity = Tuple(*(g.identity for g in self.groups))
+        sorted = lambda: (Tuple(*es) for es in product(*(g.sorted() for g in self.groups)))
+        super().__init__(identity, sorted)
 
     def __iter__(self):
         its = [cycle(iter(g)) for g in self.groups]

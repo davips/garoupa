@@ -38,10 +38,10 @@ class Nat(Element):
     True
 
     """
+
     def __init__(self, i, n):
-        super().__init__()
-        self.i, self.n = i, n
-        self.order = n
+        super().__init__(i, n)
+        self.n = n
 
     def __mul__(self, other):
         return Nat((self.i + other.i) % self.n, self.n)

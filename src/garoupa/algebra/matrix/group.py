@@ -19,27 +19,20 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-
-import sys
-from math import factorial
+from dataclasses import dataclass
 
 from garoupa.algebra.abs.element import Element
-from garoupa.math import pmat_inv, pmat_mult, pmat2int, int2pmat
 
 
-class Perm(Element):
-    def __init__(self, i, n, _perm=None):
-        super().__init__(i, factorial(n))
-        self.n = n
-        self.perm = _perm if _perm else int2pmat(self.i, self.n)
+@dataclass
+class Group:
+    identity: Element
+    sorted: callable
 
-    def __mul__(self, other):
-        perm = pmat_mult(self.perm, other.perm)
-        return Perm(pmat2int(perm), self.n, _perm=perm)
+    def __post_init__(self):
+        self.bits = self.identity.bits
+        self.order = self.identity.order
+        self.name = self.__class__.__name__
 
-    def __repr__(self):
-        return f"{self.perm}"
-
-    def __invert__(self):
-        perm = pmat_inv(self.perm)
-        return Perm(pmat2int(perm), self.n, _perm=perm)
+    def comm_degree(self):
+        raise Exception("Not implemented for groups of the class", self.name)
