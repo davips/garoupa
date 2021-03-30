@@ -72,7 +72,7 @@ class Hash:
 
     def __init__(self, blob, commutative=False):
         if blob is not None:
-            self._s, self._z, self._id, self._perm = s_z_perm_id_fromblob(blob, commutative)
+            self._s, self._z, self._perm, self._id = s_z_perm_id_fromblob(blob, commutative)
 
     @classmethod
     def fromperm(cls, perm, z):

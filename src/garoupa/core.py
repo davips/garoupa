@@ -40,7 +40,7 @@ def s_z_perm_id_fromblob(blob, commutative):
     z = int.from_bytes(digest[16:], byteorder="big") % Hash.orderz
     perm = int2pmat(s, 34)
     id = b62enc(s, z)
-    return s, z, id, perm
+    return s, z, perm, id
 
 
 def s_id_fromzperm(z: int, perm: bytes):
