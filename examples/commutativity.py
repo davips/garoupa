@@ -3,6 +3,7 @@ from itertools import product
 
 from garoupa.algebra.cyclic import Z
 from garoupa.algebra.dihedral import D
+from garoupa.algebra.matrix.m import M
 
 
 def traverse(G):
@@ -21,7 +22,6 @@ def traverse(G):
 # Dihedral
 traverse(D(8))
 # ...
-
 traverse(D(8) ^ 2)
 # ...
 
@@ -29,14 +29,17 @@ traverse(D(8) ^ 2)
 traverse(Z(4) * Z(3) * Z(2))
 # ...
 
+# M 3x3 %4
+traverse(M(3, 4))
+
 # Large groups (sampling is needed).
 Gs = [D(8) ^ 3, D(8) ^ 4, D(8) ^ 5]
 for G in Gs:
     i, count = 0, 0
-    for a, b in product(G, G):
+    for a, b in zip(G, G):
         if a * b == b * a:
             count += 1
-        if i >= 300_000:
+        if i >= 10_000:
             break
         i += 1
     print(f"|{G}| = ".rjust(20, ' '),

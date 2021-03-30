@@ -37,7 +37,7 @@ class S:
     def __post_init__(self):
         self.order = reduce(operator.mul, range(1, self.n + 1))
         self.sorted = lambda: (Perm(i, self.n) for i in range(self.order))
-        self.id = Perm(0, self.n)
+        self.identity = Perm(0, self.n)
         self.bits = int(log(self.order, 2))
 
     @property

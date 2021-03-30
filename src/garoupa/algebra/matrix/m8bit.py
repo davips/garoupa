@@ -31,7 +31,7 @@ class M8bit:
     def __post_init__(self):
         self.order = 256
         self.sorted = lambda: (Mat8bit(i) for i in range(self.order))
-        self.id = Mat8bit(0)
+        self.identity = Mat8bit(0)
         self.bits = 8
 
     def __iter__(self):

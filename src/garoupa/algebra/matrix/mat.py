@@ -19,30 +19,42 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
+from math import log
 
 from garoupa.algebra.abs.element import Element
-from garoupa.math import int2bml, bmm, bm2intl, bminv
+from garoupa.math import int2bml, bmm, bm2intl, bminv, int2bm, m2intl, int2ml
 
 
 class Mat(Element):
-    def __init__(self, i, n, _m=None):
-        """        nxn        """
+    def __init__(self, i, n, o=2, _m=None):
+        """        nxn     modulo o
+        Usage:
+        >>> a = Mat(4783632, 6, 5)
+        >>> a
+        [[1 2 1 0 4 3]
+         [0 1 0 1 1 2]
+         [0 0 1 2 0 0]
+         [0 0 0 1 0 0]
+         [0 0 0 0 1 0]
+         [0 0 0 0 0 1]]
+        """
         super().__init__()
-        self.i, self.n = i, n
-        self.bits = sum(range(1, n))
-        self.order = 2 ** self.bits
+        self.i, self.n, self.o = i, n, o
+        self.cells = sum(range(1, n))
+        self.order = o ** self.cells
+        self.bits = int(log(self.order, 2))
         if i == self.i and _m is not None:
             self.m = _m
         else:
-            self.m = int2bml(self.i, self.n, self.bits)
+            self.m = int2ml(i, o, n)
 
     def __mul__(self, other):
         m = bmm(self.m, other.m)
-        return Mat(bm2intl(m, self.bits), self.n, _m=m)
+        return Mat(m2intl(m, self.o), self.n, self.o, _m=m)
 
     def __repr__(self):
         return f"{self.m}"
 
     def __invert__(self):
         m = bminv(self.m)
-        return Mat(bm2intl(m, self.bits), self.n, _m=m)
+        return Mat(m2intl(m, self.o), self.n, self.o, _m=m)

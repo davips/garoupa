@@ -43,11 +43,11 @@ class Hash:
     >>> b = Hash(b"lots of data 2")
     >>> a
     \x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;211m\x1b[1mQ\x1b[0m\x1b[38;5;176m\x1b[1mr\x1b[0m\x1b[38;5;211m\x1b[1mQ\x1b[0m\x1b[38;5;212m\x1b[1mt\x1b[0m\x1b[38;5;169m\x1b[1mG\x1b[0m\x1b[38;5;216m\x1b[1mE\x1b[0m\x1b[38;5;211m\x1b[1mc\x1b[0m\x1b[38;5;175m\x1b[1mO\x1b[0m\x1b[38;5;205m\x1b[1mZ\x1b[0m\x1b[38;5;174m\x1b[1m4\x1b[0m\x1b[38;5;206m\x1b[1mo\x1b[0m\x1b[38;5;176m\x1b[1mv\x1b[0m\x1b[38;5;175m\x1b[1mf\x1b[0m\x1b[38;5;212m\x1b[1ms\x1b[0m\x1b[38;5;168m\x1b[1m1\x1b[0m\x1b[38;5;216m\x1b[1mF\x1b[0m\x1b[38;5;176m\x1b[1mv\x1b[0m\x1b[38;5;180m\x1b[1mC\x1b[0m\x1b[38;5;169m\x1b[1mG\x1b[0m\x1b[38;5;7m\x1b[1mi\x1b[0m\x1b[38;5;212m\x1b[1mx\x1b[0m\x1b[38;5;216m\x1b[1mF\x1b[0m\x1b[38;5;175m\x1b[1mb\x1b[0m\x1b[38;5;211m\x1b[1mg\x1b[0m\x1b[38;5;168m\x1b[1m1\x1b[0m\x1b[38;5;180m\x1b[1mC\x1b[0m\x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;181m\x1b[1mj\x1b[0m\x1b[38;5;211m\x1b[1mh\x1b[0m\x1b[38;5;217m\x1b[1mU\x1b[0m\x1b[38;5;217m\x1b[1mV\x1b[0m\x1b[38;5;176m\x1b[1mr\x1b[0m\x1b[38;5;210m\x1b[1m7\x1b[0m\x1b[38;5;181m\x1b[1mT\x1b[0m\x1b[38;5;211m\x1b[1md\x1b[0m\x1b[38;5;175m\x1b[1mf\x1b[0m\x1b[38;5;211m\x1b[1md\x1b[0m\x1b[38;5;210m\x1b[1mA\x1b[0m\x1b[38;5;174m\x1b[1m4\x1b[0m\x1b[38;5;175m\x1b[1me\x1b[0m\x1b[38;5;212m\x1b[1mw\x1b[0m\x1b[38;5;174m\x1b[1m9\x1b[0m
-    >>> str(a)
+    >>> a.id
     'TQrQtGEcOZ4ovfs1FvCGixFbg1CTjhUVr7TdfdA4ew9'
     >>> a * b
     \x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;73m\x1b[1mf\x1b[0m\x1b[38;5;72m\x1b[1mP\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;72m\x1b[1mM\x1b[0m\x1b[38;5;108m\x1b[1mR\x1b[0m\x1b[38;5;79m\x1b[1mi\x1b[0m\x1b[38;5;73m\x1b[1mu\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;73m\x1b[1mu\x1b[0m\x1b[38;5;72m\x1b[1m4\x1b[0m\x1b[38;5;73m\x1b[1mr\x1b[0m\x1b[38;5;245m\x1b[1mJ\x1b[0m\x1b[38;5;72m\x1b[1mM\x1b[0m\x1b[38;5;67m\x1b[1mY\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;78m\x1b[1mE\x1b[0m\x1b[38;5;73m\x1b[1mf\x1b[0m\x1b[38;5;67m\x1b[1mX\x1b[0m\x1b[38;5;72m\x1b[1m6\x1b[0m\x1b[38;5;78m\x1b[1mS\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;78m\x1b[1mD\x1b[0m\x1b[38;5;114m\x1b[1mF\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;109m\x1b[1mh\x1b[0m\x1b[38;5;73m\x1b[1mc\x1b[0m\x1b[38;5;66m\x1b[1mG\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mQ\x1b[0m\x1b[38;5;73m\x1b[1mb\x1b[0m\x1b[38;5;72m\x1b[1m9\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;79m\x1b[1mk\x1b[0m\x1b[38;5;67m\x1b[1mn\x1b[0m\x1b[38;5;73m\x1b[1mw\x1b[0m\x1b[38;5;78m\x1b[1mC\x1b[0m\x1b[38;5;103m\x1b[1mp\x1b[0m\x1b[38;5;72m\x1b[1mK\x1b[0m\x1b[38;5;78m\x1b[1mS\x1b[0m\x1b[38;5;67m\x1b[1mY\x1b[0m\x1b[38;5;72m\x1b[1m5\x1b[0m
-    >>> str(a * b)
+    >>> (a * b).id
     'hfPQMRiuCu4rJMYhEfX6ShDFpQhcGpQb9CknwCpKSY5'
     >>> a * b * ~b == a
     True
@@ -107,7 +107,7 @@ class Hash:
         >>> h = Hash.from128bit(bits)
         >>> h
         \x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;71m\x1b[1mw\x1b[0m\x1b[38;5;240m\x1b[1m1\x1b[0m\x1b[38;5;101m\x1b[1mZ\x1b[0m\x1b[38;5;240m\x1b[1mH\x1b[0m\x1b[38;5;71m\x1b[1mv\x1b[0m\x1b[38;5;101m\x1b[1m7\x1b[0m\x1b[38;5;71m\x1b[1mg\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;101m\x1b[1m7\x1b[0m\x1b[38;5;71m\x1b[1me\x1b[0m\x1b[38;5;71m\x1b[1me\x1b[0m\x1b[38;5;71m\x1b[1mz\x1b[0m\x1b[38;5;71m\x1b[1mg\x1b[0m\x1b[38;5;71m\x1b[1mT\x1b[0m\x1b[38;5;107m\x1b[1mh\x1b[0m\x1b[38;5;71m\x1b[1mO\x1b[0m\x1b[38;5;239m\x1b[1mW\x1b[0m\x1b[38;5;65m\x1b[1ma\x1b[0m\x1b[38;5;71m\x1b[1mU\x1b[0m\x1b[38;5;65m\x1b[1mc\x1b[0m\x1b[38;5;65m\x1b[1mK\x1b[0m\x1b[38;5;240m\x1b[1mm\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;71m\x1b[1mj\x1b[0m\x1b[38;5;65m\x1b[1mc\x1b[0m\x1b[38;5;101m\x1b[1mZ\x1b[0m\x1b[38;5;65m\x1b[1mM\x1b[0m\x1b[38;5;71m\x1b[1mP\x1b[0m\x1b[38;5;65m\x1b[1mL\x1b[0m\x1b[38;5;101m\x1b[1m3\x1b[0m\x1b[38;5;71m\x1b[1m9\x1b[0m
-        >>> str(h)
+        >>> h.id
         '00000000000lw1ZHv7gl7eezgThOWaUcKmljcZMPL39'
         >>> h.bits
         '0000000000000000000000000000000000000000000000000000000000000000010001111010100101000011011011011101010000111110000001111010110000000000000000000000000000000000000000000000000000000000000000000111100110101111110000000011111101111000010010010000000101001111'
@@ -125,7 +125,7 @@ class Hash:
         >>> h = Hash.fromid('00000000000L3IuQhryVYXaWfSwF9NnZrx4M4bSH6U9')
         >>> h
         \x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;173m\x1b[1mL\x1b[0m\x1b[38;5;203m\x1b[1m3\x1b[0m\x1b[38;5;167m\x1b[1mI\x1b[0m\x1b[38;5;137m\x1b[1mu\x1b[0m\x1b[38;5;173m\x1b[1mQ\x1b[0m\x1b[38;5;209m\x1b[1mh\x1b[0m\x1b[38;5;173m\x1b[1mr\x1b[0m\x1b[38;5;143m\x1b[1my\x1b[0m\x1b[38;5;215m\x1b[1mV\x1b[0m\x1b[38;5;167m\x1b[1mY\x1b[0m\x1b[38;5;167m\x1b[1mX\x1b[0m\x1b[38;5;137m\x1b[1ma\x1b[0m\x1b[38;5;131m\x1b[1mW\x1b[0m\x1b[38;5;173m\x1b[1mf\x1b[0m\x1b[38;5;143m\x1b[1mS\x1b[0m\x1b[38;5;173m\x1b[1mw\x1b[0m\x1b[38;5;215m\x1b[1mF\x1b[0m\x1b[38;5;173m\x1b[1m9\x1b[0m\x1b[38;5;209m\x1b[1mN\x1b[0m\x1b[38;5;167m\x1b[1mn\x1b[0m\x1b[38;5;203m\x1b[1mZ\x1b[0m\x1b[38;5;173m\x1b[1mr\x1b[0m\x1b[38;5;209m\x1b[1mx\x1b[0m\x1b[38;5;137m\x1b[1m4\x1b[0m\x1b[38;5;173m\x1b[1mM\x1b[0m\x1b[38;5;137m\x1b[1m4\x1b[0m\x1b[38;5;173m\x1b[1mb\x1b[0m\x1b[38;5;143m\x1b[1mS\x1b[0m\x1b[38;5;167m\x1b[1mH\x1b[0m\x1b[38;5;173m\x1b[1m6\x1b[0m\x1b[38;5;179m\x1b[1mU\x1b[0m\x1b[38;5;173m\x1b[1m9\x1b[0m
-        >>> str(h)
+        >>> h.id
         '00000000000L3IuQhryVYXaWfSwF9NnZrx4M4bSH6U9'
         """
         a = self.s.to_bytes(8, byteorder="big")
@@ -208,11 +208,17 @@ class Hash:
             self._repr = colorize128bit(self.id)
         return self._repr
 
+    @property
+    def idc(self):
+        return repr(self)
+
     def __str__(self):
         return self.id
 
     def __eq__(self, other):
         return self.s == other.s and self.z == other.z
+
+
         # @classmethod
     # def muls(cls, size, /, *perms):  # 23.6 µs
     #     return Hash(perm=reduce(pmat_mult, [p.perm for p in perms]))

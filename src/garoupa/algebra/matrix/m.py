@@ -21,13 +21,15 @@
 #  time spent here.
 
 import random as rnd
+from math import log
+
 from garoupa.algebra.abs.element import Element
 from garoupa.algebra.matrix.mat import Mat
 from garoupa.algebra.product import Product
 
 
 class M(Element):
-    def __init__(self, n):
+    def __init__(self, n, o=2):
         """
         1 b b b
         0 1 b b
@@ -35,20 +37,22 @@ class M(Element):
         0 0 0 1
         """
         super().__init__()
-        self.n = n
-        self.bits = sum(range(1, n))
-        self.order = 2 ** self.bits
+        self.n, self.o = n, o
+        self.identity = Mat(0, n, o)
+        self.cells = self.identity.cells
+        self.order = self.identity.order
+        self.bits = self.identity.bits
         self.sorted = lambda: (Mat(i, self.n) for i in range(self.order))
 
     def __iter__(self):
         for i in range(self.order):
-            yield Mat(rnd.getrandbits(self.bits), self.n)
+            yield Mat(rnd.getrandbits(self.bits), self.n, self.o)
 
     def __mul__(self, other):
         return Product(self, other)
 
     def __repr__(self):
-        return f"M{self.n}"
+        return f"M{self.n}%{self.o}"
 
     def __invert__(self):
-        return Mat(rnd.getrandbits(self.bits), self.n)
+        return Mat(rnd.getrandbits(self.bits), self.n, self.o)

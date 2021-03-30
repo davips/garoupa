@@ -39,7 +39,7 @@ class D:
         self.r = lambda: (R(r, self.n) for r in range(self.n))
         self.s = lambda: (S(s, self.n) for s in range(self.n))
         self.sorted = lambda: chain(self.r(), self.s())
-        self.id = R(0, self.n)
+        self.identity = R(0, self.n)
         self.bits = int(log(self.order, 2))
 
     @property

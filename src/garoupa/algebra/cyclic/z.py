@@ -35,7 +35,7 @@ class Z:
     def __post_init__(self):
         self.order = self.n
         self.sorted = lambda: (Nat(i, self.n) for i in range(self.order))
-        self.id = Nat(0, self.n)
+        self.identity = Nat(0, self.n)
         self.bits = int(log(self.order, 2))
 
     def __iter__(self):

@@ -359,3 +359,44 @@ def bm2intl(m, bits):
             n += (int(m[i, j]) << b)
             b -= 1
     return n
+
+
+def int2ml(n, o, l):
+    """
+    Usage:
+    >>> from numpy import uint8
+    >>> int2ml(4095, 4, 5)
+    array([[1, 3, 3, 3, 3],
+           [0, 1, 3, 3, 0],
+           [0, 0, 1, 0, 0],
+           [0, 0, 0, 1, 0],
+           [0, 0, 0, 0, 1]], dtype=uint8)
+    """
+    m = np.eye(l, dtype=np.ubyte)
+    for i in range(l - 1):
+        for j in range(i + 1, l):
+            n, rem = divmod(n, o)
+            m[i, j] = rem
+    return m
+
+
+def m2intl(m, o):
+    """
+    Usage:
+    >>> from numpy import array, uint8
+    >>> m = array([[1, 3, 3, 3, 3],
+    ...            [0, 1, 3, 3, 0],
+    ...            [0, 0, 1, 0, 0],
+    ...            [0, 0, 0, 1, 0],
+    ...            [0, 0, 0, 0, 1]], dtype=uint8)
+    >>> m2intl(m, 4)
+    4095
+    """
+    n = 0
+    l = len(m)
+    exp = 1
+    for i in range(l - 1):
+        for j in range(i + 1, l):
+            n += m[i, j] * exp
+            exp *= o
+    return n
