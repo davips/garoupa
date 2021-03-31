@@ -54,7 +54,7 @@ b = Hash(blob=b"Some other binary content. Might be, e.g., an action or another 
 c = a * b
 print(f"{a} * {b} = {c}")
 """
-3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 * XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk
+3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 * XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh
 """
 ```
 
@@ -63,8 +63,8 @@ print(~b)
 # Multiplication can be reverted by the inverse hash. Zero is the identity hash.
 print(f"{b} * {~b} = {b * ~b} = 0")
 """
-IdNlCrGCIPtypjF4xCZd4yb9YFeDiycRIwVM39yRIIJ
-XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * IdNlCrGCIPtypjF4xCZd4yb9YFeDiycRIwVM39yRIIJ = 0000000000000000000000000000000000000000000 = 0
+R4J9jUDTFmjZqI7IpD3rrvVR4SA7opVCpZAu7ZnMID6
+XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * R4J9jUDTFmjZqI7IpD3rrvVR4SA7opVCpZAu7ZnMID6 = 0000000000000000000000000000000000000000000 = 0
 """
 ```
 
@@ -80,7 +80,7 @@ XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * 0000000000000000000000000000000000
 
 print(f"{c} * {~b} = {c * ~b} = {a} = a")
 """
-R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk * IdNlCrGCIPtypjF4xCZd4yb9YFeDiycRIwVM39yRIIJ = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = a
+bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh * R4J9jUDTFmjZqI7IpD3rrvVR4SA7opVCpZAu7ZnMID6 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = a
 """
 ```
 
@@ -88,7 +88,7 @@ R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk * IdNlCrGCIPtypjF4xCZd4yb9YFeDiycRIw
 
 print(f"{~a} * {c} = {~a * c} = {b} = b")
 """
-ncbPkmmO3z9Bskk3dweIvlWghWyGZpfcE7Zqh6AZ4tj * R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = b
+v4QJKocAsbzzSMQre5nY8gxZvRtBgXkYQPn1d5wld4i * bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = b
 """
 ```
 
@@ -97,7 +97,7 @@ ncbPkmmO3z9Bskk3dweIvlWghWyGZpfcE7Zqh6AZ4tj * R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02
 # Division is shorthand for reversion.
 print(f"{c} / {b} = {c / b} = a")
 """
-R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk / XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = a
+bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh / XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = a
 """
 ```
 
@@ -106,7 +106,7 @@ R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk / XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLd
 # Hash multiplication is not expected to be commutative.
 print(f"{a * b} != {b * a}")
 """
-R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk != eP4HWUGNBLd8fNiqMpPaGsT7iFL3nSPjdgbpxMgF4BA
+bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh != bGkIRaQg4OOT21Ux5GBiP7gof9J9FBHFaFtRUHFijIu
 """
 ```
 
@@ -115,7 +115,7 @@ R1BiZy1F4HTc9zWSiofC4gV3VhT7GMqs02w5tefxnVk != eP4HWUGNBLd8fNiqMpPaGsT7iFL3nSPjd
 # Hash multiplication is associative.
 print(f"{a * (b * c)} = {(a * b) * c}")
 """
-M7Acfgmx7M9uv1ZJ7YryKY9xfqnX6oL31gCaSssid6d = M7Acfgmx7M9uv1ZJ7YryKY9xfqnX6oL31gCaSssid6d
+Dpki8EEC2ODuthyLOEqrbQBqQnXEv7LZ5GWUBy9Xr7s = Dpki8EEC2ODuthyLOEqrbQBqQnXEv7LZ5GWUBy9Xr7s
 """
 ```
 
