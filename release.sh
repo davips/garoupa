@@ -1,5 +1,5 @@
 echo
-pytest src --cov=src --doctest-modules
+pytest src tests --cov=src --doctest-modules
 echo "----------------- tested -----------------------"
 read -p "press any key"
 

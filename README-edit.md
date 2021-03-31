@@ -32,9 +32,9 @@ pip install garoupa
 
 ### from source
 ```bash
-cd my-project
-git clone https://github.com/davips/garoupa ../garoupa
-pip install -e ../garoupa
+git clone https://github.com/davips/garoupa
+cd garoupa
+poetry install
 ```
 
 
