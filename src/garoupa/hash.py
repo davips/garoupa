@@ -121,6 +121,20 @@ class Hash:
         hash._z = int.from_bytes(digest[8:], byteorder="big")
         return hash
 
+    @classmethod
+    def fromn(cls, n: int):
+        """Return hash representing the given int
+
+        Usage:
+        >>> h = Hash.fromn(93453653634600329720972579209745209590259072095732)
+        >>> h
+        \x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;115m\x1b[1mb\x1b[0m\x1b[38;5;121m\x1b[1mf\x1b[0m\x1b[38;5;121m\x1b[1mf\x1b[0m\x1b[38;5;7m\x1b[1mp\x1b[0m\x1b[38;5;79m\x1b[1ma\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;144m\x1b[1mI\x1b[0m\x1b[38;5;151m\x1b[1md\x1b[0m\x1b[38;5;157m\x1b[1ml\x1b[0m\x1b[38;5;114m\x1b[1mL\x1b[0m\x1b[38;5;144m\x1b[1m2\x1b[0m\x1b[38;5;73m\x1b[1mW\x1b[0m\x1b[38;5;120m\x1b[1mP\x1b[0m\x1b[38;5;110m\x1b[1mn\x1b[0m\x1b[38;5;158m\x1b[1mw\x1b[0m\x1b[38;5;150m\x1b[1mM\x1b[0m\x1b[38;5;157m\x1b[1mk\x1b[0m\x1b[38;5;109m\x1b[1mX\x1b[0m\x1b[38;5;144m\x1b[1mJ\x1b[0m\x1b[38;5;156m\x1b[1mR\x1b[0m\x1b[38;5;84m\x1b[1mC\x1b[0m\x1b[38;5;150m\x1b[1m6\x1b[0m\x1b[38;5;249m\x1b[1mZ\x1b[0m\x1b[38;5;86m\x1b[1my\x1b[0m\x1b[38;5;158m\x1b[1mw\x1b[0m\x1b[38;5;114m\x1b[1mL\x1b[0m\x1b[38;5;86m\x1b[1my\x1b[0m\x1b[38;5;84m\x1b[1m8\x1b[0m
+        >>> h.id
+        '000000000000000bffpa0IdlL2WPnwMkXJRC6ZywLy8'
+        """
+        s, z = divmod(n, cls._2_128)
+        return Hash.fromsz(s, z)
+
     def to128bit(self):
         """The most significant parts of 's' and 'z' should be zero,
          keep only: 64 bits for 's', 64 bits for 'z'.
@@ -221,7 +235,6 @@ class Hash:
 
     def __eq__(self, other):
         return self.s == other.s and self.z == other.z
-
 
         # @classmethod
     # def muls(cls, size, /, *perms):  # 23.6 µs

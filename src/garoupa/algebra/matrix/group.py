@@ -36,3 +36,6 @@ class Group:
 
     def comm_degree(self):
         raise Exception("Not implemented for groups of the class", self.name)
+
+    def __invert__(self) -> Element:
+        raise Exception("Not implemented for groups of the class", self.name)

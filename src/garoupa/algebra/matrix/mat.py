@@ -19,10 +19,9 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-from math import log
 
 from garoupa.algebra.abs.element import Element
-from garoupa.math import int2bml, bmm, bm2intl, bminv, int2bm, m2intl, int2ml
+from garoupa.math import bmm, bminv, m2intl, int2ml
 
 
 class Mat(Element):

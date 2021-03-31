@@ -24,15 +24,19 @@ from abc import abstractmethod, ABC
 from dataclasses import dataclass
 from math import log
 
+from garoupa import Hash
+
 
 @dataclass
 class Element(ABC):
     i: int
     order: int
+    _id = None
 
     def __post_init__(self):
         self.name = f"{self.__class__.__name__.lower()}_{self.i}"
         self.bits = log(self.order, 2)
+        self.hash = Hash.fromn(self.i)
 
     @abstractmethod
     def __mul__(self, other):
@@ -46,3 +50,9 @@ class Element(ABC):
 
     def __hash__(self):
         return hash(repr(self))
+
+    @property
+    def id(self):
+        if self._id is None:
+            self._id = self.hash.id
+        return self._id
