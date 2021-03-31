@@ -20,11 +20,7 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-import operator
-import random as rnd
-from dataclasses import dataclass
-from functools import reduce
-from math import log, pi, sqrt, exp, factorial
+from math import pi, sqrt, exp, factorial
 
 from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.product.product import Product
@@ -53,7 +49,7 @@ class S(Group):
 
     def __iter__(self):
         while True:
-            yield Perm(rnd.getrandbits(int(self.bits)), self.n)
+            yield Perm(self.samplei(), self.n)
 
     def __mul__(self, other):
         return Product(self, other)
@@ -62,4 +58,4 @@ class S(Group):
         return f"S{self.n}"
 
     def __invert__(self):
-        return Perm(rnd.getrandbits(int(self.bits)), self.n)
+        return Perm(self.samplei(), self.n)

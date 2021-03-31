@@ -20,10 +20,6 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-import random as rnd
-from dataclasses import dataclass
-from math import log
-
 from garoupa.algebra.cyclic.nat import Nat
 from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.product.product import Product
@@ -37,7 +33,7 @@ class Z(Group):
 
     def __iter__(self):
         while True:
-            yield Nat(rnd.getrandbits(int(self.bits)), self.n)
+            yield Nat(self.samplei(), self.n)
 
     def __mul__(self, other):
         return Product(self, other)

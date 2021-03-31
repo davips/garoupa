@@ -20,10 +20,6 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-import random as rnd
-from math import log
-
-from garoupa.algebra.abs.element import Element
 from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.matrix.mat import Mat
 from garoupa.algebra.product import Product
@@ -45,7 +41,7 @@ class M(Group):
 
     def __iter__(self):
         while True:
-            yield Mat(rnd.getrandbits(int(self.bits)), self.n, self.mod)
+            yield Mat(self.samplei(), self.n, self.mod)
 
     def __mul__(self, other):
         return Product(self, other)
@@ -54,4 +50,4 @@ class M(Group):
         return f"M{self.n}%{self.mod}"
 
     def __invert__(self):
-        return Mat(rnd.getrandbits(int(self.bits)), self.n, self.mod)
+        return Mat(self.samplei(), self.n, self.mod)

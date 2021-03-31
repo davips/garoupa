@@ -20,6 +20,7 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 from dataclasses import dataclass
+from random import Random
 
 from garoupa.algebra.abs.element import Element
 
@@ -28,14 +29,19 @@ from garoupa.algebra.abs.element import Element
 class Group:
     identity: Element
     sorted: callable
+    seed: int = 0
 
     def __post_init__(self):
         self.bits = self.identity.bits
         self.order = self.identity.order
         self.name = self.__class__.__name__
+        self.rnd = Random(self.seed)
 
     def comm_degree(self):
         raise Exception("Not implemented for groups of the class", self.name)
 
     def __invert__(self) -> Element:
         raise Exception("Not implemented for groups of the class", self.name)
+
+    def samplei(self):
+        return self.rnd.getrandbits(int(self.bits))

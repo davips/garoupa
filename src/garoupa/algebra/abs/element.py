@@ -32,11 +32,11 @@ class Element(ABC):
     i: int
     order: int
     _id = None
+    _hash = None
 
     def __post_init__(self):
         self.name = f"{self.__class__.__name__.lower()}_{self.i}"
         self.bits = log(self.order, 2)
-        self.hash = Hash.fromn(self.i)
 
     @abstractmethod
     def __mul__(self, other):
@@ -50,6 +50,12 @@ class Element(ABC):
 
     def __hash__(self):
         return hash(repr(self))
+
+    @property
+    def hash(self):
+        if self._hash is None:
+            self._hash = Hash.fromn(self.i)
+        return self._hash
 
     @property
     def id(self):

@@ -20,10 +20,7 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-import random as rnd
-from dataclasses import dataclass
 from itertools import chain, repeat
-from math import log
 
 from garoupa.algebra.dihedral.r import R
 from garoupa.algebra.dihedral.s import S
@@ -48,7 +45,7 @@ class D(Group):
 
     def __iter__(self):
         while True:
-            yield rnd.choice([R, S])(rnd.getrandbits(int(self.bits)), self.n)
+            yield self.rnd.choice([R, S])(self.samplei(), self.n)
 
     def __mul__(self, other):
         return Product(self, other)

@@ -19,7 +19,6 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-import random as rnd
 
 from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.matrix.mat8bit import Mat8bit
@@ -32,7 +31,7 @@ class M8bit(Group):
 
     def __iter__(self):
         while True:
-            yield Mat8bit(rnd.getrandbits(int(self.bits)))
+            yield Mat8bit(self.samplei)
 
     def __mul__(self, other):
         return Product(self, other)
@@ -41,4 +40,4 @@ class M8bit(Group):
         return self.__class__.__name__
 
     def __invert__(self):
-        return Mat8bit(rnd.getrandbits(int(self.bits)))
+        return Mat8bit(self.samplei)
