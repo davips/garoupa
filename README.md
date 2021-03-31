@@ -6,6 +6,7 @@ Cryptographic hash, abstract algebra and operators - see package [hosh](https://
 
 <p>
 <a title="fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Malabar_grouper_melb_aquarium.jpg"><img width="120" alt="Malabar grouper melb aquarium" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg"></a>
+<br>
 <a href="https://github.com/davips/hosh/blob/main/colored-id.png">
 <img src="https://raw.githubusercontent.com/davips/hosh/main/colored-id.png" alt="Colored base-62 representation" width="500" height="130">
 </a>
@@ -137,14 +138,13 @@ from math import factorial
 
 from garoupa.algebra.cyclic import Z
 from garoupa.algebra.dihedral import D
+from garoupa.algebra.symmetric import Perm
+from garoupa.algebra.symmetric import S
 
 # Direct product between:
 #   symmetric group S4;
 #   cyclic group Z5; and,
 #   dihedral group D4.
-from garoupa.algebra.symmetric import S
-from garoupa.algebra.symmetric.perm import Perm
-
 G = S(4) * Z(5) * D(4)
 print(G)
 """
@@ -212,11 +212,6 @@ print(a, "*", b, "*", ~b, "=", a * b * ~b, "= a")
 """
 [1, 3, 2, 0] * [1, 2, 3, 0] * [3, 0, 1, 2] = [1, 3, 2, 0] = a
 """
-```
-
-```python3
-
-
 ```
 
 
@@ -359,8 +354,20 @@ for G in map(M, range(6, 11)):
 </p>
 </details>
 
+**Groups benefit from methods from module 'hash'**
+<details>
+<p>
 
-
+```python3
+from garoupa.algebra.matrix import M
+m = ~M(23)
+print(repr(m.hash))
+```
+<a href="https://github.com/davips/garoupa/blob/main/examples/7KDd8TiA3S11QTkUid2wy87DQIeGQ35vB1bsP5Y6DjZ.png">
+<img src="https://raw.githubusercontent.com/davips/garoupa/main/examples/7KDd8TiA3S11QTkUid2wy87DQIeGQ35vB1bsP5Y6DjZ.png" alt="Colored base-62 representation" width="380" height="18">
+</a>
+</p>
+</details>
 
 
 ### Features

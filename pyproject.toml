@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "garoupa"
-version = "1.210328.5"
+version = "1.210328.9"
 description = "Cryptographic hash, abstract algebra and operators (previously known as 'hoshy') - see package hosh for a faster, native (compiled) hash/ops approach "
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
