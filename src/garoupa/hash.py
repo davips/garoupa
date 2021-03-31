@@ -23,7 +23,7 @@
 from hashlib import md5
 
 from garoupa.colors import colorize128bit
-from garoupa.core import s_z_perm_id_fromblob, s_z_perm_fromid, perm_id_fromsz, s_id_fromzperm
+from garoupa.core import zs_perm_id_fromblob, zs_perm_fromid, perm_id_fromzs, s_id_fromzperm
 from garoupa.math import pmat_mult, pmat_inv
 
 
@@ -34,9 +34,9 @@ class Hash:
 
     's' should be zero to create a commutative element.
 
-    Set 'z' for a commutative element;
-    set both '
-    bits = |   ~64 bits ZM127   |   ~64 bits S34   |   64 bits S34   |   64 bits ZM127   |
+    Set only 'z' for a commutative element;
+    set both 'z' and 's' otherwise.
+    bits = |   ~128 bits ZM127   |   ~128 bits S34   |
 
     Usage:
     >>> a = Hash(b"lots of data")
@@ -44,9 +44,9 @@ class Hash:
     >>> a.id
     'TQrQtGEcOZ666oBPwiT4G0QtAh0vW5HW4Vcw4hTD0Ls'
     >>> (a * b).id
-    'me15uumcp52MXjdiR1ei3Qx8jB6dss4RrNjaDBsNfE2'
+    'Od1QpzT2bl9fHlanBznoqofqOo12PrCollgAkN1aM3W'
     >>> (b * a).id
-    'OT9Z3AKZ35u4ABiFcoGO34VWWui4xomCVPpNuM3fqPC'
+    'Od1QpzT2bl9fHlanBznoqmMVMKt0c1hFsUBiPNJ6Pqp'
     >>> a * b * ~b == a
     True
     >>> c = Hash(b"lots of data 3")
@@ -67,12 +67,12 @@ class Hash:
     orders = 295232799039604140847618609643520000000  # 34!
     orderz = 340282366920938463463374607431768211297  # 2**128-159
     _2_128 = 2 ** 128
-    _n, _id, _s, _z, _perm = None, None, None, None, None
-    _bits, _sz = None, None
+    _n, _id, _z, _s, _perm = None, None, None, None, None
+    _bits, _zs = None, None
 
     def __init__(self, blob, commutative=False):
         if blob is not None:
-            self._s, self._z, self._perm, self._id = s_z_perm_id_fromblob(blob, commutative)
+            self._z, self._s, self._perm, self._id = zs_perm_id_fromblob(blob, commutative)
 
     @classmethod
     def fromperm(cls, perm, z):
@@ -81,9 +81,9 @@ class Hash:
         return hash
 
     @classmethod
-    def fromsz(cls, s, z):
+    def fromzs(cls, z, s):
         hash = Hash(None)
-        hash._s, hash._z = s, z
+        hash._z, hash._s = z, s
         return hash
 
     @classmethod
@@ -101,62 +101,69 @@ class Hash:
         return hash
 
     @classmethod
-    def from128bit(cls, digest: bytes):
-        """Return hash representing the given 16 bytes: 64 bits for 's', 64 bits for 'z'
+    def from128bit(cls, digest: bytes, commutative=False):
+        """Return hash representing the given 16 bytes:
+        64 most significant bits for 'z', 64 least significant bits for 's', (non-commutative); or,
+        128 bits for z, none for s, if commutative flag is set (z should be less than 2^128-159).
 
         Usage:
-        >>> bits = md5(b"This digest represents a hash comming from some external database.").digest()
-        >>> bits
+        >>> bytes = md5(b"This digest represents a hash comming from some external database.").digest()
+        >>> bytes
         b'G\\xa9Cm\\xd4>\\x07\\xacy\\xaf\\xc0?xI\\x01O'
-        >>> h = Hash.from128bit(bits)
-        >>> h
-        \x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;239m\x1b[1m0\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;71m\x1b[1mw\x1b[0m\x1b[38;5;240m\x1b[1m1\x1b[0m\x1b[38;5;101m\x1b[1mZ\x1b[0m\x1b[38;5;240m\x1b[1mH\x1b[0m\x1b[38;5;71m\x1b[1mv\x1b[0m\x1b[38;5;101m\x1b[1m7\x1b[0m\x1b[38;5;71m\x1b[1mg\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;101m\x1b[1m7\x1b[0m\x1b[38;5;71m\x1b[1me\x1b[0m\x1b[38;5;71m\x1b[1me\x1b[0m\x1b[38;5;71m\x1b[1mz\x1b[0m\x1b[38;5;71m\x1b[1mg\x1b[0m\x1b[38;5;71m\x1b[1mT\x1b[0m\x1b[38;5;107m\x1b[1mh\x1b[0m\x1b[38;5;71m\x1b[1mO\x1b[0m\x1b[38;5;239m\x1b[1mW\x1b[0m\x1b[38;5;65m\x1b[1ma\x1b[0m\x1b[38;5;71m\x1b[1mU\x1b[0m\x1b[38;5;65m\x1b[1mc\x1b[0m\x1b[38;5;65m\x1b[1mK\x1b[0m\x1b[38;5;240m\x1b[1mm\x1b[0m\x1b[38;5;107m\x1b[1ml\x1b[0m\x1b[38;5;71m\x1b[1mj\x1b[0m\x1b[38;5;65m\x1b[1mc\x1b[0m\x1b[38;5;101m\x1b[1mZ\x1b[0m\x1b[38;5;65m\x1b[1mM\x1b[0m\x1b[38;5;71m\x1b[1mP\x1b[0m\x1b[38;5;65m\x1b[1mL\x1b[0m\x1b[38;5;101m\x1b[1m3\x1b[0m\x1b[38;5;71m\x1b[1m9\x1b[0m
+        >>> h = Hash.from128bit(bytes)
         >>> h.id
         '00000000000lw1ZHv7gl7eezgThOWaUcKmljcZMPL39'
         >>> h.bits
         '0000000000000000000000000000000000000000000000000000000000000000010001111010100101000011011011011101010000111110000001111010110000000000000000000000000000000000000000000000000000000000000000000111100110101111110000000011111101111000010010010000000101001111'
         """
         hash = Hash(None)
-        hash._s = int.from_bytes(digest[:8], byteorder="big")
-        hash._z = int.from_bytes(digest[8:], byteorder="big")
+        if commutative:
+            hash._z = int.from_bytes(digest, byteorder="big")
+            hash._s = 0
+        else:
+            hash._z = int.from_bytes(digest[:8], byteorder="big")
+            hash._s = int.from_bytes(digest[8:], byteorder="big")
         return hash
+
+    def to128bit(self, commutative=False):
+        """The most significant parts of 's' and 'z' should be zero,
+         because conversion will keep only: 64 bits for 's', 64 bits for 'z'.
+         Unless the commutative flag is set, which results in all 128 bits from 'z'.
+
+        Usage:
+        >>> h = Hash.from128bit(b'3124123329432412')
+        >>> h.to128bit()
+        b'3124123329432412'
+        >>> h.bits
+        '0000000000000000000000000000000000000000000000000000000000000000001100110011000100110010001101000011000100110010001100110011001100000000000000000000000000000000000000000000000000000000000000000011001000111001001101000011001100110010001101000011000100110010'
+        """
+        if commutative:
+            zbytes = self.z.to_bytes(16, byteorder="big")
+            return zbytes
+        zbytes = self.z.to_bytes(8, byteorder="big")
+        sbytes = self.s.to_bytes(8, byteorder="big")
+        return zbytes + sbytes
 
     @classmethod
     def fromn(cls, n: int):
-        """Return hash representing the given int
+        """Return hash representing the given int.
+        Numbers from one of the intervals [0; 34![  or  [2^128; 2^256-159[
 
         Usage:
-        >>> h = Hash.fromn(93453653634600329720972579209745209590259072095732)
-        >>> h
-        \x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;115m\x1b[1mb\x1b[0m\x1b[38;5;121m\x1b[1mf\x1b[0m\x1b[38;5;121m\x1b[1mf\x1b[0m\x1b[38;5;7m\x1b[1mp\x1b[0m\x1b[38;5;79m\x1b[1ma\x1b[0m\x1b[38;5;72m\x1b[1m0\x1b[0m\x1b[38;5;144m\x1b[1mI\x1b[0m\x1b[38;5;151m\x1b[1md\x1b[0m\x1b[38;5;157m\x1b[1ml\x1b[0m\x1b[38;5;114m\x1b[1mL\x1b[0m\x1b[38;5;144m\x1b[1m2\x1b[0m\x1b[38;5;73m\x1b[1mW\x1b[0m\x1b[38;5;120m\x1b[1mP\x1b[0m\x1b[38;5;110m\x1b[1mn\x1b[0m\x1b[38;5;158m\x1b[1mw\x1b[0m\x1b[38;5;150m\x1b[1mM\x1b[0m\x1b[38;5;157m\x1b[1mk\x1b[0m\x1b[38;5;109m\x1b[1mX\x1b[0m\x1b[38;5;144m\x1b[1mJ\x1b[0m\x1b[38;5;156m\x1b[1mR\x1b[0m\x1b[38;5;84m\x1b[1mC\x1b[0m\x1b[38;5;150m\x1b[1m6\x1b[0m\x1b[38;5;249m\x1b[1mZ\x1b[0m\x1b[38;5;86m\x1b[1my\x1b[0m\x1b[38;5;158m\x1b[1mw\x1b[0m\x1b[38;5;114m\x1b[1mL\x1b[0m\x1b[38;5;86m\x1b[1my\x1b[0m\x1b[38;5;84m\x1b[1m8\x1b[0m
+        >>> h = Hash.fromn(324134134)
         >>> h.id
-        '000000000000000bffpa0IdlL2WPnwMkXJRC6ZywLy8'
+        '00000000000000000000000000000000000000Lw25u'
         """
-        s, z = divmod(n, cls._2_128)
-        return Hash.fromsz(s, z)
-
-    def to128bit(self):
-        """The most significant parts of 's' and 'z' should be zero,
-         keep only: 64 bits for 's', 64 bits for 'z'.
-
-        Usage:
-        >>> h = Hash.fromid('00000000000L3IuQhryVYXaWfSwF9NnZrx4M4bSH6U9')
-        >>> h
-        \x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;131m\x1b[1m0\x1b[0m\x1b[38;5;173m\x1b[1mL\x1b[0m\x1b[38;5;203m\x1b[1m3\x1b[0m\x1b[38;5;167m\x1b[1mI\x1b[0m\x1b[38;5;137m\x1b[1mu\x1b[0m\x1b[38;5;173m\x1b[1mQ\x1b[0m\x1b[38;5;209m\x1b[1mh\x1b[0m\x1b[38;5;173m\x1b[1mr\x1b[0m\x1b[38;5;143m\x1b[1my\x1b[0m\x1b[38;5;215m\x1b[1mV\x1b[0m\x1b[38;5;167m\x1b[1mY\x1b[0m\x1b[38;5;167m\x1b[1mX\x1b[0m\x1b[38;5;137m\x1b[1ma\x1b[0m\x1b[38;5;131m\x1b[1mW\x1b[0m\x1b[38;5;173m\x1b[1mf\x1b[0m\x1b[38;5;143m\x1b[1mS\x1b[0m\x1b[38;5;173m\x1b[1mw\x1b[0m\x1b[38;5;215m\x1b[1mF\x1b[0m\x1b[38;5;173m\x1b[1m9\x1b[0m\x1b[38;5;209m\x1b[1mN\x1b[0m\x1b[38;5;167m\x1b[1mn\x1b[0m\x1b[38;5;203m\x1b[1mZ\x1b[0m\x1b[38;5;173m\x1b[1mr\x1b[0m\x1b[38;5;209m\x1b[1mx\x1b[0m\x1b[38;5;137m\x1b[1m4\x1b[0m\x1b[38;5;173m\x1b[1mM\x1b[0m\x1b[38;5;137m\x1b[1m4\x1b[0m\x1b[38;5;173m\x1b[1mb\x1b[0m\x1b[38;5;143m\x1b[1mS\x1b[0m\x1b[38;5;167m\x1b[1mH\x1b[0m\x1b[38;5;173m\x1b[1m6\x1b[0m\x1b[38;5;179m\x1b[1mU\x1b[0m\x1b[38;5;173m\x1b[1m9\x1b[0m
-        >>> h.id
-        '00000000000L3IuQhryVYXaWfSwF9NnZrx4M4bSH6U9'
-        """
-        a = self.s.to_bytes(8, byteorder="big")
-        b = self.z.to_bytes(8, byteorder="big")
-        return a + b
+        z, s = divmod(n, cls._2_128)
+        return Hash.fromzs(z, s)
 
     def calculate(self):
         if self._perm:
             self._s, self._id = s_id_fromzperm(self._z, self._perm)
         elif self._id:
-            self._s, self._z, self._perm = s_z_perm_fromid(self._id)
+            self._s, self._z, self._perm = zs_perm_fromid(self._id)
         elif None not in [self._s, self._z]:
-            self._perm, self._id = perm_id_fromsz(self._s, self._z)
+            self._perm, self._id = perm_id_fromzs(self._z, self._s)
         else:
             raise Exception("Missing argument.")
         if self.s >= self.orders:
@@ -173,14 +180,14 @@ class Hash:
     @property
     def n(self):
         if self._n is None:
-            self._n = self.s * self._2_128 + self.z
+            self._n = self.z * self._2_128 + self.s
         return self._n
 
     @property
-    def sz(self):
-        if self._sz is None:
-            self._sz = self.s, self.z
-        return self._sz
+    def zs(self):
+        if self._zs is None:
+            self._zs = self.z, self.s
+        return self._zs
 
     @property
     def id(self):
@@ -216,10 +223,10 @@ class Hash:
         return Hash.fromperm(perm=pmat_mult(self.perm, pmat_inv(other.perm)), z=(self.z - other.z) % self.orderz)
 
     def __add__(self, other):
-        return Hash.fromsz((self.s + other.s) % self.orders, (self.z + other.z) % self.orderz)
+        return Hash.fromzs((self.z + other.z) % self.orderz, (self.s + other.s) % self.orders)
 
     def __sub__(self, other):
-        return Hash.fromsz((self.s - other.s) % self.orders, (self.z - other.z) % self.orderz)
+        return Hash.fromzs((self.z - other.z) % self.orderz, (self.s - other.s) % self.orders)
 
     def __repr__(self):
         if self._repr is None:
@@ -234,7 +241,7 @@ class Hash:
         return self.id
 
     def __eq__(self, other):
-        return self.s == other.s and self.z == other.z
+        return self.z == other.z and self.s == other.s
 
         # @classmethod
     # def muls(cls, size, /, *perms):  # 23.6 µs
@@ -246,4 +253,4 @@ class Hash:
     #     return [Hash(perm=res) for res in results]
 
 
-identity = Hash.fromsz(0, 0)
+identity = Hash.fromzs(0, 0)

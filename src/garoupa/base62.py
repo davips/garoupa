@@ -42,11 +42,11 @@ def b62dec(string):
     num = 0
     for char in string:
         num = num * 62 + rev_alphabet[char]
-    s, z = divmod(num, 2 ** 128)
-    return s, z
+    z, s = divmod(num, 2 ** 128)
+    return z, s
 
 
-def b62enc(s, z):
+def b62enc(z, s):
     """
     Usage:
     >>> b62enc(123, 456)
@@ -60,7 +60,7 @@ def b62enc(s, z):
     :return:
     """
     encoded = ""
-    num = s * 2 ** 128 + z
+    num = z * 2 ** 128 + s
     while num:
         num, rem = divmod(num, 62)
         encoded = alphabet[rem] + encoded
