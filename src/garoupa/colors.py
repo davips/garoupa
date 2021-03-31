@@ -35,7 +35,7 @@ def lim(x):
     return min(255, max(0, x))
 
 
-def colorize128bit(id, ampl=0.8, change=0.4):
+def colorize128bit(id, ampl=0.8, change=0.44):
     """
     Usage:
     >>> c = colorize128bit("Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoPJNO")
@@ -43,7 +43,7 @@ def colorize128bit(id, ampl=0.8, change=0.4):
     True
     """
     numbers = md5(id.encode()).digest()
-    margin = 70
+    margin = 64
     fgr = margin + numbers[1] * ampl
     fgg = margin + numbers[2] * ampl
     fgb = margin + numbers[3] * ampl
