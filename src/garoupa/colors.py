@@ -25,29 +25,33 @@ from hashlib import md5
 import colored
 from colored import stylize
 
-from garoupa.base62 import b62dec
-
 
 def paint(txt, fgr, fgg, fgb):
     fgcolor = f"#{hex(fgr)[2:].rjust(2, '0')}{hex(fgg)[2:].rjust(2, '0')}{hex(fgb)[2:].rjust(2, '0')}"
-    return stylize(txt, colored.fg(fgcolor) + colored.attr("bold"))
+    return stylize(txt, colored.fg(fgcolor) + colored.attr("bold") + colored.bg("#000000"))
 
 
 def lim(x):
     return min(255, max(0, x))
 
 
-def colorize128bit(id, ampl=0.8, change=0.1):
+def colorize128bit(id, ampl=0.8, change=0.12):
+    """
+    Usage:
+    >>> c = colorize128bit("Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoPJNO")
+    >>> c == '\x1b[38;5;169m\x1b[1m\x1b[48;5;0mI\x1b[0m\x1b[38;5;133m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;182m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;134m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;134m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;175m\x1b[1m\x1b[48;5;0m7\x1b[0m\x1b[38;5;98m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;138m\x1b[1m\x1b[48;5;0m2\x1b[0m\x1b[38;5;140m\x1b[1m\x1b[48;5;0mB\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;176m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;140m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;98m\x1b[1m\x1b[48;5;0mi\x1b[0m\x1b[38;5;169m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;169m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;133m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;182m\x1b[1m\x1b[48;5;0mO\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;134m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;134m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;175m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;98m\x1b[1m\x1b[48;5;0me\x1b[0m\x1b[38;5;138m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;140m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mF\x1b[0m\x1b[38;5;176m\x1b[1m\x1b[48;5;0mT\x1b[0m\x1b[38;5;140m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;98m\x1b[1m\x1b[48;5;0mm\x1b[0m\x1b[38;5;169m\x1b[1m\x1b[48;5;0mJ\x1b[0m'
+    True
+    """
     numbers = md5(id.encode()).digest()
-    margin = 60
+    margin = 90
     base = numbers[0]
     ch = 255 * change
     fgr = margin + (base ^ numbers[1]) * ampl
     fgg = margin + (base ^ numbers[2]) * ampl
     fgb = margin + (base ^ numbers[3]) * ampl
     out = ""
-    for i, c in enumerate(id):
-        quot, dr = divmod(b62dec(c)[1], 4)
+    for i, c in zip(numbers * 2, id):
+        quot, dr = divmod(i, 4)
         quot, dg = divmod(quot, 4)
         db = quot % 4
         r = max(margin, lim(fgr + ch * (dr - 2)))
