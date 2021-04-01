@@ -17,6 +17,7 @@ Cryptographic hash, abstract algebra and operators
 
 
 
+[PyPI package](https://pypi.org/project/garoupa)
 
 [Latest version](https://github.com/davips/garoupa)
 
