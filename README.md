@@ -9,8 +9,8 @@
 Cryptographic hash, abstract algebra and operators
 
 <p>
-<a href="https://github.com/davips/garoupa/blob/main/frontimg.png">
-<img src="https://raw.githubusercontent.com/davips/garoupa/main/frontimg.png" alt="Colored base-62 representation" width="500" height="130">
+<a href="https://github.com/davips/garoupa/blob/main/examples/frontimg.png">
+<img src="https://raw.githubusercontent.com/davips/garoupa/main/examples/frontimg.png" alt="Colored base-62 representation" width="400" height="230">
 </a>
 </p>
 
@@ -301,6 +301,7 @@ for G in Gs:
 **Tendence of commutativity on Mn**
 <details>
 <p>
+
 ```python3
 from itertools import chain
 
