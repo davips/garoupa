@@ -43,7 +43,9 @@ class Mat(Element):
         self.m = int2ml(i, o, n) if _m is None else _m
 
     def __mul__(self, other):
-        m = bmm(self.m, other.m)
+        if self.o != other.o or self.n != other.n:
+            raise Exception("Elements are from different groups.")
+        m = bmm(self.m, other.m, self.o)
         return Mat(m2intl(m, self.o), self.n, self.o, _m=m)
 
     def __repr__(self):

@@ -26,9 +26,9 @@ from garoupa.algebra.product.product import Product
 
 
 class Z(Group):
-    def __init__(self, n):
+    def __init__(self, n, seed=0):
         sorted = lambda: (Nat(i, n) for i in range(n))
-        super().__init__(Nat(0, n), sorted)
+        super().__init__(Nat(0, n), sorted, seed)
         self.n = n
 
     def __iter__(self):

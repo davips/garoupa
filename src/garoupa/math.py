@@ -160,9 +160,9 @@ def int2bm(n):
     return bytes2bm(n.to_bytes(16, byteorder='big'))
 
 
-def bmm(a, b):
-    """unitriangular bmatrix multiplication"""
-    return (a @ b) % 2
+def bmm(a, b, mod):
+    """unitriangular matrix (modulo) multiplication"""
+    return (a @ b) % mod
 
 
 def bm2int(m):

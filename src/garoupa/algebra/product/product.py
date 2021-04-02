@@ -30,11 +30,11 @@ from garoupa.algebra.product.tuple import Tuple
 
 
 class Product(Group):
-    def __init__(self, *groups):
+    def __init__(self, *groups, seed=0):
         self.groups = groups
         identity = Tuple(*(g.identity for g in self.groups))
         sorted = lambda: (Tuple(*es) for es in product(*(g.sorted() for g in self.groups)))
-        super().__init__(identity, sorted)
+        super().__init__(identity, sorted, seed)
 
     def __iter__(self):
         its = [cycle(iter(g)) for g in self.groups]

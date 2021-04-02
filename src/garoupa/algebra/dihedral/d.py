@@ -29,11 +29,11 @@ from garoupa.algebra.product.product import Product
 
 
 class D(Group):
-    def __init__(self, n):
+    def __init__(self, n, seed=0):
         self.r = lambda: (R(r, n) for r in range(n))
         self.s = lambda: (S(s, n) for s in range(n))
         sorted = lambda: chain(self.s(), self.r())
-        super().__init__(R(0, n), sorted)
+        super().__init__(R(0, n), sorted, seed)
         self.n = n
 
     @property

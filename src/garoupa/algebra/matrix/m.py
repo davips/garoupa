@@ -26,7 +26,7 @@ from garoupa.algebra.product import Product
 
 
 class M(Group):
-    def __init__(self, n, mod=2):
+    def __init__(self, n, mod=2, seed=0):
         """
         1 b b b
         0 1 b b
@@ -36,7 +36,7 @@ class M(Group):
         identity = Mat(0, n, mod)
         self.cells = identity.cells
         sorted = lambda: (Mat(i, self.n) for i in range(identity.order))
-        super().__init__(identity, sorted)
+        super().__init__(identity, sorted, seed)
         self.n, self.mod = n, mod
 
     def __iter__(self):
