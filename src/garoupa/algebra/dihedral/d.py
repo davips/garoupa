@@ -39,8 +39,8 @@ class D(Group):
     @property
     def comm_degree(self):
         """Exact commutativity degree"""
-        num = (self.n + 3) if self.n % 2 == 0 else (self.n + 6)
-        den = 4 * self.n
+        num = (self.n + 6) if self.n % 2 == 0 else (self.n + 3)
+        den = 2 * self.order
         return num / den
 
     def __iter__(self):
