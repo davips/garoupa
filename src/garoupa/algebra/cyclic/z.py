@@ -31,6 +31,11 @@ class Z(Group):
         super().__init__(Nat(0, n), sorted, seed)
         self.n = n
 
+    @property
+    def comm_degree(self):
+        """Exact commutativity degree"""
+        return 1
+
     def __iter__(self):
         while True:
             yield Nat(self.samplei(), self.n)
