@@ -11,7 +11,7 @@ from garoupa.algebra.matrix.m128bit import M128bit
 
 
 def g(le):
-    print("fork")
+    print("fork", flush=True)
     # for le in gp[1000, 1500, ...]:
     s = {}
 
@@ -19,7 +19,7 @@ def g(le):
         for l in range(11, 19):
             G = M(l) if l < 18 else M128bit()
             z = G.identity
-            print(G, G.cells, sep="\t", end="\t")
+            print(G, G.cells, sep="\t", end="\t", flush=True)
             for j in range(3):
                 t = 1
                 a = ~G
@@ -30,11 +30,11 @@ def g(le):
                     if r == z:
                         s[str(G)] = t, a.i
                         break
-            print(t)
+            print(t, flush=True)
         pprint(s)
 
     print()
-    print(timeit(f, number=1))
+    print(timeit(f, number=1), flush=True)
 
 
 mp.ProcessingPool().map(g, gp[1000, 1500, ..., 999_999_999_999])
