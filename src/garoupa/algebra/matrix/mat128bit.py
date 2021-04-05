@@ -22,7 +22,7 @@
 
 from garoupa.algebra.abs.element import Element
 from garoupa.algebra.matrix.mat import Mat
-from garoupa.math import int2pmat, pmat_mult, pmat2int, pmat_inv
+from garoupa.math import int2bm, bm2int, bmm, bminv
 
 
 class Mat128bit(Element):
@@ -39,15 +39,15 @@ class Mat128bit(Element):
          [0 0 0 0 0 1]]
         """
         super().__init__(i, 2 ** 128)
-        self.m = int2pmat(i, 17) if _m is None else _m
+        self.m = int2bm(i) if _m is None else _m
 
     def __mul__(self, other):
-        m = pmat_mult(self.m, other.m)
-        return Mat128bit(pmat2int(m), _m=m)
+        m = bmm(self.m, other.m, 2)
+        return Mat128bit(bm2int(m), _m=m)
 
     def __repr__(self):
         return f"{self.m}"
 
     def __invert__(self):
-        m = pmat_inv(self.m)
-        return Mat128bit(pmat2int(m), _m=m)
+        m = bminv(self.m)
+        return Mat128bit(bm2int(m), _m=m)
