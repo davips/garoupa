@@ -33,6 +33,8 @@ class M(Group):
         0 0 1 b
         0 0 0 1
         """
+        if mod > 256:
+            raise Exception(f"Modulo {mod} exceeds 256.")
         identity = Mat(0, n, mod)
         self.cells = identity.cells
         sorted = lambda: (Mat(i, self.n) for i in range(identity.order))

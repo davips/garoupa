@@ -161,8 +161,8 @@ class Hash:
         if self._perm:
             self._s, self._id = s_id_fromzperm(self._z, self._perm)
         elif self._id:
-            self._s, self._z, self._perm = zs_perm_fromid(self._id)
-        elif None not in [self._s, self._z]:
+            self._z, self._s, self._perm = zs_perm_fromid(self._id)
+        elif None not in [self._z, self._s]:
             self._perm, self._id = perm_id_fromzs(self._z, self._s)
         else:
             raise Exception("Missing argument.")

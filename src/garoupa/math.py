@@ -184,7 +184,7 @@ def bm2int(m):
 
 
 def bminv(m):
-    return np.linalg.inv(m) % 2
+    return np.uint8(np.linalg.inv(m) % 2)
 
 
 def int2pmat(number, side):
@@ -397,6 +397,6 @@ def m2intl(m, o):
     exp = 1
     for i in range(l - 1):
         for j in range(i + 1, l):
-            n += m[i, j] * exp
+            n += int(m[i, j]) * exp
             exp *= o
     return n
