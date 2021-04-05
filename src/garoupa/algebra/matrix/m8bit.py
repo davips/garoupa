@@ -33,11 +33,6 @@ class M8bit(Group):
         while True:
             yield Mat8bit(self.samplei)
 
-    def __mul__(self, other):
-        return Product(self, other)
-
     def __repr__(self):
         return self.__class__.__name__
 
-    def __invert__(self):
-        return Mat8bit(self.samplei)

@@ -20,37 +20,30 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-from itertools import chain, repeat
-
-from garoupa.algebra.dihedral.r import R
-from garoupa.algebra.dihedral.s import S
 from garoupa.algebra.matrix.group import Group
-from garoupa.algebra.product.product import Product
+from garoupa.algebra.matrix.mat128bit import Mat128bit
 
 
-class D(Group):
-    def __init__(self, n, seed=0):
-        self.r = lambda: (R(r, n) for r in range(n))
-        self.s = lambda: (S(s, n) for s in range(n))
-        sorted = lambda: chain(self.s(), self.r())
-        super().__init__(R(0, n), sorted, seed)
-        self.n = n
-
-    @property
-    def comm_degree(self):
-        """Exact commutativity degree"""
-        num = (self.n + 6) if self.n % 2 == 0 else (self.n + 3)
-        den = 2 * self.order
-        return num / den
+class M128bit(Group):
+    def __init__(self, seed=0):
+        """
+        1 b b b
+        0 1 b b
+        0 0 1 b
+        0 0 0 1
+        """
+        identity = Mat128bit(0)
+        self.cells = None
+        sorted = lambda: (Mat128bit(i) for i in range(identity.order))
+        super().__init__(identity, sorted, seed)
 
     def __iter__(self):
         while True:
-            yield self.rnd.choice([R, S])(self.samplei(), self.n)
+            yield Mat128bit(self.samplei())
 
     def __repr__(self):
-        return f"D{self.n}"
+        return f"M128bit"
 
-    def __xor__(self, other):
-        return Product(*repeat(self, other))
-
-    __pow__ = __xor__
+    @property
+    def comm_degree(self):
+        return None

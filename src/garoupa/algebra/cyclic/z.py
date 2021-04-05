@@ -40,8 +40,5 @@ class Z(Group):
         while True:
             yield Nat(self.samplei(), self.n)
 
-    def __mul__(self, other):
-        return Product(self, other)
-
     def __repr__(self):
         return f"Z{self.n}"

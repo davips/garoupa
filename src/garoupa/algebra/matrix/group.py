@@ -20,6 +20,7 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 from dataclasses import dataclass
+from itertools import repeat
 from random import Random
 
 from garoupa.algebra.abs.element import Element
@@ -37,11 +38,25 @@ class Group:
         self.name = self.__class__.__name__
         self.rnd = Random(self.seed)
 
+    @property
     def comm_degree(self):
         raise Exception("Not implemented for groups of the class", self.name)
 
-    def __invert__(self) -> Element:
+    def __iter__(self):
         raise Exception("Not implemented for groups of the class", self.name)
+
+    def __invert__(self) -> Element:
+        return next(iter(self))
 
     def samplei(self):
         return self.rnd.getrandbits(int(self.bits))
+
+    def __mul__(self, other):
+        from garoupa.algebra.product import Product
+        return Product(self, other)
+
+    def __xor__(self, other):
+        from garoupa.algebra.product import Product
+        return Product(*repeat(self, other))
+
+    __pow__ = __xor__

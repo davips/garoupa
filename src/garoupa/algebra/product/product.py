@@ -36,6 +36,10 @@ class Product(Group):
         sorted = lambda: (Tuple(*es) for es in product(*(g.sorted() for g in self.groups)))
         super().__init__(identity, sorted, seed)
 
+    @property
+    def comm_degree(self):
+        return reduce(operator.mul, (g.comm_degree for g in self.groups))
+
     def __iter__(self):
         its = [cycle(iter(g)) for g in self.groups]
         while True:

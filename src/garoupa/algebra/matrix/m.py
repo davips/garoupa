@@ -43,11 +43,9 @@ class M(Group):
         while True:
             yield Mat(self.samplei(), self.n, self.mod)
 
-    def __mul__(self, other):
-        return Product(self, other)
-
     def __repr__(self):
         return f"M{self.n}%{self.mod}"
 
-    def __invert__(self):
-        return Mat(self.samplei(), self.n, self.mod)
+    @property
+    def comm_degree(self):
+        return None

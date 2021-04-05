@@ -20,37 +20,34 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-from itertools import chain, repeat
-
-from garoupa.algebra.dihedral.r import R
-from garoupa.algebra.dihedral.s import S
-from garoupa.algebra.matrix.group import Group
-from garoupa.algebra.product.product import Product
+from garoupa.algebra.abs.element import Element
+from garoupa.algebra.matrix.mat import Mat
+from garoupa.math import int2pmat, pmat_mult, pmat2int, pmat_inv
 
 
-class D(Group):
-    def __init__(self, n, seed=0):
-        self.r = lambda: (R(r, n) for r in range(n))
-        self.s = lambda: (S(s, n) for s in range(n))
-        sorted = lambda: chain(self.s(), self.r())
-        super().__init__(R(0, n), sorted, seed)
-        self.n = n
+class Mat128bit(Element):
+    def __init__(self, i, _m=None):
+        """        nxn     modulo o
+        Usage:
+        >>> a = Mat(4783632, 6, 5)
+        >>> a
+        [[1 2 1 0 4 3]
+         [0 1 0 1 1 2]
+         [0 0 1 2 0 0]
+         [0 0 0 1 0 0]
+         [0 0 0 0 1 0]
+         [0 0 0 0 0 1]]
+        """
+        super().__init__(i, 2 ** 128)
+        self.m = int2pmat(i, 17) if _m is None else _m
 
-    @property
-    def comm_degree(self):
-        """Exact commutativity degree"""
-        num = (self.n + 6) if self.n % 2 == 0 else (self.n + 3)
-        den = 2 * self.order
-        return num / den
-
-    def __iter__(self):
-        while True:
-            yield self.rnd.choice([R, S])(self.samplei(), self.n)
+    def __mul__(self, other):
+        m = pmat_mult(self.m, other.m)
+        return Mat128bit(pmat2int(m), _m=m)
 
     def __repr__(self):
-        return f"D{self.n}"
+        return f"{self.m}"
 
-    def __xor__(self, other):
-        return Product(*repeat(self, other))
-
-    __pow__ = __xor__
+    def __invert__(self):
+        m = pmat_inv(self.m)
+        return Mat128bit(pmat2int(m), _m=m)

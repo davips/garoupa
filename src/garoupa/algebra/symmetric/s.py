@@ -51,11 +51,6 @@ class S(Group):
         while True:
             yield Perm(self.samplei(), self.n)
 
-    def __mul__(self, other):
-        return Product(self, other)
-
     def __repr__(self):
         return f"S{self.n}"
 
-    def __invert__(self):
-        return Perm(self.samplei(), self.n)
