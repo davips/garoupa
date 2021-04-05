@@ -16,7 +16,7 @@ def g(le):
     s = {}
 
     def f():
-        for l in range(10, 19):
+        for l in range(12, 18):
             G = M(l)  # if l < 18 else M128bit()
             print(G, 99999)
             z = G.identity
