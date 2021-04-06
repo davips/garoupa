@@ -90,7 +90,7 @@ class Hash:
     def fromid(cls, id):
         """
         Usage:
-        >>> Hash.fromid("HpHx15miyc2amaxUwSQiv0Z0XtM73NdL0paVyy1inV9").s
+        >>> Hash.fromid("HpHx15miyc2amaxUwSQiv0Z0XtM73NdL0paVyy1inV9").z
         99929999938476344564747343999999245678
 
         :param id:
