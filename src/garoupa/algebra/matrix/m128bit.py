@@ -47,3 +47,8 @@ class M128bit(Group):
     @property
     def comm_degree(self):
         return None
+
+    def replace(self, *args, **kwargs):
+        dic = {"seed": self.seed}
+        dic.update(kwargs)
+        return self.__class__(**dic)

@@ -19,15 +19,15 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-from multiprocessing import Value
+from dataclasses import dataclass, replace
+from itertools import repeat, islice
+from multiprocessing import Value, Lock
 from pprint import pprint
+from random import Random
 from timeit import timeit
 
 import pathos.multiprocessing as mp
 from lange import gp
-from dataclasses import dataclass
-from itertools import repeat, islice
-from random import Random
 
 from garoupa.algebra.abs.element import Element
 
@@ -37,6 +37,7 @@ class Group:
     identity: Element
     sorted: callable
     seed: int = 0
+    _commuting_pairs, _comparisons, _last_printed = Value('i', 0), Value('i', 0), Value('i', -1)
 
     def __post_init__(self):
         self.bits = self.identity.bits
@@ -44,34 +45,45 @@ class Group:
         self.name = self.__class__.__name__
         self.rnd = Random(self.seed)
 
-    def sampled_comm_degree(self, chunk=5_000):
+    def sampled_comm_degree(self, chunksize=5_000, nchunks=1_000_000):
         """
         Usage:
+        >>> import io
+        >>> from contextlib import redirect_stdout
         >>> from garoupa.algebra.symmetric import S
-        >>> G = S(17)
-        >>> G.sampled_comm_degree()
+        >>> G = S(4)
+        >>> f = io.StringIO()
+        >>> with redirect_stdout(f):
+        ...     G.sampled_comm_degree(chunksize=10000, nchunks=1)
+        >>> print(f"Expected: {G.comm_degree:.4}\t\tEstimated: {f.getvalue()}")  # doctest: +NORMALIZE_WHITESPACE
+            Expected: 0.2542         Estimated:     2443/10000:	~24.43%
         """
 
         def thread(idx):
-            n = 0
-            for a, b in islice(zip(self, self), 0, chunk):
+            A, B = self.replace(seed=idx), self.replace(seed=idx + 1)
+            for a, b in islice(zip(A, B), 0, chunksize):
                 if a * b == b * a:
                     with Group._commuting_pairs.get_lock():
                         Group._commuting_pairs.value += 1
                 with Group._comparisons.get_lock():
                     Group._comparisons.value += 1
-                    n = Group._comparisons.value
-            with Group._last_printed.get_lock():
+            with Group._last_printed.get_lock(), Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
+                comms = Group._commuting_pairs.value
+                n = Group._comparisons.value
                 if n > Group._last_printed.value:
                     Group._last_printed.value = n
-                    comms = Group._commuting_pairs.value
-                    print(f"{comms}/{n}:".rjust(15, ' '), f"\t~{100 * comms / n} %", sep="", flush=True)
+                    print(f"{comms}/{n}:".rjust(15, ' '), f"\t~{100 * comms / n}%", sep="", flush=True)
+            return comms, n
 
-        Group._commuting_pairs = Value('i', 0)
-        Group._comparisons = Value('i', 0)
-        Group._last_printed = Value('i', -1)
-        mp.ProcessingPool().map(thread, range(1_000_000))
-
+        Group._commuting_pairs.value = 0
+        Group._comparisons.value = 0
+        Group._last_printed.value = 0
+        if nchunks == 1:
+            thread(0)
+        else:
+            lst = mp.ProcessingPool().map(thread, range(0, 2 * nchunks, 2))
+            comms, n = sorted(lst)[-1]
+            print(self, f"{comms}/{n}:".rjust(15, ' '), f"\t~{100 * comms / n}%", sep="", flush=True)
 
     @property
     def comm_degree(self):
@@ -96,3 +108,6 @@ class Group:
         return Product(*repeat(self, other))
 
     __pow__ = __xor__
+
+    def replace(self, *args, **kwargs):
+        raise Exception("Not implemented for groups of the class", self.name)

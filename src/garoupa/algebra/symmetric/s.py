@@ -23,7 +23,6 @@
 from math import pi, sqrt, exp, factorial
 
 from garoupa.algebra.matrix.group import Group
-from garoupa.algebra.product.product import Product
 from garoupa.algebra.symmetric.perm import Perm
 
 
@@ -54,3 +53,7 @@ class S(Group):
     def __repr__(self):
         return f"S{self.n}"
 
+    def replace(self, *args, **kwargs):
+        dic = {"n": self.n, "seed": self.seed}
+        dic.update(kwargs)
+        return self.__class__(**dic)

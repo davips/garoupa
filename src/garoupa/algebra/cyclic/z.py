@@ -42,3 +42,8 @@ class Z(Group):
 
     def __repr__(self):
         return f"Z{self.n}"
+
+    def replace(self, *args, **kwargs):
+        dic = {"n": self.n, "seed": self.seed}
+        dic.update(kwargs)
+        return self.__class__(**dic)

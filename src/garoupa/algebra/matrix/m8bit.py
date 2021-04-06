@@ -36,3 +36,7 @@ class M8bit(Group):
     def __repr__(self):
         return self.__class__.__name__
 
+    def replace(self, *args, **kwargs):
+        dic = {"seed": self.seed}
+        dic.update(kwargs)
+        return self.__class__(**dic)

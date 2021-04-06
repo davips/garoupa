@@ -22,7 +22,6 @@
 
 from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.matrix.mat import Mat
-from garoupa.algebra.product import Product
 
 
 class M(Group):
@@ -51,3 +50,8 @@ class M(Group):
     @property
     def comm_degree(self):
         return None
+
+    def replace(self, *args, **kwargs):
+        dic = {"n": self.n, "mod": self.mod, "seed": self.seed}
+        dic.update(kwargs)
+        return self.__class__(**dic)

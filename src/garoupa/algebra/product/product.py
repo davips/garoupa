@@ -52,3 +52,9 @@ class Product(Group):
         if isinstance(other, Product):
             return Product(*self.groups, *other.groups)
         return Product(*self.groups, other)
+
+    def replace(self, *args, **kwargs):
+        dic = {"seed": self.seed}
+        dic.update(kwargs)
+        groups = args or self.groups
+        return self.__class__(*groups, **dic)

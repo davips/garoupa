@@ -54,3 +54,8 @@ class D(Group):
         return Product(*repeat(self, other))
 
     __pow__ = __xor__
+
+    def replace(self, *args, **kwargs):
+        dic = {"n": self.n, "seed": self.seed}
+        dic.update(kwargs)
+        return self.__class__(**dic)
