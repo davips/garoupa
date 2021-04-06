@@ -19,8 +19,14 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
+from multiprocessing import Value
+from pprint import pprint
+from timeit import timeit
+
+import pathos.multiprocessing as mp
+from lange import gp
 from dataclasses import dataclass
-from itertools import repeat
+from itertools import repeat, islice
 from random import Random
 
 from garoupa.algebra.abs.element import Element
@@ -38,9 +44,39 @@ class Group:
         self.name = self.__class__.__name__
         self.rnd = Random(self.seed)
 
+    def sampled_comm_degree(self, chunk=5_000):
+        """
+        Usage:
+        >>> from garoupa.algebra.symmetric import S
+        >>> G = S(17)
+        >>> G.sampled_comm_degree()
+        """
+
+        def thread(idx):
+            n = 0
+            for a, b in islice(zip(self, self), 0, chunk):
+                if a * b == b * a:
+                    with Group._commuting_pairs.get_lock():
+                        Group._commuting_pairs.value += 1
+                with Group._comparisons.get_lock():
+                    Group._comparisons.value += 1
+                    n = Group._comparisons.value
+            with Group._last_printed.get_lock():
+                if n > Group._last_printed.value:
+                    Group._last_printed.value = n
+                    comms = Group._commuting_pairs.value
+                    print(f"{comms}/{n}:".rjust(15, ' '), f"\t~{100 * comms / n} %", sep="", flush=True)
+
+        Group._commuting_pairs = Value('i', 0)
+        Group._comparisons = Value('i', 0)
+        Group._last_printed = Value('i', -1)
+        mp.ProcessingPool().map(thread, range(1_000_000))
+
+
     @property
     def comm_degree(self):
-        raise Exception("Not implemented for groups of the class", self.name)
+        raise Exception(f"Not implemented for groups from class {self.name}."
+                        "HINT: Use sampled_comm_degree()", self.name)
 
     def __iter__(self):
         raise Exception("Not implemented for groups of the class", self.name)

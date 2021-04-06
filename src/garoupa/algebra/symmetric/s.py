@@ -28,10 +28,10 @@ from garoupa.algebra.symmetric.perm import Perm
 
 
 class S(Group):
-    def __init__(self, n):
+    def __init__(self, n, seed=0):
         identity = Perm(0, n)
         sorted = lambda: (Perm(i, self.n) for i in range(identity.order))
-        super().__init__(identity, sorted)
+        super().__init__(identity, sorted, seed)
         self.n = n
 
     @property

@@ -31,17 +31,8 @@ for G in chain(M1_4, [M8bit(), M(5)]):
 """
 
 for G in map(M, range(6, 11)):
-    i, count = 0, 0
-    for a, b in zip(G, G):
-        if a * b == b * a:
-            count += 1
-        i += 1
-        if i >= 1_000_000:
-            break
-    print(f"|{G}| = ".rjust(20, ' '),
-          f"{G.order}:".ljust(10, ' '),
-          f"{count}/{i}:".rjust(15, ' '), f"  {G.bits} bits",
-          f"\t~{100 * count / i} %", sep="")
+    G.sampled_comm_degree()
+
 """
 All Mi here are Mi%2:
      |M1| = 1:                        1/1:  0 bits	100.0 %

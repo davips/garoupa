@@ -34,8 +34,6 @@ class Mat8bit(Element):
             self.m = int2bm8bit(self.i)
 
     def __mul__(self, other):
-        if self.o != other.o or self.n != other.n:
-            raise Exception("Elements are from different groups.")
         m = bmm(self.m, other.m, 2)
         return Mat8bit(bm2int8bit(m), _m=m)
 
