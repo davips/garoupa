@@ -19,9 +19,10 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-
+import operator
 from abc import abstractmethod, ABC
 from dataclasses import dataclass
+from functools import reduce
 from math import log
 
 from garoupa import Hash
@@ -41,6 +42,11 @@ class Element(ABC):
     @abstractmethod
     def __mul__(self, other):
         pass
+
+    def __xor__(self, other):
+        return reduce(operator.mul, [self] * other)
+
+    __pow__ = __xor__
 
     def __repr__(self):
         return self.name

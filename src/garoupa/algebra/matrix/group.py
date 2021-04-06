@@ -19,15 +19,13 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from itertools import repeat, islice
 from multiprocessing import Value, Lock
-from pprint import pprint
 from random import Random
-from timeit import timeit
 
 import pathos.multiprocessing as mp
-from lange import gp
+from lange import GP
 
 from garoupa.algebra.abs.element import Element
 
@@ -37,7 +35,8 @@ class Group:
     identity: Element
     sorted: callable
     seed: int = 0
-    _commuting_pairs, _comparisons, _last_printed = Value('i', 0), Value('i', 0), Value('i', -1)
+    _commuting_pairs, _comparisons = Value('i', 0), Value('i', 0)
+    _mutex = Lock()
 
     def __post_init__(self):
         self.bits = self.identity.bits
@@ -45,45 +44,41 @@ class Group:
         self.name = self.__class__.__name__
         self.rnd = Random(self.seed)
 
-    def sampled_comm_degree(self, chunksize=5_000, nchunks=1_000_000):
+    def sampled_commuting_freq(self, pairs=5_000, runs=1_000_000_000_000):
         """
         Usage:
-        >>> import io
-        >>> from contextlib import redirect_stdout
-        >>> from garoupa.algebra.symmetric import S
-        >>> G = S(4)
-        >>> f = io.StringIO()
-        >>> with redirect_stdout(f):
-        ...     G.sampled_comm_degree(chunksize=10000, nchunks=1)
-        >>> print(f"Expected: {G.comm_degree:.4}\t\tEstimated: {f.getvalue()}")  # doctest: +NORMALIZE_WHITESPACE
-            Expected: 0.2542         Estimated:     2443/10000:	~24.43%
+        >>> from garoupa.algebra.matrix import M
+        >>> G = M(5)
+        >>> max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))
+        (272, 4000)
         """
 
         def thread(idx):
             A, B = self.replace(seed=idx), self.replace(seed=idx + 1)
-            for a, b in islice(zip(A, B), 0, chunksize):
+            with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
+                comms = Group._commuting_pairs.value
+                n = Group._comparisons.value
+            for a, b in islice(zip(A, B), 0, pairs):
                 if a * b == b * a:
                     with Group._commuting_pairs.get_lock():
                         Group._commuting_pairs.value += 1
-                with Group._comparisons.get_lock():
+                with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
                     Group._comparisons.value += 1
-            with Group._last_printed.get_lock(), Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
-                comms = Group._commuting_pairs.value
-                n = Group._comparisons.value
-                if n > Group._last_printed.value:
-                    Group._last_printed.value = n
-                    print(f"{comms}/{n}:".rjust(15, ' '), f"\t~{100 * comms / n}%", sep="", flush=True)
+                    comms = Group._commuting_pairs.value
+                    n = Group._comparisons.value
             return comms, n
 
         Group._commuting_pairs.value = 0
         Group._comparisons.value = 0
-        Group._last_printed.value = 0
-        if nchunks == 1:
+        if runs == 1:
             thread(0)
         else:
-            lst = mp.ProcessingPool().map(thread, range(0, 2 * nchunks, 2))
-            comms, n = sorted(lst)[-1]
-            print(self, f"{comms}/{n}:".rjust(15, ' '), f"\t~{100 * comms / n}%", sep="", flush=True)
+            last_total = -1
+            for comms, n in mp.ProcessingPool().imap(thread, range(0, 2 * runs, 2)):
+                with self._mutex:
+                    if n > last_total:
+                        last_total = n
+                        yield comms, n
 
     @property
     def comm_degree(self):
@@ -92,6 +87,55 @@ class Group:
 
     def __iter__(self):
         raise Exception("Not implemented for groups of the class", self.name)
+
+    def sampled_orders(self, sample=100, width=10, limits=[100, 101, ..., 1_000_000_000_000_000_000]):
+        """Histogram of element orders. Detect identity after many repetitions
+
+        Usage:
+        >>> from garoupa.algebra.symmetric import S
+        >>> for hist in S(4).sampled_orders(width=1, limits=[1, 1.1, ..., 999_999]):
+        ...     print(hist)
+        {}
+        {(1, 1): 9}
+        {(1, 1): 13}
+        {(1, 1): 11, (2, 2): 38}
+        {(1, 1): 5, (2, 2): 37, (3, 3): 40}
+        {(1, 1): 7, (2, 2): 39, (3, 3): 22, (4, 4): 32}
+        """
+        hist = {}
+
+        def thread(limit):
+            G = self.replace(seed=limit)
+            for a in islice(G, 0, sample):
+                r = a
+                for i in range(1, int(limit)):
+                    if r == G.identity:
+                        with self._mutex:
+                            bin = (i // width) * width + width // 2
+                            key = bin - width // 2, bin + width // 2
+                            if key not in hist:
+                                hist[key] = 0
+                            hist[key] += 1
+                        break
+                    r = r * a
+
+            # REMINDER: Python multithreading is really full of unneeded pitfalls:
+            #   local variable hist is copied to all threads;
+            #   strangely, it is not one copy per thread, it is a copy for them all;
+            #   the local variable will be untouched,
+            #   so we need to return it.
+            return hist
+
+        if len(limits) == 1:
+            yield thread(limits[0])
+        else:
+            last_total = -1
+            for h in mp.ProcessingPool().imap(thread, GP(*limits)):
+                with self._mutex:
+                    tot = sum(h.values())
+                    if tot > last_total:
+                        last_total = tot
+                        yield dict(sorted(list(h.items())))
 
     def __invert__(self) -> Element:
         return next(iter(self))
