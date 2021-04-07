@@ -95,7 +95,7 @@ class Group:
     def __iter__(self):
         raise Exception("Not implemented for groups of the class", self.name)
 
-    def sampled_orders(self, sample=100, width=10, limit=100):
+    def sampled_orders(self, sample=100, width=10, limit=100, logfreq=10):
         """Histogram of element orders. Detect identity after many repetitions
 
         Usage:
@@ -140,19 +140,22 @@ class Group:
             #   so we need to return it.
             return hist
 
-        last_total = -1
-        with Bar('Processing', max=sample, suffix='%(percent)f%%  ETA: %(eta)ds') as bar:
+        last_total, previous = -1, 0
+        with Bar('Processing', max=sample, suffix='%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds') as bar:
             for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
                 with self._mutex:
                     t = sum(h.values())
                 bar.next()
-                if t % 4 == 0:
+                now = bar.elapsed + 1
+                if now % logfreq == 0 and now != previous:
+                    previous = now
                     with self._mutex:
                         tot = sum(h.values())
                         if tot > last_total:
                             last_total = tot
                             sys.stdout.write("\x1b[1A")  # "\x1b[2K")
                             yield dict(sorted(list(h.items())))
+        yield dict(sorted(list(h.items())))
 
     def __invert__(self) -> Element:
         return next(iter(self))
