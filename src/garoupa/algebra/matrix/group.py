@@ -147,7 +147,7 @@ class Group:
                     t = sum(h.values())
                 bar.next()
                 now = bar.elapsed + 1
-                if now % logfreq == 0 and now != previous:
+                if now > previous + logfreq:
                     previous = now
                     with self._mutex:
                         tot = sum(h.values())
