@@ -7,13 +7,13 @@ from math import log
 from garoupa.algebra.dihedral import D
 from garoupa.algebra.symmetric import S
 
-limit = 1_000_000
+limit = 100_000_000
 step = 1
 sample = 100_000_000_000
 Ds = reduce(operator.mul, [D(n) for n in range(5, 49, 2)])
 Ss = reduce(operator.mul, [S(n) for n in range(3, 5, 1)])
-G = Ds * Ss
-# G = reduce(operator.mul, [D(2**i) for i in range(4, 16)])  # 1092/2350 = 4.65e-01
+# G = Ds * Ss
+G = reduce(operator.mul, [D(2**i) for i in range(6, 28)])
 print(f"bits: {log(G.order, 2):.2f}\tPc: {G.comm_degree or -1:.2e}", G)
 print("--------------------------------------------------------------")
 for hist in G.sampled_orders(sample=sample, limit=limit):
