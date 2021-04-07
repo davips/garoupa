@@ -19,13 +19,18 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
+import sys
 from dataclasses import dataclass
+from time import time
+
+from progress.bar import Bar
 from itertools import repeat, islice
+from math import inf
 from multiprocessing import Value, Lock
 from random import Random
+from multiprocessing import Manager
 
 import pathos.multiprocessing as mp
-from lange import GP
 
 from garoupa.algebra.abs.element import Element
 
@@ -34,7 +39,7 @@ from garoupa.algebra.abs.element import Element
 class Group:
     identity: Element
     sorted: callable
-    seed: int = 0
+    seed: int = None
     _commuting_pairs, _comparisons = Value('i', 0), Value('i', 0)
     _mutex = Lock()
 
@@ -42,31 +47,33 @@ class Group:
         self.bits = self.identity.bits
         self.order = self.identity.order
         self.name = self.__class__.__name__
+        if self.seed is None:
+            self.seed = int(time() * 1000000000)
         self.rnd = Random(self.seed)
 
     def sampled_commuting_freq(self, pairs=5_000, runs=1_000_000_000_000):
         """
         Usage:
         >>> from garoupa.algebra.matrix import M
-        >>> G = M(5)
+        >>> G = M(5, seed=0)
         >>> max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))
         (272, 4000)
         """
 
         def thread(idx):
-            A, B = self.replace(seed=idx), self.replace(seed=idx + 1)
+            A, B = self.replace(seed=idx + self.seed), self.replace(seed=idx + 1 + self.seed)
             with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
                 comms = Group._commuting_pairs.value
                 n = Group._comparisons.value
-            for a, b in islice(zip(A, B), 0, pairs):
-                if a * b == b * a:
-                    with Group._commuting_pairs.get_lock():
-                        Group._commuting_pairs.value += 1
-                with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
-                    Group._comparisons.value += 1
-                    comms = Group._commuting_pairs.value
-                    n = Group._comparisons.value
-            return comms, n
+                for a, b in Bar('Processing', max=pairs).iter(islice(zip(A, B), 0, pairs)):
+                    if a * b == b * a:
+                        with Group._commuting_pairs.get_lock():
+                            Group._commuting_pairs.value += 1
+                    with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
+                        Group._comparisons.value += 1
+                        comms = Group._commuting_pairs.value
+                        n = Group._comparisons.value
+                return comms, n
 
         Group._commuting_pairs.value = 0
         Group._comparisons.value = 0
@@ -88,54 +95,64 @@ class Group:
     def __iter__(self):
         raise Exception("Not implemented for groups of the class", self.name)
 
-    def sampled_orders(self, sample=100, width=10, limits=[100, 101, ..., 1_000_000_000_000_000_000]):
+    def sampled_orders(self, sample=100, width=10, limit=100):
         """Histogram of element orders. Detect identity after many repetitions
 
         Usage:
         >>> from garoupa.algebra.symmetric import S
-        >>> for hist in S(4).sampled_orders(width=1, limits=[1, 1.1, ..., 999_999]):
-        ...     print(hist)
-        {}
-        {(1, 1): 9}
-        {(1, 1): 13}
-        {(1, 1): 11, (2, 2): 38}
-        {(1, 1): 5, (2, 2): 37, (3, 3): 40}
-        {(1, 1): 7, (2, 2): 39, (3, 3): 22, (4, 4): 32}
+        >>> tot = 0
+        >>> list(S(6, seed=0).sampled_orders(sample=1, width=2))
+        [{(6, 7): 1}]
+        >>> for hist in S(6, seed=0).sampled_orders(width=2):
+        ...     print(hist)  # doctest: +SKIP
+        {(0, 1): 1, (2, 3): 16, (4, 5): 6}
+        {(0, 1): 1, (2, 3): 23, (4, 5): 7}
+        {(0, 1): 1, (2, 3): 27, (4, 5): 11}
+        {(0, 1): 1, (2, 3): 33, (4, 5): 13}
+        {(0, 1): 1, (2, 3): 40, (4, 5): 14}
+        {(0, 1): 3, (2, 3): 56, (4, 5): 20}
+        {(0, 1): 4, (2, 3): 66, (4, 5): 29}
+        {(0, 1): 4, (2, 3): 67, (4, 5): 29}
         """
-        hist = {}
+        hist = Manager().dict()
 
-        def thread(limit):
-            G = self.replace(seed=limit)
-            for a in islice(G, 0, sample):
-                r = a
-                for i in range(1, int(limit)):
-                    if r == G.identity:
-                        with self._mutex:
-                            bin = (i // width) * width + width // 2
-                            key = bin - width // 2, bin + width // 2
-                            if key not in hist:
-                                hist[key] = 0
-                            hist[key] += 1
-                        break
-                    r = r * a
-
+        def thread(a):
+            r = a
+            for i in range(1, limit + 1):
+                if r == self.identity:
+                    bin = (i // width) * width + width // 2
+                    key = bin - width // 2, bin + width // 2 - 1
+                    with self._mutex:
+                        if key not in hist:
+                            hist[key] = 0
+                        hist[key] += 1
+                    break
+                r = r * a
+            if r != self.identity:
+                key = inf, inf
+                with self._mutex:
+                    if key not in hist:
+                        hist[key] = 0
+                    hist[key] += 1
             # REMINDER: Python multithreading is really full of unneeded pitfalls:
             #   local variable hist is copied to all threads;
-            #   strangely, it is not one copy per thread, it is a copy for them all;
             #   the local variable will be untouched,
             #   so we need to return it.
             return hist
 
-        if len(limits) == 1:
-            yield thread(limits[0])
-        else:
-            last_total = -1
-            for h in mp.ProcessingPool().imap(thread, GP(*limits)):
+        last_total = -1
+        with Bar('Processing', max=sample, suffix='%(percent)f%%  ETA: %(eta)ds') as bar:
+            for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
                 with self._mutex:
-                    tot = sum(h.values())
-                    if tot > last_total:
-                        last_total = tot
-                        yield dict(sorted(list(h.items())))
+                    t = sum(h.values())
+                bar.next()
+                if t % 4 == 0:
+                    with self._mutex:
+                        tot = sum(h.values())
+                        if tot > last_total:
+                            last_total = tot
+                            sys.stdout.write("\x1b[1A")  # "\x1b[2K")
+                            yield dict(sorted(list(h.items())))
 
     def __invert__(self) -> Element:
         return next(iter(self))

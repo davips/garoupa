@@ -25,7 +25,7 @@ from garoupa.algebra.matrix.mat128bit import Mat128bit
 
 
 class M128bit(Group):
-    def __init__(self, seed=0):
+    def __init__(self, seed=None):
         """
         1 b b b
         0 1 b b

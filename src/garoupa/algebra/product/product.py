@@ -30,7 +30,7 @@ from garoupa.algebra.product.tuple import Tuple
 
 
 class Product(Group):
-    def __init__(self, *groups, seed=0):
+    def __init__(self, *groups, seed=None):
         self.groups = groups
         identity = Tuple(*(g.identity for g in self.groups))
         sorted = lambda: (Tuple(*es) for es in product(*(g.sorted() for g in self.groups)))
@@ -38,7 +38,10 @@ class Product(Group):
 
     @property
     def comm_degree(self):
-        return reduce(operator.mul, (g.comm_degree for g in self.groups))
+        comms = [g.comm_degree for g in self.groups]
+        if any(comm is None for comm in comms):
+            return
+        return reduce(operator.mul, comms)
 
     def __iter__(self):
         its = [cycle(iter(g)) for g in self.groups]

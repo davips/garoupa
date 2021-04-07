@@ -23,7 +23,7 @@
 from garoupa.algebra.abs.element import Element
 
 
-class R(Element):
+class Dr(Element):
     def __init__(self, j, n):
         super().__init__(n + j, 2 * n)
         self.j = j
@@ -32,8 +32,8 @@ class R(Element):
 
     def __mul__(self, other):
         j = (self.j + other.j) % self.n
-        if isinstance(other, R):
-            return R(j, self.n)
+        if isinstance(other, Dr):
+            return Dr(j, self.n)
         else:
-            from garoupa.algebra.dihedral.s import S
-            return S(j, self.n)
+            from garoupa.algebra.dihedral.ds import Ds
+            return Ds(j, self.n)

@@ -21,5 +21,5 @@
 #  time spent here.
 
 from .d import D
-from .r import R
-from .s import S
+from .dr import Dr
+from .ds import Ds

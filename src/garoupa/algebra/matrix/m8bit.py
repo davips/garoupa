@@ -26,7 +26,7 @@ from garoupa.algebra.product.product import Product
 
 
 class M8bit(Group):
-    def __init__(self, seed=0):
+    def __init__(self, seed=None):
         super().__init__(Mat8bit(0), lambda: (Mat8bit(i) for i in range(self.order)), seed)
 
     def __iter__(self):

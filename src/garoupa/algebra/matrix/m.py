@@ -25,7 +25,7 @@ from garoupa.algebra.matrix.mat import Mat
 
 
 class M(Group):
-    def __init__(self, n, mod=2, seed=0):
+    def __init__(self, n, mod=2, seed=None):
         """
         1 b b b
         0 1 b b

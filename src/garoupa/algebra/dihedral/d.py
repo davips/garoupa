@@ -22,18 +22,18 @@
 
 from itertools import chain, repeat
 
-from garoupa.algebra.dihedral.r import R
-from garoupa.algebra.dihedral.s import S
+from garoupa.algebra.dihedral.dr import Dr
+from garoupa.algebra.dihedral.ds import Ds
 from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.product.product import Product
 
 
 class D(Group):
-    def __init__(self, n, seed=0):
-        self.r = lambda: (R(r, n) for r in range(n))
-        self.s = lambda: (S(s, n) for s in range(n))
+    def __init__(self, n, seed=None):
+        self.r = lambda: (Dr(r, n) for r in range(n))
+        self.s = lambda: (Ds(s, n) for s in range(n))
         sorted = lambda: chain(self.s(), self.r())
-        super().__init__(R(0, n), sorted, seed)
+        super().__init__(Dr(0, n), sorted, seed)
         self.n = n
 
     @property
@@ -45,7 +45,7 @@ class D(Group):
 
     def __iter__(self):
         while True:
-            yield self.rnd.choice([R, S])(self.samplei(), self.n)
+            yield self.rnd.choice([Dr, Ds])(self.samplei(), self.n)
 
     def __repr__(self):
         return f"D{self.n}"
