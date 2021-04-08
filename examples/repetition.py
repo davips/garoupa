@@ -1,4 +1,5 @@
 # Detect identity after many repetitions
+
 import operator
 from datetime import datetime
 from functools import reduce
@@ -7,7 +8,7 @@ from sys import argv
 
 from garoupa.algebra.dihedral import D
 
-example = not True
+example = True
 
 primes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
           109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229,
@@ -18,25 +19,33 @@ primes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 7
           797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941,
           947, 953, 967, 971, 977, 983, 991, 997, 1009]
 
-limit, sample = 1_000_000_000, 100_000_000_000
 if example:
     limit, sample = 30, 100
-    G = reduce(operator.mul, [D(n) for n in primes[:5]])
-elif argv[1] == "p128":
-    G = reduce(operator.mul, [D(n) for n in primes[:22]])
-elif argv[1] == "p256":
-    G = reduce(operator.mul, [D(n) for n in primes[:38]])
-elif argv[1] == "128":
-    G = reduce(operator.mul, [D(n) for n in range(5, 51, 2)])
+    lst = []  # See *.
+    for n in primes[:5]:
+        lst.append(D(n, seed=n))
+    G = reduce(operator.mul, lst)
 else:
-    G = reduce(operator.mul, [D(n) for n in range(5, 86, 2)])
+    limit, sample = 1_000_000_000, 100_000_000_000
+    if argv[1] == "p128":
+        G = reduce(operator.mul, [D(n) for n in primes[:22]])
+    elif argv[1] == "p256":
+        G = reduce(operator.mul, [D(n) for n in primes[:38]])
+    elif argv[1] == "128":
+        G = reduce(operator.mul, [D(n) for n in range(5, 51, 2)])
+    else:
+        G = reduce(operator.mul, [D(n) for n in range(5, 86, 2)])
 
 print(f"{G.bits} bits   Pc: {G.comm_degree}")
 print("--------------------------------------------------------------")
 for hist in G.sampled_orders(sample=sample, limit=limit):
-    bad = sum(v for k, v in hist.items() if k[0] < limit)
     tot = sum(hist.values())
+    bad = 0  # See *.
+    for k, v in hist.items():
+        if k[0] <= limit:
+            bad += v
     print(f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
           G, datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
     print(hist)
+# * -> [Explicit FOR due to autogeneration of README through eval]
 # ...
