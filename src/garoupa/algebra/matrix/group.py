@@ -35,15 +35,18 @@ import pathos.multiprocessing as mp
 from garoupa.algebra.abs.element import Element
 
 
-@dataclass
+# @dataclass
+# class Group:
+#     identity: Element
+#     sorted: callable
+#     seed: int = None
+
 class Group:
-    identity: Element
-    sorted: callable
-    seed: int = None
     _commuting_pairs, _comparisons = Value('i', 0), Value('i', 0)
     _mutex = Lock()
 
-    def __post_init__(self):
+    def __init__(self, identity: Element, sorted: callable, seed: int = None):
+        self.identity, self.sorted, self.seed = identity, sorted, seed
         self.bits = self.identity.bits
         self.order = self.identity.order
         self.name = self.__class__.__name__
