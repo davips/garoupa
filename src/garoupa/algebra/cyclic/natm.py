@@ -46,6 +46,9 @@ class Natm(Element):
     def __mul__(self, other):
         return Natm((self.i * other.i) % self.n, self.n)
 
+    def __add__(self, other):
+        return Natm((self.i + other.i) % self.n, self.n)
+
     def __repr__(self):
         return f"{self.i}"
 
