@@ -44,8 +44,8 @@ else:
     else:
         G = reduce(operator.mul, [D(n) for n in range(5, 86, 2)])
 
-print(f"{G.bits} bits   Pc: {G.comm_degree}   {G}")
-print("--------------------------------------------------------------")
+print(f"{G.bits} bits   Pc: {G.comm_degree}   {G}", flush=True)
+print("--------------------------------------------------------------", flush=True)
 for hist in G.sampled_orders(sample=sample, limit=limit):
     tot = sum(hist.values())
     bad = 0  # See *.
@@ -53,7 +53,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
         if k[0] <= limit:
             bad += v
     print(f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
-          G, datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
-    print(hist)
+          G, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), flush=True)
+    print(hist, flush=True)
 # * -> [Explicit FOR due to autogeneration of README through eval]
 # ...
