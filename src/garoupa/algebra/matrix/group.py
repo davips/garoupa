@@ -146,15 +146,13 @@ class Group:
         last_total, previous = -1, 0
         with Bar('Processing', max=sample, suffix='%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds') as bar:
             for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
-                with self._mutex:
-                    t = sum(h.values())
                 bar.next()
                 now = bar.elapsed + 1
                 if now > previous + logfreq:
-                    previous = now
                     with self._mutex:
                         tot = sum(h.values())
                         if tot > last_total:
+                            previous = now
                             last_total = tot
                             sys.stdout.write("\x1b[1A")  # "\x1b[2K")
                             yield dict(sorted(list(h.items())))
