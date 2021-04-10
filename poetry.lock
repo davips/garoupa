@@ -67,7 +67,7 @@ toml = ["toml"]
 name = "dill"
 version = "0.3.3"
 description = "serialize all of python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.6, !=3.0.*"
 
@@ -94,7 +94,7 @@ python-versions = "*"
 name = "multiprocess"
 version = "0.70.11.1"
 description = "better multiprocessing and multithreading in python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -124,7 +124,7 @@ pyparsing = ">=2.0.2"
 name = "pathos"
 version = "0.2.7"
 description = "parallel graph management and execution in heterogeneous computing"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -149,7 +149,7 @@ dev = ["pre-commit", "tox"]
 name = "pox"
 version = "0.2.9"
 description = "utilities for filesystem exploration and automated builds"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -157,7 +157,7 @@ python-versions = "*"
 name = "ppft"
 version = "1.6.6.3"
 description = "distributed and parallel python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -235,7 +235,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "8111036c206cf0057aec650c9cc4aa4679008786a60be66418a063ea3e9d6e3d"
+content-hash = "71e3c1fd38167556d75ce9506db2ba50982775576c81b638980f9cc3674dcdd6"
 
 [metadata.files]
 atomicwrites = [

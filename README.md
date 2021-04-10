@@ -2,15 +2,16 @@
 [![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
 # garoupa
-Garoupa is a package containing some groups from abstract algebra and a flexible operable hash, briefly explained in the presentation (ongoing work):
-
-[![image](https://user-images.githubusercontent.com/3620506/114261273-11641e80-99b0-11eb-9fd8-929826e169a2.png)](https://docs.google.com/presentation/d/e/2PACX-1vSCTHD6FeLET6lKgexiqJQ6c4viu0F_60kjoDe0x2mm8RqdhkWOiRA4QN3Zr-QLCq9CsPs_qkAAgxso/embed?start=false&loop=false&delayms=3000)
-
-Screenshot of usage in an interactive session:
 <p>
 <a title="fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Malabar_grouper_melb_aquarium.jpg"><img width="120" alt="Malabar grouper melb aquarium" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg"></a>
 </p>
 
+Garoupa is a package containing some groups from abstract algebra and a flexible operable hash, briefly explained in the presentation (ongoing work):
+
+[![image](https://user-images.githubusercontent.com/3620506/114261273-11641e80-99b0-11eb-9fd8-929826e169a2.png)](https://docs.google.com/presentation/d/e/2PACX-1vSCTHD6FeLET6lKgexiqJQ6c4viu0F_60kjoDe0x2mm8RqdhkWOiRA4QN3Zr-QLCq9CsPs_qkAAgxso/embed?start=false&loop=false&delayms=3000)
+
+
+Screenshot of usage in an interactive session:
 
 <p>
 <a href="https://github.com/davips/garoupa/blob/main/examples/frontimg.png">
@@ -24,6 +25,7 @@ Screenshot of usage in an interactive session:
 
 [Latest version](https://github.com/davips/garoupa)
 
+Garoupa hosts also some niceties for group theory experimentation.
 
 ## Python installation
 ### from package
@@ -43,7 +45,7 @@ cd garoupa
 poetry install
 ```
 
-## Examples
+### Examples
 **Basic operations**
 <details>
 <p>
@@ -163,11 +165,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 1, 0, 3], 1, dr2»	*	«[1, 3, 0, 2], 3, ds2»	=	«[1, 3, 2, 0], 4, ds0»
-«[2, 0, 1, 3], 1, dr5»	*	«[2, 3, 0, 1], 3, dr3»	=	«[1, 3, 2, 0], 4, dr0»
-«[1, 0, 3, 2], 3, dr1»	*	«[0, 3, 1, 2], 1, dr5»	=	«[1, 2, 0, 3], 4, dr2»
-«[0, 1, 2, 3], 0, ds0»	*	«[2, 0, 3, 1], 1, ds2»	=	«[2, 0, 3, 1], 1, dr2»
-«[3, 0, 2, 1], 1, ds5»	*	«[0, 1, 3, 2], 2, ds5»	=	«[3, 0, 1, 2], 3, dr0»
+«[2, 0, 3, 1], 2, dr0»	*	«[0, 2, 1, 3], 0, dr4»	=	«[2, 3, 0, 1], 2, dr0»
+«[3, 0, 1, 2], 3, dr1»	*	«[3, 0, 2, 1], 3, dr7»	=	«[2, 3, 1, 0], 1, dr0»
+«[0, 1, 2, 3], 1, dr3»	*	«[2, 1, 0, 3], 3, dr3»	=	«[2, 1, 0, 3], 4, dr2»
+«[2, 3, 0, 1], 3, dr2»	*	«[3, 0, 2, 1], 3, dr7»	=	«[1, 2, 0, 3], 1, dr1»
+«[2, 3, 0, 1], 2, ds4»	*	«[1, 3, 0, 2], 0, ds4»	=	«[3, 1, 2, 0], 2, dr0»
 """
 ```
 
@@ -177,7 +179,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[11, 4, 2, 7, 0, 10, 8, 5, 3, 9, 1, 6]
+[10, 7, 3, 8, 11, 9, 2, 1, 6, 5, 0, 4]
 """
 ```
 
@@ -291,9 +293,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          791/10000:  12.0 bits	~7.91 %
-    |D8×D8×D8×D8| = 65536:         385/10000:  16.0 bits	~3.85 %
- |D8×D8×D8×D8×D8| = 1048576:       153/10000:  20.0 bits	~1.53 %
+       |D8×D8×D8| = 4096:          843/10000:  12.0 bits	~8.43 %
+    |D8×D8×D8×D8| = 65536:         358/10000:  16.0 bits	~3.58 %
+ |D8×D8×D8×D8×D8| = 1048576:       146/10000:  20.0 bits	~1.46 %
 """
 ```
 
@@ -315,7 +317,7 @@ from sys import argv
 
 from garoupa.algebra.dihedral import D
 
-example = True
+example = len(argv) == 1 or type(argv[1]) == str
 
 primes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
           109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229,
@@ -333,18 +335,26 @@ if example:
         lst.append(D(n, seed=n))
     G = reduce(operator.mul, lst)
 else:
-    limit, sample = 1_000_000_000, 100_000_000_000
-    if argv[1] == "p128":
-        G = reduce(operator.mul, [D(n) for n in primes[:22]])
+    limit, sample = int(argv[2]), 100_000_000
+    if argv[1] == "p64":
+        G = reduce(operator.mul, [D(n) for n in primes[:13]])
+    elif argv[1] == "p96":
+        G = reduce(operator.mul, [D(n) for n in primes[:17]])
+    elif argv[1] == "p128":
+        G = reduce(operator.mul, [D(n) for n in primes[:21]])
     elif argv[1] == "p256":
         G = reduce(operator.mul, [D(n) for n in primes[:38]])
+    elif argv[1] == "64":
+        G = reduce(operator.mul, [D(n) for n in range(5, 31, 2)])
+    elif argv[1] == "96":
+        G = reduce(operator.mul, [D(n) for n in range(5, 41, 2)])
     elif argv[1] == "128":
         G = reduce(operator.mul, [D(n) for n in range(5, 51, 2)])
     else:
         G = reduce(operator.mul, [D(n) for n in range(5, 86, 2)])
 
-print(f"{G.bits} bits   Pc: {G.comm_degree}")
-print("--------------------------------------------------------------")
+print(f"{G.bits} bits   Pc: {G.comm_degree}   {G}", flush=True)
+print("--------------------------------------------------------------", flush=True)
 for hist in G.sampled_orders(sample=sample, limit=limit):
     tot = sum(hist.values())
     bad = 0  # See *.
@@ -352,14 +362,14 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
         if k[0] <= limit:
             bad += v
     print(f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
-          G, datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
-    print(hist)
+          G, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), flush=True)
+    print(hist, flush=True)
 # * -> [Explicit FOR due to autogeneration of README through eval]
 """
-18.874116854444512 bits   Pc: 0.006993006993006995
+18.874116854444512 bits   Pc: 0.006993006993006995   D3×D5×D7×D11×D13
 --------------------------------------------------------------
 
-bits: 18.87  Pc: 6.99e-03   a^<30=0: 37/100 = 3.70e-01 D3×D5×D7×D11×D13 08/04/2021 02:53:53
+bits: 18.87  Pc: 6.99e-03   a^<30=0: 37/100 = 3.70e-01 D3×D5×D7×D11×D13 10/04/2021 04:01:02
 {(0, 9): 14, (10, 19): 10, (20, 29): 13, (inf, inf): 63}
 """
 ```
@@ -443,9 +453,9 @@ print(repr(m.hash))
 
 
 
-## Features
+### Features
 
 
-## Performance
+### Performance
 See package [hosh](https://pypi.org/project/hosh) for faster, native (compiled) hash operations.
 However, only future major version `1.*.*` or higher of hosh will be compatible with garoupa hashes.

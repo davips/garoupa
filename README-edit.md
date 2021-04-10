@@ -6,14 +6,18 @@
 <a title="fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Malabar_grouper_melb_aquarium.jpg"><img width="120" alt="Malabar grouper melb aquarium" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg"></a>
 </p>
 
-Cryptographic hash, abstract algebra and operators
+Garoupa is a package containing some groups from abstract algebra and a flexible operable hash, briefly explained in the presentation (ongoing work):
+
+[![image](https://user-images.githubusercontent.com/3620506/114261273-11641e80-99b0-11eb-9fd8-929826e169a2.png)](https://docs.google.com/presentation/d/e/2PACX-1vSCTHD6FeLET6lKgexiqJQ6c4viu0F_60kjoDe0x2mm8RqdhkWOiRA4QN3Zr-QLCq9CsPs_qkAAgxso/embed?start=false&loop=false&delayms=3000)
+
+
+Screenshot of usage in an interactive session:
 
 <p>
 <a href="https://github.com/davips/garoupa/blob/main/examples/frontimg.png">
 <img src="https://raw.githubusercontent.com/davips/garoupa/main/examples/frontimg.png" alt="Colored base-62 representation" width="400" height="230">
 </a>
 </p>
-
 
 
 

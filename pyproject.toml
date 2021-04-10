@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "garoupa"
-version = "1.210401.1"
+version = "1.210410.0"
 description = "Cryptographic hash, abstract algebra and operators"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
@@ -15,6 +15,7 @@ blake3 = "^0.1.8"
 colored = "^1.4.2"
 numpy = "^1.20.1"
 progress = "^1.5"
+pathos = "^0.2.7"
 
 [tool.poetry.dev-dependencies]
 autoreadme = "^0.2102.20"
