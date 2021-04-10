@@ -26,11 +26,19 @@ if example:
         lst.append(D(n, seed=n))
     G = reduce(operator.mul, lst)
 else:
-    limit, sample = 10_000_000, 1_000_000
-    if argv[1] == "p128":
+    limit, sample = int(argv[2]), 100_000_000
+    if argv[1] == "p64":
+        G = reduce(operator.mul, [D(n) for n in primes[:13]])
+    elif argv[1] == "p96":
+        G = reduce(operator.mul, [D(n) for n in primes[:17]])
+    elif argv[1] == "p128":
         G = reduce(operator.mul, [D(n) for n in primes[:22]])
     elif argv[1] == "p256":
         G = reduce(operator.mul, [D(n) for n in primes[:38]])
+    elif argv[1] == "64":
+        G = reduce(operator.mul, [D(n) for n in range(5, 31, 2)])
+    elif argv[1] == "96":
+        G = reduce(operator.mul, [D(n) for n in range(5, 41, 2)])
     elif argv[1] == "128":
         G = reduce(operator.mul, [D(n) for n in range(5, 51, 2)])
     else:
