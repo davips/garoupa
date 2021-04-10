@@ -22,3 +22,5 @@
 
 from .z import Z
 from .nat import Nat
+from .zm import Zm
+from .natm import Natm
