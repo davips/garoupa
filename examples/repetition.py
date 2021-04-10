@@ -32,7 +32,7 @@ else:
     elif argv[1] == "p96":
         G = reduce(operator.mul, [D(n) for n in primes[:17]])
     elif argv[1] == "p128":
-        G = reduce(operator.mul, [D(n) for n in primes[:22]])
+        G = reduce(operator.mul, [D(n) for n in primes[:21]])
     elif argv[1] == "p256":
         G = reduce(operator.mul, [D(n) for n in primes[:38]])
     elif argv[1] == "64":
