@@ -8,9 +8,9 @@ from sys import argv
 
 from garoupa.algebra.dihedral import D
 
-example = len(argv) == 1 or type(argv[1]) == str
+example = len(argv) == 1 or (not argv[1].isdecimal() and not argv[1].startswith("p"))
 
-primes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
+primes = [5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
           109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229,
           233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359,
           367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491,
@@ -26,15 +26,15 @@ if example:
         lst.append(D(n, seed=n))
     G = reduce(operator.mul, lst)
 else:
-    limit, sample = int(argv[2]), 100_000_000
+    limit, sample = int(argv[2]), 100_000_000_000
     if argv[1] == "p64":
-        G = reduce(operator.mul, [D(n) for n in primes[:13]])
+        G = reduce(operator.mul, [D(n) for n in primes[:12]])
     elif argv[1] == "p96":
-        G = reduce(operator.mul, [D(n) for n in primes[:17]])
+        G = reduce(operator.mul, [D(n) for n in primes[:16]])
     elif argv[1] == "p128":
         G = reduce(operator.mul, [D(n) for n in primes[:21]])
     elif argv[1] == "p256":
-        G = reduce(operator.mul, [D(n) for n in primes[:38]])
+        G = reduce(operator.mul, [D(n) for n in primes[:37]])
     elif argv[1] == "64":
         G = reduce(operator.mul, [D(n) for n in range(5, 31, 2)])
     elif argv[1] == "96":
