@@ -51,7 +51,7 @@ else:
     else:
         G = reduce(operator.mul, [D(n) for n in range(5, 86, 2)])
 
-print(f"{G.bits} bits   Pc: {G.comm_degree}   {G}", flush=True)
+print(f"{G.bits} bits   Pc: {G.comm_degree}  order: {G.order} {G}", flush=True)
 print("--------------------------------------------------------------", flush=True)
 for hist in G.sampled_orders(sample=sample, limit=limit):
     tot = sum(hist.values())
