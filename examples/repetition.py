@@ -7,8 +7,9 @@ from math import log
 from sys import argv
 
 from garoupa.algebra.dihedral import D
+from garoupa.algebra.symmetric import S
 
-example = len(argv) == 1 or (not argv[1].isdecimal() and not argv[1].startswith("p"))
+example = len(argv) == 1 or (not argv[1].isdecimal() and argv[1][0] not in ["p", "s", "d"])
 
 primes = [5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
           109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229,
@@ -26,8 +27,14 @@ if example:
         lst.append(D(n, seed=n))
     G = reduce(operator.mul, lst)
 else:
-    limit, sample = int(argv[2]), 100_000_000_000
-    if argv[1] == "p64":
+    limit, sample = int(argv[2]), int(argv[3]) if len(argv) > 2 else 1_000_000_000_000
+    if argv[1] == "s25d":
+        G = S(25) * reduce(operator.mul, [D(n) for n in primes[:9]])
+    elif argv[1] == "s57":
+        G = S(57)
+    elif argv[1] == "p384":
+        G = reduce(operator.mul, [D(n) for n in primes[:51]])
+    elif argv[1] == "p64":
         G = reduce(operator.mul, [D(n) for n in primes[:12]])
     elif argv[1] == "p96":
         G = reduce(operator.mul, [D(n) for n in primes[:16]])
