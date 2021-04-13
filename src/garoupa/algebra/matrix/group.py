@@ -42,7 +42,7 @@ from garoupa.algebra.abs.element import Element
 #     seed: int = None
 
 class Group:
-    _commuting_pairs, _comparisons = Value('i', 0), Value('i', 0)
+    _commuting_pairs, _comparisons, _interrupt = Value('i', 0), Value('i', 0), Value('i', 0)
     _mutex = Lock()
 
     def __init__(self, identity: Element, sorted: callable, seed: int = None):
@@ -54,7 +54,7 @@ class Group:
             self.seed = int(time() * 1000000000)
         self.rnd = Random(self.seed)
 
-    def sampled_commuting_freq(self, pairs=5_000, runs=1_000_000_000_000):
+    def sampled_commuting_freq(self, pairs=5_000, runs=1_000_000_000_000, exitonhit=False):
         """
         Usage:
         >>> from garoupa.algebra.matrix import M
@@ -70,16 +70,22 @@ class Group:
                 n = Group._comparisons.value
                 for a, b in Bar('Processing', max=pairs).iter(islice(zip(A, B), 0, pairs)):
                     if a * b == b * a:
+                        if exitonhit:
+                            with Group._interrupt.get_lock():
+                                Group._interrupt.value = 1
                         with Group._commuting_pairs.get_lock():
                             Group._commuting_pairs.value += 1
                     with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
                         Group._comparisons.value += 1
                         comms = Group._commuting_pairs.value
                         n = Group._comparisons.value
+                    if Group._interrupt.value == 1:
+                        break
                 return comms, n
 
         Group._commuting_pairs.value = 0
         Group._comparisons.value = 0
+        Group._interrupt.value = 0
         if runs == 1:
             thread(0)
         else:
@@ -98,7 +104,7 @@ class Group:
     def __iter__(self):
         raise Exception("Not implemented for groups of the class", self.name)
 
-    def sampled_orders(self, sample=100, width=10, limit=100, logfreq=10):
+    def sampled_orders(self, sample=100, width=10, limit=100, logfreq=10, exitonhit=False):
         """Histogram of element orders. Detect identity after many repetitions
 
         Usage:
@@ -123,12 +129,17 @@ class Group:
             r = a
             for i in range(1, limit + 1):
                 if r == self.identity:
+                    if exitonhit:
+                        with Group._interrupt.get_lock():
+                            Group._interrupt.value = 1
                     bin = (i // width) * width + width // 2
-                    key = bin - width // 2, bin + width // 2 - 1
+                    key = bin - width // 2 - 1, bin + width // 2
                     with self._mutex:
                         if key not in hist:
                             hist[key] = 0
                         hist[key] += 1
+                    break
+                if Group._interrupt.value == 1:
                     break
                 r = r * a
             if r != self.identity:
@@ -143,6 +154,7 @@ class Group:
             #   so we need to return it.
             return hist
 
+        Group._interrupt.value = 0
         last_total, previous = -1, 0
         with Bar('Processing', max=sample, suffix='%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds') as bar:
             for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
