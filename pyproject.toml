@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "garoupa"
-version = "1.210410.1"
+version = "1.210410.2"
 description = "Cryptographic hash, abstract algebra and operators"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"

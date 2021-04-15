@@ -111,7 +111,7 @@ class Group:
         >>> from garoupa.algebra.symmetric import S
         >>> tot = 0
         >>> list(S(6, seed=0).sampled_orders(sample=1, width=2))
-        [{(6, 7): 1}]
+        [{(5, 8): 1}]
         >>> for hist in S(6, seed=0).sampled_orders(width=2):
         ...     print(hist)  # doctest: +SKIP
         {(0, 1): 1, (2, 3): 16, (4, 5): 6}

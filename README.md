@@ -165,11 +165,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[0, 1, 3, 2], 1, dr4»	*	«[3, 1, 0, 2], 0, ds4»	=	«[2, 1, 0, 3], 1, ds0»
-«[3, 0, 1, 2], 0, ds6»	*	«[1, 0, 2, 3], 2, ds4»	=	«[0, 3, 1, 2], 2, dr2»
-«[0, 2, 1, 3], 3, ds2»	*	«[3, 2, 0, 1], 1, dr3»	=	«[3, 1, 0, 2], 4, ds3»
-«[0, 1, 2, 3], 2, ds3»	*	«[1, 0, 3, 2], 2, dr0»	=	«[1, 0, 3, 2], 4, ds3»
-«[3, 2, 0, 1], 2, ds0»	*	«[3, 2, 0, 1], 2, ds2»	=	«[1, 0, 3, 2], 4, dr2»
+«[2, 1, 0, 3], 3, ds6»	*	«[0, 1, 2, 3], 3, dr1»	=	«[2, 1, 0, 3], 1, ds1»
+«[0, 1, 2, 3], 1, dr3»	*	«[3, 2, 0, 1], 3, ds2»	=	«[3, 2, 0, 1], 4, ds1»
+«[3, 0, 2, 1], 3, dr7»	*	«[3, 0, 2, 1], 3, ds0»	=	«[1, 3, 2, 0], 1, ds3»
+«[1, 3, 0, 2], 3, dr5»	*	«[3, 0, 2, 1], 0, ds3»	=	«[2, 1, 0, 3], 3, ds0»
+«[1, 0, 2, 3], 0, ds7»	*	«[0, 1, 2, 3], 3, ds2»	=	«[1, 0, 2, 3], 3, dr1»
 """
 ```
 
@@ -179,7 +179,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[2, 6, 7, 3, 4, 1, 5, 10, 8, 0, 9, 11]
+[11, 2, 3, 8, 0, 6, 10, 5, 4, 1, 7, 9]
 """
 ```
 
@@ -293,9 +293,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          824/10000:  12.0 bits	~8.24 %
-    |D8×D8×D8×D8| = 65536:         343/10000:  16.0 bits	~3.43 %
- |D8×D8×D8×D8×D8| = 1048576:       165/10000:  20.0 bits	~1.65 %
+       |D8×D8×D8| = 4096:          797/10000:  12.0 bits	~7.97 %
+    |D8×D8×D8×D8| = 65536:         362/10000:  16.0 bits	~3.62 %
+ |D8×D8×D8×D8×D8| = 1048576:       185/10000:  20.0 bits	~1.85 %
 """
 ```
 
@@ -316,10 +316,11 @@ from math import log
 from sys import argv
 
 from garoupa.algebra.dihedral import D
+from garoupa.algebra.symmetric import S
 
-example = len(argv) == 1 or type(argv[1]) == str
+example = len(argv) == 1 or (not argv[1].isdecimal() and argv[1][0] not in ["p", "s", "d"])
 
-primes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
+primes = [5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
           109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229,
           233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359,
           367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491,
@@ -335,15 +336,21 @@ if example:
         lst.append(D(n, seed=n))
     G = reduce(operator.mul, lst)
 else:
-    limit, sample = int(argv[2]), 100_000_000
-    if argv[1] == "p64":
-        G = reduce(operator.mul, [D(n) for n in primes[:13]])
+    limit, sample = int(argv[2]), int(argv[3]) if len(argv) > 2 else 1_000_000_000_000
+    if argv[1] == "s25d":
+        G = S(25) * reduce(operator.mul, [D(n) for n in primes[:9]])
+    elif argv[1] == "s57":
+        G = S(57)
+    elif argv[1] == "p384":
+        G = reduce(operator.mul, [D(n) for n in primes[:51]])
+    elif argv[1] == "p64":
+        G = reduce(operator.mul, [D(n) for n in primes[:12]])
     elif argv[1] == "p96":
-        G = reduce(operator.mul, [D(n) for n in primes[:17]])
+        G = reduce(operator.mul, [D(n) for n in primes[:16]])
     elif argv[1] == "p128":
         G = reduce(operator.mul, [D(n) for n in primes[:21]])
     elif argv[1] == "p256":
-        G = reduce(operator.mul, [D(n) for n in primes[:38]])
+        G = reduce(operator.mul, [D(n) for n in primes[:37]])
     elif argv[1] == "64":
         G = reduce(operator.mul, [D(n) for n in range(5, 31, 2)])
     elif argv[1] == "96":
@@ -353,7 +360,7 @@ else:
     else:
         G = reduce(operator.mul, [D(n) for n in range(5, 86, 2)])
 
-print(f"{G.bits} bits   Pc: {G.comm_degree}   {G}", flush=True)
+print(f"{G.bits} bits   Pc: {G.comm_degree}  order: {G.order} {G}", flush=True)
 print("--------------------------------------------------------------", flush=True)
 for hist in G.sampled_orders(sample=sample, limit=limit):
     tot = sum(hist.values())
@@ -366,11 +373,11 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
     print(hist, flush=True)
 # * -> [Explicit FOR due to autogeneration of README through eval]
 """
-18.874116854444512 bits   Pc: 0.006993006993006995   D3×D5×D7×D11×D13
+21.376617194973697 bits   Pc: 0.004113533525298232  order: 2722720 D5×D7×D11×D13×D17
 --------------------------------------------------------------
 
-bits: 18.87  Pc: 6.99e-03   a^<30=0: 37/100 = 3.70e-01 D3×D5×D7×D11×D13 10/04/2021 04:02:49
-{(0, 9): 14, (10, 19): 10, (20, 29): 13, (inf, inf): 63}
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 15/04/2021 18:56:12
+{(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 """
 ```
 
