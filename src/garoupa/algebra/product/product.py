@@ -99,7 +99,7 @@ class Product(Group):
             self._order_hist = dict(sorted(reduce(self.order_hist_mul, (G.order_hist for G in self.groups)).items()))
         return self._order_hist
 
-    def compact_order_hist_lowmem(self, max_histsize, preserve_upto, initial_binsize=1):
+    def compact_order_hist_lowmem(self, max_histsize, preserve_upto, initial_binsize=1, show_timestamp=True):
         """Memory-friendly histogram of element orders in a direct product
 
         Compact largest intermediate histograms during calculation to avoid memory exhaustion.
@@ -113,15 +113,15 @@ class Product(Group):
         >>> G = D(3) * D(5) * D(7) * D(9)
         >>> G.compact_order_hist(binsize=20)
         {9: 9136, 29: 1856, 42: 1968, 69: 1044, 90: 1080, 105: 480, 126: 1188, 210: 864, 315: 432, 630: 432}
-        >>> G.compact_order_hist_lowmem(max_histsize=5, preserve_upto=0)
-        Intermediate hist size for D3*D5 : 7
-        Intermediate hist size for D3*D5*D7 : 10
-        Intermediate hist size for D3*D5*D7*D9 : 12
+        >>> G.compact_order_hist_lowmem(max_histsize=5, preserve_upto=0, show_timestamp=False)  # doctest: +NORMALIZE_WHITESPACE
+        Pi: 0.28944444444444445 	Hist size: 7	 False 	D3*D5
+        Pi: 0.1997278911564626 	Hist size: 10	 False 	D3*D5*D7
+        Pi: 0.10980880230880231 	Hist size: 12	 False 	D3*D5*D7*D9
         {3: 2646, 6: 3402, 9: 2268, 10: 2020, 30: 2108, 35: 84, 70: 1476, 90: 1548, 105: 840, 210: 864, 315: 792, 630: 432}
-        >>> G.compact_order_hist_lowmem(max_histsize=5, preserve_upto=10)
-        Intermediate hist size for D3*D5 : 7
-        Intermediate hist size for D3*D5*D7 : 15
-        Intermediate hist size for D3*D5*D7*D9 : 24
+        >>> G.compact_order_hist_lowmem(max_histsize=5, preserve_upto=10, show_timestamp=False)  # doctest: +NORMALIZE_WHITESPACE
+        Pi: 0.28944444444444445 	Hist size: 7	 False 	D3*D5
+        Pi: 0.17061791383219957 	Hist size: 15	 False 	D3*D5*D7
+        Pi: 0.10299551638837354 	Hist size: 24	 False 	D3*D5*D7*D9
         {1: 1, 2: 1919, 3: 20, 5: 4, 6: 2668, 7: 6, 9: 18, 10: 1276, 14: 1514, 15: 24, 18: 1710, 21: 120, 30: 1640, 35: 24, 42: 1944, 45: 24, 63: 108, 70: 936, 90: 1080, 105: 480, 126: 1236, 210: 864, 315: 432, 630: 432}
         """
 
@@ -158,7 +158,7 @@ class Product(Group):
             histb = compact(histb, binsizeb)
             hist = self.order_hist_mul(hista, histb)
             prod = f"{ga}*{gb}"
-            print("Pi:", self._pi_core(hist), f"\tHist size: {len(hist)}\t", datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            print("Pi:", self._pi_core(hist), f"\tHist size: {len(hist)}\t", show_timestamp and datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
                   f"\t{prod}", flush=True)
             return prod, hist
 
