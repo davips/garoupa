@@ -151,7 +151,7 @@ class Product(Group):
             histb = compact(histb)
             hist = self.order_hist_mul(hista, histb)
             prod = f"{ga}*{gb}"
-            print(f"Intermediate hist size for {prod} : {len(hist)}")
+            print(f"Intermediate hist size for {prod} : {len(hist)}", flush=True)
             return prod, hist
 
         return dict(sorted(reduce(mul, hists())[1].items()))
