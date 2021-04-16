@@ -261,20 +261,21 @@ class Group:
     def order_hist(self):
         raise Exception(f"Method order_hist() not implemented for groups from class {self.name}.")
 
+    @staticmethod
+    def _pi_core(hist):
+        p = 0
+        for order, freq in hist.items():
+            p += freq / order
+        return p / sum(hist.values())
+
     @property
     def pi(self):
         """Chance of stopping a repetition exactly at identity"""
         if self._pi is None:
-            p = 0
-            for order, freq in self.order_hist.items():
-                p += freq / order
-            self._pi = p / sum(self.order_hist.values())
+            self._pi = self._pi_core(self.order_hist)
         return self._pi
 
     def pi_lowmem(self, max_histsize, preserve_upto=0, initial_binsize=1):
         """Approximmate Chance of stopping a repetition exactly at identity - memory-friendly"""
         hist = self.compact_order_hist_lowmem(max_histsize, preserve_upto, initial_binsize=initial_binsize)
-        p = 0
-        for order, freq in hist.items():
-            p += freq / order
-        return p / sum(hist.values())
+        return self._pi_core(hist)

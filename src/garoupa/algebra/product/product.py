@@ -25,6 +25,7 @@
 #  time spent here.
 
 import operator
+from datetime import datetime
 from functools import reduce
 from itertools import product, cycle
 
@@ -157,7 +158,8 @@ class Product(Group):
             histb = compact(histb, binsizeb)
             hist = self.order_hist_mul(hista, histb)
             prod = f"{ga}*{gb}"
-            print(f"Intermediate hist size for {prod} : {len(hist)}", flush=True)
+            print("Pi:", self._pi_core(hist), f"\tHist size: {len(hist)}\t", datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                  f"\t{prod}", flush=True)
             return prod, hist
 
         return dict(sorted(reduce(mul, hists())[1].items()))
