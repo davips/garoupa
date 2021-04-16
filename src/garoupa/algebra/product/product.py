@@ -113,14 +113,14 @@ class Product(Group):
         >>> G.compact_order_hist(binsize=20)
         {9: 9136, 29: 1856, 42: 1968, 69: 1044, 90: 1080, 105: 480, 126: 1188, 210: 864, 315: 432, 630: 432}
         >>> G.compact_order_hist_lowmem(max_histsize=5, preserve_upto=0)
-        Intermediate hist size: 7
-        Intermediate hist size: 8
-        Intermediate hist size: 8
+        Intermediate hist size for D3*D5 : 7
+        Intermediate hist size for D3*D5*D7 : 8
+        Intermediate hist size for D3*D5*D7*D9 : 8
         {6: 7616, 9: 2856, 12: 2560, 36: 960, 70: 2496, 210: 768, 315: 792, 630: 432}
         >>> G.compact_order_hist_lowmem(max_histsize=5, preserve_upto=10)
-        Intermediate hist size: 7
-        Intermediate hist size: 15
-        Intermediate hist size: 20
+        Intermediate hist size for D3*D5 : 7
+        Intermediate hist size for D3*D5*D7 : 15
+        Intermediate hist size for D3*D5*D7*D9 : 20
         {1: 1, 2: 1919, 3: 20, 5: 4, 6: 2668, 7: 6, 9: 18, 10: 1276, 14: 54, 15: 24, 18: 1710, 21: 36, 24: 4768, 30: 744, 45: 24, 63: 36, 72: 1788, 84: 1920, 90: 744, 252: 720}
         """
 
@@ -154,4 +154,4 @@ class Product(Group):
             print(f"Intermediate hist size for {prod} : {len(hist)}")
             return prod, hist
 
-        return dict(sorted(reduce(mul, hists()).items()))
+        return dict(sorted(reduce(mul, hists())[1].items()))
