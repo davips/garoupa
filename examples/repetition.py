@@ -3,7 +3,7 @@
 import operator
 from datetime import datetime
 from functools import reduce
-from math import log
+from math import log, inf
 from sys import argv
 
 from garoupa.algebra.dihedral import D
@@ -59,8 +59,12 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
     for k, v in hist.items():
         if k[0] <= limit:
             bad += v
-    print(f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
-          G, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), flush=True)
     print(hist, flush=True)
+    hist = hist.copy()
+    if (inf, inf) in hist:
+        del hist[(inf, inf)]
+    hist = {int((k[0] + k[1]) / 2): v for k, v in hist.items()}
+    print(f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
+          G, G._pi_core(hist), datetime.now().strftime("%d/%m/%Y %H:%M:%S"), flush=True)
 # * -> [Explicit FOR due to autogeneration of README through eval]
 # ...
