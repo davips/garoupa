@@ -1,4 +1,8 @@
 #  Copyright (c) 2021. Davi Pereira dos Santos
+#
+#  Functions Based on Gabriel Dalforno code:
+#  order_hist, euler
+#
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
 #
@@ -59,3 +63,34 @@ class D(Group):
         dic = {"n": self.n, "seed": self.seed}
         dic.update(kwargs)
         return self.__class__(**dic)
+
+    @property
+    def order_hist(self):
+        """Sorted histogram of element orders.
+
+        Usage
+        >>> D(7).order_hist
+        {1: 1, 2: 7, 7: 6}
+
+        Based on Gabriel Dalforno code."""
+        if self._order_hist is None:
+            if self.n % 2 == 0:
+                raise Exception("Cannot calculate histogram for even n:", self.n)
+            hist = {1: 1, 2: self.n}
+            for d in range(3, self.n + 1, 2):
+                if self.n % d == 0:
+                    hist[d] = self.euler
+            self._order_hist = dict(sorted(hist.items()))
+        return self._order_hist
+
+    @property
+    def euler(self):
+        """Euler Totient Function
+
+        Based on Gabriel Dalforno code."""
+        if self._euler is None:
+            self._euler = 1
+            for i in range(2, self.n):
+                if self.gcd(i, self.n) == 1:
+                    self._euler += 1
+        return self._euler

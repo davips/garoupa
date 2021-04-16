@@ -1,4 +1,8 @@
 #  Copyright (c) 2021. Davi Pereira dos Santos
+#
+#  Functions based on Gabriel Dalforno code:
+#  gcd, lcm
+#
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
 #
@@ -20,30 +24,23 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 import sys
-from dataclasses import dataclass
-from time import time
-
-from progress.bar import Bar
 from itertools import repeat, islice
-from math import inf
+from math import inf, ceil
+from multiprocessing import Manager
 from multiprocessing import Value, Lock
 from random import Random
-from multiprocessing import Manager
+from time import time
 
 import pathos.multiprocessing as mp
+from progress.bar import Bar
 
 from garoupa.algebra.abs.element import Element
 
 
-# @dataclass
-# class Group:
-#     identity: Element
-#     sorted: callable
-#     seed: int = None
-
 class Group:
     _commuting_pairs, _comparisons, _interrupt = Value('i', 0), Value('i', 0), Value('i', 0)
     _mutex = Lock()
+    _euler, _order_hist, _pi = None, None, None
 
     def __init__(self, identity: Element, sorted: callable, seed: int = None):
         self.identity, self.sorted, self.seed = identity, sorted, seed
@@ -188,3 +185,95 @@ class Group:
 
     def replace(self, *args, **kwargs):
         raise Exception("Not implemented for groups of the class", self.name)
+
+    @classmethod
+    def lcm(cls, a, b):
+        """Least common multiple
+
+        Usage:
+        >>> from garoupa.algebra.dihedral import D
+        >>> D.lcm(32, 12)
+        96
+
+        Based on Gabriel Dalforno code."""
+        return int((a * b) / cls.gcd(a, b))
+
+    @classmethod
+    def gcd(cls, a, b):
+        """Greatest common divisor
+
+        Usage:
+        >>> from garoupa.algebra.dihedral import D
+        >>> D.gcd(32, 12)
+        4
+
+        Based on Gabriel Dalforno code."""
+        if a == 0:
+            return b
+        return cls.gcd(b % a, a)
+
+    def compact_order_hist_lowmem(self, max_histsize, preserve_upto, initial_binsize=1):
+        raise Exception(f"Method compact_order_hist_lowmem() not implemented for groups from class {self.name}.")
+
+    def compact_order_hist(self, binsize, preserve_upto=0, hist=None):
+        """Compact histogram of element orders.
+
+        Usage
+        >>> from garoupa.algebra.dihedral import D
+        >>> (D(7) * D(19)).order_hist
+        {1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
+        >>> (D(7) * D(19)).compact_order_hist(1)
+        {1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
+        >>> (D(7) * D(19)).compact_order_hist(3)
+        {1: 160, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
+        >>> (D(7) * D(19)).compact_order_hist(10)
+        {2: 166, 14: 132, 38: 126, 133: 108}
+        """
+        hist = hist or self.order_hist
+        result = {}
+        it = iter(hist.items())
+        while True:
+            try:
+                k, v = next(it)
+            except StopIteration:
+                return result
+            if k > preserve_upto:
+                break
+            result[k] = v
+
+        while True:
+            binstart = k // binsize
+            acc = 0
+            binmiddle = 0
+            try:
+                while k // binsize == binstart:
+                    acc += v
+                    binmiddle += k * v
+                    k, v = next(it)
+            except StopIteration:
+                break
+            finally:
+                result[binmiddle // acc] = acc
+        return result
+
+    @property
+    def order_hist(self):
+        raise Exception(f"Method order_hist() not implemented for groups from class {self.name}.")
+
+    @property
+    def pi(self):
+        """Chance of stopping a repetition exactly at identity"""
+        if self._pi is None:
+            p = 0
+            for order, freq in self.order_hist.items():
+                p += freq / order
+            self._pi = p / sum(self.order_hist.values())
+        return self._pi
+
+    def pi_lowmem(self, max_histsize, preserve_upto=0, initial_binsize=1):
+        """Approximmate Chance of stopping a repetition exactly at identity - memory-friendly"""
+        hist = self.compact_order_hist_lowmem(max_histsize, preserve_upto, initial_binsize=initial_binsize)
+        p = 0
+        for order, freq in hist.items():
+            p += freq / order
+        return p / sum(hist.values())

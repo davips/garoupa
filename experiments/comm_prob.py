@@ -1,10 +1,5 @@
-# Detect identity after many repetitions and increase group order
-
 import operator
-from datetime import datetime
 from functools import reduce
-from math import log
-from sys import argv
 
 from garoupa.algebra.dihedral import D
 
@@ -16,13 +11,10 @@ primes = [5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 
           643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787,
           797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941,
           947, 953, 967, 971, 977, 983, 991, 997, 1009]
+G8 = reduce(operator.mul, [D(n) for n in primes[:8]])
+G5_83 = reduce(operator.mul, [D(n) for n in primes[:21]])
+G5_167 = reduce(operator.mul, [D(n) for n in primes[:37]])
 
-for lastprime, _ in enumerate(primes):
-    G = reduce(operator.mul, [D(n) for n in primes[:lastprime + 1]])
-
-    for hist in G.sampled_orders(sample=int(argv[1]), width=1, limit=G.order, exitonhit=True):
-        bad = sum(v for k, v in hist.items() if k[0] < G.order)
-        tot = sum(hist.values())
-        print(f"{log(G.order, 2):.2f}", next(iter(hist))[0],
-              f"Pc: {G.comm_degree or -1:.2e} {bad}/{tot} = {bad / tot:.2e}",
-              G, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), flush=True)
+# print(G5_83.pi)
+# print(G5_83.pi_lowmem(100_000))
+print(G5_167.pi_lowmem(10_000_000, preserve_upto=100_000_000))
