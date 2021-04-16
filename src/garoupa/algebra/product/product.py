@@ -114,14 +114,14 @@ class Product(Group):
         {9: 9136, 29: 1856, 42: 1968, 69: 1044, 90: 1080, 105: 480, 126: 1188, 210: 864, 315: 432, 630: 432}
         >>> G.compact_order_hist_lowmem(max_histsize=5, preserve_upto=0)
         Intermediate hist size for D3*D5 : 7
-        Intermediate hist size for D3*D5*D7 : 8
-        Intermediate hist size for D3*D5*D7*D9 : 8
-        {6: 7616, 9: 2856, 12: 2560, 36: 960, 70: 2496, 210: 768, 315: 792, 630: 432}
+        Intermediate hist size for D3*D5*D7 : 10
+        Intermediate hist size for D3*D5*D7*D9 : 12
+        {3: 2646, 6: 3402, 9: 2268, 10: 2020, 30: 2108, 35: 84, 70: 1476, 90: 1548, 105: 840, 210: 864, 315: 792, 630: 432}
         >>> G.compact_order_hist_lowmem(max_histsize=5, preserve_upto=10)
         Intermediate hist size for D3*D5 : 7
         Intermediate hist size for D3*D5*D7 : 15
-        Intermediate hist size for D3*D5*D7*D9 : 20
-        {1: 1, 2: 1919, 3: 20, 5: 4, 6: 2668, 7: 6, 9: 18, 10: 1276, 14: 54, 15: 24, 18: 1710, 21: 36, 24: 4768, 30: 744, 45: 24, 63: 36, 72: 1788, 84: 1920, 90: 744, 252: 720}
+        Intermediate hist size for D3*D5*D7*D9 : 24
+        {1: 1, 2: 1919, 3: 20, 5: 4, 6: 2668, 7: 6, 9: 18, 10: 1276, 14: 1514, 15: 24, 18: 1710, 21: 120, 30: 1640, 35: 24, 42: 1944, 45: 24, 63: 108, 70: 936, 90: 1080, 105: 480, 126: 1236, 210: 864, 315: 432, 630: 432}
         """
 
         # if max_histsize <= preserve_upto:  errado
@@ -139,10 +139,10 @@ class Product(Group):
                 hist = self.compact_order_hist(binsize=binsize[0], preserve_upto=preserve_upto, hist=hist)
                 if 0 in hist:
                     del hist[0]
-                    binsize[0] **= 1 / 2
+                    binsize[0] = max(1, int(binsize[0] ** 1 / 2))
                     break
-                if len(hist) <= max_histsize:
-                    binsize[0] **= 1 / 2
+                if len(hist) <= max_histsize or binsize[0] > len(hist) // 2:
+                    binsize[0] = max(1, int(binsize[0] ** 1 / 2))
                     break
                 binsize[0] *= 2
             return hist
