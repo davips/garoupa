@@ -236,6 +236,7 @@ class Group:
             try:
                 k, v = next(it)
             except StopIteration:
+                result[0] = 0
                 return result
             if k > preserve_upto:
                 break

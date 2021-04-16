@@ -134,21 +134,27 @@ class Product(Group):
                 else:
                     yield str(g), g.order_hist
 
-        binsize = [initial_binsize]
-
-        def compact(hist):
+        def compact(hist, binsize):
             while True:
                 hist = self.compact_order_hist(binsize=binsize[0], preserve_upto=preserve_upto, hist=hist)
-                if len(hist) <= max_histsize or len(hist) <= preserve_upto:
+                if 0 in hist:
+                    del hist[0]
+                    binsize[0] **= 1 / 2
+                    break
+                if len(hist) <= max_histsize:
+                    binsize[0] **= 1 / 2
                     break
                 binsize[0] *= 2
             return hist
 
+        binsizea = [initial_binsize]
+        binsizeb = [initial_binsize]
+
         def mul(tupa, tupb):
             ga, hista = tupa
             gb, histb = tupb
-            hista = compact(hista)
-            histb = compact(histb)
+            hista = compact(hista, binsizea)
+            histb = compact(histb, binsizeb)
             hist = self.order_hist_mul(hista, histb)
             prod = f"{ga}*{gb}"
             print(f"Intermediate hist size for {prod} : {len(hist)}", flush=True)
