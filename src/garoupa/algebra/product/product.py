@@ -137,7 +137,9 @@ class Product(Group):
 
         def compact(hist, binsize):
             while True:
-                hist = self.compact_order_hist(binsize=binsize[0], preserve_upto=preserve_upto, hist=hist)
+                hist = self.compact_order_hist(
+                    binsize=binsize[0], preserve_upto=preserve_upto, max_histsize=max_histsize, hist=hist
+                )
                 if 0 in hist:
                     del hist[0]
                     binsize[0] = max(1, int(binsize[0] ** 1 / 2))
@@ -158,7 +160,8 @@ class Product(Group):
             histb = compact(histb, binsizeb)
             hist = self.order_hist_mul(hista, histb)
             prod = f"{ga}*{gb}"
-            print("Pi:", self._pi_core(hist), f"\tHist size: {len(hist)}\t", show_timestamp and datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            print("Pi:", self._pi_core(hist), f"\tHist size: {len(hist)}\t",
+                  show_timestamp and datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
                   f"\t{prod}", flush=True)
             return prod, hist
 

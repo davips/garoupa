@@ -215,7 +215,7 @@ class Group:
     def compact_order_hist_lowmem(self, max_histsize, preserve_upto, initial_binsize=1):
         raise Exception(f"Method compact_order_hist_lowmem() not implemented for groups from class {self.name}.")
 
-    def compact_order_hist(self, binsize, preserve_upto=0, hist=None):
+    def compact_order_hist(self, binsize, preserve_upto=0, max_histsize=inf, hist=None):
         """Compact histogram of element orders.
 
         Usage
@@ -232,13 +232,15 @@ class Group:
         hist = hist or self.order_hist
         result = {}
         it = iter(hist.items())
+        c = 0
         while True:
             try:
                 k, v = next(it)
+                c += 1
             except StopIteration:
                 result[0] = 0
                 return result
-            if k > preserve_upto:
+            if k > preserve_upto or c >= max_histsize:
                 break
             result[k] = v
 
