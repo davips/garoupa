@@ -17,4 +17,4 @@ G5_167 = reduce(operator.mul, [D(n) for n in primes[:37]])
 
 # print(G5_83.pi)
 # print(G5_83.pi_lowmem(100_000))
-print(G5_167.pi_lowmem(100_000_000, preserve_upto=1_000_000_000))
+print(G5_167.pi_lowmem(50_000_000, preserve_upto=100_000_000))
