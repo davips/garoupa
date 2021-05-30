@@ -1,4 +1,4 @@
-#  Copyright (c) 2021. Gabriel Dalforno
+#  Copyright (c) 2021. Gabriel Dalforno and Davi Pereira-Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
 #
@@ -21,10 +21,18 @@
 #  time spent here.
 
 import math
-from collections import OrderedDict
-from math import gcd
-
+import operator
+from functools import reduce
 import matplotlib.pyplot as plt
+
+primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
+          109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229,
+          233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359,
+          367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491,
+          499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641,
+          643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787,
+          797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941,
+          947, 953, 967, 971, 977, 983, 991, 997, 1009]
 
 
 # Order of the group W2,p
@@ -48,7 +56,7 @@ def order_histW2(p: int) -> dict:
 
 # Least Common Multiple
 def lcm(a: int, b: int) -> int:
-    return int((a * b) / gcd(a, b))
+    return int((a * b) / math.gcd(a, b))
 
 
 # Order histogram of G1xG2
@@ -115,48 +123,60 @@ def order_hist(p: int) -> dict:
 
 
 ###########################################################################
-#######  Full characterization of G = W2 x W3 x W5 x W7 x W11 x W13  ######
+#######  Full characterization of G = W2 x W3 x W5 x W7 x W11 x W13 x ...
 ###########################################################################
-N = 2 ** 3 * 3 ** 4 * 5 ** 6 * 7 ** 8 * 11 ** 12 * 13 ** 14
-print("Full characterization of G = W2 x W3 x W5 x W7 x W11 x W13")
-print("----------------------------------------------------------")
-print(f"Number of elements: 2^3 x 3^4 x 5^6 x 7^8 x 11^12 x 13^14")
-print(f"Number of bits: {math.log(N, 2)}")
-del N
-print(f"Minimum order for a never-trivial element: {2 * 3 * 5 * 7 * 11 * 13}")
+bitslimits = iter(192 * i for i in range(1, 5))
+bitslimit = next(bitslimits)
+for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
+    ws = primes[:take]
+    N = reduce(operator.mul, (a ** (a + 1) for a in ws))
+    bits = math.log(N, 2)
+    if bits > bitslimit:
+        bitslimit = next(bitslimits)
+        continue
+    print()
+    print("----------------------------------------------------------")
+    print(f"G = W2 x W... x W{ws[-1]}", N)
+    print(f"Number of bits: {bits}.  Compatible with: {bitslimit} bits")
+    print(f"Minimum order for a never-trivial element: {reduce(operator.mul, ws)}")
+    P = 1
+    for prime in ws:
+        P *= Pc(2, prime)
+    print(f"Probability of commutation: {P}")
 
-P = 1
-for p in (2, 3, 5, 7, 11, 13):
-    P *= Pc(2, p)
-print(f"Probability of commutation: {P}")
-del P
+    G = reduce(direct_product_order_hist, map(order_hist, ws))
+    sorted_keys = sorted(G.keys())
+    G = dict({str(key): G[key] for key in sorted_keys})
 
-W2xW3 = direct_product_order_hist(order_hist(2), order_hist(3))
-W2xW3xW5 = direct_product_order_hist(W2xW3, order_hist(5))
-del W2xW3
-W2xW3xW5xW7 = direct_product_order_hist(W2xW3xW5, order_hist(7))
-del W2xW3xW5
-W2xW3xW5xW7xW11 = direct_product_order_hist(W2xW3xW5xW7, order_hist(11))
-del W2xW3xW5xW7
-G = direct_product_order_hist(W2xW3xW5xW7xW11, order_hist(13))
-del W2xW3xW5xW7xW11
-
-sorted_keys = sorted(G.keys())
-G = OrderedDict({str(key): G[key] for key in sorted_keys})
-
-plt.style.use("dark_background")
-plt.title("G = W2 x W3 x W5 x W7 x W11 x W13")
-plt.bar(G.keys(), G.values(), color="blue")
-plt.xticks(
-    [
+    plt.style.use("dark_background")
+    plt.title(f"G = W2 x W... x W{ws[-1]}")
+    plt.bar(G.keys(), G.values(), color="blue")
+    plt.yscale("log")
+    plt.xticks([
         0,
         int(0.5 * len(sorted_keys)),
         int(0.65 * len(sorted_keys)),
         int(0.75 * len(sorted_keys)),
         int(0.85 * len(sorted_keys)),
         int(0.95 * len(sorted_keys))
-    ]
-)
-plt.xlabel("Order")
-plt.ylabel("#Elements")
-plt.show()
+    ])
+    plt.xlabel("Order")
+    plt.ylabel("#Elements")
+    plt.show()
+
+    t = sum(G.values())
+    acc = 0
+    for key, v in G.items():
+        acc += v
+        p = (t - acc) / t
+        # if p < 0.999_999_999_999_999_999:
+        # if key > 1_000_000_000_000:
+        # if key > 100_000_000:
+        if int(key) > 1_000_000:
+            print(f"{p:.21e} {int(key):_}", acc, flush=True)
+            break
+
+    # 99.99999999999998%    154_040_315    garante ordem acima de 154M (1 em 10^18)
+    # 99.9999999731%      2_155_487_205
+    # 99.997%         1_000_571_521_950
+    # 98.32%      1_002_681_290_940_420    repetição sem limites para 98% dos elementos (10^15 repetições)
