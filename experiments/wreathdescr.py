@@ -105,7 +105,7 @@ def k(n: int, p: int) -> int:
 
 # Order of the group W2,p
 def order(n: int, p: int) -> int:
-    return p ** ((p ** n - 1) / (p - 1))
+    return p ** ((p ** n - 1) // (p - 1))
 
 
 # Probability of commutation of W2,p
@@ -180,3 +180,10 @@ for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
     # 99.9999999731%      2_155_487_205
     # 99.997%         1_000_571_521_950
     # 98.32%      1_002_681_290_940_420    repetição sem limites para 98% dos elementos (10^15 repetições)
+
+print()
+for pi in primes[:10]:
+    o = order(2, pi)
+    print(f"|W2,{pi:<2}|: {o:<60_}    {math.log(o, 2):<28} bits")
+    if pi == primes[4]:
+        print('-----------')
