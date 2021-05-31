@@ -24,6 +24,9 @@ from math import factorial, gcd, exp, pi, sqrt
 
 
 # Calculates all the partitions of Sn
+from garoupa.algebra.symmetric import S
+
+
 def accel_asc(n: int) -> list:
     # https://arxiv.org/pdf/0909.2331.pdf
     return list(accel_asc_yield(n))
@@ -131,3 +134,6 @@ def order_histSD(integers: list) -> dict:
         for n in integers[2:]:
             initial = direct_product_order_hist(initial, order_histS(n))
     return initial
+
+
+print(sum(order_histS(34).values()) == S(34).order)
