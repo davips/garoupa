@@ -70,7 +70,7 @@ def conj_class_size(p: list, n: int) -> int:
     total = 1
     for key, val in counter.items():
         total *= (key ** val) * factorial(val)
-    return int(factorial(n) / total)
+    return factorial(n) // total
 
 
 # Order of the group Sn
@@ -96,7 +96,7 @@ def order_histS(n: int) -> dict:
 
 # Least Common Multiple
 def lcm(a: int, b: int) -> int:
-    return int((a * b) / gcd(a, b))
+    return (a * b) // gcd(a, b)
 
 
 # Order histogram of G1xG2
@@ -136,4 +136,4 @@ def order_histSD(integers: list) -> dict:
     return initial
 
 
-print(sum(order_histS(34).values()) == S(34).order)
+print(sum(order_histS(34).values()) == orderS(34))

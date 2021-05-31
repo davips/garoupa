@@ -25,6 +25,9 @@ import operator
 from functools import reduce
 import matplotlib.pyplot as plt
 
+from experiments.symmetricdescr import order_histS
+from garoupa.algebra.symmetric import S
+
 primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
           109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229,
           233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359,
@@ -56,7 +59,7 @@ def order_histW2(p: int) -> dict:
 
 # Least Common Multiple
 def lcm(a: int, b: int) -> int:
-    return int((a * b) / math.gcd(a, b))
+    return (a * b) // math.gcd(a, b)
 
 
 # Order histogram of G1xG2
@@ -129,22 +132,34 @@ bitslimits = iter(192 * i for i in range(1, 5))
 bitslimit = next(bitslimits)
 for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
     ws = primes[:take]
-    N = reduce(operator.mul, (a ** (a + 1) for a in ws))
+    dup = None
+    sn = 0 #S(25)
+    print()
+    print("----------------------------------------------------------")
+    print(f"G = W2 x W... x W{ws[-1]} x W{dup} x {sn}")
+    print(f"Minimum order for a never-trivial element: {reduce(operator.mul, ws)}")
+
+    # Add a duplicate wreath to make |G| near 2^384 (and also Pc as a side effect).
+    if dup:
+        ws = ws + [dup]
+
+    N = reduce(operator.mul, (order(2, a) for a in ws))
+    G = reduce(direct_product_order_hist, map(order_hist, ws))
+    P = 1
+    if sn:
+        N *= sn.order
+        P *= sn.comm_degree
+        G = direct_product_order_hist(G, order_histS(sn.n))
     bits = math.log(N, 2)
     if bits > bitslimit:
         bitslimit = next(bitslimits)
         continue
-    print()
-    print("----------------------------------------------------------")
-    print(f"G = W2 x W... x W{ws[-1]}", N)
     print(f"Number of bits: {bits}.  Compatible with: {bitslimit} bits")
-    print(f"Minimum order for a never-trivial element: {reduce(operator.mul, ws)}")
-    P = 1
+
     for prime in ws:
         P *= Pc(2, prime)
     print(f"Probability of commutation: {P}")
 
-    G = reduce(direct_product_order_hist, map(order_hist, ws))
     sorted_keys = sorted(G.keys())
     G = dict({str(key): G[key] for key in sorted_keys})
 
@@ -176,14 +191,40 @@ for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
             print(f"{p:.21e} {int(key):_}", acc, flush=True)
             break
 
+    # Results for W2 ... W29 !!!
     # 99.99999999999998%    154_040_315    garante ordem acima de 154M (1 em 10^18)
+    # For comparison, it is the same probability of MD5 resulting in a collision after 2.6 × 10^10 hashes.
+
     # 99.9999999731%      2_155_487_205
     # 99.997%         1_000_571_521_950
     # 98.32%      1_002_681_290_940_420    repetição sem limites para 98% dos elementos (10^15 repetições)
 
-print()
 for pi in primes[:10]:
     o = order(2, pi)
     print(f"|W2,{pi:<2}|: {o:<60_}    {math.log(o, 2):<28} bits")
     if pi == primes[4]:
         print('-----------')
+
+"""
+----------------------------------------------------------
+G = W2 x W... x W19 x WNone
+Minimum order for a never-trivial element: 9699690
+Number of bits: 297.5824748376703.  Compatible with: 384 bits
+Probability of commutation: 1.3674814255755696e-103
+9.999999996048327677300e-01 1_000_692 150671822625249681076853911937223128978523303906569452603253481697914844967919624
+
+----------------------------------------------------------
+G = W2 x W... x W19 x W19
+Minimum order for a never-trivial element: 9699690
+Number of bits: 382.541025106542.  Compatible with: 384 bits
+Probability of commutation: 1.0077254229078475e-131
+9.999999999594980648610e-01 1_000_692 580495779297195110573587781192980641999361007778557671425361505690796073985707529525485581793053974240520
+
+----------------------------------------------------------
+G = W2 x W... x W19 x WNone x S25
+Minimum order for a never-trivial element: 9699690
+Number of bits: 381.2639884465455.  Compatible with: 384 bits
+Probability of commutation: 1.891290625481518e-125
+9.999999999800267547201e-01 1_000_692 118125654385623329379021240469595465429499359410849169418929426942183875146215174300147519604239488439424
+
+"""
