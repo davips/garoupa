@@ -63,34 +63,61 @@ class D(Group):
         dic = {"n": self.n, "seed": self.seed}
         dic.update(kwargs)
         return self.__class__(**dic)
-
+    
     @property
     def order_hist(self):
         """Sorted histogram of element orders.
-
         Usage
         >>> D(7).order_hist
         {1: 1, 2: 7, 7: 6}
-
         Based on Gabriel Dalforno code."""
         if self._order_hist is None:
-            if self.n % 2 == 0:
-                raise Exception("Cannot calculate histogram for even n:", self.n)
-            hist = {1: 1, 2: self.n}
-            for d in range(3, self.n + 1, 2):
+            rule = self.n % 2
+            hist = {1: 1, 2: self.n if rule != 0 else self.n + 1}
+            rng = range(3, self.n + 1, 2) if rule != 0 else range(3, self.n + 1)
+            for d in rng:
                 if self.n % d == 0:
-                    hist[d] = self.euler
+                    hist[d] = self.euler(d)
             self._order_hist = dict(sorted(hist.items()))
         return self._order_hist
 
-    @property
-    def euler(self):
-        """Euler Totient Function
 
+    def euler(self, d):
+        """Euler Totient Function
         Based on Gabriel Dalforno code."""
-        if self._euler is None:
-            self._euler = 1
-            for i in range(2, self.n):
-                if self.gcd(i, self.n) == 1:
-                    self._euler += 1
-        return self._euler
+        phi = 1
+        for i in range(2, d):
+            if self.gcd(i, d) == 1:
+                phi += 1
+        return phi
+
+#     @property
+#     def order_hist(self):
+#         """Sorted histogram of element orders.
+
+#         Usage
+#         >>> D(7).order_hist
+#         {1: 1, 2: 7, 7: 6}
+
+#         Based on Gabriel Dalforno code."""
+#         if self._order_hist is None:
+#             if self.n % 2 == 0:
+#                 raise Exception("Cannot calculate histogram for even n:", self.n)
+#             hist = {1: 1, 2: self.n}
+#             for d in range(3, self.n + 1, 2):
+#                 if self.n % d == 0:
+#                     hist[d] = self.euler
+#             self._order_hist = dict(sorted(hist.items()))
+#         return self._order_hist
+
+#     @property
+#     def euler(self):
+#         """Euler Totient Function
+
+#         Based on Gabriel Dalforno code."""
+#         if self._euler is None:
+#             self._euler = 1
+#             for i in range(2, self.n):
+#                 if self.gcd(i, self.n) == 1:
+#                     self._euler += 1
+#         return self._euler
