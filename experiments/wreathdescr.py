@@ -128,12 +128,10 @@ def order_hist(p: int) -> dict:
 ###########################################################################
 #######  Full characterization of G = W2 x W3 x W5 x W7 x W11 x W13 x ...
 ###########################################################################
-bitslimits = iter(192 * i for i in range(1, 5))
-bitslimit = next(bitslimits)
-for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
+for take in range(1, 14):  # "128"-bit: 6; "256"-bit: 8
     ws = primes[:take]
     dup = None
-    sn = 0 #S(25)
+    sn = 0  # S(25)
     print()
     print("----------------------------------------------------------")
     print(f"G = W2 x W... x W{ws[-1]} x W{dup} x {sn}")
@@ -151,10 +149,11 @@ for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
         P *= sn.comm_degree
         G = direct_product_order_hist(G, order_histS(sn.n))
     bits = math.log(N, 2)
-    if bits > bitslimit:
-        bitslimit = next(bitslimits)
-        continue
-    print(f"Number of bits: {bits}.  Compatible with: {bitslimit} bits")
+    base = 1024
+    bitsbase = int(math.log(base, 2))
+    mmcbits = lcm(8, bitsbase)
+    bitslimit = (math.ceil(bits) // mmcbits + 1) * mmcbits
+    print(f"bits: {bits}.  Nearest: {bitslimit} bits     {bitslimit / bitsbase} digits    {bitslimit / 8} bytes")
 
     for prime in ws:
         P *= Pc(2, prime)
@@ -163,21 +162,21 @@ for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
     sorted_keys = sorted(G.keys())
     G = dict({str(key): G[key] for key in sorted_keys})
 
-    plt.style.use("dark_background")
-    plt.title(f"G = W2 x W... x W{ws[-1]}")
-    plt.bar(G.keys(), G.values(), color="blue")
-    plt.yscale("log")
-    plt.xticks([
-        0,
-        int(0.5 * len(sorted_keys)),
-        int(0.65 * len(sorted_keys)),
-        int(0.75 * len(sorted_keys)),
-        int(0.85 * len(sorted_keys)),
-        int(0.95 * len(sorted_keys))
-    ])
-    plt.xlabel("Order")
-    plt.ylabel("#Elements")
-    plt.show()
+    # plt.style.use("dark_background")
+    # plt.title(f"G = W2 x W... x W{ws[-1]}")
+    # plt.bar(G.keys(), G.values(), color="blue")
+    # plt.yscale("log")
+    # plt.xticks([
+    #     0,
+    #     int(0.5 * len(sorted_keys)),
+    #     int(0.65 * len(sorted_keys)),
+    #     int(0.75 * len(sorted_keys)),
+    #     int(0.85 * len(sorted_keys)),
+    #     int(0.95 * len(sorted_keys))
+    # ])
+    # plt.xlabel("Order")
+    # plt.ylabel("#Elements")
+    # plt.show()
 
     t = sum(G.values())
     acc = 0
@@ -185,10 +184,11 @@ for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
         acc += v
         p = (t - acc) / t
         # if p < 0.999_999_999_999_999_999:
-        # if key > 1_000_000_000_000:
+        # if int(key) > 10**9:
         # if key > 100_000_000:
-        if int(key) > 1_000_000:
-            print(f"{p:.21e} {int(key):_}", acc, flush=True)
+        # if int(key) > 1_000_000:
+        if t // acc < 10 ** 16:
+            print(f"1:{t // acc:e}   reps allowed={int(key):_}", flush=True)
             break
 
     # Results for W2 ... W29 !!!
@@ -199,11 +199,11 @@ for take in range(6, 9):  # "128"-bit: 6; "256"-bit: 8
     # 99.997%         1_000_571_521_950
     # 98.32%      1_002_681_290_940_420    repetição sem limites para 98% dos elementos (10^15 repetições)
 
-for pi in primes[:10]:
-    o = order(2, pi)
-    print(f"|W2,{pi:<2}|: {o:<60_}    {math.log(o, 2):<28} bits")
-    if pi == primes[4]:
-        print('-----------')
+# for pi in primes[:10]:
+#     o = order(2, pi)
+#     print(f"|W2,{pi:<2}|: {o:<60_}    {math.log(o, 2):<28} bits")
+#     if pi == primes[4]:
+#         print('-----------')
 
 """
 ----------------------------------------------------------

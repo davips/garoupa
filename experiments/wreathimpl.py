@@ -22,10 +22,12 @@
 from functools import reduce
 from operator import iconcat
 
-
 ###########################################################################
 ###########################################################################
 # Calculates action of permutation b on the set a
+from timeit import timeit
+
+
 def pmat_mult(a: list, b: list) -> list:
     return [a[x] for x in b]
 
@@ -530,4 +532,14 @@ def inverseG(g: list) -> list:
 # print(f"N*N^-1 = {zero}")
 
 x = (2 ** 3) * (3 ** 4) * (5 ** 6) * (7 ** 8) * (11 ** 12) * (13 ** 14) * (17 ** 18) * (19 ** 20) - 1
-print(int_to_elem(x))
+e = int_to_elem(x)
+print(e)
+
+
+def f():
+    return multiplyG(e, e)
+    # return elem_to_int(int_to_elem(x))
+
+
+t = timeit(f, number=10000)
+print(t * 100, "us")
