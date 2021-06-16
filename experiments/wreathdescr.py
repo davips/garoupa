@@ -45,7 +45,7 @@ def orderW2(p: int) -> int:
 
 # Probability of commutation of W2,p
 def PW2(p: int) -> float:
-    return (p ** 2 + p ** (p - 1) - 1) / (p ** (2 * (p + 1)))
+    return (p ** 2 + p ** (p - 1) - 1) / orderW2(p)
 
 
 # Order histogram of W2,p
