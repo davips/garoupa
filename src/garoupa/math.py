@@ -400,3 +400,146 @@ def m2intl(m, o):
             n += int(m[i, j]) * exp
             exp *= o
     return n
+
+
+
+##########################################
+##########################################
+##########################################
+
+
+def m4m(a, b, mod):
+    """Multiply two unitriangular matrices 4x4 modulo 'mod'.
+
+    'a' and 'b' given as lists in the format: [a1,4 a1,3 a2,4 a2,3 a3,4 a1,2]
+
+    1 a0 a4 a5
+    0  1 a2 a3
+    0  0  1 a1
+    0  0  0  1
+
+    >>> a, b = [51,18340,56,756,456,344], [781,2340,9870,1234,9134,3134]
+    >>> m4m(b, m4inv(b, 4294967291), 4294967291) == [0,0,0,0,0,0]
+    True
+    >>> c = m4m(a, b, 4294967291)
+    >>> m4m(c, m4inv(b, 4294967291), 4294967291) == a
+    True
+    """
+    return [
+        (a[0] + b[0] + a[5] * b[2] + a[1] * b[4]) % mod,
+        (a[1] + b[1] + a[5] * b[3]) % mod,
+        (a[2] + b[2] + a[3] * b[4]) % mod,
+        (a[3] + b[3]) % mod,
+        (a[4] + b[4]) % mod,
+        (a[5] + b[5]) % mod
+    ]
+
+
+def m4inv(m, mod):
+    """Inverse of unitriangular matrix modulo 'mod'
+
+    'm' given as a list in the format: [a1,4 a1,3 a2,4 a2,3 a3,4 a1,2]
+
+    1 a0 a4 a5
+    0  1 a2 a3
+    0  0  1 a1
+    0  0  0  1
+
+    Based on https://groupprops.subwiki.org/wiki/Unitriangular_matrix_group:UT(4,p)
+
+    >>> e = [42821,772431,428543,443530,42121,7213]
+    >>> m4inv(m4inv(e, 4294967291), 4294967291)==e
+    True
+    """
+    return [
+        (m[5] * m[2] + m[1] * m[4] - m[5] * m[3] * m[4] - m[0]) % mod,
+        (m[5] * m[3] - m[1]) % mod,
+        (m[3] * m[4] - m[2]) % mod,
+        -m[3] % mod,
+        -m[4] % mod,
+        -m[5] % mod,
+    ]
+
+
+def int2m4(num, mod):
+    """
+    >>> e = [42821,772431,428543,443530,42121,7213]
+    >>> e == int2m4(m42int(e,4294967291), 4294967291)
+    True
+    """
+    m = [0, 0, 0, 0, 0, 0]
+    num, m[5] = divmod(num, mod)
+    num, m[4] = divmod(num, mod)
+    num, m[3] = divmod(num, mod)
+    num, m[2] = divmod(num, mod)
+    num, m[1] = divmod(num, mod)
+    num, m[0] = divmod(num, mod)
+    return m
+
+
+def m42int(m, mod):
+    """
+    >>> n = 986723489762345987253897254295863
+    >>> m42int(int2m4(n, 4294967291), 4294967291) == n
+    True
+    """
+    return m[5] + m[4] * mod + m[3] * (mod ** 2) + m[2] * (mod ** 3) + m[1] * (mod ** 4) + m[0] * (mod ** 5)
+
+
+##########################################
+##########################################
+##########################################
+
+# def m4m(a, b, mod):
+#     """unitriangular matrix (modulo) multiplication"""
+#     return (a @ b) % mod
+#
+#
+# def m42int(m, o):
+#     """
+#     Usage:
+#     >>> from numpy import array, uint8
+#     >>> m = array([[1, 3, 3, 3, 3],
+#     ...            [0, 1, 3, 3, 0],
+#     ...            [0, 0, 1, 0, 0],
+#     ...            [0, 0, 0, 1, 0],
+#     ...            [0, 0, 0, 0, 1]], dtype=uint8)
+#     >>> m2int(m, 4)
+#     4095
+#     """
+#     n = 0
+#     l = len(m)
+#     exp = 1
+#     for i in range(l - 1):
+#         for j in range(i + 1, l):
+#             n += int(m[i, j]) * exp
+#             exp *= o
+#     return n
+#
+#
+# def int2m4(n, o, l=4):
+#     """
+#     Usage:
+#     >>> from numpy import uint8
+#     >>> int2m(4095, 4, 5)
+#     array([[1, 3, 3, 3, 3],
+#            [0, 1, 3, 3, 0],
+#            [0, 0, 1, 0, 0],
+#            [0, 0, 0, 1, 0],
+#            [0, 0, 0, 0, 1]], dtype=uint8)
+#     """
+#     # if o < 257:
+#     #     m = np.eye(l, dtype=np.ubyte)
+#     # else:
+#     m = np.eye(l, dtype=np.uint64)
+#     for i in range(l - 1):
+#         for j in range(i + 1, l):
+#             n, rem = divmod(n, o)
+#             m[i, j] = rem
+#     return m
+#
+#
+# def m4inv(m, o):
+#     # if o < 257:
+#     #     return np.uint8(np.linalg.inv(m) % o)
+#     return np.linalg.inv(m) % o

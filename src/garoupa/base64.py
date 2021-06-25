@@ -21,14 +21,14 @@
 #  time spent here.
 
 
-alphabet = tuple("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+alphabet = tuple("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-.")
 rev_alphabet = dict((c, v) for v, c in enumerate(alphabet))
 
 
-def b62dec(string):
+def b64dec(string):
     """
     Usage:
-    >>> b62dec("AA") == (0, 10*62 + 10)
+    >>> b64dec("aa") == 10*64 + 10
     True
 
     Parameters
@@ -41,27 +41,21 @@ def b62dec(string):
     """
     num = 0
     for char in string:
-        num = num * 62 + rev_alphabet[char]
-    z, s = divmod(num, 2 ** 128)
-    return z, s
+        num = num * 64 + rev_alphabet[char]
+    return num
 
 
-def b62enc(z, s):
+def b64enc(num, digits):
     """
     Usage:
-    >>> b62enc(123, 456)
-    '00000000000000000000FSL0OJRorrriZQUQzLO9WlE'
-    >>> n = b62dec(b62enc(123, 456))
-    >>> n == (123, 456)
+    >>> b64enc(123456, 10)
+    '0000000u90'
+    >>> n = b64dec(b64enc(123456, 10))
+    >>> n == 123456
     True
-
-    :param s:
-    :param z:
-    :return:
     """
     encoded = ""
-    num = z * 2 ** 128 + s
     while num:
-        num, rem = divmod(num, 62)
+        num, rem = divmod(num, 64)
         encoded = alphabet[rem] + encoded
-    return encoded.rjust(43, "0")
+    return encoded.rjust(digits, "0")
