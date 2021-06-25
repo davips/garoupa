@@ -21,11 +21,11 @@
 #  time spent here.
 
 from garoupa.algebra.abs.element import Element
-from garoupa.math import bmm, bminv, m2intl, int2ml
+from garoupa.math import mm, minv, m2int, int2m
 
 
 class Mat(Element):
-    def __init__(self, i, n, o=2, _m=None):
+    def __init__(self, i, n, mod=2, _m=None):
         """        nxn     modulo o
         Usage:
         >>> a = Mat(4783632, 6, 5)
@@ -38,19 +38,19 @@ class Mat(Element):
          [0 0 0 0 0 1]]
         """
         self.cells = sum(range(1, n))
-        super().__init__(i, o ** self.cells)
-        self.n, self.o = n, o
-        self.m = int2ml(i, o, n) if _m is None else _m
+        super().__init__(i, mod ** self.cells)
+        self.n, self.mod = n, mod
+        self.m = int2m(i, mod, n) if _m is None else _m
 
     def __mul__(self, other):
-        if self.o != other.o or self.n != other.n:
+        if self.mod != other.mod or self.n != other.n:
             raise Exception("Elements are from different groups.")
-        m = bmm(self.m, other.m, self.o)
-        return Mat(m2intl(m, self.o), self.n, self.o, _m=m)
+        m = mm(self.m, other.m, self.mod)
+        return Mat(m2int(m, self.mod), self.n, self.mod, _m=m)
 
     def __repr__(self):
         return f"{self.m}"
 
     def __invert__(self):
-        m = bminv(self.m)
-        return Mat(m2intl(m, self.o), self.n, self.o, _m=m)
+        m = minv(self.m, self.mod)
+        return Mat(m2int(m, self.mod), self.n, self.mod, _m=m)

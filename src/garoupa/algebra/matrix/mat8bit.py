@@ -21,7 +21,7 @@
 #  time spent here.
 
 from garoupa.algebra.abs.element import Element
-from garoupa.math import int2bm8bit, bmm, bm2int8bit, bminv
+from garoupa.math import int2bm8bit, mm, bm2int8bit, minv
 
 
 class Mat8bit(Element):
@@ -34,12 +34,12 @@ class Mat8bit(Element):
             self.m = int2bm8bit(self.i)
 
     def __mul__(self, other):
-        m = bmm(self.m, other.m, 2)
+        m = mm(self.m, other.m, 2)
         return Mat8bit(bm2int8bit(m), _m=m)
 
     def __repr__(self):
         return f"{self.m}"
 
     def __invert__(self):
-        m = bminv(self.m)
+        m = minv(self.m)
         return Mat8bit(bm2int8bit(m), _m=m)

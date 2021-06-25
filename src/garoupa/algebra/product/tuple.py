@@ -38,3 +38,6 @@ class Tuple(Element):
 
     def __repr__(self):
         return f"«{', '.join([str(a) for a in self.subelements])}»"
+
+    def __invert__(self):
+        return Tuple(*(~a for a in self.subelements))
