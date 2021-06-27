@@ -20,6 +20,10 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
+##############################################################################
+# Abstract Algebra helper functions
+##############################################################################
+
 def int2pmat(number, side):
     """Convert number into permutation.
 
@@ -117,6 +121,10 @@ def pmat_inv(m):
         r[m[i]] = i
     return r
 
+
+##############################################################################
+# Hash class helper functions
+##############################################################################
 
 def m4m(a, b, mod):
     """Multiply two unitriangular matrices 4x4 modulo 'mod'.
