@@ -22,8 +22,10 @@
 
 import math
 import operator
+from decimal import Decimal, getcontext
 from functools import reduce
 import matplotlib.pyplot as plt
+import numpy
 
 from experiments.symmetricdescr import order_histS
 from garoupa.algebra.symmetric import S
@@ -125,13 +127,30 @@ def order_hist(p: int) -> dict:
     }
 
 
+def median(values, weights):
+    acc = 0
+    s = sum(weights)
+    for w, v in zip(weights, values):
+        acc += w
+        if acc >= s // 2:
+            break
+    return v
+
+
+def wmean0(values, weights):
+    u = sum(w * v for w, v in zip(weights, values)) // sum(weights)
+    weights = [w for w, v in zip(weights, values) if v < u]
+    s = int(Decimal(sum(w * ((v - u) ** 2) for w, v in zip(weights, values)) // sum(weights)).sqrt())
+    return u, s
+
+
 ###########################################################################
 #######  Full characterization of G = W2 x W3 x W5 x W7 x W11 x W13 x ...
 ###########################################################################
-for take in range(1, 14):  # "128"-bit: 6; "256"-bit: 8
+for take in range(1, 13):  # "128"-bit: 6; "256"-bit: 8
     ws = primes[:take]
     dup = None
-    sn = 0  # S(25)
+    sn = 0 #S(15)
     print()
     print("----------------------------------------------------------")
     print(f"G = W2 x W... x W{ws[-1]} x W{dup} x {sn}")
@@ -149,7 +168,7 @@ for take in range(1, 14):  # "128"-bit: 6; "256"-bit: 8
         P *= sn.comm_degree
         G = direct_product_order_hist(G, order_histS(sn.n))
     bits = math.log(N, 2)
-    base = 1024
+    base = 64
     bitsbase = int(math.log(base, 2))
     mmcbits = lcm(8, bitsbase)
     bitslimit = (math.ceil(bits) // mmcbits + 1) * mmcbits
@@ -180,16 +199,22 @@ for take in range(1, 14):  # "128"-bit: 6; "256"-bit: 8
 
     t = sum(G.values())
     acc = 0
+    foi = False
+    vals = []
+    weights = []
     for key, v in G.items():
         acc += v
         p = (t - acc) / t
-        # if p < 0.999_999_999_999_999_999:
-        # if int(key) > 10**9:
-        # if key > 100_000_000:
-        # if int(key) > 1_000_000:
-        if t // acc < 10 ** 16:
-            print(f"1:{t // acc:e}   reps allowed={int(key):_}", flush=True)
-            break
+        # if int(key) > 10000000:
+        if t // acc < 10 ** 2:
+            if not foi:
+                print(f"{p:.58e}    1/{t // acc:.1e}   reps allowed < {int(key):_}", flush=True)
+            foi = True
+            if foi:
+                vals.append(int(key))
+                weights.append(v)
+    if foi:
+        print(median(vals, weights), flush=True)
 
     # Results for W2 ... W29 !!!
     # 99.99999999999998%    154_040_315    garante ordem acima de 154M (1 em 10^18)
@@ -206,6 +231,9 @@ for take in range(1, 14):  # "128"-bit: 6; "256"-bit: 8
 #         print('-----------')
 
 """
+base-64
+64 digits
+
 ----------------------------------------------------------
 G = W2 x W... x W19 x WNone
 Minimum order for a never-trivial element: 9699690
@@ -227,4 +255,29 @@ Number of bits: 381.2639884465455.  Compatible with: 384 bits
 Probability of commutation: 1.891290625481518e-125
 9.999999999800267547201e-01 1_000_692 118125654385623329379021240469595465429499359410849169418929426942183875146215174300147519604239488439424
 
+"""
+
+"""
+base-128
+
+G = W2 x W... x W23 x W0 x 0
+Minimum order for a never-trivial element: 223092870
+bits: 406.1479617830386.  Nearest: 448 bits     64.0 digits    56.0 bytes
+Probability of commutation: 5.382669313684215e-139
+9.9999999999932764893628700519911944866180419921875000000000e-01    1/1.5e+12   reps allowed < 10_013_850
+1185010205829450
+
+G = W2 x W... x W23 x W0 x S15
+Minimum order for a never-trivial element: 223092870
+bits: 446.3981022529212.  Nearest: 448 bits     64.0 digits    56.0 bytes
+Probability of commutation: 8.171900583922535e-149
+9.9999999999996469490781692002201452851295471191406250000000e-01    1/2.8e+13   reps allowed < 10_006_920
+1659014288161230
+
+G = W2 x W... x W23 x W10 x 0
+Minimum order for a never-trivial element: 223092870
+bits: 442.6891708267996.  Nearest: 448 bits     64.0 digits    56.0 bytes
+Probability of commutation: 5.382669846568477e-152
+1.0000000000000000000000000000000000000000000000000000000000e+00    1/1.3e+20   reps allowed < 10_013_850
+2619496244465100
 """

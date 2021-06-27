@@ -22,8 +22,8 @@
 from collections import Counter
 from math import factorial, gcd, exp, pi, sqrt
 
-
 # Calculates all the partitions of Sn
+from garoupa.algebra.dihedral import D
 from garoupa.algebra.symmetric import S
 
 
@@ -136,4 +136,16 @@ def order_histSD(integers: list) -> dict:
     return initial
 
 
-print(sum(order_histS(34).values()) == orderS(34))
+# G = {k: v for k, v in sorted(list((order_histS(78).items())))}
+# # G = {k: v for k, v in sorted(list((D(8)^32).order_hist.items()))}
+# t = sum(G.values())
+# acc = 0
+# print(max(G.keys()))
+# print(G)
+# for key, v in G.items():
+#     acc += v
+#     p = (t - acc) / t
+#     print(p, f"{acc / t:e}", f"1:{t // acc:e}   reps allowed={int(key-1):_}", flush=True)
+#     if p < 0.99:
+#         break
+# print((D(8)^64).comm_degree, S(78).comm_degree)
