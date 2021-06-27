@@ -20,78 +20,69 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-from hashlib import md5
-
 from garoupa.colors import colorize128bit
-from garoupa.core import zs_perm_id_fromblob, zs_perm_fromid, perm_id_fromzs, s_id_fromzperm
-from garoupa.math import pmat_mult, pmat_inv
+from garoupa.core import cells_id_fromblob, id_fromcells, cells_fromid
+from garoupa.math import int2m4, m42int, m4m, m4inv
 
 
 class Hash:
     """
-    's' (< 34!) and 'z' (< 2^128 - 159) define an element of 256 bits.
-    When importing 128 bits hashes like MD5, it should be split between 's' and 'z'.
-
-    's' should be zero to create a commutative element.
-
-    Set only 'z' for a commutative element;
-    set both 'z' and 's' otherwise.
-    bits = |   ~128 bits ZM127   |   ~128 bits S34   |
 
     Usage:
     >>> a = Hash(b"lots of data")
     >>> b = Hash(b"lots of data 2")
     >>> a.id
-    'TQrQtGEcOZ666oBPwiT4G0QtAh0vW5HW4Vcw4hTD0Ls'
+    'fw-IowLZVKdeXCNkqsTHFiIe06Pv0.oaAXY.fN6xJ2E7.fe36iBXxOYpmm83Q7ZL'
+    >>> b.id
+    'ttXOjA4WLwyrOF6tk2YJeYHhrydN6hrm315uFyZRa9Z0OBPm2NWRkoOYtNHYGlwv'
     >>> (a * b).id
-    'Od1QpzT2bl9fHlanBznoqofqOo12PrCollgAkN1aM3W'
+    'Qq7iG-7VFyikrEZO.I3hNzzr6gyk7pVOCdHXE3vtf0IYf5XRIwTGLaCHCw6Ek.o.'
     >>> (b * a).id
-    'Od1QpzT2bl9fHlanBznoqmMVMKt0c1hFsUBiPNJ6Pqp'
+    'GuaH.VyJ80frrZf5sqAegxzd6sdmpQXdbM3X3AmysRIke8awuP5glCK9GLVPUSJC'
     >>> a * b * ~b == a
     True
     >>> c = Hash(b"lots of data 3")
     >>> (a * b) * c == a * (b * c)
     True
-    >>> old_128bit_hash = md5(b"lots of data for a commuting element").digest()
-    >>> d = Hash.from128bit(old_128bit_hash)
-    >>> d.bits  # four 64-bit parts: zeros, half for 's', zeros, half for 'z'
-    '0000000000000000000000000000000000000000000000000000000000000000000101011110101101011011111011101101000010100100000100110110111100000000000000000000000000000000000000000000000000000000000000001100011000100101001110110110101100101000010010110011011010100010'
-    >>> e = Hash(b"lots of data", commutative=True)
+    >>> e = Hash(b"lots of data")
     >>> f = Hash(b"lots of data 2")
-    >>> e * f == f * e
+    >>> e * f != f * e
     True
-    >>> a * b == b * a
-    False
+    >>> a * b != b * a
+    True
     """
     _repr = None
-    orders = 295232799039604140847618609643520000000  # 34!
-    orderz = 340282366920938463463374607431768211297  # 2**128-159
-    _2_128 = 2 ** 128
-    _n, _id, _z, _s, _perm = None, None, None, None, None
-    _bits, _zs = None, None
+    _n, _id, _cells = None, None, None
+    _bits = None
 
-    def __init__(self, blob, commutative=False):
+    def __init__(self, blob, version="UT64.4"):
+        if version == "UT32.4":
+            self.p = 4294967291
+            self.bytes = 24
+            self.digits = 32
+            self.order = 6277101691541631771514589274378639120656724268335671295241
+        elif version == "UT64.4":
+            self.p = 18446744073709551557
+            self.bytes = 48
+            self.digits = 64
+            self.order = 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249
+        else:
+            raise Exception("Unknown version:", version)
         if blob is not None:
-            self._z, self._s, self._perm, self._id = zs_perm_id_fromblob(blob, commutative)
+            self._cells, self._id = cells_id_fromblob(blob, self.bytes, self.p)
 
     @classmethod
-    def fromperm(cls, perm, z):
+    def fromcells(cls, cells):
         hash = Hash(None)
-        hash._z, hash._perm = z, perm
-        return hash
-
-    @classmethod
-    def fromzs(cls, z, s):
-        hash = Hash(None)
-        hash._z, hash._s = z, s
+        hash._cells = cells
         return hash
 
     @classmethod
     def fromid(cls, id):
         """
         Usage:
-        >>> Hash.fromid("HpHx15miyc2amaxUwSQiv0Z0XtM73NdL0paVyy1inV9").z
-        99929999938476344564747343999999245678
+        >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").n
+        27694086209736845103299750681684630473246580734449841275786785442935721031358612476242143296609286791135053038790338
 
         :param id:
         :return:
@@ -101,93 +92,42 @@ class Hash:
         return hash
 
     @classmethod
-    def from128bit(cls, digest: bytes, commutative=False):
-        """Return hash representing the given 16 bytes:
-        64 most significant bits for 'z', 64 least significant bits for 's', (non-commutative); or,
-        128 bits for z, none for s, if commutative flag is set (z should be less than 2^128-159).
+    def fromn(cls, n: int, p=18446744073709551557,
+              order=39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249):
+        """Hash representing the given int.
+
+        Default 'p' is according to version UT64.4.
 
         Usage:
-        >>> bytes = md5(b"This digest represents a hash comming from some external database.").digest()
-        >>> bytes
-        b'G\\xa9Cm\\xd4>\\x07\\xacy\\xaf\\xc0?xI\\x01O'
-        >>> h = Hash.from128bit(bytes)
+        >>> h = Hash.fromn(7647544756746324134134)
         >>> h.id
-        '00000000000lw1ZHv7gl7eezgThOWaUcKmljcZMPL39'
-        >>> h.bits
-        '0000000000000000000000000000000000000000000000000000000000000000010001111010100101000011011011011101010000111110000001111010110000000000000000000000000000000000000000000000000000000000000000000111100110101111110000000011111101111000010010010000000101001111'
+        '0000000000000000000000000000000000000000000000000001DFc0Ttk5MszS'
         """
-        hash = Hash(None)
-        if commutative:
-            hash._z = int.from_bytes(digest, byteorder="big")
-            hash._s = 0
-        else:
-            hash._z = int.from_bytes(digest[:8], byteorder="big")
-            hash._s = int.from_bytes(digest[8:], byteorder="big")
-        return hash
-
-    def to128bit(self, commutative=False):
-        """The most significant parts of 's' and 'z' should be zero,
-         because conversion will keep only: 64 bits for 's', 64 bits for 'z'.
-         Unless the commutative flag is set, which results in all 128 bits from 'z'.
-
-        Usage:
-        >>> h = Hash.from128bit(b'3124123329432412')
-        >>> h.to128bit()
-        b'3124123329432412'
-        >>> h.bits
-        '0000000000000000000000000000000000000000000000000000000000000000001100110011000100110010001101000011000100110010001100110011001100000000000000000000000000000000000000000000000000000000000000000011001000111001001101000011001100110010001101000011000100110010'
-        """
-        if commutative:
-            zbytes = self.z.to_bytes(16, byteorder="big")
-            return zbytes
-        zbytes = self.z.to_bytes(8, byteorder="big")
-        sbytes = self.s.to_bytes(8, byteorder="big")
-        return zbytes + sbytes
-
-    @classmethod
-    def fromn(cls, n: int):
-        """Return hash representing the given int.
-        Numbers from one of the intervals [0; 34![  or  [2^128; 2^256-159[
-
-        Usage:
-        >>> h = Hash.fromn(324134134)
-        >>> h.id
-        '00000000000000000000000000000000000000Lw25u'
-        """
-        z, s = divmod(n, cls._2_128)
-        return Hash.fromzs(z, s)
+        if n > order:
+            raise Exception(f"Element outside allowed range: {n} >= {order}")
+        return Hash.fromcells(int2m4(n, p))
 
     def calculate(self):
-        if self._perm:
-            self._s, self._id = s_id_fromzperm(self._z, self._perm)
+        if self._cells is not None:
+            self._id = id_fromcells(self._cells, self.digits, self.p)
         elif self._id:
-            self._z, self._s, self._perm = zs_perm_fromid(self._id)
-        elif None not in [self._z, self._s]:
-            self._perm, self._id = perm_id_fromzs(self._z, self._s)
+            self._cells = cells_fromid(self._id, self.p)
         else:
             raise Exception("Missing argument.")
-        if self.s >= self.orders:
-            raise Exception(f"Element 's' part outside allowed range: {self.s} >= {self.orders}")
-        if self.z >= self.orderz:
-            raise Exception(f"Element 'z' part outside allowed range: {self.z} >= {self.orderz}")
+        if self.n >= self.order:
+            raise Exception(f"Element outside allowed range: {self.n} >= {self.order}")
 
     @property
-    def perm(self):
-        if self._perm is None:
+    def cells(self):
+        if self._cells is None:
             self.calculate()
-        return self._perm
+        return self._cells
 
     @property
     def n(self):
         if self._n is None:
-            self._n = self.z * self._2_128 + self.s
+            self._n = m42int(self.cells, self.p)
         return self._n
-
-    @property
-    def zs(self):
-        if self._zs is None:
-            self._zs = self.z, self.s
-        return self._zs
 
     @property
     def id(self):
@@ -195,42 +135,30 @@ class Hash:
             self.calculate()
         return self._id
 
-    @property
-    def s(self):
-        if self._s is None:
-            self.calculate()
-        return self._s
-
-    @property
-    def bits(self):
-        if self._bits is None:
-            self._bits = bin(self.n)[2:].rjust(256, "0")
-        return self._bits
-
-    @property
-    def z(self):
-        if self._z is None:
-            self.calculate()
-        return self._z
+    # @property
+    # def bits(self):
+    #     if self._bits is None:
+    #         self._bits = bin(self.n)[2:].rjust(256, "0")
+    #     return self._bits
 
     def __mul__(self, other):
-        return Hash.fromperm(perm=pmat_mult(self.perm, other.perm), z=(self.z + other.z) % self.orderz)
+        return Hash.fromcells(m4m(self.cells, other.cells, self.p))
 
     def __invert__(self):
-        return Hash.fromperm(perm=pmat_inv(self.perm), z=self.orderz - self.z)
+        return Hash.fromcells(m4inv(self.cells, self.p))
 
     def __truediv__(self, other):
-        return Hash.fromperm(perm=pmat_mult(self.perm, pmat_inv(other.perm)), z=(self.z - other.z) % self.orderz)
+        return Hash.fromcells(m4m(self.cells, m4inv(other.cells, self.p), self.p))
 
     def __add__(self, other):
-        return Hash.fromzs((self.z + other.z) % self.orderz, (self.s + other.s) % self.orders)
+        return Hash.fromn((self.n + other.n) % self.order)
 
     def __sub__(self, other):
-        return Hash.fromzs((self.z - other.z) % self.orderz, (self.s - other.s) % self.orders)
+        return Hash.fromn((self.n - other.n) % self.order)
 
     def __repr__(self):
         if self._repr is None:
-            self._repr = colorize128bit(self.id)
+            self._repr = colorize128bit(self.id, self.digits)
         return self._repr
 
     @property
@@ -241,16 +169,7 @@ class Hash:
         return self.id
 
     def __eq__(self, other):
-        return self.z == other.z and self.s == other.s
-
-        # @classmethod
-    # def muls(cls, size, /, *perms):  # 23.6 µs
-    #     return Hash(perm=reduce(pmat_mult, [p.perm for p in perms]))
-    #
-    # @classmethod
-    # def pairmuls(cls, size, /, *pairs):  # 5.34 µs
-    #     results = map(lambda a, b: pmat_mult(a.perm, b.perm), pairs[::2], pairs[1::2])
-    #     return [Hash(perm=res) for res in results]
+        return self.n == other.n
 
 
-identity = Hash.fromzs(0, 0)
+identity = Hash.fromn(0)

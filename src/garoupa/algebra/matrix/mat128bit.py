@@ -22,7 +22,7 @@
 
 from garoupa.algebra.abs.element import Element
 from garoupa.algebra.matrix.mat import Mat
-from garoupa.math import int2bm, bm2int, bmm, bminv
+from garoupa.math import int2bm, bm2int, mm, minv
 
 
 class Mat128bit(Element):
@@ -42,12 +42,12 @@ class Mat128bit(Element):
         self.m = int2bm(i) if _m is None else _m
 
     def __mul__(self, other):
-        m = bmm(self.m, other.m, 2)
+        m = mm(self.m, other.m, 2)
         return Mat128bit(bm2int(m), _m=m)
 
     def __repr__(self):
         return f"{self.m}"
 
     def __invert__(self):
-        m = bminv(self.m)
+        m = minv(self.m)
         return Mat128bit(bm2int(m), _m=m)

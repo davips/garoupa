@@ -22,33 +22,28 @@
 
 from blake3 import blake3
 
-from garoupa.base62 import b62enc, b62dec
-from garoupa.math import int2pmat, pmat2int
+from garoupa.base64 import b64enc, b64dec
+from garoupa.math import m42int, int2m4
 
 
-def zs_perm_id_fromblob(blob, commutative):
-    digest = blake3(blob).digest()
-    from garoupa import Hash
-    z = int.from_bytes(digest[:16], byteorder="big") % Hash.orderz
-    s = 0 if commutative else int.from_bytes(digest[16:], byteorder="big") % Hash.orders
-    perm = int2pmat(s, 34)
-    id = b62enc(z, s)
-    return z, s, perm, id
+def cells_id_fromblob(blob, bytes, p):
+    """Takes bytes from blake3 excluding rightmost bit.
+
+    Blake3 return a digest with the first byte to the left."""
+    digest = blake3(blob).digest(length=bytes)
+    n = int.from_bytes(digest, byteorder="big") >> 1
+    cells = int2m4(n, p)
+    digits = bytes + bytes // 3
+    id = b64enc(n, digits)
+    return cells, id
 
 
-def s_id_fromzperm(z: int, perm: bytes):
-    s = pmat2int(perm)
-    id = b62enc(z, s)
-    return s, id
+def id_fromcells(cells, digits, p):
+    num = m42int(cells, p)
+    id = b64enc(num, digits)
+    return id
 
 
-def zs_perm_fromid(id):
-    z, s = b62dec(id)
-    perm = int2pmat(s, 34)
-    return z, s, perm
-
-
-def perm_id_fromzs(z, s):
-    perm = int2pmat(s, 34)
-    id = b62enc(z, s)
-    return perm, id
+def cells_fromid(id, p):
+    num = b64dec(id)
+    return int2m4(num, p)
