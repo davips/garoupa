@@ -31,6 +31,8 @@ class M(Group):
         0 1 b b
         0 0 1 b
         0 0 0 1
+
+        >>> M(4, 5)
         """
         identity = Mat(0, n, mod)
         self.cells = identity.cells
