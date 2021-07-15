@@ -129,11 +129,11 @@ def pmat_inv(m):
 def m4m(a, b, mod):
     """Multiply two unitriangular matrices 4x4 modulo 'mod'.
 
-    'a' and 'b' given as lists in the format: [a1,4 a1,3 a2,4 a2,3 a3,4 a1,2]
+    'a' and 'b' given as lists in the format: [a5, a4, a3, a2, a1, a0]
 
-    1 a0 a4 a5
+    1 a4 a1 a0
     0  1 a2 a3
-    0  0  1 a1
+    0  0  1 a5
     0  0  0  1
 
     >>> a, b = [51,18340,56,756,456,344], [781,2340,9870,1234,9134,3134]
@@ -144,23 +144,23 @@ def m4m(a, b, mod):
     True
     """
     return [
-        (a[0] + b[0] + a[5] * b[2] + a[1] * b[4]) % mod,
-        (a[1] + b[1] + a[5] * b[3]) % mod,
-        (a[2] + b[2] + a[3] * b[4]) % mod,
+        (a[0] + b[0]) % mod,
+        (a[1] + b[1]) % mod,
+        (a[2] + b[2] + a[3] * b[0]) % mod,
         (a[3] + b[3]) % mod,
-        (a[4] + b[4]) % mod,
-        (a[5] + b[5]) % mod
+        (a[4] + b[4] + a[1] * b[3]) % mod,
+        (a[5] + b[5] + a[1] * b[2] + a[4] * b[0]) % mod
     ]
 
 
 def m4inv(m, mod):
     """Inverse of unitriangular matrix modulo 'mod'
 
-    'm' given as a list in the format: [a1,4 a1,3 a2,4 a2,3 a3,4 a1,2]
+    'm' given as a list in the format: [a5, a4, a3, a2, a1, a0]
 
-    1 a0 a4 a5
+    1 a4 a1 a0
     0  1 a2 a3
-    0  0  1 a1
+    0  0  1 a5
     0  0  0  1
 
     Based on https://groupprops.subwiki.org/wiki/Unitriangular_matrix_group:UT(4,p)
@@ -170,12 +170,12 @@ def m4inv(m, mod):
     True
     """
     return [
-        (m[5] * m[2] + m[1] * m[4] - m[5] * m[3] * m[4] - m[0]) % mod,
-        (m[5] * m[3] - m[1]) % mod,
-        (m[3] * m[4] - m[2]) % mod,
+        -m[0] % mod,
+        -m[1] % mod,
+        (m[3] * m[0] - m[2]) % mod,
         -m[3] % mod,
-        -m[4] % mod,
-        -m[5] % mod,
+        (m[1] * m[3] - m[4]) % mod,
+        (m[1] * m[2] + m[4] * m[0] - m[1] * m[3] * m[0] - m[5]) % mod
     ]
 
 
@@ -191,7 +191,7 @@ def int2m4(num, mod):
     num, m[3] = divmod(num, mod)
     num, m[2] = divmod(num, mod)
     num, m[1] = divmod(num, mod)
-    num, m[0] = divmod(num, mod)
+    _, m[0] = divmod(num, mod)
     return m
 
 
