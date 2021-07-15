@@ -49,7 +49,7 @@ class Mat(Element):
         True
         """
         self.cells = sum(range(1, n))
-        super().__init__(i, mod ** self.cells)
+        super().__init__(i, order=mod ** self.cells)
         self.n, self.mod = n, mod
         self.m = int2ml(i, mod, n) if _m is None else _m
 
@@ -63,6 +63,14 @@ class Mat(Element):
         return f"{self.m}"
 
     def __invert__(self):
+        """
+        >>> a = Mat(8761437689349876134, 4, 4294967291)
+        >>> b = Mat(42978259879825, 4, 4294967291)
+        >>> a == a * b * ~b
+        True
+
+        :return:
+        """
         import numpy as np
-        m = np.linalg.inv(self.m) % self.mod
+        m = (np.linalg.inv(self.m) % self.mod).astype(np.uint64)
         return Mat(m2intl(m, self.mod), self.n, self.mod, _m=m)

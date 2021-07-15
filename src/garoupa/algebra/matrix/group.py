@@ -31,8 +31,6 @@ from multiprocessing import Value, Lock
 from random import Random
 from time import time
 
-import pathos.multiprocessing as mp
-from progress.bar import Bar
 
 from garoupa.algebra.abs.element import Element
 
@@ -59,6 +57,8 @@ class Group:
         >>> max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))
         (272, 4000)
         """
+        import pathos.multiprocessing as mp
+        from progress.bar import Bar
 
         def thread(idx):
             A, B = self.replace(seed=idx + self.seed), self.replace(seed=idx + 1 + self.seed)

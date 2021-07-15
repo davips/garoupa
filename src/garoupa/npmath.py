@@ -266,15 +266,15 @@ def bm2intl(m, bits):
 def int2ml(n, o, l):
     """
     Usage:
-    >>> from numpy import uint8
+    >>> from numpy import uint64
     >>> int2ml(4095, 4, 5)
     array([[1, 3, 3, 3, 3],
            [0, 1, 3, 3, 0],
            [0, 0, 1, 0, 0],
            [0, 0, 0, 1, 0],
-           [0, 0, 0, 0, 1]], dtype=uint8)
+           [0, 0, 0, 0, 1]], dtype=uint64)
     """
-    m = np.eye(l, dtype=np.ubyte)
+    m = np.eye(l, dtype=np.uint64)
     for i in range(l - 1):
         for j in range(i + 1, l):
             n, rem = divmod(n, o)
@@ -290,7 +290,7 @@ def m2intl(m, o):
     ...            [0, 1, 3, 3, 0],
     ...            [0, 0, 1, 0, 0],
     ...            [0, 0, 0, 1, 0],
-    ...            [0, 0, 0, 0, 1]], dtype=uint8)
+    ...            [0, 0, 0, 0, 1]], dtype=np.uint64)
     >>> m2intl(m, 4)
     4095
     """
@@ -321,8 +321,8 @@ def m42int(m, o):
     ...            [0, 1, 3, 3, 0],
     ...            [0, 0, 1, 0, 0],
     ...            [0, 0, 0, 1, 0],
-    ...            [0, 0, 0, 0, 1]], dtype=uint8)
-    >>> m2int(m, 4)
+    ...            [0, 0, 0, 0, 1]], dtype=np.uint64)
+    >>> m42int(m, 4)
     4095
     """
     n = 0
@@ -338,17 +338,13 @@ def m42int(m, o):
 def int2m4(n, o, l=4):
     """
     Usage:
-    >>> from numpy import uint8
-    >>> int2m(4095, 4, 5)
+    >>> int2m4(4095, 4, 5)
     array([[1, 3, 3, 3, 3],
            [0, 1, 3, 3, 0],
            [0, 0, 1, 0, 0],
            [0, 0, 0, 1, 0],
-           [0, 0, 0, 0, 1]], dtype=uint8)
+           [0, 0, 0, 0, 1]], dtype=uint64)
     """
-    # if o < 257:
-    #     m = np.eye(l, dtype=np.ubyte)
-    # else:
     m = np.eye(l, dtype=np.uint64)
     for i in range(l - 1):
         for j in range(i + 1, l):

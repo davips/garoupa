@@ -81,7 +81,6 @@ class D(Group):
             self._order_hist = dict(sorted(hist.items()))
         return self._order_hist
 
-
     def euler(self, d):
         """Euler Totient Function
         Based on Gabriel Dalforno code."""

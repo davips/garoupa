@@ -19,7 +19,7 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-
+from garoupa.algebra.matrix.aux import ncclasses
 from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.matrix.mat import Mat
 
@@ -32,7 +32,11 @@ class M(Group):
         0 0 1 b
         0 0 0 1
 
-        >>> M(4, 5)
+        >>> ~M(4, 5, seed=42)
+        [[1 3 2 4]
+         [0 1 1 3]
+         [0 0 1 1]
+         [0 0 0 1]]
         """
         identity = Mat(0, n, mod)
         self.cells = identity.cells
@@ -49,7 +53,7 @@ class M(Group):
 
     @property
     def comm_degree(self):
-        return None
+        return ncclasses(self.n, self.mod) / self.order
 
     def replace(self, *args, **kwargs):
         dic = {"n": self.n, "mod": self.mod, "seed": self.seed}
