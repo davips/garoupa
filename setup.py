@@ -25,7 +25,7 @@ import setuptools
 
 NAME = "garoupa"
 
-VERSION = "0.2101.12"
+VERSION = "0.2102.12"
 
 AUTHOR = 'Davi Pereira-Santos'
 
