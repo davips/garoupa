@@ -72,13 +72,17 @@ class Hash:
             self._cells, self._id = cells_id_fromblob(blob, self.bytes, self.p)
 
     @classmethod
-    def fromcells(cls, cells):
+    def fromcells(cls, cells, p=18446744073709551557,
+                  order=39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249):
         hash = Hash(None)
         hash._cells = cells
+        hash.p = p
+        hash.order = order
         return hash
 
     @classmethod
-    def fromid(cls, id):
+    def fromid(cls, id, p=18446744073709551557,
+               order=39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249):
         """
         Usage:
         >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").n
@@ -89,6 +93,8 @@ class Hash:
         """
         hash = Hash(None)
         hash._id = id
+        hash.p = p
+        hash.order = order
         return hash
 
     @classmethod
@@ -105,7 +111,7 @@ class Hash:
         """
         if n > order:
             raise Exception(f"Element outside allowed range: {n} >= {order}")
-        return Hash.fromcells(int2m4(n, p))
+        return Hash.fromcells(int2m4(n, p), p, order)
 
     def calculate(self):
         if self._cells is not None:
@@ -142,19 +148,19 @@ class Hash:
     #     return self._bits
 
     def __mul__(self, other):
-        return Hash.fromcells(m4m(self.cells, other.cells, self.p))
+        return Hash.fromcells(m4m(self.cells, other.cells, self.p), self.p, self.order)
 
     def __invert__(self):
-        return Hash.fromcells(m4inv(self.cells, self.p))
+        return Hash.fromcells(m4inv(self.cells, self.p), self.p, self.order)
 
     def __truediv__(self, other):
-        return Hash.fromcells(m4m(self.cells, m4inv(other.cells, self.p), self.p))
+        return Hash.fromcells(m4m(self.cells, m4inv(other.cells, self.p), self.p), self.p, self.order)
 
     def __add__(self, other):
-        return Hash.fromn((self.n + other.n) % self.order)
+        return Hash.fromn((self.n + other.n) % self.order, self.p, self.order)
 
     def __sub__(self, other):
-        return Hash.fromn((self.n - other.n) % self.order)
+        return Hash.fromn((self.n - other.n) % self.order, self.p, self.order)
 
     def __repr__(self):
         if self._repr is None:

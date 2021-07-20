@@ -5,11 +5,14 @@ from garoupa.algebra.matrix.mat import Mat
 from garoupa.base64 import *
 from sympy import isprime
 
+from garoupa.math import m42int
+
 z = 2 ** 32
 h = z * 2 ** 96
 g = h * 2 ** 64
 lasthex = b64dec("ffffffffffffffffffffffffffffffff")
 p = 2 ** 32 - 5
+
 # rho = "--------------------------------"
 # lastd = "----------------ZZZZZZZZZZZZZZZZ"
 # d = "-------------------------------0"
@@ -60,3 +63,13 @@ print("l * f * g * x * y == f * l * g * y * x == f * g * l * y * x == f * g * y 
       l * f * g * x * y == f * l * g * y * x == f * g * l * y * x == f * g * y * l * x == f * g * y * x * l)
 
 print(f * x * y * ~x == f * y)
+
+a = Hash.fromn(4 * p // 5, p, p ** 6)
+print(a, ~a)
+
+a = Hash.fromn(4 * p ** 4 // 5, p, p ** 6)
+print(a.cells, (~a).cells)
+print(a * (~a))
+print(log(a.n, p), log((~a).n, p), log(4 * p ** 4 // 5, p))
+
+print(m42int([0, 0, 858993459, 858993459, 858993459, 858993459], p) < p ** 6)
