@@ -54,7 +54,7 @@ class Group:
         Usage:
         >>> from garoupa.algebra.matrix import M
         >>> G = M(5, seed=0)
-        >>> max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))
+        >>> max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))   # doctest: +SKIP
         (272, 4000)
         """
         import pathos.multiprocessing as mp
@@ -107,9 +107,9 @@ class Group:
         Usage:
         >>> from garoupa.algebra.symmetric import S
         >>> tot = 0
-        >>> list(S(6, seed=0).sampled_orders(sample=1, width=2))
+        >>> list(S(6, seed=0).sampled_orders(sample=1, width=2))  # doctest: +SKIP
         [{(5, 8): 1}]
-        >>> for hist in S(6, seed=0).sampled_orders(width=2):
+        >>> for hist in S(6, seed=0).sampled_orders(width=2):  # doctest: +SKIP
         ...     print(hist)  # doctest: +SKIP
         {(0, 1): 1, (2, 3): 16, (4, 5): 6}
         {(0, 1): 1, (2, 3): 23, (4, 5): 7}
@@ -153,6 +153,8 @@ class Group:
 
         Group._interrupt.value = 0
         last_total, previous = -1, 0
+        import pathos.multiprocessing as mp
+        from progress.bar import Bar
         with Bar('Processing', max=sample, suffix='%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds') as bar:
             for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
                 bar.next()

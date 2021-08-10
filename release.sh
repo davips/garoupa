@@ -6,7 +6,9 @@ echo
 
 echo "---------------- readme ----------------"
 read -p "press any key"
+pip install pathos progress
 autoreadme -i README-edit.md -s examples/ -o README.md
+pip uninstall pathos progress
 echo "---------------- readme done ----------------"
 echo
 

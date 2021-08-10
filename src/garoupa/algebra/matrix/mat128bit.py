@@ -19,10 +19,11 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
+from sympy.physics.units import mm
 
 from garoupa.algebra.abs.element import Element
 from garoupa.algebra.matrix.mat import Mat
-from garoupa.math import int2bm, bm2int, mm, minv
+from garoupa.npmath import int2bm, bm2int, bminv
 
 
 class Mat128bit(Element):
@@ -49,5 +50,5 @@ class Mat128bit(Element):
         return f"{self.m}"
 
     def __invert__(self):
-        m = minv(self.m)
+        m = bminv(self.m)
         return Mat128bit(bm2int(m), _m=m)

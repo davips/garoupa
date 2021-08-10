@@ -36,9 +36,9 @@ class Hash:
     >>> b.id
     'ttXOjA4WLwyrOF6tk2YJeYHhrydN6hrm315uFyZRa9Z0OBPm2NWRkoOYtNHYGlwv'
     >>> (a * b).id
-    'Qq7iG-7VFyikrEZO.I3hNzzr6gyk7pVOCdHXE3vtf0IYf5XRIwTGLaCHCw6Ek.o.'
+    'I-WuI4QUFeHGKfTNKvQq1X5jqz-rfMJC19-pIAVniOF3ScY-1ac3fMqhAElcjexK'
     >>> (b * a).id
-    'GuaH.VyJ80frrZf5sqAegxzd6sdmpQXdbM3X3AmysRIke8awuP5glCK9GLVPUSJC'
+    'I-WuI4QUFeHGKfTNKvQq1-T.MqLLanrR4nsDP4B2SuNUeN7xgiWFtVokR7Qcb05-'
     >>> a * b * ~b == a
     True
     >>> c = Hash(b"lots of data 3")

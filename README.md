@@ -61,7 +61,7 @@ b = Hash(blob=b"Some other binary content. Might be, e.g., an action or another 
 c = a * b
 print(f"{a} * {b} = {c}")
 """
-3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 * XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh
+1WCCD1p4Msmn2hvbiaHOPcYw8qQnGMai5zFZE68xr2kymjdnq6CEysKx7AUZGDqK * hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62
 """
 ```
 
@@ -70,8 +70,8 @@ print(~b)
 # Multiplication can be reverted by the inverse hash. Zero is the identity hash.
 print(f"{b} * {~b} = {b * ~b} = 0")
 """
-R4J9jUDTFmjZqI7IpD3rrvVR4SA7opVCpZAu7ZnMID6
-XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * R4J9jUDTFmjZqI7IpD3rrvVR4SA7opVCpZAu7ZnMID6 = 0000000000000000000000000000000000000000000 = 0
+Khf00n.bNZZF6fe7CB8.0UaG6rgeXrGfUVwMDON29e8yuXoZzq6ZCVfWEoBk6KDc
+hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz * Khf00n.bNZZF6fe7CB8.0UaG6rgeXrGfUVwMDON29e8yuXoZzq6ZCVfWEoBk6KDc = 0000000000000000000000000000000000000000000000000000000000000000 = 0
 """
 ```
 
@@ -79,7 +79,7 @@ XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * R4J9jUDTFmjZqI7IpD3rrvVR4SA7opVCpZ
 
 print(f"{b} * {identity} = {b * identity} = b")
 """
-XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * 0000000000000000000000000000000000000000000 = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = b
+hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz * 0000000000000000000000000000000000000000000000000000000000000000 = hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = b
 """
 ```
 
@@ -87,7 +87,7 @@ XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 * 0000000000000000000000000000000000
 
 print(f"{c} * {~b} = {c * ~b} = {a} = a")
 """
-bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh * R4J9jUDTFmjZqI7IpD3rrvVR4SA7opVCpZAu7ZnMID6 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = a
+jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 * Khf00n.bNZZF6fe7CB8.0UaG6rgeXrGfUVwMDON29e8yuXoZzq6ZCVfWEoBk6KDc = 1WCCD1p4Msmn2hvbiaHOPcYw8qQnGMai5zFZE68xr2kymjdnq6CEysKx7AUZGDqK = 1WCCD1p4Msmn2hvbiaHOPcYw8qQnGMai5zFZE68xr2kymjdnq6CEysKx7AUZGDqK = a
 """
 ```
 
@@ -95,7 +95,7 @@ bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh * R4J9jUDTFmjZqI7IpD3rrvVR4SA7opVCpZ
 
 print(f"{~a} * {c} = {~a * c} = {b} = b")
 """
-v4QJKocAsbzzSMQre5nY8gxZvRtBgXkYQPn1d5wld4i * bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = b
+-5ppo-CXfdBEZKwQJRno1iP6a0I1pTGJLUOa5yvjIjEYAfE3FQ8gNQAxzmT4O6P- * jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 = hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = b
 """
 ```
 
@@ -104,7 +104,7 @@ v4QJKocAsbzzSMQre5nY8gxZvRtBgXkYQPn1d5wld4i * bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQe
 # Division is shorthand for reversion.
 print(f"{c} / {b} = {c / b} = a")
 """
-bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh / XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLdo6GTk6FO6 = 3dJZQ80zDmZ1hyah8Bj14GFU4gxRr7N2RY5My0iKJn0 = a
+jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 / hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = 1WCCD1p4Msmn2hvbiaHOPcYw8qQnGMai5zFZE68xr2kymjdnq6CEysKx7AUZGDqK = a
 """
 ```
 
@@ -113,7 +113,7 @@ bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh / XdQj1SPgqbpRK2uFx4ShKttP6Mc0qHZgLd
 # Hash multiplication is not expected to be commutative.
 print(f"{a * b} != {b * a}")
 """
-bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh != bGkIRaQg4OOT21Ux5GBiP7gof9J9FBHFaFtRUHFijIu
+jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 != jFnCCFpU-8kJY2h3HBB-CsB9NaEYXZlsV3Pmu.WFL2pQpx6gvFcTN-gR54d5f0K2
 """
 ```
 
@@ -122,7 +122,7 @@ bGkIRaQg4OOT21Ux5GBiP71v06XGkoiZQei1n3g9Izh != bGkIRaQg4OOT21Ux5GBiP7gof9J9FBHFa
 # Hash multiplication is associative.
 print(f"{a * (b * c)} = {(a * b) * c}")
 """
-Dpki8EEC2ODuthyLOEqrbQBqQnXEv7LZ5GWUBy9Xr7s = Dpki8EEC2ODuthyLOEqrbQBqQnXEv7LZ5GWUBy9Xr7s
+DiLddiPNYgBrU4y7nbb-mm73.unoKH6Ux.AktmuBlx6q51QMs6sjNOGj4Cgvxojn = DiLddiPNYgBrU4y7nbb-mm73.unoKH6Ux.AktmuBlx6q51QMs6sjNOGj4Cgvxojn
 """
 ```
 
@@ -165,11 +165,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[1, 0, 3, 2], 2, ds6»	*	«[2, 3, 0, 1], 0, dr3»	=	«[3, 2, 1, 0], 2, ds3»
-«[2, 1, 0, 3], 3, ds5»	*	«[1, 2, 0, 3], 3, dr0»	=	«[1, 0, 2, 3], 1, ds1»
-«[1, 2, 0, 3], 2, dr1»	*	«[3, 0, 2, 1], 1, ds7»	=	«[3, 1, 0, 2], 3, ds0»
-«[2, 1, 0, 3], 3, ds4»	*	«[0, 3, 1, 2], 0, ds6»	=	«[2, 3, 1, 0], 3, dr2»
-«[0, 1, 2, 3], 1, ds2»	*	«[1, 0, 2, 3], 1, ds5»	=	«[1, 0, 2, 3], 2, dr1»
+«[2, 0, 1, 3], 1, ds0»	*	«[1, 3, 0, 2], 0, ds0»	=	«[0, 3, 2, 1], 1, dr0»
+«[0, 1, 2, 3], 1, ds4»	*	«[2, 3, 0, 1], 2, dr0»	=	«[2, 3, 0, 1], 3, ds0»
+«[0, 2, 1, 3], 3, dr1»	*	«[3, 0, 1, 2], 1, ds4»	=	«[3, 0, 2, 1], 4, ds1»
+«[1, 0, 2, 3], 2, ds6»	*	«[3, 1, 0, 2], 2, dr1»	=	«[3, 0, 1, 2], 4, ds1»
+«[3, 0, 1, 2], 0, ds3»	*	«[3, 0, 1, 2], 0, dr4»	=	«[2, 3, 0, 1], 0, ds3»
 """
 ```
 
@@ -179,7 +179,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[2, 1, 6, 3, 0, 4, 10, 11, 8, 7, 5, 9]
+[0, 11, 6, 8, 5, 7, 2, 4, 9, 1, 3, 10]
 """
 ```
 
@@ -293,9 +293,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          908/10000:  12.0 bits	~9.08 %
-    |D8×D8×D8×D8| = 65536:         375/10000:  16.0 bits	~3.75 %
- |D8×D8×D8×D8×D8| = 1048576:       166/10000:  20.0 bits	~1.66 %
+       |D8×D8×D8| = 4096:          830/10000:  12.0 bits	~8.3 %
+    |D8×D8×D8×D8| = 65536:         394/10000:  16.0 bits	~3.94 %
+ |D8×D8×D8×D8×D8| = 1048576:       144/10000:  20.0 bits	~1.44 %
 """
 ```
 
@@ -312,7 +312,7 @@ for G in Gs:
 import operator
 from datetime import datetime
 from functools import reduce
-from math import log
+from math import log, inf
 from sys import argv
 
 from garoupa.algebra.dihedral import D
@@ -368,16 +368,20 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
     for k, v in hist.items():
         if k[0] <= limit:
             bad += v
-    print(f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
-          G, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), flush=True)
     print(hist, flush=True)
+    hist = hist.copy()
+    if (inf, inf) in hist:
+        del hist[(inf, inf)]
+    hist = {int((k[0] + k[1]) / 2): v for k, v in hist.items()}
+    print(f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
+          G, G._pi_core(hist), datetime.now().strftime("%d/%m/%Y %H:%M:%S"), flush=True)
 # * -> [Explicit FOR due to autogeneration of README through eval]
 """
 21.376617194973697 bits   Pc: 0.004113533525298232  order: 2722720 D5×D7×D11×D13×D17
 --------------------------------------------------------------
-
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 16/04/2021 05:52:04
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
+
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 10/08/2021 20:48:43
 """
 ```
 

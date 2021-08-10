@@ -67,10 +67,13 @@ class D(Group):
     @property
     def order_hist(self):
         """Sorted histogram of element orders.
+
+        Based on Gabriel Dalforno code.
+
         Usage
         >>> D(7).order_hist
         {1: 1, 2: 7, 7: 6}
-        Based on Gabriel Dalforno code."""
+        """
         if self._order_hist is None:
             rule = self.n % 2
             hist = {1: 1, 2: self.n if rule != 0 else self.n + 1}
