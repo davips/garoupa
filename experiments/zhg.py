@@ -1,3 +1,7 @@
+"""
+Example of identifiers from diferent subgroups in G.
+"""
+
 from math import log
 
 from garoupa import Hash
@@ -68,8 +72,9 @@ a = Hash.fromn(4 * p // 5, p, p ** 6)
 print(a, ~a)
 
 a = Hash.fromn(4 * p ** 4 // 5, p, p ** 6)
-print(a.cells, (~a).cells)
-print(a * (~a))
-print(log(a.n, p), log((~a).n, p), log(4 * p ** 4 // 5, p))
+print(a, (~a))
 
-print(m42int([0, 0, 858993459, 858993459, 858993459, 858993459], p) < p ** 6)
+
+print()
+print(x*f)
+print(f*x)
