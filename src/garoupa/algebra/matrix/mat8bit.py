@@ -30,20 +30,16 @@ class Mat8bit(Element):
         17x17 with 8 zeros to match 128 bits.
 
         Usage:
-        >>> a = Mat8bit(1414343245)
-        >>> b = Mat8bit(2345254565)
-        >>> a * b  # doctest: +SKIP
-        [[1. 0. 1. 1. 1.]
-         [0. 1. 0. 1. 0.]
-         [0. 0. 1. 0. 0.]
+        >>> a = Mat8bit(127)
+        >>> b = Mat8bit(88)
+        >>> a * b
+        [[1. 0. 0. 0. 1.]
+         [0. 1. 0. 0. 1.]
+         [0. 0. 1. 1. 1.]
          [0. 0. 0. 1. 0.]
          [0. 0. 0. 0. 1.]]
-        >>> ~(a * b)  # doctest: +SKIP
-        [[1. 0. 1. 1. 1.]
-         [0. 1. 0. 1. 0.]
-         [0. 0. 1. 0. 0.]
-         [0. 0. 0. 1. 0.]
-         [0. 0. 0. 0. 1.]]
+        >>> (a * b) * ~b == a
+        True
          """
         super().__init__(i, 2 ** 8)
         if i == self.i and _m is not None:

@@ -49,7 +49,7 @@ class Natm(Element):
         >>> a = Natm(7, 5)
         >>> b = Natm(9, 5)
         >>> a * b
-        1
+        3
         """
         return Natm((self.i * other.i) % self.n, self.n)
 
@@ -58,8 +58,8 @@ class Natm(Element):
         Usage:
         >>> a = Natm(7, 5)
         >>> b = Natm(9, 5)
-        >>> a * b
-        3
+        >>> a + b
+        1
         """
         return Natm((self.i + other.i) % self.n, self.n)
 

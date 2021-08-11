@@ -29,6 +29,10 @@ def int2pmat(number, side):
 
     Pads to side.
 
+    Usage
+    >>> int2pmat(4, 4)
+    [0, 2, 1, 3]
+
     Parameters
     ----------
     number
@@ -49,6 +53,10 @@ def int2pmat(number, side):
 
 def pmat2int(matrix):
     """Convert permutation to number.
+
+    Usage
+    >>> pmat2int([0, 2, 1, 3])
+    4
 
     Parameters
     ----------

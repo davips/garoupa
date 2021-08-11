@@ -27,16 +27,37 @@ from garoupa.algebra.product.product import Product
 
 class M8bit(Group):
     def __init__(self, seed=None):
+        """
+        Usage:
+        >>> G = M8bit(seed=0)
+        >>> G, ~G
+        (M8bit, [[1. 0. 1. 1. 0.]
+         [0. 1. 1. 1. 0.]
+         [0. 0. 1. 0. 0.]
+         [0. 0. 0. 1. 0.]
+         [0. 0. 0. 0. 1.]])
+        """
+
         super().__init__(Mat8bit(0), lambda: (Mat8bit(i) for i in range(self.order)), seed)
 
     def __iter__(self):
         while True:
-            yield Mat8bit(self.samplei)
+            yield Mat8bit(self.samplei())
 
     def __repr__(self):
         return self.__class__.__name__
 
     def replace(self, *args, **kwargs):
+        """
+        Usage:
+        >>> G = M8bit(seed=0)
+        >>> ~G.replace(seed=1)
+        [[1. 0. 0. 0. 1.]
+         [0. 1. 0. 0. 0.]
+         [0. 0. 1. 1. 0.]
+         [0. 0. 0. 1. 0.]
+         [0. 0. 0. 0. 1.]]
+        """
         dic = {"seed": self.seed}
         dic.update(kwargs)
         return self.__class__(**dic)
