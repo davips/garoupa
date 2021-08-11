@@ -130,6 +130,10 @@ print(repr(m.hash))
 
 
 ### Features
+* [x] Create noncommutative identifiers from binary content
+* [ ] Create commutative identifiers from binary content
+  * [ ] Create elements from H
+  * [ ] Create elements from H
 
 
 ### Performance
