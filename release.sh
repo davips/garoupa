@@ -1,14 +1,14 @@
 echo
 echo "----------------- test -----------------------"
+pip install numpy pathos progress
 pytest src tests --cov=src --doctest-modules
 echo "----------------- tested -----------------------"
 echo; echo
 
 echo "---------------- readme ----------------"
 read -p "press any key"
-pip install pathos progress
 autoreadme -i README-edit.md -s examples/ -o README.md
-pip uninstall pathos progress
+pip uninstall numpy pathos progress
 echo "---------------- readme done ----------------"
 echo; echo
 
