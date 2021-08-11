@@ -25,6 +25,14 @@ from garoupa.algebra.matrix.group import Group
 
 class Zm(Group):
     def __init__(self, n, seed=None):
+        """
+        Usage:
+        >>> G = Zm(1414343245, seed=0)
+        >>> G.comm_degree
+        1
+        >>> G, ~G
+        (Zm1414343245, 906691059)
+        """
         sorted = lambda: (Natm(i, n) for i in range(n))
         super().__init__(Natm(1, n), sorted, seed)
         self.n = n
@@ -42,6 +50,12 @@ class Zm(Group):
         return f"Zm{self.n}"
 
     def replace(self, *args, **kwargs):
+        """
+        Usage:
+        >>> G = Zm(1414343245, seed=0)
+        >>> ~G.replace(seed=1)
+        144272509
+        """
         dic = {"n": self.n, "seed": self.seed}
         dic.update(kwargs)
         return self.__class__(**dic)

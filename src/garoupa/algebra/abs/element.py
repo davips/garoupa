@@ -36,6 +36,12 @@ class Element(ABC):
     _hash = None
 
     def __post_init__(self):
+        """
+        Usage
+        >>> from garoupa.algebra.dihedral import Ds
+        >>> Ds(64**2, 64**32).bits - 1
+        192.0
+        """
         self.name = f"{self.__class__.__name__.lower()}_{self.i}"
         self.bits = log(self.order, 2)
 
@@ -44,27 +50,63 @@ class Element(ABC):
         pass
 
     def __xor__(self, other):
+        """
+        Usage
+        >>> from garoupa.algebra.dihedral import Ds
+        >>> Ds(64**2,64**5) ^ 3
+        ds4096
+        """
         return reduce(operator.mul, [self] * other)
 
     __pow__ = __xor__
 
     def __repr__(self):
+        """
+        Usage
+        >>> from garoupa.algebra.dihedral import Ds
+        >>> Ds(64**3, 64**5) ^ 3
+        ds262144
+        """
         return self.name
 
     def __eq__(self, other):
+        """
+        Usage
+        >>> from garoupa.algebra.dihedral import Ds
+        >>> Ds(64**2, 64**5) ^ 3 == Ds(4096, 64**5)
+        True
+        """
         return self.name == other.name
 
     def __hash__(self):
+        """
+        Usage
+        >>> from garoupa.algebra.dihedral import Ds
+        >>> isinstance(hash(Ds(64**2,64**5)), int)
+        True
+        """
         return hash(repr(self))
 
     @property
     def hash(self):
+        """
+        Usage
+        >>> from garoupa.algebra.dihedral import Ds
+        >>> Ds(64**2,64**5).hash.id
+        '0000000000000000000000000000000000000000000000000000000000000100'
+        """
         if self._hash is None:
             self._hash = Hash.fromn(self.i)
         return self._hash
 
     @property
     def id(self):
+        """
+        Usage
+        >>> from garoupa.algebra.dihedral import Ds
+        >>> Ds(64**2,64**5).id
+        '0000000000000000000000000000000000000000000000000000000000000100'
+        """
         if self._id is None:
             self._id = self.hash.id
         return self._id

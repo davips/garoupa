@@ -26,7 +26,25 @@ from garoupa.npmath import int2bm8bit, bm2int8bit
 
 class Mat8bit(Element):
     def __init__(self, i, _m=None):
-        """        17x17 with 8 zeros to match 128 bits.        """
+        """
+        17x17 with 8 zeros to match 128 bits.
+
+        Usage:
+        >>> a = Mat8bit(1414343245)
+        >>> b = Mat8bit(2345254565)
+        >>> a * b  # doctest: +SKIP
+        [[1. 0. 1. 1. 1.]
+         [0. 1. 0. 1. 0.]
+         [0. 0. 1. 0. 0.]
+         [0. 0. 0. 1. 0.]
+         [0. 0. 0. 0. 1.]]
+        >>> ~(a * b)  # doctest: +SKIP
+        [[1. 0. 1. 1. 1.]
+         [0. 1. 0. 1. 0.]
+         [0. 0. 1. 0. 0.]
+         [0. 0. 0. 1. 0.]
+         [0. 0. 0. 0. 1.]]
+         """
         super().__init__(i, 2 ** 8)
         if i == self.i and _m is not None:
             self.m = _m
@@ -42,5 +60,5 @@ class Mat8bit(Element):
 
     def __invert__(self):
         import numpy as np
-        m = np.linalg.inv(self.m)
+        m = np.linalg.inv(self.m) % 2
         return Mat8bit(bm2int8bit(m), _m=m)

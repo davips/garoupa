@@ -34,6 +34,14 @@ from garoupa.algebra.product.product import Product
 
 class D(Group):
     def __init__(self, n, seed=None):
+        """
+        Usage:
+        >>> G = D(1414343245, seed=0)
+        >>> round(G.comm_degree, 2)
+        0.25
+        >>> G, ~G, G^2
+        (D1414343245, ds1627694678, D1414343245×D1414343245)
+        """
         self.r = lambda: (Dr(r, n) for r in range(n))
         self.s = lambda: (Ds(s, n) for s in range(n))
         sorted = lambda: chain(self.s(), self.r())
@@ -60,6 +68,12 @@ class D(Group):
     __pow__ = __xor__
 
     def replace(self, *args, **kwargs):
+        """
+        Usage:
+        >>> G = D(1414343245, seed=0)
+        >>> ~G.replace(seed=1)
+        dr1222356005
+        """
         dic = {"n": self.n, "seed": self.seed}
         dic.update(kwargs)
         return self.__class__(**dic)

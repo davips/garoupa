@@ -1,4 +1,4 @@
-#  Copyright (c) 2021. Gabriel Dalforno
+#  Copyright (c) 2021. Gabriel Dalforno and Davi Pereira-Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
 #
@@ -19,10 +19,27 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
+from math import log
 
 
 def ncclasses(n, p):
-    """Number of conjugacy classes"""
+    """Number of conjugacy classes
+
+    Usage
+    >>> for n in range(3, 14):
+    ...     print(round(log(ncclasses(n, 2**32-5), 2), 2))  # doctest: +SKIP
+    64.0
+    97.0
+    130.32
+    192.0
+    227.0
+    290.0
+    353.58
+    418.32
+    483.46
+    577.0
+    643.7
+    """
     if n == 3:
         return p ** 2 + p - 1
     elif n == 4:

@@ -27,6 +27,14 @@ from garoupa.algebra.product.product import Product
 
 class Z(Group):
     def __init__(self, n, seed=None):
+        """
+        Usage:
+        >>> G = Z(1414343245, seed=0)
+        >>> G.comm_degree
+        1
+        >>> G, ~G
+        (Z1414343245, 906691059)
+        """
         sorted = lambda: (Nat(i, n) for i in range(n))
         super().__init__(Nat(0, n), sorted, seed)
         self.n = n
@@ -44,6 +52,12 @@ class Z(Group):
         return f"Z{self.n}"
 
     def replace(self, *args, **kwargs):
+        """
+        Usage:
+        >>> G = Z(1414343245, seed=0)
+        >>> ~G.replace(seed=1)
+        144272509
+        """
         dic = {"n": self.n, "seed": self.seed}
         dic.update(kwargs)
         return self.__class__(**dic)

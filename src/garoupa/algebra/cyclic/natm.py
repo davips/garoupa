@@ -44,9 +44,23 @@ class Natm(Element):
         self.n = n
 
     def __mul__(self, other):
+        """
+        Usage:
+        >>> a = Natm(7, 5)
+        >>> b = Natm(9, 5)
+        >>> a * b
+        1
+        """
         return Natm((self.i * other.i) % self.n, self.n)
 
     def __add__(self, other):
+        """
+        Usage:
+        >>> a = Natm(7, 5)
+        >>> b = Natm(9, 5)
+        >>> a * b
+        3
+        """
         return Natm((self.i + other.i) % self.n, self.n)
 
     def __repr__(self):
