@@ -68,7 +68,7 @@ name = "dill"
 version = "0.3.4"
 description = "serialize all of python"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*"
 
 [package.extras]
@@ -87,7 +87,7 @@ name = "multiprocess"
 version = "0.70.12.2"
 description = "better multiprocessing and multithreading in python"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [package.dependencies]
@@ -98,7 +98,7 @@ name = "numpy"
 version = "1.21.1"
 description = "NumPy is the fundamental package for array computing with Python."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [[package]]
@@ -117,7 +117,7 @@ name = "pathos"
 version = "0.2.8"
 description = "parallel graph management and execution in heterogeneous computing"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [package.dependencies]
@@ -142,7 +142,7 @@ name = "pox"
 version = "0.3.0"
 description = "utilities for filesystem exploration and automated builds"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -150,7 +150,7 @@ name = "ppft"
 version = "1.6.6.4"
 description = "distributed and parallel python"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [package.extras]
@@ -161,7 +161,7 @@ name = "progress"
 version = "1.6"
 description = "Easy to use progress bars"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -231,7 +231,7 @@ full = ["progress", "pathos", "numpy"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "9a310b020432c1a904f1e9da1d6b084c8592766fe68476e8887405fc6d84b2b5"
+content-hash = "4c044b08d25d1cf4926d8a0ab88e6aa3dfd3d59409b51e8644517767907ab6dc"
 
 [metadata.files]
 atomicwrites = [
