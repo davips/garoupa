@@ -1,0 +1,15 @@
+[run]
+omit =
+    # abstract classes
+    #*/abs/*
+    
+    # examples
+    */examples/*
+
+    setup.py
+    venv
+
+[report]
+exclude_lines =
+    @abstractmethod
+    @abc.abstractmethod
