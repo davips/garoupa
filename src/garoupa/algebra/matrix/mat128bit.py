@@ -19,11 +19,9 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-from sympy.physics.units import mm
-
 from garoupa.algebra.abs.element import Element
 from garoupa.algebra.matrix.mat import Mat
-from garoupa.npmath import int2bm, bm2int, bminv
+from garoupa.npmath import int2bm, bm2int, bminv, bmm
 
 
 class Mat128bit(Element):
@@ -43,7 +41,7 @@ class Mat128bit(Element):
         self.m = int2bm(i) if _m is None else _m
 
     def __mul__(self, other):
-        m = mm(self.m, other.m, 2)
+        m = bmm(self.m, other.m, 2)
         return Mat128bit(bm2int(m), _m=m)
 
     def __repr__(self):

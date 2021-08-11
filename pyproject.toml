@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "garoupa"
 version = "2.210810.1"
-description = "Cryptographic hash, abstract algebra and operators"
+description = "Predictable identifiers, cryptographic hash, abstract algebra and operators"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
 readme = 'README.md'
@@ -10,6 +10,7 @@ packages = [
 ]
 
 # For more dependencies and faster execution: poetry install -E full
+# hosh may not be updated yet!
 [tool.poetry.extras]
 full = ["progress", "pathos", "numpy", "hosh"]
 
@@ -21,8 +22,7 @@ colored = "^1.4.2"
 progress = { version = "^1.5", optional = true }
 pathos = { version = "^0.2.7", optional = true }
 numpy = { version = "^1.20.1", optional = true }
-hosh = { version = "^0.210317.0", optional = true }
-sympy = "^1.8"
+hosh = { version = "^2.210810.0", optional = true }
 
 [tool.poetry.dev-dependencies]
 autoreadme = "^0.2102.20"
