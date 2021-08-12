@@ -26,12 +26,24 @@ from garoupa.base64 import b64enc, b64dec
 from garoupa.math import m42int, int2m4
 
 
-def cells_id_fromblob(blob, mod, bytes, p):
+def cells_id_fromblob(blob, etype, bytes, p):
     """Takes bytes from blake3 excluding rightmost bit.
 
-    Blake3 return a digest with the first byte to the left."""
+    ps. Blake3 returns a digest with the most significant byte on the right."""
     digest = blake3(blob).digest(length=bytes)
-    n = (int.from_bytes(digest, byteorder="big") >> 1) % mod
+    n = int.from_bytes(digest, byteorder="big") >> 1
+    if etype == "unordered":
+        n %= p
+    elif etype == "hybrid":
+        n %= p ** 4
+        if n < p:  # Useless conditional: Negligible probability of occurrence.
+            n = p ** 4 - n
+    elif etype == "ordered":
+        n %= p ** 6
+        if n < p ** 4:  # Useless conditional: Negligible probability of occurrence.
+            n = p ** 6 - n
+    else:
+        raise Exception("Unknown subgroup:", etype)
     cells = int2m4(n, p)
     digits = bytes + bytes // 3
     id = b64enc(n, digits)

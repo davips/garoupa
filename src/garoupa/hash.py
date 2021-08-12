@@ -27,7 +27,8 @@ from garoupa.math import int2m4, m42int, m4m, m4inv
 
 class Hash:
     """
-    subgroup: Z, H or G
+    etype = ordered, hybrid, unordered
+    According to subgroup: Z, H\Z or G\H
 
     Usage:
     >>> a = Hash(b"lots of data")
@@ -51,9 +52,9 @@ class Hash:
     True
     >>> a * b != b * a
     True
-    >>> x = Hash(b"lots of data 6", "H")
-    >>> y = Hash(b"lots of data 7", "H")
-    >>> z = Hash(b"lots of data 8", "Z")
+    >>> x = Hash(b"lots of data 6", "hybrid")
+    >>> y = Hash(b"lots of data 7", "hybrid")
+    >>> z = Hash(b"lots of data 8", "unordered")
     >>> x * y == y * x
     True
     >>> x * a != a * x
@@ -67,7 +68,8 @@ class Hash:
     _n, _id, _cells = None, None, None
     _bits = None
 
-    def __init__(self, blob, subgroup="G", version="UT64.4"):
+    def __init__(self, blob, etype="ordered", version="UT64.4"):
+        self.etype = etype
         if version == "UT32.4":
             self.p = 4294967291
             self.bytes = 24
@@ -81,18 +83,7 @@ class Hash:
         else:
             raise Exception("Unknown version:", version)
         if blob is not None:  # None is for internal use only.
-            if subgroup == "Z":
-                mod = self.p
-                self.isco = True
-            elif subgroup == "H":
-                mod = self.p ** 4
-                self.isco = True
-            elif subgroup == "G":
-                mod = self.p ** 6
-                self.isco = False
-            else:
-                raise Exception("Unknown subgroup:", subgroup)
-            self._cells, self._id = cells_id_fromblob(blob, mod, self.bytes, self.p)
+            self._cells, self._id = cells_id_fromblob(blob, etype, self.bytes, self.p)
 
     @classmethod
     def fromcells(cls, cells, p=18446744073709551557,
