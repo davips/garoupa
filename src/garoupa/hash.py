@@ -27,6 +27,7 @@ from garoupa.math import int2m4, m42int, m4m, m4inv
 
 class Hash:
     """
+    subgroup: Z, H or G
 
     Usage:
     >>> a = Hash(b"lots of data")
@@ -44,18 +45,29 @@ class Hash:
     >>> c = Hash(b"lots of data 3")
     >>> (a * b) * c == a * (b * c)
     True
-    >>> e = Hash(b"lots of data")
-    >>> f = Hash(b"lots of data 2")
+    >>> e = Hash(b"lots of data 4")
+    >>> f = Hash(b"lots of data 5")
     >>> e * f != f * e
     True
     >>> a * b != b * a
+    True
+    >>> x = Hash(b"lots of data 6", "H")
+    >>> y = Hash(b"lots of data 7", "H")
+    >>> z = Hash(b"lots of data 8", "Z")
+    >>> x * y == y * x
+    True
+    >>> x * a != a * x
+    True
+    >>> x * z == z * x
+    True
+    >>> a * z == z * a
     True
     """
     _repr = None
     _n, _id, _cells = None, None, None
     _bits = None
 
-    def __init__(self, blob, version="UT64.4"):
+    def __init__(self, blob, subgroup="G", version="UT64.4"):
         if version == "UT32.4":
             self.p = 4294967291
             self.bytes = 24
@@ -68,13 +80,24 @@ class Hash:
             self.order = 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249
         else:
             raise Exception("Unknown version:", version)
-        if blob is not None:
-            self._cells, self._id = cells_id_fromblob(blob, self.bytes, self.p)
+        if blob is not None:  # None is for internal use only.
+            if subgroup == "Z":
+                mod = self.p
+                self.isco = True
+            elif subgroup == "H":
+                mod = self.p ** 4
+                self.isco = True
+            elif subgroup == "G":
+                mod = self.p ** 6
+                self.isco = False
+            else:
+                raise Exception("Unknown subgroup:", subgroup)
+            self._cells, self._id = cells_id_fromblob(blob, mod, self.bytes, self.p)
 
     @classmethod
     def fromcells(cls, cells, p=18446744073709551557,
                   order=39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249):
-        hash = Hash(None)
+        hash = Hash(None, "H")
         hash._cells = cells
         hash.p = p
         hash.order = order
@@ -91,7 +114,7 @@ class Hash:
         :param id:
         :return:
         """
-        hash = Hash(None)
+        hash = Hash(None, "H")
         hash._id = id
         hash.p = p
         hash.order = order

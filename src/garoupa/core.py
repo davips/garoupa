@@ -26,12 +26,12 @@ from garoupa.base64 import b64enc, b64dec
 from garoupa.math import m42int, int2m4
 
 
-def cells_id_fromblob(blob, bytes, p):
+def cells_id_fromblob(blob, mod, bytes, p):
     """Takes bytes from blake3 excluding rightmost bit.
 
     Blake3 return a digest with the first byte to the left."""
     digest = blake3(blob).digest(length=bytes)
-    n = int.from_bytes(digest, byteorder="big") >> 1
+    n = (int.from_bytes(digest, byteorder="big") >> 1) % mod
     cells = int2m4(n, p)
     digits = bytes + bytes // 3
     id = b64enc(n, digits)

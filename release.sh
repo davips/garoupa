@@ -1,10 +1,13 @@
+echo
+echo "----------------- updating poetry... -----------------------"
 poetry update
 poetry install
-read -p "press enter"
-echo
+echo "----------------- updated -----------------------"
+echo; echo
 
 echo
-echo "----------------- test -----------------------"
+echo "----------------- testing... -----------------------"
+read -p "press enter"
 poetry run pytest src tests --cov=src --doctest-modules
 echo "----------------- tested -----------------------"
 echo; echo
