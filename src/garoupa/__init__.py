@@ -20,4 +20,6 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-from .hash import Hash
+from .hash import Hash, ø, Ø
+
+ħ = Hash

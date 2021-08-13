@@ -207,5 +207,5 @@ class Hash:
         return print(self.idc if colored else self.id)
 
 
-identity32 = Hash.fromn(0, version="UT32.4")
-identity64 = Hash.fromn(0, version="UT64.4")
+ø = identity32 = Hash.fromn(0, version="UT32.4")
+Ø = identity64 = Hash.fromn(0, version="UT64.4")
