@@ -194,6 +194,13 @@ class Hash:
     def __eq__(self, other):
         return self.n == other.n
 
+    def show(self, colored=True):
+        """
+        Usage:
+        >>> Hash(b"asdf86fasd").show(colored=False)
+        7xoxnm1KL3mqmGpKe1PYxrQEzupxLnsx8rb1JHagl2mBdq.k1xZ.N0XcaPsu-o6J
+        """
+        return print(self.idc if colored else self.id)
 
 
 identity32 = Hash.fromn(0, version="UT32.4")
