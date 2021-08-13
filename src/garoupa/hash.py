@@ -232,6 +232,9 @@ class Hash:
         """
         return print(self.idc if colored else self.id)
 
+    def __hash__(self):
+        return self.n
+
 
 ø = identity32 = Hash.fromn(0, version="UT32.4")
 Ø = identity64 = Hash.fromn(0, version="UT64.4")
