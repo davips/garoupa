@@ -97,12 +97,16 @@ class Hash:
         Usage:
         >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").n
         27694086209736845103299750681684630473246580734449841275786785442935721031358612476242143296609286791135053038790338
+        >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").cells
+        [12965474857293227450, 4805863185154552840, 16510049226032775365, 6860254296570243509, 18322175770473372666, 17035651294132294200]
 
         Parameters
         ----------
         id
         version
         """
+        if len(id) != 32 and "32" in version or len(id) != 64 and "64" in version:
+            raise Exception(f"Wrong identifier length for {version}: {len(id)}   id:[{id}]")
         hash = Hash(None, version=version)
         hash._id = id
         return hash
@@ -133,7 +137,7 @@ class Hash:
     def calculate(self):
         if self._cells is not None:
             self._id = id_fromcells(self._cells, self.digits, self.p)
-        elif self._id:
+        elif self._id is not None:
             self._cells = cells_fromid(self._id, self.p)
         else:
             raise Exception("Missing argument.")
