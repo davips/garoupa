@@ -19,11 +19,14 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
+from typing import Union
 
 from garoupa.colors import colorize128bit
 from garoupa.core import cells_id_fromblob, id_fromcells, cells_fromid
 from garoupa.math import int2m4, m42int, m4m, m4inv
 
+
+# TODO:          Hash -> Hosh    Operable hash, confunde menos com hash, q passaria a ser pra blob
 
 class Hash:
     """
@@ -63,6 +66,14 @@ class Hash:
     True
     >>> a * z == z * a
     True
+    >>> print(ø)  # Handy syntax using ø or Ø for identity.
+    00000000000000000000000000000000
+    >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysd")  # Strings are converted as ids.
+    7ysdf98ysdf98ysdf98ysdfysdf98ysd
+    >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysd" * "6gdsf76df8gaf87gaf87gaf87agdfa78")
+    dOFFu0eLHn0nHvqVpdWgtHXmGGqPLQWl
+    >>> print(Ø)  # Version UT64.4
+    0000000000000000000000000000000000000000000000000000000000000000
     """
     _repr = None
     _n, _id, _cells = None, None, None
@@ -168,19 +179,27 @@ class Hash:
     #         self._bits = bin(self.n)[2:].rjust(256, "0")
     #     return self._bits
 
-    def __mul__(self, other):
+    def __mul__(self, other: Union['Hash', str]):
+        if isinstance(other, str):
+            other = Hash.fromid(other, version=self.version)
         return Hash.fromcells(m4m(self.cells, other.cells, self.p), self.version)
 
     def __invert__(self):
         return Hash.fromcells(m4inv(self.cells, self.p), self.version)
 
     def __truediv__(self, other):
+        if isinstance(other, str):
+            other = Hash.fromid(other, version=self.version)
         return Hash.fromcells(m4m(self.cells, m4inv(other.cells, self.p), self.p), self.version)
 
     def __add__(self, other):
+        if isinstance(other, str):
+            other = Hash.fromid(other, version=self.version)
         return Hash.fromn((self.n + other.n) % self.order, self.version)
 
     def __sub__(self, other):
+        if isinstance(other, str):
+            other = Hash.fromid(other, version=self.version)
         return Hash.fromn((self.n - other.n) % self.order, self.version)
 
     def __repr__(self):
@@ -196,7 +215,14 @@ class Hash:
         return self.id
 
     def __eq__(self, other):
+        if isinstance(other, str):
+            other = Hash.fromid(other, version=self.version)
         return self.n == other.n
+
+    def __ne__(self, other):
+        if isinstance(other, str):
+            other = Hash.fromid(other, version=self.version)
+        return self.n != other.n
 
     def show(self, colored=True):
         """
