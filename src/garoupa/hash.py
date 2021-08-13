@@ -28,7 +28,7 @@ from garoupa.math import int2m4, m42int, m4m, m4inv
 class Hash:
     """
     etype = ordered, hybrid, unordered
-    According to subgroup: Z, H\Z or G\H
+    According to subgroup: Z, H\\Z or G\\H
 
     Usage:
     >>> a = Hash(b"lots of data")
@@ -69,7 +69,7 @@ class Hash:
     _bits = None
 
     def __init__(self, blob, etype="ordered", version="UT64.4"):
-        self.etype = etype
+        self.etype, self.version = etype, version
         if version == "UT32.4":
             self.p = 4294967291
             self.bytes = 24
@@ -86,34 +86,29 @@ class Hash:
             self._cells, self._id = cells_id_fromblob(blob, etype, self.bytes, self.p)
 
     @classmethod
-    def fromcells(cls, cells, p=18446744073709551557,
-                  order=39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249):
-        hash = Hash(None, "H")
+    def fromcells(cls, cells, version="UT64.4"):
+        hash = Hash(None, version=version)
         hash._cells = cells
-        hash.p = p
-        hash.order = order
         return hash
 
     @classmethod
-    def fromid(cls, id, p=18446744073709551557,
-               order=39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249):
+    def fromid(cls, id, version="UT64.4"):
         """
         Usage:
         >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").n
         27694086209736845103299750681684630473246580734449841275786785442935721031358612476242143296609286791135053038790338
 
-        :param id:
-        :return:
+        Parameters
+        ----------
+        id
+        version
         """
-        hash = Hash(None, "H")
+        hash = Hash(None, version=version)
         hash._id = id
-        hash.p = p
-        hash.order = order
         return hash
 
     @classmethod
-    def fromn(cls, n: int, p=18446744073709551557,
-              order=39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249):
+    def fromn(cls, n: int, version="UT64.4"):
         """Hash representing the given int.
 
         Default 'p' is according to version UT64.4.
@@ -123,9 +118,17 @@ class Hash:
         >>> h.id
         '0000000000000000000000000000000000000000000000000001DFc0Ttk5MszS'
         """
+        if version == "UT32.4":
+            p = 4294967291
+            order = 6277101691541631771514589274378639120656724268335671295241
+        elif version == "UT64.4":
+            p = 18446744073709551557
+            order = 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249
+        else:
+            raise Exception("Unknown version:", version)
         if n > order:
             raise Exception(f"Element outside allowed range: {n} >= {order}")
-        return Hash.fromcells(int2m4(n, p), p, order)
+        return Hash.fromcells(int2m4(n, p), version)
 
     def calculate(self):
         if self._cells is not None:
@@ -162,19 +165,19 @@ class Hash:
     #     return self._bits
 
     def __mul__(self, other):
-        return Hash.fromcells(m4m(self.cells, other.cells, self.p), self.p, self.order)
+        return Hash.fromcells(m4m(self.cells, other.cells, self.p), self.version)
 
     def __invert__(self):
-        return Hash.fromcells(m4inv(self.cells, self.p), self.p, self.order)
+        return Hash.fromcells(m4inv(self.cells, self.p), self.version)
 
     def __truediv__(self, other):
-        return Hash.fromcells(m4m(self.cells, m4inv(other.cells, self.p), self.p), self.p, self.order)
+        return Hash.fromcells(m4m(self.cells, m4inv(other.cells, self.p), self.p), self.version)
 
     def __add__(self, other):
-        return Hash.fromn((self.n + other.n) % self.order, self.p, self.order)
+        return Hash.fromn((self.n + other.n) % self.order, self.version)
 
     def __sub__(self, other):
-        return Hash.fromn((self.n - other.n) % self.order, self.p, self.order)
+        return Hash.fromn((self.n - other.n) % self.order, self.version)
 
     def __repr__(self):
         if self._repr is None:
@@ -192,4 +195,6 @@ class Hash:
         return self.n == other.n
 
 
-identity = Hash.fromn(0)
+
+identity32 = Hash.fromn(0, version="UT32.4")
+identity64 = Hash.fromn(0, version="UT64.4")
