@@ -20,6 +20,8 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-from .hash import Hash, ø, Ø
+from .hash import Hash
 
 ħ = Hash
+ø = identity32 = Hash.fromn(0, version="UT32.4")
+Ø = identity64 = Hash.fromn(0, version="UT64.4")

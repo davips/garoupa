@@ -33,6 +33,7 @@ class M128bit(Group):
         0 0 0 1
 
         Usage:
+
         >>> G = M128bit(seed=0)
         >>> G.comm_degree
         >>> G, ~G

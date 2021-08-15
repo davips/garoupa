@@ -54,7 +54,7 @@ poetry install
 from garoupa import Hash
 
 # Hashes can be multiplied.
-from garoupa.hash import identity
+from garoupa import identity64
 
 a = Hash(blob=b"Some large binary content...")
 b = Hash(blob=b"Some other binary content. Might be, e.g., an action or another large content.")
@@ -77,7 +77,7 @@ hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz * Khf00n.bNZZF6
 
 ```python3
 
-print(f"{b} * {identity} = {b * identity} = b")
+print(f"{b} * {identity64} = {b * identity64} = b")
 """
 hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz * 0000000000000000000000000000000000000000000000000000000000000000 = hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = b
 """
@@ -165,11 +165,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 1, 0, 3], 1, dr6»	*	«[1, 3, 0, 2], 2, dr4»	=	«[1, 3, 2, 0], 3, dr2»
-«[3, 0, 1, 2], 3, dr5»	*	«[1, 0, 2, 3], 3, ds1»	=	«[0, 3, 1, 2], 1, ds2»
-«[1, 3, 0, 2], 0, dr1»	*	«[0, 2, 1, 3], 0, ds3»	=	«[1, 0, 3, 2], 0, ds0»
-«[2, 0, 3, 1], 0, ds2»	*	«[1, 0, 3, 2], 0, ds3»	=	«[0, 2, 1, 3], 0, dr3»
-«[1, 2, 0, 3], 0, ds2»	*	«[2, 0, 1, 3], 3, dr0»	=	«[0, 1, 2, 3], 3, ds2»
+«[3, 0, 1, 2], 2, ds3»	*	«[2, 0, 3, 1], 2, dr5»	=	«[1, 3, 2, 0], 4, ds2»
+«[0, 3, 1, 2], 3, dr6»	*	«[3, 0, 1, 2], 1, ds7»	=	«[2, 0, 3, 1], 4, ds1»
+«[0, 1, 2, 3], 0, dr2»	*	«[3, 2, 0, 1], 1, ds4»	=	«[3, 2, 0, 1], 1, ds2»
+«[2, 3, 0, 1], 2, ds6»	*	«[2, 0, 1, 3], 0, dr3»	=	«[0, 2, 3, 1], 2, ds3»
+«[3, 0, 2, 1], 1, dr2»	*	«[2, 0, 1, 3], 3, dr6»	=	«[2, 3, 0, 1], 4, dr0»
 """
 ```
 
@@ -179,7 +179,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[2, 6, 4, 7, 11, 5, 10, 3, 8, 0, 1, 9]
+[8, 0, 7, 4, 6, 3, 2, 9, 1, 5, 10, 11]
 """
 ```
 
@@ -293,9 +293,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          870/10000:  12.0 bits	~8.7 %
-    |D8×D8×D8×D8| = 65536:         380/10000:  16.0 bits	~3.8 %
- |D8×D8×D8×D8×D8| = 1048576:       132/10000:  20.0 bits	~1.32 %
+       |D8×D8×D8| = 4096:          844/10000:  12.0 bits	~8.44 %
+    |D8×D8×D8×D8| = 65536:         368/10000:  16.0 bits	~3.68 %
+ |D8×D8×D8×D8×D8| = 1048576:       167/10000:  20.0 bits	~1.67 %
 """
 ```
 
@@ -381,7 +381,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 11/08/2021 23:47:43
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 12/08/2021 01:17:25
 """
 ```
 

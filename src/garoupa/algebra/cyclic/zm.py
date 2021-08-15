@@ -27,6 +27,7 @@ class Zm(Group):
     def __init__(self, n, seed=None):
         """
         Usage:
+
         >>> G = Zm(1414343245, seed=0)
         >>> G.comm_degree
         1
@@ -52,6 +53,7 @@ class Zm(Group):
     def replace(self, *args, **kwargs):
         """
         Usage:
+
         >>> G = Zm(1414343245, seed=0)
         >>> ~G.replace(seed=1)
         144272509

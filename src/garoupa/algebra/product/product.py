@@ -70,7 +70,8 @@ class Product(Group):
     def order_hist_mul(cls, hista, histb):
         """Histogram of element orders for a product of 2 groups.
 
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import D
         >>> Product.order_hist_mul(D(5).order_hist, D(7).order_hist)
         {1: 1, 2: 47, 5: 4, 7: 6, 10: 28, 14: 30, 35: 24}
@@ -90,7 +91,8 @@ class Product(Group):
     def order_hist(self):
         """Sorted histogram of element orders.
 
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import D
         >>> (D(3) * D(5) * D(7)).order_hist
         {1: 1, 2: 191, 3: 2, 5: 4, 6: 94, 7: 6, 10: 124, 14: 138, 15: 8, 21: 12, 30: 56, 35: 24, 42: 60, 70: 72, 105: 48}
@@ -106,7 +108,8 @@ class Product(Group):
         Nested products will also be processed through this method.
         Final and temporary hist may exceed max_histsize by a factor of 2 at most.
 
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import D
         >>> Product.order_hist_mul(D(7).order_hist, D(19).order_hist)
         {1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}

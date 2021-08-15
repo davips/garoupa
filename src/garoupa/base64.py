@@ -28,6 +28,7 @@ rev_alphabet = dict((c, v) for v, c in enumerate(alphabet))
 def b64dec(string):
     """
     Usage:
+
     >>> b64dec("aa") == 10*64 + 10
     True
 
@@ -48,6 +49,7 @@ def b64dec(string):
 def b64enc(num, digits):
     """
     Usage:
+
     >>> b64enc(123456, 10)
     '0000000u90'
     >>> n = b64dec(b64enc(123456, 10))

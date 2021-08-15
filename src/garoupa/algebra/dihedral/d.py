@@ -36,6 +36,7 @@ class D(Group):
     def __init__(self, n, seed=None):
         """
         Usage:
+
         >>> G = D(1414343245, seed=0)
         >>> round(G.comm_degree, 2)
         0.25
@@ -70,6 +71,7 @@ class D(Group):
     def replace(self, *args, **kwargs):
         """
         Usage:
+
         >>> G = D(1414343245, seed=0)
         >>> ~G.replace(seed=1)
         dr1222356005
@@ -84,7 +86,8 @@ class D(Group):
 
         Based on Gabriel Dalforno code.
 
-        Usage
+        Usage:
+
         >>> D(7).order_hist
         {1: 1, 2: 7, 7: 6}
         """

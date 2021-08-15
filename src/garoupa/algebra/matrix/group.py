@@ -52,6 +52,7 @@ class Group:
     def sampled_commuting_freq(self, pairs=5_000, runs=1_000_000_000_000, exitonhit=False):
         """
         Usage:
+
         >>> from garoupa.algebra.matrix import M
         >>> G = M(5, seed=0)
         >>> max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))
@@ -105,6 +106,7 @@ class Group:
         """Histogram of element orders. Detect identity after many repetitions
 
         Usage:
+
         >>> from garoupa.algebra.symmetric import S
         >>> tot = 0
         >>> list(S(6, seed=0).sampled_orders(sample=1, width=2))
@@ -186,6 +188,7 @@ class Group:
         """Least common multiple
 
         Usage:
+
         >>> from garoupa.algebra.dihedral import D
         >>> D.lcm(32, 12)
         96
@@ -198,6 +201,7 @@ class Group:
         """Greatest common divisor
 
         Usage:
+
         >>> from garoupa.algebra.dihedral import D
         >>> D.gcd(32, 12)
         4
@@ -213,7 +217,8 @@ class Group:
     def compact_order_hist(self, binsize, preserve_upto=0, max_histsize=inf, hist=None):
         """Compact histogram of element orders.
 
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import D
         >>> (D(7) * D(19)).order_hist
         {1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}

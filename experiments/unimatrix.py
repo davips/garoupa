@@ -22,61 +22,60 @@
 
 import numpy as np
 
-
-p = 4294967291  
+p = 4294967291
 n = 4
 
 
-def order(p:int)->int:
+def order(p: int) -> int:
     """Order of the group"""
-    return p**6
+    return p ** 6
 
 
-def PU(p:int)->float:
+def PU(p: int) -> float:
     """Degree of commutativity"""
-    return (2*(p**3) + p**2 - 2*p)/orderU(p)
+    return (2 * (p ** 3) + p ** 2 - 2 * p) / order(p)
 
 
-def order_hist(p:int)->dict:
+def order_hist(p: int) -> dict:
     """Order histogram"""
     return {
-        1:1,
-        p:order(p)-1
+        1: 1,
+        p: order(p) - 1
     }
 
 
-def product(U:np.ndarray, V:np.ndarray)->np.ndarray:
+def product(U: np.ndarray, V: np.ndarray) -> np.ndarray:
     """Multiply two matrices mod p"""
-    return (U@V)%p
+    return (U @ V) % p
 
 
-def invert(U:np.ndarray)->np.ndarray:
+def invert(U: np.ndarray) -> np.ndarray:
     """Computes inverse mod p"""
-    A1 = (-U[0, 1])%p
-    A4 = (-U[1, 2])%p
-    A6 = (-U[2, 3])%p
-    A2 = (-U[0, 1]*A4 - U[0, 2])%p
-    A5 = (-U[1, 2]*A6 - U[1, 3])%p
-    A3 = (-U[0, 1]*A5 - U[0, 2]*A6 - U[0, 3])%p
+    A1 = (-U[0, 1]) % p
+    A4 = (-U[1, 2]) % p
+    A6 = (-U[2, 3]) % p
+    A2 = (-U[0, 1] * A4 - U[0, 2]) % p
+    A5 = (-U[1, 2] * A6 - U[1, 3]) % p
+    A3 = (-U[0, 1] * A5 - U[0, 2] * A6 - U[0, 3]) % p
     return np.array([
-            [1, A1, A2, A3],
-            [0, 1, A4, A5],
-            [0, 0, 1, A6],
-            [0, 0, 0, 1]
+        [1, A1, A2, A3],
+        [0, 1, A4, A5],
+        [0, 0, 1, A6],
+        [0, 0, 0, 1]
     ])
 
 
-def power(U:np.ndarray, k:int)->np.ndarray:
+def power(U: np.ndarray, k: int) -> np.ndarray:
     """Computes U^k mod p"""
-    return np.linalg.matrix_power(U, k)%p
+    return np.linalg.matrix_power(U, k) % p
 
 
-def int_to_elem(N:int)->np.ndarray:
+def int_to_elem(N: int) -> np.ndarray:
     """Maps integer to unitriangular matrix mod p"""
-    assert N>=0 and N<p**6
+    assert N >= 0 and N < p ** 6
     A = np.zeros(6)
     i = 0
-    while N!=0:
+    while N != 0:
         N, r = divmod(N, p)
         A[i] = r
         i += 1
@@ -88,17 +87,16 @@ def int_to_elem(N:int)->np.ndarray:
     ], dtype=np.int64)
 
 
-def elem_to_int(U:np.ndarray)->int:
+def elem_to_int(U: np.ndarray) -> int:
     """Maps unitriangular matrix mod p to integer"""
     A = [U[0, 1], U[2, 3], U[1, 2], U[1, 3], U[0, 2], U[0, 3]]
     N = 0
     for k in range(6):
-        N += A[k]*(p**k)
+        N += A[k] * (p ** k)
     return int(N)
 
-
 #### More elegant solution to invert a matrix, but an overkill for n=4 ####
-#def solve(U:np.ndarray, b:np.ndarray)->np.ndarray:
+# def solve(U:np.ndarray, b:np.ndarray)->np.ndarray:
 #    """Solves Ux=b mod p"""
 #    x = np.zeros(n, dtype=np.int64)
 #    for i in range(1, n+1):
@@ -108,7 +106,7 @@ def elem_to_int(U:np.ndarray)->int:
 #    return x
 
 
-#def invert(U:np.ndarray)->np.ndarray:
+# def invert(U:np.ndarray)->np.ndarray:
 #    """Computes inverse mod p"""
 #    V = np.zeros([n, n], dtype=np.int64)
 #    for i in range(n):

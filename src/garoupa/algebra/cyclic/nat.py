@@ -26,6 +26,7 @@ from garoupa.algebra.abs.element import Element
 class Nat(Element):
     """
     Usage:
+
     >>> a = Nat(1414343245,2**32)
     >>> b = Nat(77639,2**32)
     >>> b

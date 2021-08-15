@@ -30,6 +30,7 @@ class Mat8bit(Element):
         17x17 with 8 zeros to match 128 bits.
 
         Usage:
+
         >>> a = Mat8bit(127)
         >>> b = Mat8bit(88)
         >>> a * b

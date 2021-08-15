@@ -2,7 +2,7 @@
 from garoupa import Hash
 
 # Hashes can be multiplied.
-from garoupa.hash import identity64
+from garoupa import identity64
 
 a = Hash(blob=b"Some large binary content...")
 b = Hash(blob=b"Some other binary content. Might be, e.g., an action or another large content.")

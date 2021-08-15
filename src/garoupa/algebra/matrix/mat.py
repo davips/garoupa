@@ -28,6 +28,7 @@ class Mat(Element):
     def __init__(self, i, n, mod=2, _m=None):
         """        nxn     modulo o
         Usage:
+
         >>> a = Mat(4783632, 6, 10)
         >>> a
         [[1 2 3 6 3 8]

@@ -112,7 +112,7 @@ for G in map(M, range(6, 11)):
 </p>
 </details>
 
-**Groups benefit from methods from module 'hash'**
+**Groups benefit from methods from the module 'hash'**
 <details>
 <p>
 

@@ -34,6 +34,7 @@ class Hash:
     According to subgroup: Z, H\\Z or G\\H
 
     Usage:
+
     >>> a = Hash(b"lots of data")
     >>> b = Hash(b"lots of data 2")
     >>> a.id
@@ -106,6 +107,7 @@ class Hash:
     def fromid(cls, id, version="UT64.4"):
         """
         Usage:
+
         >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").n
         27694086209736845103299750681684630473246580734449841275786785442935721031358612476242143296609286791135053038790338
         >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").cells
@@ -129,6 +131,7 @@ class Hash:
         Default 'p' is according to version UT64.4.
 
         Usage:
+
         >>> h = Hash.fromn(7647544756746324134134)
         >>> h.id
         '0000000000000000000000000000000000000000000000000001DFc0Ttk5MszS'
@@ -227,6 +230,7 @@ class Hash:
     def show(self, colored=True):
         """
         Usage:
+
         >>> Hash(b"asdf86fasd").show(colored=False)
         7xoxnm1KL3mqmGpKe1PYxrQEzupxLnsx8rb1JHagl2mBdq.k1xZ.N0XcaPsu-o6J
         """
@@ -234,7 +238,3 @@ class Hash:
 
     def __hash__(self):
         return self.n
-
-
-ø = identity32 = Hash.fromn(0, version="UT32.4")
-Ø = identity64 = Hash.fromn(0, version="UT64.4")

@@ -266,6 +266,7 @@ def bm2intl(m, bits):
 def int2ml(n, o, l):
     """
     Usage:
+
     >>> from numpy import uint64
     >>> int2ml(4095, 4, 5)
     array([[1, 3, 3, 3, 3],
@@ -285,6 +286,7 @@ def int2ml(n, o, l):
 def m2intl(m, o):
     """
     Usage:
+
     >>> from numpy import array, uint8
     >>> m = array([[1, 3, 3, 3, 3],
     ...            [0, 1, 3, 3, 0],
@@ -316,6 +318,7 @@ def m4m(a, b, mod):
 def m42int(m, o):
     """
     Usage:
+
     >>> from numpy import array, uint8
     >>> m = array([[1, 3, 3, 3, 3],
     ...            [0, 1, 3, 3, 0],
@@ -338,6 +341,7 @@ def m42int(m, o):
 def int2m4(n, o, l=4):
     """
     Usage:
+
     >>> int2m4(4095, 4, 5)
     array([[1, 3, 3, 3, 3],
            [0, 1, 3, 3, 0],

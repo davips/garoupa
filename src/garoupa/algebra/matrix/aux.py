@@ -25,7 +25,8 @@ from math import log
 def ncclasses(n, p):
     """Number of conjugacy classes
 
-    Usage
+    Usage:
+
     >>> for n in range(3, 5):
     ...     print(ncclasses(n, 2**32-5))
     18446744035054845971

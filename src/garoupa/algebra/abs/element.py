@@ -37,7 +37,8 @@ class Element(ABC):
 
     def __post_init__(self):
         """
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import Ds
         >>> Ds(64**2, 64**32).bits - 1
         192.0
@@ -51,7 +52,8 @@ class Element(ABC):
 
     def __xor__(self, other):
         """
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import Ds
         >>> Ds(64**2,64**5) ^ 3
         ds4096
@@ -62,7 +64,8 @@ class Element(ABC):
 
     def __repr__(self):
         """
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import Ds
         >>> Ds(64**3, 64**5) ^ 3
         ds262144
@@ -71,7 +74,8 @@ class Element(ABC):
 
     def __eq__(self, other):
         """
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import Ds
         >>> Ds(64**2, 64**5) ^ 3 == Ds(4096, 64**5)
         True
@@ -80,7 +84,8 @@ class Element(ABC):
 
     def __hash__(self):
         """
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import Ds
         >>> isinstance(hash(Ds(64**2,64**5)), int)
         True
@@ -90,7 +95,8 @@ class Element(ABC):
     @property
     def hash(self):
         """
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import Ds
         >>> Ds(64**2,64**5).hash.id
         '0000000000000000000000000000000000000000000000000000000000000100'
@@ -102,7 +108,8 @@ class Element(ABC):
     @property
     def id(self):
         """
-        Usage
+        Usage:
+
         >>> from garoupa.algebra.dihedral import Ds
         >>> Ds(64**2,64**5).id
         '0000000000000000000000000000000000000000000000000000000000000100'

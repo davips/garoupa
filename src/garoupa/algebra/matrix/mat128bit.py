@@ -28,6 +28,7 @@ class Mat128bit(Element):
     def __init__(self, i, _m=None):
         """        nxn     modulo o
         Usage:
+
         >>> a = Mat(4783632, 6, 5)
         >>> a
         [[1 2 1 0 4 3]

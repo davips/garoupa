@@ -26,6 +26,7 @@ from garoupa.algebra.abs.element import Element
 class Natm(Element):
     """
     Usage:
+
     >>> a = Natm(1414343245, 2**32)
     >>> b = Natm(77639, 2**32)
     >>> b
@@ -46,6 +47,7 @@ class Natm(Element):
     def __mul__(self, other):
         """
         Usage:
+
         >>> a = Natm(7, 5)
         >>> b = Natm(9, 5)
         >>> a * b
@@ -56,6 +58,7 @@ class Natm(Element):
     def __add__(self, other):
         """
         Usage:
+
         >>> a = Natm(7, 5)
         >>> b = Natm(9, 5)
         >>> a + b
