@@ -67,6 +67,7 @@ class Hash:
     True
     >>> a * z == z * a
     True
+    >>> from garoupa import ø, Ø
     >>> print(ø)  # Handy syntax using ø or Ø for identity.
     00000000000000000000000000000000
     >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysd")  # Strings are converted as ids.
