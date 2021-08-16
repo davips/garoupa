@@ -51,7 +51,7 @@ poetry install
 <p>
 
 ```python3
-from garoupa import Hash
+from garoupa import Hosh
 
 # Hashes can be multiplied.
 from garoupa import identity64
@@ -453,8 +453,9 @@ for G in map(M, range(6, 11)):
 
 ```python3
 from garoupa.algebra.matrix import M
+
 m = ~M(23)
-print(repr(m.hash))
+print(repr(m.hosh))
 ```
 <a href="https://github.com/davips/garoupa/blob/main/examples/7KDd8TiA3S11QTkUid2wy87DQIeGQ35vB1bsP5Y6DjZ.png">
 <img src="https://raw.githubusercontent.com/davips/garoupa/main/examples/7KDd8TiA3S11QTkUid2wy87DQIeGQ35vB1bsP5Y6DjZ.png" alt="Colored base-62 representation" width="380" height="18">
@@ -473,4 +474,4 @@ print(repr(m.hash))
 
 ### Performance
 See package [hosh](https://pypi.org/project/hosh) for faster, native (compiled) hash operations.
-However, only future major version `1.*.*` or higher of hosh will be compatible with garoupa hashes.
+However, only future major version `2.*.*` or higher of hosh will be compatible with garoupa hashes.

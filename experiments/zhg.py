@@ -4,7 +4,7 @@ Example of identifiers from diferent subgroups in G.
 
 from math import log
 
-from garoupa import Hash
+from garoupa import Hosh
 from garoupa.algebra.matrix.mat import Mat
 from garoupa.base64 import *
 from sympy import isprime
@@ -51,11 +51,11 @@ p = 2 ** 32 - 5
 # print()
 # print()
 
-l = Hash.fromn(4 * p // 5, p, p ** 6)
-x = Hash.fromn(3 * p ** 4 // 5, p, p ** 6)
-y = Hash.fromn(4 * p ** 4 // 5, p, p ** 6)
-f = Hash.fromn(3 * p ** 6 // 5, p, p ** 6)
-g = Hash.fromn(4 * p ** 6 // 5, p, p ** 6)
+l = Hosh.fromn(4 * p // 5, p, p ** 6)
+x = Hosh.fromn(3 * p ** 4 // 5, p, p ** 6)
+y = Hosh.fromn(4 * p ** 4 // 5, p, p ** 6)
+f = Hosh.fromn(3 * p ** 6 // 5, p, p ** 6)
+g = Hosh.fromn(4 * p ** 6 // 5, p, p ** 6)
 print(l.cells)
 print(x.cells, y.cells)
 print(f.cells, g.cells)
@@ -68,10 +68,10 @@ print("l * f * g * x * y == f * l * g * y * x == f * g * l * y * x == f * g * y 
 
 print(f * x * y * ~x == f * y)
 
-a = Hash.fromn(4 * p // 5, p, p ** 6)
+a = Hosh.fromn(4 * p // 5, p, p ** 6)
 print(a, ~a)
 
-a = Hash.fromn(4 * p ** 4 // 5, p, p ** 6)
+a = Hosh.fromn(4 * p ** 4 // 5, p, p ** 6)
 print(a, (~a))
 
 

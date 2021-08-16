@@ -25,7 +25,7 @@ from dataclasses import dataclass
 from functools import reduce
 from math import log
 
-from garoupa import Hash
+from garoupa import Hosh
 
 
 @dataclass
@@ -33,7 +33,7 @@ class Element(ABC):
     i: int
     order: int
     _id = None
-    _hash = None
+    _hosh = None
 
     def __post_init__(self):
         """
@@ -93,17 +93,17 @@ class Element(ABC):
         return hash(repr(self))
 
     @property
-    def hash(self):
+    def hosh(self):
         """
         Usage:
 
         >>> from garoupa.algebra.dihedral import Ds
-        >>> Ds(64**2,64**5).hash.id
+        >>> Ds(64**2,64**5).hosh.id
         '0000000000000000000000000000000000000000000000000000000000000100'
         """
-        if self._hash is None:
-            self._hash = Hash.fromn(self.i)
-        return self._hash
+        if self._hosh is None:
+            self._hosh = Hosh.fromn(self.i)
+        return self._hosh
 
     @property
     def id(self):
@@ -115,5 +115,5 @@ class Element(ABC):
         '0000000000000000000000000000000000000000000000000000000000000100'
         """
         if self._id is None:
-            self._id = self.hash.id
+            self._id = self.hosh.id
         return self._id

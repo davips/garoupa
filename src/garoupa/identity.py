@@ -20,29 +20,29 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
-from garoupa import Hash
+from garoupa import Hosh
 
 
-class Identity(Hash):
+class Identity(Hosh):
     def __init__(self, version):
         super().__init__(None, "ordered", version)
         self._cells = [0, 0, 0, 0, 0, 0]
 
     @property
     def u(self):
-        """Shortcut to induce etype=unordered in the next operand, when it is not a ready Hash object.
+        """Shortcut to induce etype=unordered in the next operand, when it is not a ready Hosh object.
         default=Ordered, h=Hybrid and u=Unordered
 
         Usage:
 
-        >>> from garoupa import ø, Ø, Hash
+        >>> from garoupa import ø, Ø, Hosh
         >>> a = ø.u * b"654"
         >>> print(a)
         000000000000000000000000000kYNjp
         >>> b = Ø.u * b"654"
         >>> print(b)
         000000000000000000000000000000000000000000000000000007Oe9Pkyj58r
-        >>> Hash(b"654", "unordered", "UT32.4") == a and b == Hash(b"654","unordered", "UT64.4")
+        >>> Hosh(b"654", "unordered", "UT32.4") == a and b == Hosh(b"654","unordered", "UT64.4")
         True
         """
         self.etype = "unordered"
@@ -55,14 +55,14 @@ class Identity(Hash):
 
         Usage:
 
-        >>> from garoupa import ø, Ø, Hash
+        >>> from garoupa import ø, Ø, Hosh
         >>> a = ø.h * b"654"
         >>> print(a)
         0000000000167KF1DMkyi2pJsjygdObZ
         >>> b = Ø.h * b"654"
         >>> print(b)
         0000000000000000000000eZ7EUaEx7AwXByek6Nl1dSRveP.VZeAE4-oWVLSrc8
-        >>> Hash(b"654", "hybrid", "UT32.4") == a and b == Hash(b"654","hybrid", "UT64.4")
+        >>> Hosh(b"654", "hybrid", "UT32.4") == a and b == Hosh(b"654","hybrid", "UT64.4")
         True
         """
         self.etype = "hybrid"

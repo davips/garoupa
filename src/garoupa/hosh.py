@@ -26,17 +26,15 @@ from garoupa.core import cells_id_fromblob, id_fromcells, cells_fromid
 from garoupa.math import int2m4, m42int, m4m, m4inv
 
 
-# TODO:          Hash -> Hosh    Operable hash, confunde menos com hash, q passaria a ser pra blob
-
-class Hash:
+class Hosh:
     """
     etype = ordered, hybrid, unordered
     According to subgroup: Z, H\\Z or G\\H
 
     Usage:
 
-    >>> a = Hash(b"lots of data")
-    >>> b = Hash(b"lots of data 2")
+    >>> a = Hosh(b"lots of data")
+    >>> b = Hosh(b"lots of data 2")
     >>> a.id
     'fw-IowLZVKdeXCNkqsTHFiIe06Pv0.oaAXY.fN6xJ2E7.fe36iBXxOYpmm83Q7ZL'
     >>> b.id
@@ -47,18 +45,18 @@ class Hash:
     'I-WuI4QUFeHGKfTNKvQq1-T.MqLLanrR4nsDP4B2SuNUeN7xgiWFtVokR7Qcb05-'
     >>> a * b * ~b == a
     True
-    >>> c = Hash(b"lots of data 3")
+    >>> c = Hosh(b"lots of data 3")
     >>> (a * b) * c == a * (b * c)
     True
-    >>> e = Hash(b"lots of data 4")
-    >>> f = Hash(b"lots of data 5")
+    >>> e = Hosh(b"lots of data 4")
+    >>> f = Hosh(b"lots of data 5")
     >>> e * f != f * e
     True
     >>> a * b != b * a
     True
-    >>> x = Hash(b"lots of data 6", "hybrid")
-    >>> y = Hash(b"lots of data 7", "hybrid")
-    >>> z = Hash(b"lots of data 8", "unordered")
+    >>> x = Hosh(b"lots of data 6", "hybrid")
+    >>> y = Hosh(b"lots of data 7", "hybrid")
+    >>> z = Hosh(b"lots of data 8", "unordered")
     >>> x * y == y * x
     True
     >>> x * a != a * x
@@ -102,18 +100,18 @@ class Hash:
 
     @classmethod
     def fromcells(cls, cells, version="UT64.4"):
-        hash = Hash(None, version=version)
-        hash._cells = cells
-        return hash
+        hosh = Hosh(None, version=version)
+        hosh._cells = cells
+        return hosh
 
     @classmethod
     def fromid(cls, id, version="UT64.4"):
         """
         Usage:
 
-        >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").n
+        >>> Hosh.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").n
         27694086209736845103299750681684630473246580734449841275786785442935721031358612476242143296609286791135053038790338
-        >>> Hash.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").cells
+        >>> Hosh.fromid("I-WuI4QUFeHGKfTNKvQq1.nvrF1g78jBUgN73RMYyoXehzfULkYQHPYdppZW5ar2").cells
         [12965474857293227450, 4805863185154552840, 16510049226032775365, 6860254296570243509, 18322175770473372666, 17035651294132294200]
 
         Parameters
@@ -123,19 +121,19 @@ class Hash:
         """
         if len(id) != 32 and "32" in version or len(id) != 64 and "64" in version:
             raise Exception(f"Wrong identifier length for {version}: {len(id)}   id:[{id}]")
-        hash = Hash(None, version=version)
-        hash._id = id
-        return hash
+        hosh = Hosh(None, version=version)
+        hosh._id = id
+        return hosh
 
     @classmethod
     def fromn(cls, n: int, version="UT64.4"):
-        """Hash representing the given int.
+        """Hosh representing the given int.
 
         Default 'p' is according to version UT64.4.
 
         Usage:
 
-        >>> h = Hash.fromn(7647544756746324134134)
+        >>> h = Hosh.fromn(7647544756746324134134)
         >>> h.id
         '0000000000000000000000000000000000000000000000000001DFc0Ttk5MszS'
         """
@@ -149,7 +147,7 @@ class Hash:
             raise Exception("Unknown version:", version)
         if n > order:
             raise Exception(f"Element outside allowed range: {n} >= {order}")
-        return Hash.fromcells(int2m4(n, p), version)
+        return Hosh.fromcells(int2m4(n, p), version)
 
     def calculate(self):
         if self._cells is not None:
@@ -185,20 +183,20 @@ class Hash:
     #         self._bits = bin(self.n)[2:].rjust(256, "0")
     #     return self._bits
 
-    def __mul__(self, other: Union['Hash', str, bytes, int]):
-        return Hash.fromcells(m4m(self.cells, self.convert(other).cells, self.p), self.version)
+    def __mul__(self, other: Union['Hosh', str, bytes, int]):
+        return Hosh.fromcells(m4m(self.cells, self.convert(other).cells, self.p), self.version)
 
     def __invert__(self):
-        return Hash.fromcells(m4inv(self.cells, self.p), self.version)
+        return Hosh.fromcells(m4inv(self.cells, self.p), self.version)
 
     def __truediv__(self, other):
-        return Hash.fromcells(m4m(self.cells, m4inv(self.convert(other).cells, self.p), self.p), self.version)
+        return Hosh.fromcells(m4m(self.cells, m4inv(self.convert(other).cells, self.p), self.p), self.version)
 
     def __add__(self, other):
-        return Hash.fromn((self.n + self.convert(other).n) % self.order, self.version)
+        return Hosh.fromn((self.n + self.convert(other).n) % self.order, self.version)
 
     def __sub__(self, other):
-        return Hash.fromn((self.n - self.convert(other).n) % self.order, self.version)
+        return Hosh.fromn((self.n - self.convert(other).n) % self.order, self.version)
 
     def __repr__(self):
         if self._repr is None:
@@ -222,7 +220,7 @@ class Hash:
         """
         Usage:
 
-        >>> Hash(b"asdf86fasd").show(colored=False)
+        >>> Hosh(b"asdf86fasd").show(colored=False)
         7xoxnm1KL3mqmGpKe1PYxrQEzupxLnsx8rb1JHagl2mBdq.k1xZ.N0XcaPsu-o6J
         """
         return print(self.idc if colored else self.id)
@@ -231,14 +229,14 @@ class Hash:
         return self.n
 
     def convert(self, other):
-        if isinstance(other, Hash):
+        if isinstance(other, Hosh):
             return other
         if isinstance(other, str):
-            return Hash.fromid(other, version=self.version)
+            return Hosh.fromid(other, version=self.version)
         if isinstance(other, bytes):
-            return Hash(other, etype=self.etype, version=self.version)
+            return Hosh(other, etype=self.etype, version=self.version)
         if isinstance(other, int):
-            return Hash.fromn(other, version=self.version)
+            return Hosh.fromn(other, version=self.version)
         if isinstance(other, list):
-            return Hash.fromcells(other, version=self.version)
+            return Hosh.fromcells(other, version=self.version)
         raise Exception(f"Cannot convert type {type(other)}.")

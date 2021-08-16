@@ -1,16 +1,16 @@
 # Basic operations
-from garoupa import Hash
+from garoupa import Hosh
 
-# Hashes can be multiplied.
+# Hoshes (operable hash-based elements) can be multiplied.
 from garoupa import identity64
 
-a = Hash(blob=b"Some large binary content...")
-b = Hash(blob=b"Some other binary content. Might be, e.g., an action or another large content.")
+a = Hosh(blob=b"Some large binary content...")
+b = Hosh(blob=b"Some other binary content. Might be, e.g., an action or another large content.")
 c = a * b
 print(f"{a} * {b} = {c}")
 # ...
 print(~b)
-# Multiplication can be reverted by the inverse hash. Zero is the identity hash.
+# Multiplication can be reverted by the inverse hosh. Zero is the identity hosh.
 print(f"{b} * {~b} = {b * ~b} = 0")
 # ...
 
@@ -27,11 +27,11 @@ print(f"{~a} * {c} = {~a * c} = {b} = b")
 print(f"{c} / {b} = {c / b} = a")
 # ...
 
-# Hash multiplication is not expected to be commutative.
+# Hosh multiplication is not expected to be commutative.
 print(f"{a * b} != {b * a}")
 # ...
 
-# Hash multiplication is associative.
+# Hosh multiplication is associative.
 print(f"{a * (b * c)} = {(a * b) * c}")
 # ...
 

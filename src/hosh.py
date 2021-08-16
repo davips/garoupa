@@ -20,5 +20,5 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-from garoupa import Hash
-_ = Hash
+from garoupa import Hosh
+_ = Hosh

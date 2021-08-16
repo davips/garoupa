@@ -20,10 +20,10 @@
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
 
-from .hash import Hash
+from .hosh import Hosh
 from .identity import Identity
 
-ħ = Hash
+ħ = Hosh
 
 ø = identity32 = Identity(version="UT32.4")
 Ø = identity64 = Identity(version="UT64.4")

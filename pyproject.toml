@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "garoupa"
-version = "2.210811.8"
-description = "Predictable identifiers, cryptographic hash, abstract algebra and operators"
+version = "2.210811.10"
+description = "Predictable operable hash-based identifiers and abstract algebra groups"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
 readme = 'README.md'
