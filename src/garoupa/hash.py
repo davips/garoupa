@@ -70,12 +70,14 @@ class Hash:
     >>> from garoupa import ø, Ø
     >>> print(ø)  # Handy syntax using ø or Ø for identity.
     00000000000000000000000000000000
-    >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysd")  # Strings are converted as ids.
+    >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysd")  # str, bytes or int are converted as id, blob or element rank.
     7ysdf98ysdf98ysdf98ysdfysdf98ysd
     >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysd" * "6gdsf76df8gaf87gaf87gaf87agdfa78")
     dOFFu0eLHn0nHvqVpdWgtHXmGGqPLQWl
     >>> print(Ø)  # Version UT64.4
     0000000000000000000000000000000000000000000000000000000000000000
+    >>> print(Ø.h * b"sdff")  # etype=hybrid
+    0000000000000000000000T6pyeleVnuHDGVuV5pKpby2rejp3txYcmGbCu7u2dh
     """
     _repr = None
     _n, _id, _cells = None, None, None
@@ -137,7 +139,7 @@ class Hash:
         >>> h.id
         '0000000000000000000000000000000000000000000000000001DFc0Ttk5MszS'
         """
-        if version == "UT32.4":
+        if version == "UT32.4":  # TODO: deduplicate code
             p = 4294967291
             order = 6277101691541631771514589274378639120656724268335671295241
         elif version == "UT64.4":
@@ -183,28 +185,20 @@ class Hash:
     #         self._bits = bin(self.n)[2:].rjust(256, "0")
     #     return self._bits
 
-    def __mul__(self, other: Union['Hash', str]):
-        if isinstance(other, str):
-            other = Hash.fromid(other, version=self.version)
-        return Hash.fromcells(m4m(self.cells, other.cells, self.p), self.version)
+    def __mul__(self, other: Union['Hash', str, bytes, int]):
+        return Hash.fromcells(m4m(self.cells, self.convert(other).cells, self.p), self.version)
 
     def __invert__(self):
         return Hash.fromcells(m4inv(self.cells, self.p), self.version)
 
     def __truediv__(self, other):
-        if isinstance(other, str):
-            other = Hash.fromid(other, version=self.version)
-        return Hash.fromcells(m4m(self.cells, m4inv(other.cells, self.p), self.p), self.version)
+        return Hash.fromcells(m4m(self.cells, m4inv(self.convert(other).cells, self.p), self.p), self.version)
 
     def __add__(self, other):
-        if isinstance(other, str):
-            other = Hash.fromid(other, version=self.version)
-        return Hash.fromn((self.n + other.n) % self.order, self.version)
+        return Hash.fromn((self.n + self.convert(other).n) % self.order, self.version)
 
     def __sub__(self, other):
-        if isinstance(other, str):
-            other = Hash.fromid(other, version=self.version)
-        return Hash.fromn((self.n - other.n) % self.order, self.version)
+        return Hash.fromn((self.n - self.convert(other).n) % self.order, self.version)
 
     def __repr__(self):
         if self._repr is None:
@@ -219,14 +213,10 @@ class Hash:
         return self.id
 
     def __eq__(self, other):
-        if isinstance(other, str):
-            other = Hash.fromid(other, version=self.version)
-        return self.n == other.n
+        return self.n == self.convert(other).n
 
     def __ne__(self, other):
-        if isinstance(other, str):
-            other = Hash.fromid(other, version=self.version)
-        return self.n != other.n
+        return self.n != self.convert(other).n
 
     def show(self, colored=True):
         """
@@ -239,3 +229,16 @@ class Hash:
 
     def __hash__(self):
         return self.n
+
+    def convert(self, other):
+        if isinstance(other, Hash):
+            return other
+        if isinstance(other, str):
+            return Hash.fromid(other, version=self.version)
+        if isinstance(other, bytes):
+            return Hash(other, etype=self.etype, version=self.version)
+        if isinstance(other, int):
+            return Hash.fromn(other, version=self.version)
+        if isinstance(other, list):
+            return Hash.fromcells(other, version=self.version)
+        raise Exception(f"Cannot convert type {type(other)}.")

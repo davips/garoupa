@@ -21,7 +21,9 @@
 #  time spent here.
 
 from .hash import Hash
+from .identity import Identity
 
 ħ = Hash
-ø = identity32 = Hash.fromn(0, version="UT32.4")
-Ø = identity64 = Hash.fromn(0, version="UT64.4")
+
+ø = identity32 = Identity(version="UT32.4")
+Ø = identity64 = Identity(version="UT64.4")
