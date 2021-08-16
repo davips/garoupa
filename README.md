@@ -53,11 +53,11 @@ poetry install
 ```python3
 from garoupa import Hosh
 
-# Hashes can be multiplied.
+# Hoshes (operable hash-based elements) can be multiplied.
 from garoupa import identity64
 
-a = Hash(blob=b"Some large binary content...")
-b = Hash(blob=b"Some other binary content. Might be, e.g., an action or another large content.")
+a = Hosh(blob=b"Some large binary content...")
+b = Hosh(blob=b"Some other binary content. Might be, e.g., an action or another large content.")
 c = a * b
 print(f"{a} * {b} = {c}")
 """
@@ -67,7 +67,7 @@ print(f"{a} * {b} = {c}")
 
 ```python3
 print(~b)
-# Multiplication can be reverted by the inverse hash. Zero is the identity hash.
+# Multiplication can be reverted by the inverse hosh. Zero is the identity hosh.
 print(f"{b} * {~b} = {b * ~b} = 0")
 """
 Khf00n.bNZZF6fe7CB8.0UaG6rgeXrGfUVwMDON29e8yuXoZzq6ZCVfWEoBk6KDc
@@ -110,7 +110,7 @@ jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 / hKM..E0QdH-mV
 
 ```python3
 
-# Hash multiplication is not expected to be commutative.
+# Hosh multiplication is not expected to be commutative.
 print(f"{a * b} != {b * a}")
 """
 jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 != jFnCCFpU-8kJY2h3HBB-CsB9NaEYXZlsV3Pmu.WFL2pQpx6gvFcTN-gR54d5f0K2
@@ -119,7 +119,7 @@ jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 != jFnCCFpU-8kJ
 
 ```python3
 
-# Hash multiplication is associative.
+# Hosh multiplication is associative.
 print(f"{a * (b * c)} = {(a * b) * c}")
 """
 DiLddiPNYgBrU4y7nbb-mm73.unoKH6Ux.AktmuBlx6q51QMs6sjNOGj4Cgvxojn = DiLddiPNYgBrU4y7nbb-mm73.unoKH6Ux.AktmuBlx6q51QMs6sjNOGj4Cgvxojn
@@ -165,11 +165,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[3, 0, 1, 2], 2, ds3»	*	«[2, 0, 3, 1], 2, dr5»	=	«[1, 3, 2, 0], 4, ds2»
-«[0, 3, 1, 2], 3, dr6»	*	«[3, 0, 1, 2], 1, ds7»	=	«[2, 0, 3, 1], 4, ds1»
-«[0, 1, 2, 3], 0, dr2»	*	«[3, 2, 0, 1], 1, ds4»	=	«[3, 2, 0, 1], 1, ds2»
-«[2, 3, 0, 1], 2, ds6»	*	«[2, 0, 1, 3], 0, dr3»	=	«[0, 2, 3, 1], 2, ds3»
-«[3, 0, 2, 1], 1, dr2»	*	«[2, 0, 1, 3], 3, dr6»	=	«[2, 3, 0, 1], 4, dr0»
+«[3, 0, 1, 2], 2, dr0»	*	«[2, 3, 0, 1], 0, dr6»	=	«[1, 2, 3, 0], 2, dr2»
+«[3, 1, 0, 2], 3, dr7»	*	«[2, 1, 0, 3], 0, dr1»	=	«[0, 1, 3, 2], 3, dr0»
+«[3, 2, 0, 1], 3, dr4»	*	«[1, 3, 0, 2], 3, ds7»	=	«[2, 1, 3, 0], 1, ds3»
+«[2, 0, 1, 3], 1, ds3»	*	«[0, 1, 2, 3], 3, ds7»	=	«[2, 0, 1, 3], 4, dr0»
+«[3, 0, 2, 1], 1, dr1»	*	«[2, 0, 1, 3], 2, ds7»	=	«[2, 3, 0, 1], 3, ds0»
 """
 ```
 
@@ -179,7 +179,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[8, 0, 7, 4, 6, 3, 2, 9, 1, 5, 10, 11]
+[2, 9, 3, 5, 8, 4, 11, 0, 6, 7, 1, 10]
 """
 ```
 
@@ -293,9 +293,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          844/10000:  12.0 bits	~8.44 %
-    |D8×D8×D8×D8| = 65536:         368/10000:  16.0 bits	~3.68 %
- |D8×D8×D8×D8×D8| = 1048576:       167/10000:  20.0 bits	~1.67 %
+       |D8×D8×D8| = 4096:          821/10000:  12.0 bits	~8.21 %
+    |D8×D8×D8×D8| = 65536:         357/10000:  16.0 bits	~3.57 %
+ |D8×D8×D8×D8×D8| = 1048576:       173/10000:  20.0 bits	~1.73 %
 """
 ```
 
@@ -381,7 +381,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 12/08/2021 01:17:25
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 15/08/2021 22:21:25
 """
 ```
 
@@ -447,7 +447,7 @@ for G in map(M, range(6, 11)):
 </p>
 </details>
 
-**Groups benefit from methods from module 'hash'**
+**Groups benefit from methods from the module 'hosh'**
 <details>
 <p>
 
@@ -474,4 +474,4 @@ print(repr(m.hosh))
 
 ### Performance
 See package [hosh](https://pypi.org/project/hosh) for faster, native (compiled) hash operations.
-However, only future major version `2.*.*` or higher of hosh will be compatible with garoupa hashes.
+However, only future major version `2.*.*` or higher of hosh will be compatible with garoupa operable hashes.
