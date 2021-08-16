@@ -1,12 +1,12 @@
 ![test](https://github.com/davips/garoupa/workflows/test/badge.svg)
 [![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
-# garoupa
+# GaROUPa
 <p>
 <a title="fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Malabar_grouper_melb_aquarium.jpg"><img width="120" alt="Malabar grouper melb aquarium" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg"></a>
 </p>
 
-Garoupa is a package containing some groups from abstract algebra and a flexible operable hash, briefly explained in the presentation (ongoing work):
+GaROUPa is a package containing some groups from abstract algebra and a flexible operable hash, briefly explained in the presentation (ongoing work):
 
 [![image](https://user-images.githubusercontent.com/3620506/114261273-11641e80-99b0-11eb-9fd8-929826e169a2.png)](https://docs.google.com/presentation/d/e/2PACX-1vSCTHD6FeLET6lKgexiqJQ6c4viu0F_60kjoDe0x2mm8RqdhkWOiRA4QN3Zr-QLCq9CsPs_qkAAgxso/embed?start=false&loop=false&delayms=3000)
 
@@ -165,11 +165,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[3, 0, 2, 1], 1, dr5»	*	«[0, 2, 1, 3], 2, ds7»	=	«[3, 2, 0, 1], 3, ds0»
-«[3, 2, 0, 1], 1, ds0»	*	«[1, 3, 0, 2], 1, dr0»	=	«[2, 1, 3, 0], 2, ds0»
-«[3, 0, 2, 1], 1, dr6»	*	«[3, 0, 2, 1], 1, dr7»	=	«[1, 3, 2, 0], 2, dr1»
-«[0, 1, 2, 3], 1, ds4»	*	«[2, 0, 3, 1], 1, dr5»	=	«[2, 0, 3, 1], 2, ds3»
-«[1, 2, 0, 3], 0, ds7»	*	«[1, 0, 3, 2], 2, dr0»	=	«[2, 1, 3, 0], 2, ds3»
+«[2, 0, 1, 3], 3, dr4»	*	«[3, 1, 0, 2], 0, ds2»	=	«[3, 0, 2, 1], 3, ds2»
+«[1, 0, 3, 2], 3, ds1»	*	«[2, 0, 1, 3], 1, ds5»	=	«[3, 1, 0, 2], 4, dr0»
+«[0, 1, 3, 2], 3, ds5»	*	«[0, 1, 2, 3], 3, ds3»	=	«[0, 1, 3, 2], 1, dr2»
+«[0, 2, 1, 3], 0, dr1»	*	«[0, 2, 1, 3], 3, dr1»	=	«[0, 1, 2, 3], 3, dr2»
+«[1, 0, 2, 3], 1, dr0»	*	«[0, 1, 3, 2], 3, dr2»	=	«[1, 0, 3, 2], 4, dr2»
 """
 ```
 
@@ -179,7 +179,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[6, 4, 0, 7, 2, 3, 11, 5, 9, 10, 1, 8]
+[6, 5, 4, 10, 8, 11, 9, 3, 1, 2, 0, 7]
 """
 ```
 
@@ -293,9 +293,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          848/10000:  12.0 bits	~8.48 %
-    |D8×D8×D8×D8| = 65536:         367/10000:  16.0 bits	~3.67 %
- |D8×D8×D8×D8×D8| = 1048576:       144/10000:  20.0 bits	~1.44 %
+       |D8×D8×D8| = 4096:          869/10000:  12.0 bits	~8.69 %
+    |D8×D8×D8×D8| = 65536:         384/10000:  16.0 bits	~3.84 %
+ |D8×D8×D8×D8×D8| = 1048576:       156/10000:  20.0 bits	~1.56 %
 """
 ```
 
@@ -381,7 +381,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 15/08/2021 22:33:25
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 15/08/2021 22:42:46
 """
 ```
 
