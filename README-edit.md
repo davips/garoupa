@@ -8,7 +8,7 @@
 
 GaROUPa is a package containing some groups from abstract algebra and a flexible operable hash, briefly explained in the presentation (ongoing work):
 
-[![image](https://user-images.githubusercontent.com/3620506/114261273-11641e80-99b0-11eb-9fd8-929826e169a2.png)](https://docs.google.com/presentation/d/e/2PACX-1vSCTHD6FeLET6lKgexiqJQ6c4viu0F_60kjoDe0x2mm8RqdhkWOiRA4QN3Zr-QLCq9CsPs_qkAAgxso/embed?start=false&loop=false&delayms=3000)
+[![image](https://raw.githubusercontent.com/davips/garoupa/main/examples/capa-slides-gdocs.png)](https://docs.google.com/presentation/d/e/2PACX-1vSCTHD6FeLET6lKgexiqJQ6c4viu0F_60kjoDe0x2mm8RqdhkWOiRA4QN3Zr-QLCq9CsPs_qkAAgxso/embed?start=false&loop=false&delayms=3000)
 
 
 Screenshot of usage in an interactive session:

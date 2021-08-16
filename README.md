@@ -8,7 +8,7 @@
 
 GaROUPa is a package containing some groups from abstract algebra and a flexible operable hash, briefly explained in the presentation (ongoing work):
 
-[![image](https://user-images.githubusercontent.com/3620506/114261273-11641e80-99b0-11eb-9fd8-929826e169a2.png)](https://docs.google.com/presentation/d/e/2PACX-1vSCTHD6FeLET6lKgexiqJQ6c4viu0F_60kjoDe0x2mm8RqdhkWOiRA4QN3Zr-QLCq9CsPs_qkAAgxso/embed?start=false&loop=false&delayms=3000)
+[![image](https://raw.githubusercontent.com/davips/garoupa/main/examples/capa-slides-gdocs.png)](https://docs.google.com/presentation/d/e/2PACX-1vSCTHD6FeLET6lKgexiqJQ6c4viu0F_60kjoDe0x2mm8RqdhkWOiRA4QN3Zr-QLCq9CsPs_qkAAgxso/embed?start=false&loop=false&delayms=3000)
 
 
 Screenshot of usage in an interactive session:
@@ -165,11 +165,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 0, 1, 3], 3, dr4»	*	«[3, 1, 0, 2], 0, ds2»	=	«[3, 0, 2, 1], 3, ds2»
-«[1, 0, 3, 2], 3, ds1»	*	«[2, 0, 1, 3], 1, ds5»	=	«[3, 1, 0, 2], 4, dr0»
-«[0, 1, 3, 2], 3, ds5»	*	«[0, 1, 2, 3], 3, ds3»	=	«[0, 1, 3, 2], 1, dr2»
-«[0, 2, 1, 3], 0, dr1»	*	«[0, 2, 1, 3], 3, dr1»	=	«[0, 1, 2, 3], 3, dr2»
-«[1, 0, 2, 3], 1, dr0»	*	«[0, 1, 3, 2], 3, dr2»	=	«[1, 0, 3, 2], 4, dr2»
+«[2, 0, 1, 3], 2, ds0»	*	«[2, 0, 3, 1], 1, ds7»	=	«[1, 2, 3, 0], 3, dr1»
+«[0, 3, 1, 2], 3, ds3»	*	«[1, 0, 3, 2], 0, dr0»	=	«[3, 0, 2, 1], 3, ds3»
+«[3, 0, 1, 2], 3, ds0»	*	«[1, 0, 3, 2], 2, ds5»	=	«[0, 3, 2, 1], 0, dr3»
+«[2, 1, 0, 3], 3, dr0»	*	«[1, 0, 2, 3], 0, dr6»	=	«[1, 2, 0, 3], 3, dr2»
+«[1, 3, 0, 2], 3, ds1»	*	«[0, 2, 1, 3], 0, ds1»	=	«[1, 0, 3, 2], 3, dr0»
 """
 ```
 
@@ -179,7 +179,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[6, 5, 4, 10, 8, 11, 9, 3, 1, 2, 0, 7]
+[11, 1, 4, 6, 8, 9, 10, 7, 0, 2, 5, 3]
 """
 ```
 
@@ -293,9 +293,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          869/10000:  12.0 bits	~8.69 %
-    |D8×D8×D8×D8| = 65536:         384/10000:  16.0 bits	~3.84 %
- |D8×D8×D8×D8×D8| = 1048576:       156/10000:  20.0 bits	~1.56 %
+       |D8×D8×D8| = 4096:          798/10000:  12.0 bits	~7.98 %
+    |D8×D8×D8×D8| = 65536:         351/10000:  16.0 bits	~3.51 %
+ |D8×D8×D8×D8×D8| = 1048576:       169/10000:  20.0 bits	~1.69 %
 """
 ```
 
@@ -381,7 +381,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 15/08/2021 22:42:46
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 15/08/2021 22:53:55
 """
 ```
 
