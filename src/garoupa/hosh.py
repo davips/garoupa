@@ -83,18 +83,7 @@ class Hosh:
 
     def __init__(self, blob, etype="ordered", version="UT64.4"):
         self.etype, self.version = etype, version
-        if version == "UT32.4":
-            self.p = 4294967291
-            self.bytes = 24
-            self.digits = 32
-            self.order = 6277101691541631771514589274378639120656724268335671295241
-        elif version == "UT64.4":
-            self.p = 18446744073709551557
-            self.bytes = 48
-            self.digits = 64
-            self.order = 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249
-        else:
-            raise Exception("Unknown version:", version)
+        self.p, self.order, self.digits, self.bytes = self.group_props(version)
         if blob is not None:  # None is for internal use only.
             self._cells, self._id = cells_id_fromblob(blob, etype, self.bytes, self.p)
 
@@ -137,14 +126,7 @@ class Hosh:
         >>> h.id
         '0000000000000000000000000000000000000000000000000001DFc0Ttk5MszS'
         """
-        if version == "UT32.4":  # TODO: deduplicate code
-            p = 4294967291
-            order = 6277101691541631771514589274378639120656724268335671295241
-        elif version == "UT64.4":
-            p = 18446744073709551557
-            order = 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249
-        else:
-            raise Exception("Unknown version:", version)
+        p, order, _, _ = cls.group_props(version)
         if n > order:
             raise Exception(f"Element outside allowed range: {n} >= {order}")
         return Hosh.fromcells(int2m4(n, p), version)
@@ -240,3 +222,11 @@ class Hosh:
         if isinstance(other, list):
             return Hosh.fromcells(other, version=self.version)
         raise Exception(f"Cannot convert type {type(other)}.")
+
+    @classmethod
+    def group_props(cls, version):
+        if version == "UT32.4":
+            return 4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24
+        elif version == "UT64.4":
+            return 18446744073709551557, 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249, 64, 48
+        raise Exception("Unknown version:", version)
