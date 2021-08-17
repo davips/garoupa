@@ -24,8 +24,8 @@ from garoupa import Hosh
 
 
 class Identity(Hosh):
-    def __init__(self, version):
-        super().__init__(None, "ordered", version)
+    def __init__(self, version, etype="ordered"):
+        super().__init__(None, etype, version)
         self._cells = [0, 0, 0, 0, 0, 0]
 
     @property
@@ -45,8 +45,7 @@ class Identity(Hosh):
         >>> Hosh(b"654", "unordered", "UT32.4") == a and b == Hosh(b"654","unordered", "UT64.4")
         True
         """
-        self.etype = "unordered"
-        return self
+        return Identity(self.version, "unordered")
 
     @property
     def h(self):
@@ -65,5 +64,4 @@ class Identity(Hosh):
         >>> Hosh(b"654", "hybrid", "UT32.4") == a and b == Hosh(b"654","hybrid", "UT64.4")
         True
         """
-        self.etype = "hybrid"
-        return self
+        return Identity(self.version, "hybrid")

@@ -19,11 +19,27 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
+from dataclasses import dataclass
 
 from .hosh import Hosh
 from .identity import Identity
 
-ħ = Hosh
 
+@dataclass
+class Helper:
+    version: str
+
+    def __call__(self, blob, etype="ordered"):
+        return Hosh(blob, etype, self.version)
+
+    def u(self, blob):
+        return Hosh(blob, "unordered", self.version)
+
+    def h(self, blob):
+        return Hosh(blob, "hybrid", self.version)
+
+
+ħ = Helper("UT32.4")
+Ħ = Helper("UT64.4")
 ø = identity32 = Identity(version="UT32.4")
 Ø = identity64 = Identity(version="UT64.4")
