@@ -91,6 +91,10 @@ class Hosh:
     def fromcells(cls, cells, version="UT64.4"):
         hosh = Hosh(None, version=version)
         hosh._cells = cells
+        if sum(cells[:4]) == 0:
+            hosh.etype = "unordered"
+        elif sum(cells[:2]) == 0:
+            hosh.etype = "hybrid"
         return hosh
 
     @classmethod
@@ -212,6 +216,8 @@ class Hosh:
 
     def convert(self, other):
         if isinstance(other, Hosh):
+            if self.version != other.version:
+                raise Exception(f"Incompatible operands: {self.version} != {other.version}")
             return other
         if isinstance(other, str):
             return Hosh.fromid(other, version=self.version)
