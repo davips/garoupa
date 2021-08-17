@@ -105,3 +105,10 @@ print(log(4294967291 ** 6, len(alph)), log(18446744073709551557 ** 6, len(alph))
 
 # մնշոչպջռսվտրցւփքօֆօֆ
 # մնշոչպջռսվտրցւփքօֆօֆմնշոչպջռսվտր
+
+for f in range(250):
+    print(chr(f), end="")
+print()
+print("_abcdefghijklmnopqrstuvwxyz~", len(bytes("", encoding="utf8")))
+# ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂă
+print("$0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz")
