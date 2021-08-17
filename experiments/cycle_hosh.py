@@ -21,7 +21,7 @@
 #  time spent here.
 #  Relevant employers or funding agencies will be notified accordingly.
 
-from garoupa import ø, ħ, Ø
+from garoupa import ħ
 
 x = ħ.h(b'a')
 f = ħ(b'a')

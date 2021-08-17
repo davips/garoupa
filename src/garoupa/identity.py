@@ -54,7 +54,7 @@ class Identity(Hosh):
 
         Usage:
 
-        >>> from garoupa import ø, Ø, Hosh
+        >>> from garoupa import Hosh, ø, Ø
         >>> a = ø.h * b"654"
         >>> print(a)
         0000000000167KF1DMkyi2pJsjygdObZ
@@ -65,3 +65,14 @@ class Identity(Hosh):
         True
         """
         return Identity(self.version, "hybrid")
+
+
+class ø_(Identity):
+    def __init__(self, etype="ordered"):
+        super().__init__("UT32.4", etype)
+
+
+class Ø_(Identity):
+    def __init__(self, etype="ordered"):
+        super().__init__("UT64.4", etype)
+

@@ -140,3 +140,6 @@ print(repr(m.hosh))
 ### Performance
 See package [hosh](https://pypi.org/project/hosh) for faster, native (compiled) hash operations.
 However, only future major version `2.*.*` or higher of hosh will be compatible with garoupa operable hashes.
+For more dependencies and faster execution: 
+`poetry install -E full`
+hosh may not be updated yet!
