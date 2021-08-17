@@ -19,7 +19,6 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is a crime and is unethical regarding the effort and
 #  time spent here.
-#  Relevant employers or funding agencies will be notified accordingly.
 from garoupa import Hosh
 
 
