@@ -83,14 +83,14 @@ class Hosh:
     _n, _id, _idc, _sid, _sidc, _cells = None, None, None, None, None, None
     _bits = None
 
-    def __init__(self, blob, etype="ordered", version="UT64.4"):
+    def __init__(self, blob, etype="ordered", version="UT32.4"):
         self.etype, self.version = etype, version
         self.p, self.order, self.digits, self.bytes = self.group_props(version)
         if blob is not None:  # None is for internal use only.
             self._cells, self._id = cells_id_fromblob(blob, etype, self.bytes, self.p)
 
     @classmethod
-    def fromcells(cls, cells, version="UT64.4"):
+    def fromcells(cls, cells, version="UT32.4"):
         hosh = Hosh(None, version=version)
         hosh._cells = cells
         if sum(cells[:4]) == 0:
@@ -100,7 +100,7 @@ class Hosh:
         return hosh
 
     @classmethod
-    def fromid(cls, id, version="UT64.4"):
+    def fromid(cls, id, version="UT32.4"):
         """
         Usage:
 
@@ -121,7 +121,7 @@ class Hosh:
         return hosh
 
     @classmethod
-    def fromn(cls, n: int, version="UT64.4"):
+    def fromn(cls, n: int, version="UT32.4"):
         """Hosh representing the given int.
 
         Default 'p' is according to version UT64.4.
