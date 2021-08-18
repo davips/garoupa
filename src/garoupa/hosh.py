@@ -21,6 +21,7 @@
 #  time spent here.
 from typing import Union
 
+from garoupa.base777 import b777enc
 from garoupa.colors import colorize128bit
 from garoupa.core import cells_id_fromblob, id_fromcells, cells_fromid
 from garoupa.math import int2m4, m42int, m4m, m4inv
@@ -77,8 +78,9 @@ class Hosh:
     >>> print(Ø.h * b"sdff")  # etype=hybrid
     0000000000000000000000T6pyeleVnuHDGVuV5pKpby2rejp3txYcmGbCu7u2dh
     """
+    shorter = False
     _repr = None
-    _n, _id, _cells = None, None, None
+    _n, _id, _idc, _sid, _sidc, _cells = None, None, None, None, None, None
     _bits = None
 
     def __init__(self, blob, etype="ordered", version="UT64.4"):
@@ -163,6 +165,65 @@ class Hosh:
             self.calculate()
         return self._id
 
+    @property
+    def sid(self):
+        """
+        Shorter id (base-922 using up to 2 bytes utf8 per char)
+
+        Usage:
+
+        >>> from garoupa import ø
+        >>> (ø * b'65e987978g').sid
+        'sӓĔՇƍǗЋӭȚrсЪƆЬŬĻüɸÓÉ'
+
+        >>> from garoupa import Ø
+        >>> (Ø * b'65e987978g').sid
+        'rɠȲÃǟƑǒȨɑǛõɚėǜտбǯӳČɟӟоňŰΞԐƆûȋʝƮǎƭλψƥɞȳɦՑ'
+
+        Returns
+        -------
+
+        """
+        if self._sid is None:
+            if self._n is None:
+                self.calculate()
+            self._sid = b777enc(self._n, self.digits * 5 // 8)
+        return self._sid
+
+    @property
+    def idc(self):
+        if self._idc is None:
+            self._idc = colorize128bit(self.id, self.digits)
+        return self._idc
+
+    @property
+    def sidc(self):
+        """
+        Shorter colored id (base-922 using up to 2 bytes utf8 per char)
+
+        Usage:
+
+        >>> from garoupa import ø
+        >>> print((ø * b'65e987978g').sidc)
+        \x1b[38;5;131m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;240m\x1b[1m\x1b[48;5;0mӓ\x1b[0m\x1b[38;5;61m\x1b[1m\x1b[48;5;0mĔ\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;0mՇ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mƍ\x1b[0m\x1b[38;5;238m\x1b[1m\x1b[48;5;0mǗ\x1b[0m\x1b[38;5;238m\x1b[1m\x1b[48;5;0mЋ\x1b[0m\x1b[38;5;239m\x1b[1m\x1b[48;5;0mӭ\x1b[0m\x1b[38;5;239m\x1b[1m\x1b[48;5;0mȚ\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0mr\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mс\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0mЪ\x1b[0m\x1b[38;5;61m\x1b[1m\x1b[48;5;0mƆ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mЬ\x1b[0m\x1b[38;5;133m\x1b[1m\x1b[48;5;0mŬ\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;0mĻ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mü\x1b[0m\x1b[38;5;240m\x1b[1m\x1b[48;5;0mɸ\x1b[0m\x1b[38;5;61m\x1b[1m\x1b[48;5;0mÓ\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;0mÉ\x1b[0m
+
+        >>> from garoupa import Ø
+        >>> print((Ø * b'65e987978g').sidc)
+        \x1b[38;5;167m\x1b[1m\x1b[48;5;0mr\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mɠ\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mȲ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mÃ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mǟ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mƑ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mǒ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mȨ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mɑ\x1b[0m\x1b[38;5;168m\x1b[1m\x1b[48;5;0mǛ\x1b[0m\x1b[38;5;173m\x1b[1m\x1b[48;5;0mõ\x1b[0m\x1b[38;5;203m\x1b[1m\x1b[48;5;0mɚ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mė\x1b[0m\x1b[38;5;168m\x1b[1m\x1b[48;5;0mǜ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mտ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mб\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mǯ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mӳ\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mČ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mɟ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mӟ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mо\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mň\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mŰ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mΞ\x1b[0m\x1b[38;5;168m\x1b[1m\x1b[48;5;0mԐ\x1b[0m\x1b[38;5;173m\x1b[1m\x1b[48;5;0mƆ\x1b[0m\x1b[38;5;203m\x1b[1m\x1b[48;5;0mû\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mȋ\x1b[0m\x1b[38;5;168m\x1b[1m\x1b[48;5;0mʝ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mƮ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mǎ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mƭ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mλ\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mψ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mƥ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mɞ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mȳ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mɦ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mՑ\x1b[0m
+
+        Returns
+        -------
+
+        """
+        if self._sidc is None:
+            self._sidc = colorize128bit(self.sid, self.digits * 5 // 8)
+        return self._sidc
+
+    def __repr__(self):
+        if self._repr is None:
+            self._repr = self.sidc if Hosh.shorter else self.idc
+        return self._repr
+
     # @property
     # def bits(self):
     #     if self._bits is None:
@@ -184,17 +245,8 @@ class Hosh:
     def __sub__(self, other):
         return Hosh.fromn((self.n - self.convert(other).n) % self.order, self.version)
 
-    def __repr__(self):
-        if self._repr is None:
-            self._repr = colorize128bit(self.id, self.digits)
-        return self._repr
-
-    @property
-    def idc(self):
-        return repr(self)
-
     def __str__(self):
-        return self.id
+        return self.sid if Hosh.shorter else self.id
 
     def __eq__(self, other):
         return self.n == self.convert(other).n
@@ -210,6 +262,15 @@ class Hosh:
         7xoxnm1KL3mqmGpKe1PYxrQEzupxLnsx8rb1JHagl2mBdq.k1xZ.N0XcaPsu-o6J
         """
         return print(self.idc if colored else self.id)
+
+    def short(self, colored=True):
+        """
+        Usage:
+
+        >>> Hosh(b"asdf86fasd").short(colored=False)
+        ÙՉԸͻЬǧӡȕɷʜrżșƕπùcսȑϳՑͶӚǦýՎѐЄƱϫŉñŸɃmЬΦȎʀʓ
+        """
+        return print(self.sidc if colored else self.sid)
 
     def __hash__(self):
         return self.n
