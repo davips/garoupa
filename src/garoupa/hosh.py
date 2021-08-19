@@ -100,7 +100,7 @@ class Hosh:
         return hosh
 
     @classmethod
-    def fromid(cls, id, version="UT32.4"):
+    def fromid(cls, id):
         """
         Usage:
 
@@ -114,8 +114,12 @@ class Hosh:
         id
         version
         """
-        if len(id) != 32 and "32" in version or len(id) != 64 and "64" in version:
-            raise Exception(f"Wrong identifier length for {version}: {len(id)}   id:[{id}]")
+        if len(id) == 32:
+            version = "UT32.4"
+        elif len(id) == 64:
+            version = "UT64.4"
+        else:
+            raise Exception(f"Wrong identifier length: {len(id)}   id:[{id}]")
         hosh = Hosh(None, version=version)
         hosh._id = id
         return hosh
@@ -240,7 +244,12 @@ class Hosh:
         return Hosh.fromcells(m4m(self.cells, m4inv(self.convert(other).cells, self.p), self.p), self.version)
 
     def __add__(self, other):
-        return Hosh.fromn((self.n + self.convert(other).n) % self.order, self.version)
+        """Matrix addition modulo p, keeping unidiagonal"""
+        return Hosh.fromcells(
+            list(map(lambda x, y: (x + y) % self.p, self.cells, self.convert(other).cells)), self.version
+        )
+        # REMINDER: these 2 codes produce different results!
+        # return Hosh.fromn((self.n + self.convert(other).n) % self.order, self.version)
 
     def __sub__(self, other):
         return Hosh.fromn((self.n - self.convert(other).n) % self.order, self.version)
