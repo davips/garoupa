@@ -31,7 +31,7 @@ def cells_id_fromblob(blob, etype, bytes, p):
 
     ps. Blake3 returns a digest with the most significant byte on the right."""
     digest = blake3(blob).digest(length=bytes)
-    n = int.from_bytes(digest, byteorder="big") >> 1
+    n = int.from_bytes(digest, byteorder="little") >> 1
     if etype == "unordered":
         n %= p
     elif etype == "hybrid":

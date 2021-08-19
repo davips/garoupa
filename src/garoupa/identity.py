@@ -37,10 +37,10 @@ class Identity(Hosh):
         >>> from garoupa import ø, Ø, Hosh
         >>> a = ø.u * b"654"
         >>> print(a)
-        000000000000000000000000000kYNjp
+        000000000000000000000000000KaUCe
         >>> b = Ø.u * b"654"
         >>> print(b)
-        000000000000000000000000000000000000000000000000000007Oe9Pkyj58r
+        00000000000000000000000000000000000000000000000000000fX3ouDHIyfY
         >>> Hosh(b"654", "unordered", "UT32.4") == a and b == Hosh(b"654","unordered", "UT64.4")
         True
         """
@@ -56,10 +56,10 @@ class Identity(Hosh):
         >>> from garoupa import Hosh, ø, Ø
         >>> a = ø.h * b"654"
         >>> print(a)
-        0000000000167KF1DMkyi2pJsjygdObZ
+        00000000001I-Cd0PXzgFHt57IIqwNuw
         >>> b = Ø.h * b"654"
         >>> print(b)
-        0000000000000000000000eZ7EUaEx7AwXByek6Nl1dSRveP.VZeAE4-oWVLSrc8
+        0000000000000000000006QtNMn5NI.Q7o.AZ9BmV2mOtvf0AjsJiwKENDfaF6Xr
         >>> Hosh(b"654", "hybrid", "UT32.4") == a and b == Hosh(b"654","hybrid", "UT64.4")
         True
         """

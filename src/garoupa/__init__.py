@@ -38,6 +38,10 @@ class Helper:
     def h(self, blob):
         return Hosh(blob, "hybrid", self.version)
 
+    fromid = Hosh.fromid
+    fromn = Hosh.fromn
+    fromcells = Hosh.fromcells
+
 
 ħ = Helper("UT32.4")
 Ħ = Helper("UT64.4")

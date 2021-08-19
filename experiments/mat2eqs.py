@@ -33,6 +33,10 @@ Z = Matrix([[1, a, b, c],
             [0, 1, d, e],
             [0, 0, 1, f],
             [0, 0, 0, 1]])
+# ? = Matrix([[1, g, h, i],
+#             [0, 1, j, k],
+#             [0, 0, 1, l],
+#             [0, 0, 0, 1]])
 
 I = Matrix.eye(4, 4)
 # A = Matrix([[1, a, b, c, d],
@@ -45,15 +49,15 @@ I = Matrix.eye(4, 4)
 #             [0, 0, 1, x, y],
 #             [0, 0, 0, 1, z],
 #             [0, 0, 0, 0, 1]])
-XF = (X * F)
-# print(repr(XF))
-X_ZXZ = simplify((X + Z - I) * X * Z)
-# print(repr(X_ZXZ))
 
-# xf = [x+z]xz                  f = Xzxz
-# print(repr(simplify(X_ZXZ - XF)))
-sol = solve([X_ZXZ - XF])
+# ex = simplify((((X * F%p) * Z%p) * (Z * F%p)%p) - I)
+ex = simplify(X * F * Z * (Z * F).inv() - I)
+# ex = simplify((F * X * Z) * (Z * F).inv() - I)
+# print(repr(ex))
+sol = solve(ex)
+
 pprint(sol)
+
 """
    -(-f4 + x4)      -(-4⋅f1 + f2⋅f4 - f2⋅x4 + f4⋅x2 + 4⋅x1 - x2⋅x4)     
 a: ────────────, b: ────────────────────────────────────────────────, 

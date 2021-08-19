@@ -37,13 +37,13 @@ class Hosh:
     >>> a = Hosh(b"lots of data")
     >>> b = Hosh(b"lots of data 2")
     >>> a.id
-    'fw-IowLZVKdeXCNkqsTHFiIe06Pv0.oaAXY.fN6xJ2E7.fe36iBXxOYpmm83Q7ZL'
+    '2Lo3TSO03yIBqYTFR6NKjKdC.oLyb0--'
     >>> b.id
-    'ttXOjA4WLwyrOF6tk2YJeYHhrydN6hrm315uFyZRa9Z0OBPm2NWRkoOYtNHYGlwv'
+    'lxqpsidKkkGXHiZg7h7aCUy-eI5esBXR'
     >>> (a * b).id
-    'I-WuI4QUFeHGKfTNKvQq1X5jqz-rfMJC19-pIAVniOF3ScY-1ac3fMqhAElcjexK'
+    'ogOtjU.KnUWCpQr8ouvvXJBxqkTZyFWc'
     >>> (b * a).id
-    'I-WuI4QUFeHGKfTNKvQq1-T.MqLLanrR4nsDP4B2SuNUeN7xgiWFtVokR7Qcb05-'
+    'ogOtjU.KnUU7mBeXIWEu2wWv2aOkuOru'
     >>> a * b * ~b == a
     True
     >>> c = Hosh(b"lots of data 3")
@@ -76,7 +76,7 @@ class Hosh:
     >>> print(Ø)  # Version UT64.4
     0000000000000000000000000000000000000000000000000000000000000000
     >>> print(Ø.h * b"sdff")  # etype=hybrid
-    0000000000000000000000T6pyeleVnuHDGVuV5pKpby2rejp3txYcmGbCu7u2dh
+    000000000000000000000a7sH7lvQjSaSIwE9rArhD52hphAaDuAEI-vjqKMpsnD
     """
     shorter = False
     _repr = None
@@ -130,7 +130,7 @@ class Hosh:
 
         >>> h = Hosh.fromn(7647544756746324134134)
         >>> h.id
-        '0000000000000000000000000000000000000000000000000001DFc0Ttk5MszS'
+        '00000000000000000001DFc0Ttk5MszS'
         """
         p, order, _, _ = cls.group_props(version)
         if n > order:
@@ -174,11 +174,11 @@ class Hosh:
 
         >>> from garoupa import ø
         >>> (ø * b'65e987978g').sid
-        'sӓĔՇƍǗЋӭȚrсЪƆЬŬĻüɸÓÉ'
+        'ĐãǚħHȩИЅՌɠźȪϔUνřǒšWն'
 
         >>> from garoupa import Ø
         >>> (Ø * b'65e987978g').sid
-        'rɠȲÃǟƑǒȨɑǛõɚėǜտбǯӳČɟӟоňŰΞԐƆûȋʝƮǎƭλψƥɞȳɦՑ'
+        'ÊŰԝǮʎĹաΦƟzƶӣξȘբZŖΫįկȯӱđՇՌɘö0ÁѳИσՔMïϾTрвЄ'
 
         Returns
         -------
@@ -205,11 +205,11 @@ class Hosh:
 
         >>> from garoupa import ø
         >>> print((ø * b'65e987978g').sidc)
-        \x1b[38;5;131m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;240m\x1b[1m\x1b[48;5;0mӓ\x1b[0m\x1b[38;5;61m\x1b[1m\x1b[48;5;0mĔ\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;0mՇ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mƍ\x1b[0m\x1b[38;5;238m\x1b[1m\x1b[48;5;0mǗ\x1b[0m\x1b[38;5;238m\x1b[1m\x1b[48;5;0mЋ\x1b[0m\x1b[38;5;239m\x1b[1m\x1b[48;5;0mӭ\x1b[0m\x1b[38;5;239m\x1b[1m\x1b[48;5;0mȚ\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0mr\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mс\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0mЪ\x1b[0m\x1b[38;5;61m\x1b[1m\x1b[48;5;0mƆ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mЬ\x1b[0m\x1b[38;5;133m\x1b[1m\x1b[48;5;0mŬ\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;0mĻ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mü\x1b[0m\x1b[38;5;240m\x1b[1m\x1b[48;5;0mɸ\x1b[0m\x1b[38;5;61m\x1b[1m\x1b[48;5;0mÓ\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;0mÉ\x1b[0m
+        \x1b[38;5;73m\x1b[1m\x1b[48;5;0mĐ\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0mã\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mǚ\x1b[0m\x1b[38;5;84m\x1b[1m\x1b[48;5;0mħ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mH\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0mȩ\x1b[0m\x1b[38;5;114m\x1b[1m\x1b[48;5;0mИ\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0mЅ\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mՌ\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0mɠ\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;0mź\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0mȪ\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mϔ\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mU\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mν\x1b[0m\x1b[38;5;77m\x1b[1m\x1b[48;5;0mř\x1b[0m\x1b[38;5;73m\x1b[1m\x1b[48;5;0mǒ\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0mš\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;84m\x1b[1m\x1b[48;5;0mն\x1b[0m
 
         >>> from garoupa import Ø
         >>> print((Ø * b'65e987978g').sidc)
-        \x1b[38;5;167m\x1b[1m\x1b[48;5;0mr\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mɠ\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mȲ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mÃ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mǟ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mƑ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mǒ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mȨ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mɑ\x1b[0m\x1b[38;5;168m\x1b[1m\x1b[48;5;0mǛ\x1b[0m\x1b[38;5;173m\x1b[1m\x1b[48;5;0mõ\x1b[0m\x1b[38;5;203m\x1b[1m\x1b[48;5;0mɚ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mė\x1b[0m\x1b[38;5;168m\x1b[1m\x1b[48;5;0mǜ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mտ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mб\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mǯ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mӳ\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mČ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mɟ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mӟ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mо\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mň\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mŰ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mΞ\x1b[0m\x1b[38;5;168m\x1b[1m\x1b[48;5;0mԐ\x1b[0m\x1b[38;5;173m\x1b[1m\x1b[48;5;0mƆ\x1b[0m\x1b[38;5;203m\x1b[1m\x1b[48;5;0mû\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mȋ\x1b[0m\x1b[38;5;168m\x1b[1m\x1b[48;5;0mʝ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mƮ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mǎ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mƭ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mλ\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mψ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mƥ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mɞ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mȳ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mɦ\x1b[0m\x1b[38;5;167m\x1b[1m\x1b[48;5;0mՑ\x1b[0m
+        \x1b[38;5;137m\x1b[1m\x1b[48;5;0mÊ\x1b[0m\x1b[38;5;101m\x1b[1m\x1b[48;5;0mŰ\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mԝ\x1b[0m\x1b[38;5;242m\x1b[1m\x1b[48;5;0mǮ\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0mʎ\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mĹ\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0mա\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mΦ\x1b[0m\x1b[38;5;240m\x1b[1m\x1b[48;5;0mƟ\x1b[0m\x1b[38;5;240m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;241m\x1b[1m\x1b[48;5;0mƶ\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mӣ\x1b[0m\x1b[38;5;143m\x1b[1m\x1b[48;5;0mξ\x1b[0m\x1b[38;5;143m\x1b[1m\x1b[48;5;0mȘ\x1b[0m\x1b[38;5;143m\x1b[1m\x1b[48;5;0mբ\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mŖ\x1b[0m\x1b[38;5;101m\x1b[1m\x1b[48;5;0mΫ\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mį\x1b[0m\x1b[38;5;242m\x1b[1m\x1b[48;5;0mկ\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0mȯ\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mӱ\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0mđ\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mՇ\x1b[0m\x1b[38;5;240m\x1b[1m\x1b[48;5;0mՌ\x1b[0m\x1b[38;5;240m\x1b[1m\x1b[48;5;0mɘ\x1b[0m\x1b[38;5;241m\x1b[1m\x1b[48;5;0mö\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;143m\x1b[1m\x1b[48;5;0mÁ\x1b[0m\x1b[38;5;143m\x1b[1m\x1b[48;5;0mѳ\x1b[0m\x1b[38;5;143m\x1b[1m\x1b[48;5;0mИ\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mσ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mՔ\x1b[0m\x1b[38;5;101m\x1b[1m\x1b[48;5;0mM\x1b[0m\x1b[38;5;95m\x1b[1m\x1b[48;5;0mï\x1b[0m\x1b[38;5;242m\x1b[1m\x1b[48;5;0mϾ\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0mT\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mр\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0mв\x1b[0m\x1b[38;5;131m\x1b[1m\x1b[48;5;0mЄ\x1b[0m
 
         Returns
         -------
@@ -259,7 +259,7 @@ class Hosh:
         Usage:
 
         >>> Hosh(b"asdf86fasd").show(colored=False)
-        7xoxnm1KL3mqmGpKe1PYxrQEzupxLnsx8rb1JHagl2mBdq.k1xZ.N0XcaPsu-o6J
+        8nsZouodGbQ5.9OUrypqCzmYrK1t8hou
         """
         return print(self.idc if colored else self.id)
 
@@ -268,7 +268,7 @@ class Hosh:
         Usage:
 
         >>> Hosh(b"asdf86fasd").short(colored=False)
-        ÙՉԸͻЬǧӡȕɷʜrżșƕπùcսȑϳՑͶӚǦýՎѐЄƱϫŉñŸɃmЬΦȎʀʓ
+        çÙkƝĜưŉЗßîōɨϱӲXеșηȧð
         """
         return print(self.sidc if colored else self.sid)
 
