@@ -285,19 +285,19 @@ class Hosh:
         return self.n
 
     def convert(self, other):
-        if isinstance(other, Hosh):
-            if self.version != other.version:
-                raise Exception(f"Incompatible operands: {self.version} != {other.version}")
-            return other
         if isinstance(other, str):
-            return Hosh.fromid(other, version=self.version)
-        if isinstance(other, bytes):
-            return Hosh(other, etype=self.etype, version=self.version)
-        if isinstance(other, int):
-            return Hosh.fromn(other, version=self.version)
-        if isinstance(other, list):
-            return Hosh.fromcells(other, version=self.version)
-        raise Exception(f"Cannot convert type {type(other)}.")
+            other = Hosh.fromid(other)
+        elif isinstance(other, bytes):
+            other = Hosh(other, etype=self.etype, version=self.version)
+        elif isinstance(other, int):
+            other = Hosh.fromn(other, version=self.version)
+        elif isinstance(other, list):
+            other = Hosh.fromcells(other, version=self.version)
+        elif not isinstance(other, Hosh):
+            raise Exception(f"Cannot convert type {type(other)}.")
+        if self.version != other.version:
+            raise Exception(f"Incompatible operands: {self.version} != {other.version}")
+        return other
 
     @classmethod
     def group_props(cls, version):
