@@ -147,7 +147,7 @@ reference = "dvpypi"
 name = "numpy"
 version = "1.21.1"
 description = "NumPy is the fundamental package for array computing with Python."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -352,12 +352,12 @@ url = "http://localhost:8080/simple"
 reference = "dvpypi"
 
 [extras]
-full = ["progress", "pathos", "numpy"]
+full = ["progress", "pathos"]
 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "2fbf28ef9a1bc37f0ba8c7b4d20942cbfa1ad8688adb1ee0d282f62e3a9dea02"
+content-hash = "f0e0b846b9dce1073396d22fc5afcd1996ccf7b1f08b53b431c844298a6e8ea5"
 
 [metadata.files]
 atomicwrites = [

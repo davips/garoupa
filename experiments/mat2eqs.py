@@ -1,6 +1,6 @@
 from sympy import Matrix, simplify, solve, pprint
 from sympy.physics.units.quantities import Quantity
-from sympy.abc import a, b, c, d, e, f  # , i, j, k, l, m, n, u, v, w, x, y, z
+from sympy.abc import a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
 
 """
 Example of conversion of a matrix expression into a linear system. 
@@ -39,24 +39,15 @@ Z = Matrix([[1, a, b, c],
 #             [0, 0, 0, 1]])
 
 I = Matrix.eye(4, 4)
-# A = Matrix([[1, a, b, c, d],
-#             [0, 1, e, f, g],
-#             [0, 0, 1, h, i],
-#             [0, 0, 0, 1, j],
-#             [0, 0, 0, 0, 1]])
-# B = Matrix([[1, q, r, s, t],
-#             [0, 1, u, v, w],
-#             [0, 0, 1, x, y],
-#             [0, 0, 0, 1, z],
-#             [0, 0, 0, 0, 1]])
-
-# ex = simplify((((X * F%p) * Z%p) * (Z * F%p)%p) - I)
-ex = simplify(X * F * Z * (Z * F).inv() - I)
-# ex = simplify((F * X * Z) * (Z * F).inv() - I)
-# print(repr(ex))
-sol = solve(ex)
-
-pprint(sol)
+#
+#
+# # ex = simplify((((X * F%p) * Z%p) * (Z * F%p)%p) - I)
+# ex = simplify(X * F * Z * (Z * F).inv() - I)
+# # ex = simplify((F * X * Z) * (Z * F).inv() - I)
+# # print(repr(ex))
+# sol = solve(ex)
+#
+# pprint(sol)
 
 """
    -(-f4 + x4)      -(-4⋅f1 + f2⋅f4 - f2⋅x4 + f4⋅x2 + 4⋅x1 - x2⋅x4)     
@@ -75,3 +66,32 @@ d: ────────────, e: ────────────
 f: ────────────
         2      
 """
+
+A = Matrix([[1, a, b, c, d],
+            [0, 1, e, f, g],
+            [0, 0, 1, h, i],
+            [0, 0, 0, 1, j],
+            [0, 0, 0, 0, 1]])
+B = Matrix([[1, q, r, s, t],
+            [0, 1, u, v, w],
+            [0, 0, 1, x, y],
+            [0, 0, 0, 1, z],
+            [0, 0, 0, 0, 1]])
+
+pprint(A * B)
+
+A = Matrix([[1, a, b, c],
+            [0, 1, d, e],
+            [0, 0, 1, f],
+            [0, 0, 0, 1]])
+B = Matrix([[1, q, r, s],
+            [0, 1, t, u],
+            [0, 0, 1, v],
+            [0, 0, 0, 1]])
+print()
+pprint(A * B)
+# pprint(solve(A*B-B*A))
+exit()
+
+p=4000000000
+pprint(solve(p ** 3 * x ** 3 - 2 ** 192))
