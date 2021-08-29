@@ -38,7 +38,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pytest src --cov=src --doctest-modules
+          pytest src tests --cov=src --doctest-modules
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
