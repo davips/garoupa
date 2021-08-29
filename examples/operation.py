@@ -1,11 +1,9 @@
 # Basic operations
-from garoupa import Hosh
+from garoupa import Hosh, ø  # ø is a shortcut for identity32 (AltGr+O in most keyboards)
 
 # Hoshes (operable hash-based elements) can be multiplied.
-from garoupa import identity64
-
-a = Hosh(blob=b"Some large binary content...")
-b = Hosh(blob=b"Some other binary content. Might be, e.g., an action or another large content.")
+a = Hosh(content=b"Some large binary content...")
+b = Hosh(content=b"Some other binary content. Might be, e.g., an action or another large content.")
 c = a * b
 print(f"{a} * {b} = {c}")
 # ...
@@ -14,7 +12,7 @@ print(~b)
 print(f"{b} * {~b} = {b * ~b} = 0")
 # ...
 
-print(f"{b} * {identity64} = {b * identity64} = b")
+print(f"{b} * {ø} = {b * ø} = b")
 # ...
 
 print(f"{c} * {~b} = {c * ~b} = {a} = a")

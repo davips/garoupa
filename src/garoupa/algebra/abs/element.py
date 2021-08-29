@@ -99,7 +99,7 @@ class Element(ABC):
 
         >>> from garoupa.algebra.dihedral import Ds
         >>> Ds(64**2,64**5).hosh.id
-        '00000000000000000000000000000100'
+        '0_0001000_______________________'
         """
         if self._hosh is None:
             self._hosh = Hosh.fromn(self.i)
@@ -112,7 +112,7 @@ class Element(ABC):
 
         >>> from garoupa.algebra.dihedral import Ds
         >>> Ds(64**2,64**5).id
-        '00000000000000000000000000000100'
+        '0_0001000_______________________'
         """
         if self._id is None:
             self._id = self.hosh.id

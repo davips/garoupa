@@ -22,7 +22,7 @@
 from dataclasses import dataclass
 
 from .hosh import Hosh
-from .identity import Identity, ø_, Ø_
+from .identity import Identity, ø, Ø
 
 
 @dataclass
@@ -40,11 +40,10 @@ class Helper:
 
     fromid = Hosh.fromid
     fromn = Hosh.fromn
-    fromcells = Hosh.fromcells
 
 
 ħ = Helper("UT32.4")
 Ħ = Helper("UT64.4")
 
-ø = identity32 = ø_()
-Ø = identity64 = Ø_()
+ø = identity32 = ø()
+Ø = identity64 = Ø()

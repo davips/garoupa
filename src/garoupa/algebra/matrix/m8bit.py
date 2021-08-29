@@ -22,7 +22,6 @@
 
 from garoupa.algebra.matrix.group import Group
 from garoupa.algebra.matrix.mat8bit import Mat8bit
-from garoupa.algebra.product.product import Product
 
 
 class M8bit(Group):

@@ -51,17 +51,15 @@ poetry install
 <p>
 
 ```python3
-from garoupa import Hosh
+from garoupa import Hosh, ø  # ø is a shortcut for identity32 (AltGr+O in most keyboards)
 
 # Hoshes (operable hash-based elements) can be multiplied.
-from garoupa import identity64
-
-a = Hosh(blob=b"Some large binary content...")
-b = Hosh(blob=b"Some other binary content. Might be, e.g., an action or another large content.")
+a = Hosh(content=b"Some large binary content...")
+b = Hosh(content=b"Some other binary content. Might be, e.g., an action or another large content.")
 c = a * b
 print(f"{a} * {b} = {c}")
 """
-1WCCD1p4Msmn2hvbiaHOPcYw8qQnGMai5zFZE68xr2kymjdnq6CEysKx7AUZGDqK * hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62
+4waH5WQxE4ZcYGH8ONu95Qn1N9os9GC8 * 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = 4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1
 """
 ```
 
@@ -70,16 +68,16 @@ print(~b)
 # Multiplication can be reverted by the inverse hosh. Zero is the identity hosh.
 print(f"{b} * {~b} = {b * ~b} = 0")
 """
-Khf00n.bNZZF6fe7CB8.0UaG6rgeXrGfUVwMDON29e8yuXoZzq6ZCVfWEoBk6KDc
-hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz * Khf00n.bNZZF6fe7CB8.0UaG6rgeXrGfUVwMDON29e8yuXoZzq6ZCVfWEoBk6KDc = 0000000000000000000000000000000000000000000000000000000000000000 = 0
+.z56eXm5eJOc9T3QfLhn7JDZs0QqfvOd
+0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 * .z56eXm5eJOc9T3QfLhn7JDZs0QqfvOd = 00000000000000000000000000000000 = 0
 """
 ```
 
 ```python3
 
-print(f"{b} * {identity64} = {b * identity64} = b")
+print(f"{b} * {ø} = {b * ø} = b")
 """
-hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz * 0000000000000000000000000000000000000000000000000000000000000000 = hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = b
+0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 * 00000000000000000000000000000000 = 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = b
 """
 ```
 
@@ -87,7 +85,7 @@ hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz * 0000000000000
 
 print(f"{c} * {~b} = {c * ~b} = {a} = a")
 """
-jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 * Khf00n.bNZZF6fe7CB8.0UaG6rgeXrGfUVwMDON29e8yuXoZzq6ZCVfWEoBk6KDc = 1WCCD1p4Msmn2hvbiaHOPcYw8qQnGMai5zFZE68xr2kymjdnq6CEysKx7AUZGDqK = 1WCCD1p4Msmn2hvbiaHOPcYw8qQnGMai5zFZE68xr2kymjdnq6CEysKx7AUZGDqK = a
+4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 * .z56eXm5eJOc9T3QfLhn7JDZs0QqfvOd = 4waH5WQxE4ZcYGH8ONu95Qn1N9os9GC8 = 4waH5WQxE4ZcYGH8ONu95Qn1N9os9GC8 = a
 """
 ```
 
@@ -95,7 +93,7 @@ jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 * Khf00n.bNZZF6
 
 print(f"{~a} * {c} = {~a * c} = {b} = b")
 """
--5ppo-CXfdBEZKwQJRno1iP6a0I1pTGJLUOa5yvjIjEYAfE3FQ8gNQAxzmT4O6P- * jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 = hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = b
+XvRkORbuogT-jPonP0LC4AdFvLfEZpQA * 4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 = 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = b
 """
 ```
 
@@ -104,7 +102,7 @@ print(f"{~a} * {c} = {~a * c} = {b} = b")
 # Division is shorthand for reversion.
 print(f"{c} / {b} = {c / b} = a")
 """
-jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 / hKM..E0QdH-mVMNUpqWbPw56-IEDesW1UHyA7k8BYF5JYIli-c-fSuQagYp.mCNz = 1WCCD1p4Msmn2hvbiaHOPcYw8qQnGMai5zFZE68xr2kymjdnq6CEysKx7AUZGDqK = a
+4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 / 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = 4waH5WQxE4ZcYGH8ONu95Qn1N9os9GC8 = a
 """
 ```
 
@@ -113,7 +111,7 @@ jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 / hKM..E0QdH-mV
 # Hosh multiplication is not expected to be commutative.
 print(f"{a * b} != {b * a}")
 """
-jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 != jFnCCFpU-8kJY2h3HBB-CsB9NaEYXZlsV3Pmu.WFL2pQpx6gvFcTN-gR54d5f0K2
+4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 != 4Z5ALLuspJ3DwvjmhSToHKD3jVKpyp.C
 """
 ```
 
@@ -122,7 +120,7 @@ jFnCCFpU-8kJY2h3HBB-CjTgm.LJZerGkOUT09EENs.7F75nK8w91lPl9gOIWe62 != jFnCCFpU-8kJ
 # Hosh multiplication is associative.
 print(f"{a * (b * c)} = {(a * b) * c}")
 """
-DiLddiPNYgBrU4y7nbb-mm73.unoKH6Ux.AktmuBlx6q51QMs6sjNOGj4Cgvxojn = DiLddiPNYgBrU4y7nbb-mm73.unoKH6Ux.AktmuBlx6q51QMs6sjNOGj4Cgvxojn
+9Wb9veYUPrJmdnVfELfNLbNajWUpp50W = 9Wb9veYUPrJmdnVfELfNLbNajWUpp50W
 """
 ```
 
@@ -165,11 +163,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[0, 2, 1, 3], 1, ds3»	*	«[0, 2, 1, 3], 1, dr7»	=	«[0, 1, 2, 3], 2, ds0»
-«[1, 3, 0, 2], 1, dr2»	*	«[3, 0, 1, 2], 3, dr4»	=	«[2, 1, 3, 0], 4, dr2»
-«[0, 1, 3, 2], 3, ds3»	*	«[0, 1, 2, 3], 2, ds3»	=	«[0, 1, 3, 2], 0, dr0»
-«[0, 2, 1, 3], 0, ds7»	*	«[3, 0, 2, 1], 1, dr7»	=	«[3, 0, 1, 2], 1, ds0»
-«[3, 0, 2, 1], 1, ds4»	*	«[1, 0, 3, 2], 0, ds0»	=	«[0, 3, 1, 2], 1, dr0»
+«[0, 3, 1, 2], 3, dr6»	*	«[1, 0, 3, 2], 1, dr4»	=	«[3, 0, 2, 1], 4, dr2»
+«[3, 0, 1, 2], 1, dr0»	*	«[3, 0, 2, 1], 2, dr4»	=	«[2, 3, 1, 0], 3, dr0»
+«[3, 2, 0, 1], 3, dr4»	*	«[3, 2, 0, 1], 3, ds2»	=	«[1, 0, 3, 2], 1, ds2»
+«[2, 0, 3, 1], 1, dr3»	*	«[3, 2, 0, 1], 0, ds0»	=	«[1, 3, 2, 0], 1, ds3»
+«[1, 3, 0, 2], 1, dr1»	*	«[0, 1, 2, 3], 3, ds2»	=	«[1, 3, 0, 2], 4, ds3»
 """
 ```
 
@@ -179,7 +177,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[8, 9, 5, 7, 10, 0, 4, 1, 6, 2, 3, 11]
+[8, 4, 7, 6, 5, 11, 1, 10, 3, 9, 0, 2]
 """
 ```
 
@@ -293,9 +291,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          876/10000:  12.0 bits	~8.76 %
-    |D8×D8×D8×D8| = 65536:         346/10000:  16.0 bits	~3.46 %
- |D8×D8×D8×D8×D8| = 1048576:       166/10000:  20.0 bits	~1.66 %
+       |D8×D8×D8| = 4096:          832/10000:  12.0 bits	~8.32 %
+    |D8×D8×D8×D8| = 65536:         359/10000:  16.0 bits	~3.59 %
+ |D8×D8×D8×D8×D8| = 1048576:       154/10000:  20.0 bits	~1.54 %
 """
 ```
 
@@ -381,7 +379,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 17/08/2021 23:43:26
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 29/08/2021 00:30:31
 """
 ```
 

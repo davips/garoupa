@@ -6,6 +6,12 @@ omit =
     # examples
     */examples/*
 
+    # unused algebra part
+    src/garoupa/algebra/*
+    src/garoupa/__init__.py
+    src/garoupa/npmath.py
+    src/garoupa/helper.py
+    
     setup.py
     venv
 

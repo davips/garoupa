@@ -23,9 +23,9 @@ from garoupa import Hosh
 
 
 class Identity(Hosh):
-    def __init__(self, version, etype="ordered"):
-        super().__init__(None, etype, version)
-        self._cells = [0, 0, 0, 0, 0, 0]
+    def __init__(self, version, etype_inducer="ordered"):
+        super().__init__([0, 0, 0, 0, 0, 0], version=version)
+        self._etype_inducer = etype_inducer
 
     @property
     def u(self):
@@ -37,14 +37,14 @@ class Identity(Hosh):
         >>> from garoupa import ø, Ø, Hosh
         >>> a = ø.u * b"654"
         >>> print(a)
-        000000000000000000000000000KaUCe
+        2_e2b898e_______________________
         >>> b = Ø.u * b"654"
         >>> print(b)
-        00000000000000000000000000000000000000000000000000000fX3ouDHIyfY
+        f_ec361e9ebb223fc_______________________________________________
         >>> Hosh(b"654", "unordered", "UT32.4") == a and b == Hosh(b"654","unordered", "UT64.4")
         True
         """
-        return Identity(self.version, "unordered")
+        return Identity(self.version, etype_inducer="unordered")
 
     @property
     def h(self):
@@ -56,22 +56,21 @@ class Identity(Hosh):
         >>> from garoupa import Hosh, ø, Ø
         >>> a = ø.h * b"654"
         >>> print(a)
-        00000000001I-Cd0PXzgFHt57IIqwNuw
+        rf_a6340cfb8d0a6b7451ecb1a8317a1
         >>> b = Ø.h * b"654"
         >>> print(b)
-        0000000000000000000006QtNMn5NI.Q7o.AZ9BmV2mOtvf0AjsJiwKENDfaF6Xr
+        rh_dc705c5c6cff41d8fe4f49956e425b275f3c091372d4a0ba8c673caa46edc
         >>> Hosh(b"654", "hybrid", "UT32.4") == a and b == Hosh(b"654","hybrid", "UT64.4")
         True
         """
-        return Identity(self.version, "hybrid")
+        return Identity(self.version, etype_inducer="hybrid")
 
 
-class ø_(Identity):
-    def __init__(self, etype="ordered"):
-        super().__init__("UT32.4", etype)
+class ø(Identity):
+    def __init__(self, etype_inducer="ordered"):
+        super().__init__("UT32.4", etype_inducer)
 
 
-class Ø_(Identity):
-    def __init__(self, etype="ordered"):
-        super().__init__("UT64.4", etype)
-
+class Ø(Identity):
+    def __init__(self, etype_inducer="ordered"):
+        super().__init__("UT64.4", etype_inducer)

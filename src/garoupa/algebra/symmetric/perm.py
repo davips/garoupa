@@ -20,11 +20,10 @@
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
 
-import sys
 from math import factorial
 
 from garoupa.algebra.abs.element import Element
-from garoupa.math import pmat_inv, pmat_mult, pmat2int, int2pmat
+from garoupa.algebra.math import pmat_inv, pmat_mult, pmat2int, int2pmat
 
 
 class Perm(Element):

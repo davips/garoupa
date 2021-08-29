@@ -25,12 +25,11 @@
 #  time spent here.
 import sys
 from itertools import repeat, islice
-from math import inf, ceil
+from math import inf
 from multiprocessing import Manager
 from multiprocessing import Value, Lock
 from random import Random
 from time import time
-
 
 from garoupa.algebra.abs.element import Element
 
