@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>garoupa.core API documentation</title>
+<meta name="description" content="Hashing and conversion functions used by Hosh …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>garoupa.core</code></h1>
+</header>
+<section id="section-intro">
+<p>Hashing and conversion functions used by Hosh</p>
+<p>This file exists to facilitate implementation of a compiled faster version in the sister package 'hosh'.
+However, the performance of garoupa seems already very high, making the 'rust' implementation not necessary.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#  Copyright (c) 2021. Davi Pereira dos Santos
+#  This file is part of the garoupa project.
+#  Please respect the license - more about this in the section (*) below.
+# 
+#  garoupa is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+# 
+#  garoupa is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+# 
+#  You should have received a copy of the GNU General Public License
+#  along with garoupa.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+# 
+#  (*) Removing authorship by any means, e.g. by distribution of derived
+#  works or verbatim, obfuscated, compiled or rewritten versions of any
+#  part of this work is illegal and is unethical regarding the effort and
+#  time spent here.
+&#34;&#34;&#34;Hashing and conversion functions used by Hosh
+
+This file exists to facilitate implementation of a compiled faster version in the sister package &#39;hosh&#39;.
+However, the performance of garoupa seems already very high, making the &#39;rust&#39; implementation not necessary.&#34;&#34;&#34;
+
+from blake3 import blake3
+
+from garoupa.encoding.base import n2id, id2n
+from garoupa.exception import WrongEType
+from garoupa.math import cells2int, int2cells
+
+
+def cells_id_fromblob(blob, etype, nbytes, p):
+    &#34;&#34;&#34;
+    Takes bytes from blake3, excluding right-most bit, to produce cells and string id.
+
+    ps. Blake3 returns a digest with the most significant byte on the right.
+
+    Usage:
+
+    &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;unordered&#34;, 48, 18446744073709551557)
+    ([0, 0, 0, 0, 0, 12851939186879403454], &#39;b_25b429914de95be_______________________________________________&#39;)
+    &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;hybrid&#34;, 48, 18446744073709551557)
+    ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], &#39;Et_cac755fd13d8adac82825b91b4671424594642a77a4a2cf9f4dabb065c5e8&#39;)
+    &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;ordered&#34;, 48, 18446744073709551557)
+    ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], &#39;qxcXeFhW8X2tXztiqgTRlQYZYfIuM1JLZVojkHHC01nn0w6Q41ciQMx096xAv59E&#39;)
+
+    Parameters
+    ----------
+    blob
+        Bytes object
+    etype
+        Type of element: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
+    nbytes
+        Number of bytes to keep from blake3
+    p
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper.
+
+    Returns
+    -------
+    The name says it all
+    &#34;&#34;&#34;
+    digest = blake3(blob).digest(length=nbytes)
+    n = int.from_bytes(digest, byteorder=&#34;little&#34;) &gt;&gt; 1
+    if etype == &#34;unordered&#34;:
+        n %= p
+    elif etype == &#34;hybrid&#34;:
+        n = (p + n) % p ** 4
+    elif etype == &#34;ordered&#34;:
+        n = (p ** 4 + n) % p ** 6
+    else:
+        raise WrongEType(&#34;Unknown etype:&#34;, etype)
+    cells = int2cells(n, p)
+    digits = 4 * nbytes // 3
+    return cells, id_fromcells(cells, digits, p)
+
+
+def id_fromcells(cells, digits, p):
+    &#34;&#34;&#34;
+    Usage based on ranges from paper:
+
+    &gt;&gt;&gt; p = 4294967291
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,0,0], 32, p) == &#39;00000000000000000000000000000000&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == &#39;f_ffffffa_______________________&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == &#39;00_00000000000000000000000000001&#39;
+    True
+    &gt;&gt;&gt; res,c1 = divmod(2**120-1+p-1, p)
+    &gt;&gt;&gt; res,c2 = divmod(res, p)
+    &gt;&gt;&gt; c4,c3 = divmod(res, p)
+    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == &#39;0f_fffffffffffffffffffffffffffff&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == &#39;0g_00000000000000000000000000000&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == &#39;.._fffec00000095fffffe0b00000276&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == &#39;00000000000000000000000000000001&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == &#39;....Uw000nn...pg000A2f..Kbo003Go&#39;
+    True
+
+    Parameters
+    ----------
+    cells
+        Six cells for a 4x4 matrix, according to the paper
+    digits
+        Number of digits of the identifier
+    p
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper
+    Returns
+    -------
+        Textual digest
+
+    &#34;&#34;&#34;
+    num = cells2int(cells, p)
+    return n2id(num, digits, p)
+
+
+def cells_fromid(id, p):
+    &#34;&#34;&#34;
+    Usage based on ranges from paper:
+
+    &gt;&gt;&gt; p = 4294967291
+    &gt;&gt;&gt; cells_fromid(&#39;00000000000000000000000000000000&#39;, p) == [0,0,0,0,0,0]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;f_ffffffa_______________________&#39;, p) == [0,0,0,0,0,p-1]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;00_00000000000000000000000000001&#39;, p) == [0,0,0,0,1,0]
+    True
+    &gt;&gt;&gt; res,c1 = divmod(16**30 - 1 + p - 1, p)
+    &gt;&gt;&gt; res,c2 = divmod(res, p)
+    &gt;&gt;&gt; c4,c3 = divmod(res, p)
+    &gt;&gt;&gt; cells_fromid(&#39;0f_fffffffffffffffffffffffffffff&#39;, p) == [0,0,c4,c3,c2,c1]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;0g_00000000000000000000000000000&#39;, p) == [0,0,c4,c3,c2,c1+1]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;.._fffec00000095fffffe0b00000276&#39;, p) == [0,0,p-1,p-1,p-1,p-1]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;00000000000000000000000000000001&#39;, p) == [0,1,0,0,0,0]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;....Uw000nn...pg000A2f..Kbo003Go&#39;, p) == [p-1,p-1,p-1,p-1,p-1,p-1]
+    True
+
+    Parameters
+    ----------
+    id
+        Textual digest
+    p
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper
+
+    Returns
+    -------
+        Six cells for a 4x4 matrix, according to the paper
+    &#34;&#34;&#34;
+    return int2cells(id2n(id, p), p)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="garoupa.core.blake3"><code class="name flex">
+<span>def <span class="ident">blake3</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Construct an incremental hasher object, which can accept any number of
+writes. The interface is similar to <code>hashlib.blake2b</code> or <code>hashlib.md5</code>
+from the standard library.</p>
+<p>Positional arguments:
+- <code>data</code> (optional): Input bytes to hash. This is equivalent to calling
+<code>update</code> on the returned hasher.</p>
+<p>Keyword arguments:
+- <code>key</code>: A 32-byte key. Setting this to non-None enables the keyed
+hashing mode.
+- <code>context</code>: A context string. Setting this to non-None enables the key
+derivation mode. Context strings should be hardcoded, globally
+unique, and application-specific. <code>context</code> and <code>key</code> cannot be used
+at the same time.
+- <code>multithreading</code>: See the <code>multithreading</code> argument on the <code>update</code>
+method. This flag only applies to this one function call. It is not a
+persistent setting, and it has no effect if <code>data</code> is omitted.</p></div>
+</dd>
+<dt id="garoupa.core.cells_fromid"><code class="name flex">
+<span>def <span class="ident">cells_fromid</span></span>(<span>id, p)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Usage based on ranges from paper:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; p = 4294967291
+&gt;&gt;&gt; cells_fromid('00000000000000000000000000000000', p) == [0,0,0,0,0,0]
+True
+&gt;&gt;&gt; cells_fromid('f_ffffffa_______________________', p) == [0,0,0,0,0,p-1]
+True
+&gt;&gt;&gt; cells_fromid('00_00000000000000000000000000001', p) == [0,0,0,0,1,0]
+True
+&gt;&gt;&gt; res,c1 = divmod(16**30 - 1 + p - 1, p)
+&gt;&gt;&gt; res,c2 = divmod(res, p)
+&gt;&gt;&gt; c4,c3 = divmod(res, p)
+&gt;&gt;&gt; cells_fromid('0f_fffffffffffffffffffffffffffff', p) == [0,0,c4,c3,c2,c1]
+True
+&gt;&gt;&gt; cells_fromid('0g_00000000000000000000000000000', p) == [0,0,c4,c3,c2,c1+1]
+True
+&gt;&gt;&gt; cells_fromid('.._fffec00000095fffffe0b00000276', p) == [0,0,p-1,p-1,p-1,p-1]
+True
+&gt;&gt;&gt; cells_fromid('00000000000000000000000000000001', p) == [0,1,0,0,0,0]
+True
+&gt;&gt;&gt; cells_fromid('....Uw000nn...pg000A2f..Kbo003Go', p) == [p-1,p-1,p-1,p-1,p-1,p-1]
+True
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>id</code></strong></dt>
+<dd>Textual digest</dd>
+<dt><strong><code>p</code></strong></dt>
+<dd>A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+according to the paper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<pre><code>Six cells for a 4x4 matrix, according to the paper
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cells_fromid(id, p):
+    &#34;&#34;&#34;
+    Usage based on ranges from paper:
+
+    &gt;&gt;&gt; p = 4294967291
+    &gt;&gt;&gt; cells_fromid(&#39;00000000000000000000000000000000&#39;, p) == [0,0,0,0,0,0]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;f_ffffffa_______________________&#39;, p) == [0,0,0,0,0,p-1]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;00_00000000000000000000000000001&#39;, p) == [0,0,0,0,1,0]
+    True
+    &gt;&gt;&gt; res,c1 = divmod(16**30 - 1 + p - 1, p)
+    &gt;&gt;&gt; res,c2 = divmod(res, p)
+    &gt;&gt;&gt; c4,c3 = divmod(res, p)
+    &gt;&gt;&gt; cells_fromid(&#39;0f_fffffffffffffffffffffffffffff&#39;, p) == [0,0,c4,c3,c2,c1]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;0g_00000000000000000000000000000&#39;, p) == [0,0,c4,c3,c2,c1+1]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;.._fffec00000095fffffe0b00000276&#39;, p) == [0,0,p-1,p-1,p-1,p-1]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;00000000000000000000000000000001&#39;, p) == [0,1,0,0,0,0]
+    True
+    &gt;&gt;&gt; cells_fromid(&#39;....Uw000nn...pg000A2f..Kbo003Go&#39;, p) == [p-1,p-1,p-1,p-1,p-1,p-1]
+    True
+
+    Parameters
+    ----------
+    id
+        Textual digest
+    p
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper
+
+    Returns
+    -------
+        Six cells for a 4x4 matrix, according to the paper
+    &#34;&#34;&#34;
+    return int2cells(id2n(id, p), p)</code></pre>
+</details>
+</dd>
+<dt id="garoupa.core.cells_id_fromblob"><code class="name flex">
+<span>def <span class="ident">cells_id_fromblob</span></span>(<span>blob, etype, nbytes, p)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes bytes from blake3, excluding right-most bit, to produce cells and string id.</p>
+<p>ps. Blake3 returns a digest with the most significant byte on the right.</p>
+<p>Usage:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; cells_id_fromblob(b&quot;sdff&quot;, &quot;unordered&quot;, 48, 18446744073709551557)
+([0, 0, 0, 0, 0, 12851939186879403454], 'b_25b429914de95be_______________________________________________')
+&gt;&gt;&gt; cells_id_fromblob(b&quot;sdff&quot;, &quot;hybrid&quot;, 48, 18446744073709551557)
+([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], 'Et_cac755fd13d8adac82825b91b4671424594642a77a4a2cf9f4dabb065c5e8')
+&gt;&gt;&gt; cells_id_fromblob(b&quot;sdff&quot;, &quot;ordered&quot;, 48, 18446744073709551557)
+([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], 'qxcXeFhW8X2tXztiqgTRlQYZYfIuM1JLZVojkHHC01nn0w6Q41ciQMx096xAv59E')
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>blob</code></strong></dt>
+<dd>Bytes object</dd>
+<dt><strong><code>etype</code></strong></dt>
+<dd>Type of element: 'unordered', 'ordered', 'hybrid'</dd>
+<dt><strong><code>nbytes</code></strong></dt>
+<dd>Number of bytes to keep from blake3</dd>
+<dt><strong><code>p</code></strong></dt>
+<dd>A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+according to the paper.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>The name says it all</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cells_id_fromblob(blob, etype, nbytes, p):
+    &#34;&#34;&#34;
+    Takes bytes from blake3, excluding right-most bit, to produce cells and string id.
+
+    ps. Blake3 returns a digest with the most significant byte on the right.
+
+    Usage:
+
+    &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;unordered&#34;, 48, 18446744073709551557)
+    ([0, 0, 0, 0, 0, 12851939186879403454], &#39;b_25b429914de95be_______________________________________________&#39;)
+    &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;hybrid&#34;, 48, 18446744073709551557)
+    ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], &#39;Et_cac755fd13d8adac82825b91b4671424594642a77a4a2cf9f4dabb065c5e8&#39;)
+    &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;ordered&#34;, 48, 18446744073709551557)
+    ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], &#39;qxcXeFhW8X2tXztiqgTRlQYZYfIuM1JLZVojkHHC01nn0w6Q41ciQMx096xAv59E&#39;)
+
+    Parameters
+    ----------
+    blob
+        Bytes object
+    etype
+        Type of element: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
+    nbytes
+        Number of bytes to keep from blake3
+    p
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper.
+
+    Returns
+    -------
+    The name says it all
+    &#34;&#34;&#34;
+    digest = blake3(blob).digest(length=nbytes)
+    n = int.from_bytes(digest, byteorder=&#34;little&#34;) &gt;&gt; 1
+    if etype == &#34;unordered&#34;:
+        n %= p
+    elif etype == &#34;hybrid&#34;:
+        n = (p + n) % p ** 4
+    elif etype == &#34;ordered&#34;:
+        n = (p ** 4 + n) % p ** 6
+    else:
+        raise WrongEType(&#34;Unknown etype:&#34;, etype)
+    cells = int2cells(n, p)
+    digits = 4 * nbytes // 3
+    return cells, id_fromcells(cells, digits, p)</code></pre>
+</details>
+</dd>
+<dt id="garoupa.core.id_fromcells"><code class="name flex">
+<span>def <span class="ident">id_fromcells</span></span>(<span>cells, digits, p)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Usage based on ranges from paper:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; p = 4294967291
+&gt;&gt;&gt; id_fromcells([0,0,0,0,0,0], 32, p) == '00000000000000000000000000000000'
+True
+&gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == 'f_ffffffa_______________________'
+True
+&gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == '00_00000000000000000000000000001'
+True
+&gt;&gt;&gt; res,c1 = divmod(2**120-1+p-1, p)
+&gt;&gt;&gt; res,c2 = divmod(res, p)
+&gt;&gt;&gt; c4,c3 = divmod(res, p)
+&gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == '0f_fffffffffffffffffffffffffffff'
+True
+&gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == '0g_00000000000000000000000000000'
+True
+&gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == '.._fffec00000095fffffe0b00000276'
+True
+&gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == '00000000000000000000000000000001'
+True
+&gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == '....Uw000nn...pg000A2f..Kbo003Go'
+True
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>cells</code></strong></dt>
+<dd>Six cells for a 4x4 matrix, according to the paper</dd>
+<dt><strong><code>digits</code></strong></dt>
+<dd>Number of digits of the identifier</dd>
+<dt><strong><code>p</code></strong></dt>
+<dd>A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+according to the paper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<pre><code>Textual digest
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def id_fromcells(cells, digits, p):
+    &#34;&#34;&#34;
+    Usage based on ranges from paper:
+
+    &gt;&gt;&gt; p = 4294967291
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,0,0], 32, p) == &#39;00000000000000000000000000000000&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == &#39;f_ffffffa_______________________&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == &#39;00_00000000000000000000000000001&#39;
+    True
+    &gt;&gt;&gt; res,c1 = divmod(2**120-1+p-1, p)
+    &gt;&gt;&gt; res,c2 = divmod(res, p)
+    &gt;&gt;&gt; c4,c3 = divmod(res, p)
+    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == &#39;0f_fffffffffffffffffffffffffffff&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == &#39;0g_00000000000000000000000000000&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == &#39;.._fffec00000095fffffe0b00000276&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == &#39;00000000000000000000000000000001&#39;
+    True
+    &gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == &#39;....Uw000nn...pg000A2f..Kbo003Go&#39;
+    True
+
+    Parameters
+    ----------
+    cells
+        Six cells for a 4x4 matrix, according to the paper
+    digits
+        Number of digits of the identifier
+    p
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper
+    Returns
+    -------
+        Textual digest
+
+    &#34;&#34;&#34;
+    num = cells2int(cells, p)
+    return n2id(num, digits, p)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="garoupa" href="index.html">garoupa</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="garoupa.core.blake3" href="#garoupa.core.blake3">blake3</a></code></li>
+<li><code><a title="garoupa.core.cells_fromid" href="#garoupa.core.cells_fromid">cells_fromid</a></code></li>
+<li><code><a title="garoupa.core.cells_id_fromblob" href="#garoupa.core.cells_id_fromblob">cells_id_fromblob</a></code></li>
+<li><code><a title="garoupa.core.id_fromcells" href="#garoupa.core.id_fromcells">id_fromcells</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

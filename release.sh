@@ -12,6 +12,14 @@ poetry run pytest src tests --cov=src --doctest-modules
 echo "----------------- tested -----------------------"
 echo; echo
 
+echo
+echo "----------------- docs... -----------------------"
+read -p "press enter"
+poetry run pdoc --html --force garoupa -o docs
+git add docs
+echo "----------------- docs done -----------------------"
+echo; echo
+
 echo "---------------- readme ----------------"
 read -p "press enter"
 source venv/bin/activate
