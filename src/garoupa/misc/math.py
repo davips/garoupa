@@ -20,13 +20,15 @@
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
 
-##############################################################################
-# Abstract Algebra helper functions
-##############################################################################
+"""
+Pure Python linear algebra module
+"""
 
 
 def int2cells(num, mod):
     """
+    Convert an integer to cells representing a 4x4 unitriangular matrix
+
     >>> e = [42821,772431,428543,443530,42121,7213]
     >>> e == int2cells(cells2int(e,4294967291), 4294967291)
     True
@@ -35,6 +37,15 @@ def int2cells(num, mod):
     ... except Exception as e:
     ...     print(e)
     Number -1 too large for given mod 10
+
+    Parameters
+    ----------
+    num
+    mod
+
+    Returns
+    -------
+
     """
     m = [0, 0, 0, 0, 0, 0]
     num, m[5] = divmod(num, mod)
@@ -50,15 +61,31 @@ def int2cells(num, mod):
 
 def cells2int(m, mod):
     """
+    Convert cells representing a 4x4 unitriangular matrix to an integer.
+
+    Usage:
+
     >>> n = 986723489762345987253897254295863
     >>> cells2int(int2cells(n, 4294967291), 4294967291) == n
     True
+
+    Parameters
+    ----------
+    m
+        List with six values
+    mod
+        Large prime number
+
+    Returns
+    -------
+        Lexicographic rank of the element (at least according to the disposition of cells adopted here)
     """
     return m[5] + m[4] * mod + m[3] * (mod ** 2) + m[2] * (mod ** 3) + m[1] * (mod ** 4) + m[0] * (mod ** 5)
 
 
 def cellsmul(a, b, mod):
-    """Multiply two unitriangular matrices 4x4 modulo 'mod'.
+    """
+    Multiply two unitriangular matrices 4x4 modulo 'mod'.
 
     'a' and 'b' given as lists in the format: [a5, a4, a3, a2, a1, a0]
 
@@ -73,6 +100,19 @@ def cellsmul(a, b, mod):
     >>> c = cellsmul(a, b, 4294967291)
     >>> cellsmul(c, cellsinv(b, 4294967291), 4294967291) == a
     True
+
+    Parameters
+    ----------
+    a
+        List with six values
+    b
+        Another (or the same) list with six values
+    mod
+        Large prime number
+
+    Returns
+    -------
+        The list that corresponds to the resulting element from multiplication
     """
     return [
         (a[0] + b[0]) % mod,
@@ -85,7 +125,8 @@ def cellsmul(a, b, mod):
 
 
 def cellsinv(m, mod):
-    """Inverse of unitriangular matrix modulo 'mod'
+    """
+    Inverse of unitriangular matrix modulo 'mod'
 
     'm' given as a list in the format: [a5, a4, a3, a2, a1, a0]
 
@@ -99,6 +140,17 @@ def cellsinv(m, mod):
     >>> e = [42821,772431,428543,443530,42121,7213]
     >>> cellsinv(cellsinv(e, 4294967291), 4294967291)==e
     True
+
+    Parameters
+    ----------
+    m
+        List with six values
+    mod
+        Large prime number
+
+    Returns
+    -------
+        The list that corresponds to the inverse element
     """
     return [
         -m[0] % mod,

@@ -19,7 +19,7 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
-
+"""Operations using numpy"""
 import numpy as np
 
 

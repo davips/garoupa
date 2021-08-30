@@ -17,22 +17,39 @@
 #
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
-#  part of this work is illegal and is unethical regarding the effort and
+#  part of this work is illegal and unethical regarding the effort and
 #  time spent here.
-from dataclasses import dataclass
+"""Exceptions create in this package.
 
-from garoupa import Hosh
+They help writing complete tests."""
+
+class CellValueTooHigh(Exception):
+    pass
 
 
-@dataclass
-class Helper:
-    version: str
+class DanglingEtype(Exception):
+    pass
 
-    def __call__(self, blob, etype="ordered"):
-        return Hosh(blob, etype, self.version)
 
-    def u(self, blob):
-        return Hosh(blob, "unordered", self.version)
+class WrongContent(Exception):
+    pass
 
-    def h(self, blob):
-        return Hosh(blob, "hybrid", self.version)
+
+class WrongVersion(Exception):
+    pass
+
+
+class WrongOperands(Exception):
+    pass
+
+
+class ElementTooHigh(Exception):
+    pass
+
+
+class WrongIdentifier(Exception):
+    pass
+
+
+class WrongEType(Exception):
+    pass

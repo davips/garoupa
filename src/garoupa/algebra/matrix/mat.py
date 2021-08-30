@@ -21,7 +21,7 @@
 #  time spent here.
 
 from garoupa.algebra.abs.element import Element
-from garoupa.npmath import int2ml, m2intl
+from garoupa.algebra.npmath import int2ml, m2intl
 
 
 class Mat(Element):

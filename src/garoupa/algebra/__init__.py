@@ -20,4 +20,10 @@
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
 
-"""Abstract algebra"""
+"""Abstract algebra groups
+
+This module was useful while studying alternative groups before sticking with UT(n,p).
+It is kept here in the hope someone find it useful.
+However, it is not the focus of this package.
+Some classes require 'poetry install -E full' to add numpy or other heavy dependencies.
+"""

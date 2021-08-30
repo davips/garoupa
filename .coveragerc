@@ -10,7 +10,7 @@ omit =
     src/garoupa/algebra/*
     src/garoupa/__init__.py
     src/garoupa/npmath.py
-    src/garoupa/helper.py
+    src/garoupa/misc/helper.py
     
     setup.py
     venv

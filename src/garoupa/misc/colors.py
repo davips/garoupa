@@ -19,7 +19,7 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
-
+"""Functions to colorize representation of Hosh objects, e.g. on ipython"""
 from hashlib import md5
 
 import colored

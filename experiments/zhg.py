@@ -2,14 +2,7 @@
 Example of identifiers from diferent subgroups in G.
 """
 
-from math import log
-
 from garoupa import Hosh
-from garoupa.algebra.matrix.mat import Mat
-from garoupa.encoding import *
-from sympy import isprime
-
-from garoupa.math import cells2int
 
 z = 2 ** 32
 h = z * 2 ** 96

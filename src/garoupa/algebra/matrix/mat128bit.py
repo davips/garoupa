@@ -21,7 +21,7 @@
 #  time spent here.
 from garoupa.algebra.abs.element import Element
 from garoupa.algebra.matrix.mat import Mat
-from garoupa.npmath import int2bm, bm2int, bminv, bmm
+from garoupa.algebra.npmath import int2bm, bm2int, bminv, bmm
 
 
 class Mat128bit(Element):

@@ -19,6 +19,7 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
+"""Operations with permutations"""
 
 
 def int2pmat(number, side):
@@ -128,8 +129,6 @@ def pmat_inv(m):
         r[m[i]] = i
     return r
 
-
 ##############################################################################
 # Hosh class helper functions
 ##############################################################################
-

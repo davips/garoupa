@@ -17,17 +17,23 @@
 # 
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
-#  part of this work is illegal and is unethical regarding the effort and
+#  part of this work is illegal and unethical regarding the effort and
 #  time spent here.
+"""Hashing and conversion functions used by Hosh
+
+This file exists to facilitate implementation of a compiled faster version in the sister package 'hosh'.
+However, the performance of garoupa seems already very high, making the 'rust' implementation not necessary."""
 
 from blake3 import blake3
 
-from garoupa.encoding import *
-from garoupa.math import cells2int, int2cells
+from garoupa.misc.encoding.base import n2id, id2n
+from garoupa.misc.exception import WrongEType
+from garoupa.misc.math import cells2int, int2cells
 
 
-def cells_id_fromblob(blob, etype, bytes, p):
-    """Takes bytes from blake3 excluding right-most bit.
+def cells_id_fromblob(blob, etype, nbytes, p):
+    """
+    Takes bytes from blake3, excluding right-most bit, to produce cells and string id.
 
     ps. Blake3 returns a digest with the most significant byte on the right.
 
@@ -39,13 +45,24 @@ def cells_id_fromblob(blob, etype, bytes, p):
     ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], 'Et_cac755fd13d8adac82825b91b4671424594642a77a4a2cf9f4dabb065c5e8')
     >>> cells_id_fromblob(b"sdff", "ordered", 48, 18446744073709551557)
     ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], 'qxcXeFhW8X2tXztiqgTRlQYZYfIuM1JLZVojkHHC01nn0w6Q41ciQMx096xAv59E')
-    >>> try:
-    ...     cells_id_fromblob(b"sdff", "t2323rt", 48, 18446744073709551557)
-    ... except Exception as e:
-    ...     print(e)
-    ('Unknown etype:', 't2323rt')
+
+    Parameters
+    ----------
+    blob
+        Bytes object
+    etype
+        Type of element: 'unordered', 'ordered', 'hybrid'
+    nbytes
+        Number of bytes to keep from blake3
+    p
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper.
+
+    Returns
+    -------
+    The name says it all
     """
-    digest = blake3(blob).digest(length=bytes)
+    digest = blake3(blob).digest(length=nbytes)
     n = int.from_bytes(digest, byteorder="little") >> 1
     if etype == "unordered":
         n %= p
@@ -54,9 +71,9 @@ def cells_id_fromblob(blob, etype, bytes, p):
     elif etype == "ordered":
         n = (p ** 4 + n) % p ** 6
     else:
-        raise Exception("Unknown etype:", etype)  # pragma: no cover
+        raise WrongEType("Unknown etype:", etype)
     cells = int2cells(n, p)
-    digits = 4 * bytes // 3
+    digits = 4 * nbytes // 3
     return cells, id_fromcells(cells, digits, p)
 
 
@@ -88,11 +105,15 @@ def id_fromcells(cells, digits, p):
     Parameters
     ----------
     cells
+        Six cells for a 4x4 matrix, according to the paper
     digits
+        Number of digits of the identifier
     p
-
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper
     Returns
     -------
+        Textual digest
 
     """
     num = cells2int(cells, p)
@@ -127,10 +148,13 @@ def cells_fromid(id, p):
     Parameters
     ----------
     id
+        Textual digest
     p
+        A big prime number compatible with the amount of bytes, to convert the hash to six cells for a 4x4 matrix
+        according to the paper
 
     Returns
     -------
-
+        Six cells for a 4x4 matrix, according to the paper
     """
     return int2cells(id2n(id, p), p)

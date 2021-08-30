@@ -19,7 +19,9 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
-
+"""
+Groups and respective elements that can be cyclic depending on the parameter choice
+"""
 from .z import Z
 from .nat import Nat
 from .zm import Zm

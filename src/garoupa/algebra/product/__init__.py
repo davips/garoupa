@@ -19,6 +19,9 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
+"""
+Direct product group and respective element
+"""
 
 from .product import Product
 from .tuple import Tuple

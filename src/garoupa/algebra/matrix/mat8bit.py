@@ -21,7 +21,7 @@
 #  time spent here.
 
 from garoupa.algebra.abs.element import Element
-from garoupa.npmath import int2bm8bit, bm2int8bit
+from garoupa.algebra.npmath import int2bm8bit, bm2int8bit
 
 
 class Mat8bit(Element):

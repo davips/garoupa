@@ -19,7 +19,7 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
-
+"""Different bases to compose an identifier string"""
 
 b64 = tuple("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-.")
 b64r = dict((c, v) for v, c in enumerate(b64))

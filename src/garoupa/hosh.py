@@ -17,21 +17,24 @@
 # 
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
-#  part of this work is illegal and is unethical regarding the effort and
+#  part of this work is illegal and unethical regarding the effort and
 #  time spent here.
 from sys import maxsize
 from typing import Union
 
-from garoupa.base777 import b777enc
-from garoupa.colors import colorize128bit
-from garoupa.core import cells_id_fromblob, cells_fromid, id_fromcells
-from garoupa.math import int2cells, cells2int, cellsmul, cellsinv
+from garoupa.misc.core import cells_id_fromblob, cells_fromid, id_fromcells
+from garoupa.misc.encoding.base777 import b777enc
+from garoupa.misc.exception import WrongOperands, WrongContent, DanglingEtype, CellValueTooHigh, WrongIdentifier, \
+    ElementTooHigh, WrongVersion
+from garoupa.misc.math import int2cells, cells2int, cellsmul, cellsinv
+from garoupa.misc.colors import colorize128bit
 
 
 class Hosh:
     """
-    etype = ordered, hybrid, unordered
-    According to subgroup: Z, H\\Z or G\\H
+    Operable hash.
+
+    Generate a Hosh object from a binary content or a list of 6 ints.
 
     Usage:
 
@@ -81,6 +84,18 @@ class Hosh:
     True
     >>> print(ø.u * b"sdff")
     3_214e6b0_______________________
+
+    Parameters
+    ----------
+    content
+        Binary content to be hashed, or a list of six integers
+    etype
+        ordered, hybrid, unordered
+        According to the subset of the desired element: Z, H\\Z or G\\H
+    version
+        UT32.4 or UT64.4 changes the number of digits and robustness against collisions
+        UT32.4 is enough for most usages. It accepts more than 4 billion repetitions of the same operation in a row.
+        UT64.4 provides unspeakable limits for operations, please see scientific paper for details.
     """
     shorter = False
     _repr = None
@@ -386,30 +401,3 @@ class Hosh:
         elif version == "UT64.4":
             return 18446744073709551557, 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249, 64, 48
         raise WrongVersion("Unknown version:", version)
-
-
-class CellValueTooHigh(Exception):
-    pass
-
-
-class DanglingEtype(Exception):
-    pass
-
-
-class WrongContent(Exception):
-    pass
-
-
-class WrongVersion(Exception):
-    pass
-
-
-class WrongOperands(Exception):
-    pass
-
-
-class ElementTooHigh(Exception):
-    pass
-
-class WrongIdentifier(Exception):
-    pass

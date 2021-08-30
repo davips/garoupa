@@ -1,49 +1,48 @@
 #  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
-# 
+#
 #  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU General Public License
 #  along with garoupa.  If not, see <http://www.gnu.org/licenses/>.
-# 
+#
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
-from dataclasses import dataclass
+"""GaROUPa solves the problem of determining the identity of multi-valued objects or sequences of events
+(and provide extra modules for group theory)"""
 
-from .hosh import Hosh
-from .identity import Identity, ø, Ø
+from garoupa.misc.identity import ø, Ø
+from .hosh import Hosh as H
+from .misc.helper import Helper
 
+__pdoc__ = {
+    'hosh': False,
+}
 
-@dataclass
-class Helper:
-    version: str
-
-    def __call__(self, blob, etype="ordered"):
-        return Hosh(blob, etype, self.version)
-
-    def u(self, blob):
-        return Hosh(blob, "unordered", self.version)
-
-    def h(self, blob):
-        return Hosh(blob, "hybrid", self.version)
-
-    fromid = Hosh.fromid
-    fromn = Hosh.fromn
-
+Hosh = H
+"""All identifiers are instances of this class"""
 
 ħ = Helper("UT32.4")
-Ħ = Helper("UT64.4")
+"""Shortcut to create 32-digit Hosh objects"""
+identity32 = ø()
+"""Shortcut to the 32-digit identity Hosh object"""
+ø = identity32
+"""Shortcut to the 32-digit identity Hosh object"""
 
-ø = identity32 = ø()
-Ø = identity64 = Ø()
+Ħ = Helper("UT64.4")
+"""Shortcut to create 64-digit Hosh objects"""
+identity64 = Ø()
+"""Shortcut to the 64-digit identity Hosh object"""
+Ø = identity64
+"""Shortcut to the 64-digit identity Hosh object"""
