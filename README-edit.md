@@ -165,14 +165,15 @@ print(repr(m.hosh))
 
 
 ## Performance
-The package [hosh](https://pypi.org/project/hosh) is a faster, native (compiled in _rust_) version of GaROUPa.
-However, only at major version `2.*.*` it will be updated and fully compatible with current GaROUPa.
-When _hosh 2_ is available, it will be possible to install the needed extra dependencies and achieve faster execution using: 
-`poetry install -E full`
-
-Despite estimated up to ~7x gains in speed when using _rust_ version, it may be negligible for most applications, 
-since the order of magnitude of creating and operating identifiers using GaROUPa is well under 30μs.
+Computation time for the simple operations performed by GaROUPa can be considered negligible for most applications,
+since the order of magnitude of creating and operating identifiers is around a few μs:
 ![img_6.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_6.png)
+Although, we estimate up to ~7x gains in speed when porting the core code to  _rust_.
+The package [hosh](https://pypi.org/project/hosh) was a faster implementation of an earlier version of GaROUPa,
+It will be updated and fully compatible with current GaROUPa at major version `2.*.*`.
+As the performance of garoupa seems already very high, an updated 'rust' implementation might become unnecessary.
+Some parts of the algebra module need additional packages, thay can be installed using:
+`poetry install -E full`
 
 ## Grants
 This work was partially supported by Fapesp under supervision of

@@ -197,11 +197,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 3, 0, 1], 3, ds1»	*	«[0, 3, 1, 2], 1, ds2»	=	«[2, 1, 3, 0], 4, dr3»
-«[0, 2, 1, 3], 2, dr4»	*	«[3, 0, 1, 2], 1, dr1»	=	«[3, 0, 2, 1], 3, dr1»
-«[2, 0, 3, 1], 3, dr2»	*	«[1, 0, 3, 2], 0, ds6»	=	«[0, 2, 1, 3], 3, ds0»
-«[1, 2, 0, 3], 2, dr5»	*	«[1, 2, 0, 3], 3, dr7»	=	«[2, 0, 1, 3], 0, dr0»
-«[1, 3, 0, 2], 2, ds7»	*	«[2, 0, 1, 3], 0, dr5»	=	«[0, 1, 3, 2], 2, ds2»
+«[3, 1, 0, 2], 2, ds0»	*	«[0, 3, 1, 2], 1, dr0»	=	«[3, 2, 1, 0], 3, ds0»
+«[3, 0, 2, 1], 2, dr7»	*	«[0, 2, 1, 3], 2, dr2»	=	«[3, 2, 0, 1], 4, dr1»
+«[3, 0, 1, 2], 0, ds7»	*	«[0, 3, 1, 2], 3, dr2»	=	«[3, 2, 0, 1], 3, ds1»
+«[3, 2, 0, 1], 3, ds7»	*	«[2, 0, 1, 3], 0, dr0»	=	«[0, 3, 2, 1], 3, ds3»
+«[1, 0, 2, 3], 1, ds1»	*	«[0, 3, 1, 2], 0, ds3»	=	«[1, 3, 0, 2], 1, dr2»
 """
 ```
 
@@ -211,7 +211,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[2, 1, 11, 3, 8, 7, 4, 10, 9, 5, 0, 6]
+[10, 4, 9, 5, 8, 11, 3, 1, 7, 2, 0, 6]
 """
 ```
 
@@ -325,9 +325,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          843/10000:  12.0 bits	~8.43 %
-    |D8×D8×D8×D8| = 65536:         338/10000:  16.0 bits	~3.38 %
- |D8×D8×D8×D8×D8| = 1048576:       144/10000:  20.0 bits	~1.44 %
+       |D8×D8×D8| = 4096:          871/10000:  12.0 bits	~8.71 %
+    |D8×D8×D8×D8| = 65536:         377/10000:  16.0 bits	~3.77 %
+ |D8×D8×D8×D8×D8| = 1048576:       177/10000:  20.0 bits	~1.77 %
 """
 ```
 
@@ -413,7 +413,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 30/08/2021 22:37:03
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 30/08/2021 22:49:06
 """
 ```
 
@@ -498,14 +498,15 @@ print(repr(m.hosh))
 
 
 ## Performance
-The package [hosh](https://pypi.org/project/hosh) is a faster, native (compiled in _rust_) version of GaROUPa.
-However, only at major version `2.*.*` it will be updated and fully compatible with current GaROUPa.
-When _hosh 2_ is available, it will be possible to install the needed extra dependencies and achieve faster execution using: 
-`poetry install -E full`
-
-Despite estimated up to ~7x gains in speed when using _rust_ version, it may be negligible for most applications, 
-since the order of magnitude of creating and operating identifiers using GaROUPa is well under 30μs.
+Computation time for the simple operations performed by GaROUPa can be considered negligible for most applications,
+since the order of magnitude of creating and operating identifiers is around a few μs:
 ![img_6.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_6.png)
+Although, we estimate up to ~7x gains in speed when porting the core code to  _rust_.
+The package [hosh](https://pypi.org/project/hosh) was a faster implementation of an earlier version of GaROUPa,
+It will be updated and fully compatible with current GaROUPa at major version `2.*.*`.
+As the performance of garoupa seems already very high, an updated 'rust' implementation might become unnecessary.
+Some parts of the algebra module need additional packages, thay can be installed using:
+`poetry install -E full`
 
 ## Grants
 This work was partially supported by Fapesp under supervision of

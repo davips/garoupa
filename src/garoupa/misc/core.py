@@ -22,7 +22,7 @@
 """Hashing and conversion functions used by Hosh
 
 This file exists to facilitate implementation of a compiled faster version in the sister package 'hosh'.
-However, the performance of garoupa seems already very high, making the 'rust' implementation not necessary."""
+However, the performance of GaROUPa seems already very high, making the 'rust' implementation not necessary."""
 
 from blake3 import blake3
 
