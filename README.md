@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
 # GaROUPa - Identification based on group theory
-GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) provides a reference implementation for the paper.  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
+GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) provides a reference implementation for the UT32.4/UT64.4 specification.  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
 :-------------------------:|:-------------------------:
 <!--- [arXiv paper](xxxxxx) --->
 
@@ -41,10 +41,10 @@ since the resulting id will remain the same,
 no matter when the unordered id is operated with the id of the object under construction.
 ![img_5.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_5.png)
 
-On the other hand, hybrid ids are excelent to represent values in a data structure like a map, 
+Conversely, hybrid ids are excelent to represent values in a data structure like a map, 
 since the order is not relevant when the consumer process looks up for keys, not indexes.
 Converselly, a chain of a data processing functions usually implies one step is dependent on the result of the previous step.
-This makes the ordered ids the perfect fit to identify functions (and also their composition, as a consequence).
+This makes ordered ids the perfect fit to identify functions (and also their composition, as a consequence).
 
 
 
@@ -199,11 +199,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[1, 0, 3, 2], 1, dr2»	*	«[0, 1, 3, 2], 2, ds3»	=	«[1, 0, 2, 3], 3, ds1»
-«[3, 2, 0, 1], 2, ds5»	*	«[2, 0, 1, 3], 1, dr3»	=	«[0, 3, 2, 1], 3, ds2»
-«[3, 1, 0, 2], 3, ds6»	*	«[3, 2, 0, 1], 2, ds2»	=	«[2, 0, 3, 1], 0, dr0»
-«[1, 0, 3, 2], 0, dr1»	*	«[2, 1, 0, 3], 3, ds1»	=	«[3, 0, 1, 2], 3, ds2»
-«[3, 1, 0, 2], 0, ds5»	*	«[3, 0, 2, 1], 1, ds4»	=	«[2, 3, 0, 1], 1, dr1»
+«[0, 1, 3, 2], 1, dr2»	*	«[3, 1, 0, 2], 2, ds1»	=	«[2, 1, 0, 3], 3, ds3»
+«[1, 2, 0, 3], 1, ds5»	*	«[1, 2, 0, 3], 1, dr7»	=	«[2, 0, 1, 3], 2, ds2»
+«[3, 0, 1, 2], 2, ds1»	*	«[2, 0, 3, 1], 2, ds7»	=	«[1, 3, 2, 0], 4, dr2»
+«[1, 0, 2, 3], 1, dr6»	*	«[3, 2, 0, 1], 0, ds0»	=	«[3, 2, 1, 0], 1, ds2»
+«[3, 2, 0, 1], 0, ds6»	*	«[1, 0, 3, 2], 1, dr4»	=	«[2, 3, 1, 0], 1, ds2»
 """
 ```
 
@@ -213,7 +213,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[2, 4, 1, 0, 3, 7, 11, 8, 6, 9, 5, 10]
+[4, 3, 6, 9, 10, 1, 5, 2, 7, 0, 11, 8]
 """
 ```
 
@@ -327,9 +327,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          869/10000:  12.0 bits	~8.69 %
-    |D8×D8×D8×D8| = 65536:         383/10000:  16.0 bits	~3.83 %
- |D8×D8×D8×D8×D8| = 1048576:       154/10000:  20.0 bits	~1.54 %
+       |D8×D8×D8| = 4096:          825/10000:  12.0 bits	~8.25 %
+    |D8×D8×D8×D8| = 65536:         360/10000:  16.0 bits	~3.6 %
+ |D8×D8×D8×D8×D8| = 1048576:       158/10000:  20.0 bits	~1.58 %
 """
 ```
 
@@ -415,7 +415,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 31/08/2021 18:21:21
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 31/08/2021 18:30:19
 """
 ```
 

@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
 # GaROUPa - Identification based on group theory
-GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) provides a reference implementation for the paper.  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
+GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) provides a reference implementation for the UT32.4/UT64.4 specification.  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
 :-------------------------:|:-------------------------:
 <!--- [arXiv paper](xxxxxx) --->
 
@@ -41,10 +41,10 @@ since the resulting id will remain the same,
 no matter when the unordered id is operated with the id of the object under construction.
 ![img_5.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_5.png)
 
-On the other hand, hybrid ids are excelent to represent values in a data structure like a map, 
+Conversely, hybrid ids are excelent to represent values in a data structure like a map, 
 since the order is not relevant when the consumer process looks up for keys, not indexes.
 Converselly, a chain of a data processing functions usually implies one step is dependent on the result of the previous step.
-This makes the ordered ids the perfect fit to identify functions (and also their composition, as a consequence).
+This makes ordered ids the perfect fit to identify functions (and also their composition, as a consequence).
 
 
 
