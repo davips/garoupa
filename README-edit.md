@@ -16,7 +16,7 @@ A product of identifiers produce a new identifier as shown below,
 where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
 New identifiers are easily created from the identity element `ø` 
 (or `identity32` for people or systems allergic to utf-8 encoding).
-![img.png](img.png)
+![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png)
 
 Operations can be reverted by the inverse of the identifier.
 ![img_1.png](img_1.png)
@@ -26,10 +26,10 @@ Operations are associative. They are order-sensitive by default - they are calle
 
 However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) 
 identifiers are also available.
-![img_3.png](img_3.png)
+![img_3.png](https://raw.githubusercontent.com/davips/garoupa/8b556816e14145fdd045f55f6de0a830d9e1865d/examples/img_3.png)
 
 This is how they affect each other:
-![img_4.png](img_4.png)
+![img_4.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_4.png)
 
 The chance of collision is determined by the number of possible identifiers of each type.
 Two versions are provided: UT32.4 and UT64.4 They can be easily implemented in other languages and are 
@@ -38,7 +38,7 @@ Unordered ids use a very narrow range of the total number of identifiers because
 One use could be the embedding of  authorship or other metadata to an object without worrying about the timing, 
 since the resulting id will remain the same, 
 no matter when the unordered id is operated with the id of the object under construction.
-![img_5.png](img_5.png)
+![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png)
 
 On the other hand, hybrid ids are excelent to represent values in a data structure like a map, 
 since the order is not relevant when the consumer process looks up for keys, not indexes.
@@ -172,7 +172,7 @@ When _hosh 2_ is available, it will be possible to install the needed extra depe
 
 Despite estimated up to ~7x gains in speed when using _rust_ version, it may be negligible for most applications, 
 since the order of magnitude of creating and operating identifiers using GaROUPa is well under 30μs.
-![img_6.png](img_6.png)
+![img_6.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_6.png)
 
 ## Grants
 This work was partially supported by Fapesp under supervision of
