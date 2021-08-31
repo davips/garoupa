@@ -125,7 +125,8 @@ class Helper:
 <span>def <span class="ident">fromid</span></span>(<span>id)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Usage:</p>
+<div class="desc"><p>Create an element from a textual id.</p>
+<p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; a = Hosh.fromid(&quot;abcdefabcdefabcdefabcdefabcdefab&quot;)
 &gt;&gt;&gt; a.n
 997946887123826552569543664509734108513592617499281126651
@@ -152,6 +153,16 @@ True
 <dl>
 <dt><strong><code>id</code></strong></dt>
 <dd>&nbsp;</dd>
+</dl>
+<h2 id="parameters_1">Parameters</h2>
+<dl>
+<dt><strong><code>id</code></strong></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>A new Hosh object</code></dt>
+<dd>&nbsp;</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -160,6 +171,8 @@ True
 <pre><code class="python">@classmethod
 def fromid(cls, id):
     &#34;&#34;&#34;
+    Create an element from a textual id.
+
     Usage:
 
     &gt;&gt;&gt; a = Hosh.fromid(&#34;abcdefabcdefabcdefabcdefabcdefab&#34;)
@@ -187,6 +200,14 @@ def fromid(cls, id):
     Parameters
     ----------
     id
+
+    Parameters
+    ----------
+    id
+
+    Returns
+    -------
+    A new Hosh object
     &#34;&#34;&#34;
     if len(id) == 32:
         version = &#34;UT32.4&#34;
@@ -201,20 +222,33 @@ def fromid(cls, id):
 <span>def <span class="ident">fromn</span></span>(<span>n: int, version='UT32.4')</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Hosh representing the given int.</p>
+<div class="desc"><p>Create a Hosh object representing the given int.</p>
 <p>Default 'p' is according to version UT64.4.</p>
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
 &gt;&gt;&gt; h.id
 '00_000000000019e9300ddd405c1c8fc'
-</code></pre></div>
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>n</code></strong></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>version</code></strong></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>A new Hosh object</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
 def fromn(cls, n: int, version=&#34;UT32.4&#34;):
-    &#34;&#34;&#34;Hosh representing the given int.
+    &#34;&#34;&#34;
+    Create a Hosh object representing the given int.
 
     Default &#39;p&#39; is according to version UT64.4.
 
@@ -223,6 +257,15 @@ def fromn(cls, n: int, version=&#34;UT32.4&#34;):
     &gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
     &gt;&gt;&gt; h.id
     &#39;00_000000000019e9300ddd405c1c8fc&#39;
+
+    Parameters
+    ----------
+    n
+    version
+
+    Returns
+    -------
+    A new Hosh object
     &#34;&#34;&#34;
     p, order, _, _ = cls.group_props(version)
     if n &gt; order:
