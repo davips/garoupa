@@ -16,6 +16,8 @@ echo
 echo "----------------- docs... -----------------------"
 read -p "press enter"
 poetry run pdoc --html --force garoupa -o docs
+mv docs/garoupa/* docs/
+rm docs/garoupa -rf
 git add docs
 echo "----------------- docs done -----------------------"
 echo; echo
