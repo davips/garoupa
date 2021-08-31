@@ -16,20 +16,20 @@ A product of identifiers produce a new identifier as shown below,
 where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
 New identifiers are easily created from the identity element `ø` 
 (or `identity32` for people or systems allergic to utf-8 encoding).
-![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png)
+![img.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img.png)
 
 Operations can be reverted by the inverse of the identifier.
-![img_1.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_1.png)
+![img_1.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_1.png)
 
 Operations are associative. They are order-sensitive by default - they are called _ordered_ ids.
-![img_2.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_2.png)
+![img_2.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_2.png)
 
 However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) 
 identifiers are also available.
 ![img_3.png](https://raw.githubusercontent.com/davips/garoupa/8b556816e14145fdd045f55f6de0a830d9e1865d/examples/img_3.png)
 
 This is how they affect each other:
-![img_4.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_4.png)
+![img_4.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_4.png)
 
 The chance of collision is determined by the number of possible identifiers of each type.
 Two versions are provided: UT32.4 and UT64.4 They can be easily implemented in other languages and are 
@@ -38,7 +38,7 @@ Unordered ids use a very narrow range of the total number of identifiers because
 One use could be the embedding of  authorship or other metadata to an object without worrying about the timing, 
 since the resulting id will remain the same, 
 no matter when the unordered id is operated with the id of the object under construction.
-![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png)
+![img_5.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_5.png)
 
 On the other hand, hybrid ids are excelent to represent values in a data structure like a map, 
 since the order is not relevant when the consumer process looks up for keys, not indexes.
@@ -52,7 +52,7 @@ Aside from the [arxiv paper](xxxxxxxxxxxx), [PyPI package](https://pypi.org/proj
 and [GitHub repository](https://github.com/davips/garoupa), 
 one can find more information, at a higher level application perspective, 
 in this presentation:
-![image](https://raw.githubusercontent.com/davips/garoupa/main/examples/capa-slides-gdocs.png)
+![image](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/capa-slides-gdocs.png)
 A lower level perspective is provided in the [API documentation](https://davips.github.io/garoupa).
 
 ## Python installation
@@ -197,11 +197,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[1, 0, 3, 2], 0, dr0»	*	«[2, 1, 0, 3], 3, ds4»	=	«[3, 0, 1, 2], 3, ds0»
-«[0, 2, 1, 3], 0, dr7»	*	«[3, 2, 0, 1], 1, dr3»	=	«[3, 1, 0, 2], 1, dr2»
-«[3, 2, 0, 1], 1, ds1»	*	«[2, 0, 3, 1], 1, ds6»	=	«[0, 3, 1, 2], 2, dr3»
-«[0, 1, 2, 3], 2, ds3»	*	«[2, 0, 1, 3], 0, ds7»	=	«[2, 0, 1, 3], 2, dr0»
-«[1, 2, 0, 3], 1, ds2»	*	«[2, 0, 3, 1], 3, dr1»	=	«[0, 1, 3, 2], 4, ds1»
+«[2, 3, 0, 1], 3, ds1»	*	«[0, 3, 1, 2], 1, ds2»	=	«[2, 1, 3, 0], 4, dr3»
+«[0, 2, 1, 3], 2, dr4»	*	«[3, 0, 1, 2], 1, dr1»	=	«[3, 0, 2, 1], 3, dr1»
+«[2, 0, 3, 1], 3, dr2»	*	«[1, 0, 3, 2], 0, ds6»	=	«[0, 2, 1, 3], 3, ds0»
+«[1, 2, 0, 3], 2, dr5»	*	«[1, 2, 0, 3], 3, dr7»	=	«[2, 0, 1, 3], 0, dr0»
+«[1, 3, 0, 2], 2, ds7»	*	«[2, 0, 1, 3], 0, dr5»	=	«[0, 1, 3, 2], 2, ds2»
 """
 ```
 
@@ -211,7 +211,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[7, 6, 1, 11, 2, 5, 9, 10, 4, 0, 3, 8]
+[2, 1, 11, 3, 8, 7, 4, 10, 9, 5, 0, 6]
 """
 ```
 
@@ -325,9 +325,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          845/10000:  12.0 bits	~8.45 %
-    |D8×D8×D8×D8| = 65536:         399/10000:  16.0 bits	~3.99 %
- |D8×D8×D8×D8×D8| = 1048576:       159/10000:  20.0 bits	~1.59 %
+       |D8×D8×D8| = 4096:          843/10000:  12.0 bits	~8.43 %
+    |D8×D8×D8×D8| = 65536:         338/10000:  16.0 bits	~3.38 %
+ |D8×D8×D8×D8×D8| = 1048576:       144/10000:  20.0 bits	~1.44 %
 """
 ```
 
@@ -413,7 +413,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 30/08/2021 22:08:36
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 30/08/2021 22:37:03
 """
 ```
 
@@ -505,7 +505,7 @@ When _hosh 2_ is available, it will be possible to install the needed extra depe
 
 Despite estimated up to ~7x gains in speed when using _rust_ version, it may be negligible for most applications, 
 since the order of magnitude of creating and operating identifiers using GaROUPa is well under 30μs.
-![img_6.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_6.png)
+![img_6.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_6.png)
 
 ## Grants
 This work was partially supported by Fapesp under supervision of

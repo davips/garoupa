@@ -289,6 +289,8 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
     @property
     def etype(self):
         &#34;&#34;&#34;
+        Type of this element
+
         Usage:
 
         &gt;&gt;&gt; from garoupa import Hosh
@@ -297,7 +299,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         Returns
         -------
-
+        &#39;ordered&#39;, &#39;hybrid&#39; or &#39;unordered&#39;
         &#34;&#34;&#34;
         if self._etype is None:
             if sum(self.cells[:5]) == 0:
@@ -311,6 +313,8 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
     @property
     def etype_inducer(self):
         &#34;&#34;&#34;
+        Type this element uses to coerce an element of undefined type.
+
         Usage:
 
         &gt;&gt;&gt; from garoupa import ø, Hosh
@@ -325,7 +329,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         Returns
         -------
-
+        &#39;ordered&#39;, &#39;hybrid&#39;, &#39;unordered&#39;
         &#34;&#34;&#34;
         if self._etype_inducer is None:
             self._etype_inducer = self.etype
@@ -333,6 +337,13 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
     @property
     def id(self):
+        &#34;&#34;&#34;
+        Textual representation of this element
+
+        Returns
+        -------
+        Textual representation
+        &#34;&#34;&#34;
         if self._id is None:
             self._id = id_fromcells(self.cells, self.digits, self.p)
         return self._id
@@ -340,6 +351,8 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
     @classmethod
     def fromid(cls, id):
         &#34;&#34;&#34;
+        Create an element from a textual id.
+
         Usage:
 
         &gt;&gt;&gt; a = Hosh.fromid(&#34;abcdefabcdefabcdefabcdefabcdefab&#34;)
@@ -367,6 +380,14 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         Parameters
         ----------
         id
+
+        Parameters
+        ----------
+        id
+
+        Returns
+        -------
+        A new Hosh object
         &#34;&#34;&#34;
         if len(id) == 32:
             version = &#34;UT32.4&#34;
@@ -378,7 +399,8 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
     @classmethod
     def fromn(cls, n: int, version=&#34;UT32.4&#34;):
-        &#34;&#34;&#34;Hosh representing the given int.
+        &#34;&#34;&#34;
+        Create a Hosh object representing the given int.
 
         Default &#39;p&#39; is according to version UT64.4.
 
@@ -387,6 +409,15 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         &gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
         &gt;&gt;&gt; h.id
         &#39;00_000000000019e9300ddd405c1c8fc&#39;
+
+        Parameters
+        ----------
+        n
+        version
+
+        Returns
+        -------
+        A new Hosh object
         &#34;&#34;&#34;
         p, order, _, _ = cls.group_props(version)
         if n &gt; order:
@@ -395,6 +426,13 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
     @property
     def n(self):
+        &#34;&#34;&#34;
+        Lexicographic rank of this eloement (according to the format adopted in internal integer cells.
+
+        Returns
+        -------
+        Number
+        &#34;&#34;&#34;
         if self._n is None:
             self._n = cells2int(self.cells, self.p)
         return self._n
@@ -416,7 +454,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         Returns
         -------
-
+        Short utf-8 textual representation
         &#34;&#34;&#34;
         if self._sid is None:
             self._sid = b777enc(self.n, self.digits * 5 // 8)
@@ -424,6 +462,13 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
     @property
     def idc(self):
+        &#34;&#34;&#34;
+        Colored textual representation of this element
+
+        Returns
+        -------
+        Textual representation
+        &#34;&#34;&#34;
         if self._idc is None:
             self._idc = colorize128bit(self.id, self.digits)
         return self._idc
@@ -445,7 +490,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         Returns
         -------
-
+        Short utf-8 colored textual representation
         &#34;&#34;&#34;
         if self._sidc is None:
             self._sidc = colorize128bit(self.sid, self.digits * 5 // 8)
@@ -586,7 +631,8 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 <span>def <span class="ident">fromid</span></span>(<span>id)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Usage:</p>
+<div class="desc"><p>Create an element from a textual id.</p>
+<p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; a = Hosh.fromid(&quot;abcdefabcdefabcdefabcdefabcdefab&quot;)
 &gt;&gt;&gt; a.n
 997946887123826552569543664509734108513592617499281126651
@@ -613,6 +659,16 @@ True
 <dl>
 <dt><strong><code>id</code></strong></dt>
 <dd>&nbsp;</dd>
+</dl>
+<h2 id="parameters_1">Parameters</h2>
+<dl>
+<dt><strong><code>id</code></strong></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>A new <a title="garoupa.Hosh" href="#garoupa.Hosh">Hosh</a> object</code></dt>
+<dd>&nbsp;</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -621,6 +677,8 @@ True
 <pre><code class="python">@classmethod
 def fromid(cls, id):
     &#34;&#34;&#34;
+    Create an element from a textual id.
+
     Usage:
 
     &gt;&gt;&gt; a = Hosh.fromid(&#34;abcdefabcdefabcdefabcdefabcdefab&#34;)
@@ -648,6 +706,14 @@ def fromid(cls, id):
     Parameters
     ----------
     id
+
+    Parameters
+    ----------
+    id
+
+    Returns
+    -------
+    A new Hosh object
     &#34;&#34;&#34;
     if len(id) == 32:
         version = &#34;UT32.4&#34;
@@ -662,20 +728,33 @@ def fromid(cls, id):
 <span>def <span class="ident">fromn</span></span>(<span>n: int, version='UT32.4')</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Hosh representing the given int.</p>
+<div class="desc"><p>Create a Hosh object representing the given int.</p>
 <p>Default 'p' is according to version UT64.4.</p>
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
 &gt;&gt;&gt; h.id
 '00_000000000019e9300ddd405c1c8fc'
-</code></pre></div>
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>n</code></strong></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>version</code></strong></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>A new <a title="garoupa.Hosh" href="#garoupa.Hosh">Hosh</a> object</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
 def fromn(cls, n: int, version=&#34;UT32.4&#34;):
-    &#34;&#34;&#34;Hosh representing the given int.
+    &#34;&#34;&#34;
+    Create a Hosh object representing the given int.
 
     Default &#39;p&#39; is according to version UT64.4.
 
@@ -684,6 +763,15 @@ def fromn(cls, n: int, version=&#34;UT32.4&#34;):
     &gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
     &gt;&gt;&gt; h.id
     &#39;00_000000000019e9300ddd405c1c8fc&#39;
+
+    Parameters
+    ----------
+    n
+    version
+
+    Returns
+    -------
+    A new Hosh object
     &#34;&#34;&#34;
     p, order, _, _ = cls.group_props(version)
     if n &gt; order:
@@ -739,12 +827,14 @@ def group_props(cls, version):
 <dl>
 <dt id="garoupa.Hosh.etype"><code class="name">var <span class="ident">etype</span></code></dt>
 <dd>
-<div class="desc"><p>Usage:</p>
+<div class="desc"><p>Type of this element</p>
+<p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Hosh
 &gt;&gt;&gt; Hosh.fromn(5).etype
 'unordered'
 </code></pre>
-<h2 id="returns">Returns</h2></div>
+<h2 id="returns">Returns</h2>
+<p>'ordered', 'hybrid' or 'unordered'</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -752,6 +842,8 @@ def group_props(cls, version):
 <pre><code class="python">@property
 def etype(self):
     &#34;&#34;&#34;
+    Type of this element
+
     Usage:
 
     &gt;&gt;&gt; from garoupa import Hosh
@@ -760,7 +852,7 @@ def etype(self):
 
     Returns
     -------
-
+    &#39;ordered&#39;, &#39;hybrid&#39; or &#39;unordered&#39;
     &#34;&#34;&#34;
     if self._etype is None:
         if sum(self.cells[:5]) == 0:
@@ -774,7 +866,8 @@ def etype(self):
 </dd>
 <dt id="garoupa.Hosh.etype_inducer"><code class="name">var <span class="ident">etype_inducer</span></code></dt>
 <dd>
-<div class="desc"><p>Usage:</p>
+<div class="desc"><p>Type this element uses to coerce an element of undefined type.</p>
+<p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import ø, Hosh
 &gt;&gt;&gt; ø.etype_inducer
 'ordered'
@@ -785,7 +878,8 @@ def etype(self):
 &gt;&gt;&gt; Hosh(b&quot;12124&quot;).etype_inducer
 'ordered'
 </code></pre>
-<h2 id="returns">Returns</h2></div>
+<h2 id="returns">Returns</h2>
+<p>'ordered', 'hybrid', 'unordered'</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -793,6 +887,8 @@ def etype(self):
 <pre><code class="python">@property
 def etype_inducer(self):
     &#34;&#34;&#34;
+    Type this element uses to coerce an element of undefined type.
+
     Usage:
 
     &gt;&gt;&gt; from garoupa import ø, Hosh
@@ -807,7 +903,7 @@ def etype_inducer(self):
 
     Returns
     -------
-
+    &#39;ordered&#39;, &#39;hybrid&#39;, &#39;unordered&#39;
     &#34;&#34;&#34;
     if self._etype_inducer is None:
         self._etype_inducer = self.etype
@@ -816,13 +912,25 @@ def etype_inducer(self):
 </dd>
 <dt id="garoupa.Hosh.id"><code class="name">var <span class="ident">id</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Textual representation of this element</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Textual representation</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
 def id(self):
+    &#34;&#34;&#34;
+    Textual representation of this element
+
+    Returns
+    -------
+    Textual representation
+    &#34;&#34;&#34;
     if self._id is None:
         self._id = id_fromcells(self.cells, self.digits, self.p)
     return self._id</code></pre>
@@ -830,13 +938,25 @@ def id(self):
 </dd>
 <dt id="garoupa.Hosh.idc"><code class="name">var <span class="ident">idc</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Colored textual representation of this element</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Textual representation</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
 def idc(self):
+    &#34;&#34;&#34;
+    Colored textual representation of this element
+
+    Returns
+    -------
+    Textual representation
+    &#34;&#34;&#34;
     if self._idc is None:
         self._idc = colorize128bit(self.id, self.digits)
     return self._idc</code></pre>
@@ -844,13 +964,25 @@ def idc(self):
 </dd>
 <dt id="garoupa.Hosh.n"><code class="name">var <span class="ident">n</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Lexicographic rank of this eloement (according to the format adopted in internal integer cells.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Number</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
 def n(self):
+    &#34;&#34;&#34;
+    Lexicographic rank of this eloement (according to the format adopted in internal integer cells.
+
+    Returns
+    -------
+    Number
+    &#34;&#34;&#34;
     if self._n is None:
         self._n = cells2int(self.cells, self.p)
     return self._n</code></pre>
@@ -868,7 +1000,11 @@ def n(self):
 &gt;&gt;&gt; (Ø * b'65e987978g').sid
 'ÊŰԝǮʎĹաΦƟzƶӣξʙСʠΠмΌВʜȉΖáςՔĦĢνԱCϔΘҳȖưΎìɚF'
 </code></pre>
-<h2 id="returns">Returns</h2></div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Short utf-8 textual representation</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -890,7 +1026,7 @@ def sid(self):
 
     Returns
     -------
-
+    Short utf-8 textual representation
     &#34;&#34;&#34;
     if self._sid is None:
         self._sid = b777enc(self.n, self.digits * 5 // 8)
@@ -909,7 +1045,11 @@ def sid(self):
 &gt;&gt;&gt; print((Ø * b'65e987978g').sidc)
 [38;5;249m[1m[48;5;0mÊ[0m[38;5;249m[1m[48;5;0mŰ[0m[38;5;144m[1m[48;5;0mԝ[0m[38;5;144m[1m[48;5;0mǮ[0m[38;5;246m[1m[48;5;0mʎ[0m[38;5;109m[1m[48;5;0mĹ[0m[38;5;146m[1m[48;5;0mա[0m[38;5;150m[1m[48;5;0mΦ[0m[38;5;182m[1m[48;5;0mƟ[0m[38;5;150m[1m[48;5;0mz[0m[38;5;179m[1m[48;5;0mƶ[0m[38;5;137m[1m[48;5;0mӣ[0m[38;5;104m[1m[48;5;0mξ[0m[38;5;119m[1m[48;5;0mʙ[0m[38;5;175m[1m[48;5;0mС[0m[38;5;109m[1m[48;5;0mʠ[0m[38;5;249m[1m[48;5;0mΠ[0m[38;5;249m[1m[48;5;0mм[0m[38;5;144m[1m[48;5;0mΌ[0m[38;5;144m[1m[48;5;0mВ[0m[38;5;246m[1m[48;5;0mʜ[0m[38;5;109m[1m[48;5;0mȉ[0m[38;5;146m[1m[48;5;0mΖ[0m[38;5;150m[1m[48;5;0má[0m[38;5;182m[1m[48;5;0mς[0m[38;5;150m[1m[48;5;0mՔ[0m[38;5;179m[1m[48;5;0mĦ[0m[38;5;137m[1m[48;5;0mĢ[0m[38;5;104m[1m[48;5;0mν[0m[38;5;119m[1m[48;5;0mԱ[0m[38;5;175m[1m[48;5;0mC[0m[38;5;109m[1m[48;5;0mϔ[0m[38;5;249m[1m[48;5;0mΘ[0m[38;5;249m[1m[48;5;0mҳ[0m[38;5;144m[1m[48;5;0mȖ[0m[38;5;144m[1m[48;5;0mư[0m[38;5;246m[1m[48;5;0mΎ[0m[38;5;109m[1m[48;5;0mì[0m[38;5;146m[1m[48;5;0mɚ[0m[38;5;150m[1m[48;5;0mF[0m
 </code></pre>
-<h2 id="returns">Returns</h2></div>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Short utf-8 colored textual representation</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -931,7 +1071,7 @@ def sidc(self):
 
     Returns
     -------
-
+    Short utf-8 colored textual representation
     &#34;&#34;&#34;
     if self._sidc is None:
         self._sidc = colorize128bit(self.sid, self.digits * 5 // 8)

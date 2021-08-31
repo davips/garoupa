@@ -122,6 +122,8 @@ class Hosh:
     @property
     def etype(self):
         """
+        Type of this element
+
         Usage:
 
         >>> from garoupa import Hosh
@@ -130,7 +132,7 @@ class Hosh:
 
         Returns
         -------
-
+        'ordered', 'hybrid' or 'unordered'
         """
         if self._etype is None:
             if sum(self.cells[:5]) == 0:
@@ -144,6 +146,8 @@ class Hosh:
     @property
     def etype_inducer(self):
         """
+        Type this element uses to coerce an element of undefined type.
+
         Usage:
 
         >>> from garoupa import ø, Hosh
@@ -158,7 +162,7 @@ class Hosh:
 
         Returns
         -------
-
+        'ordered', 'hybrid', 'unordered'
         """
         if self._etype_inducer is None:
             self._etype_inducer = self.etype
@@ -166,6 +170,13 @@ class Hosh:
 
     @property
     def id(self):
+        """
+        Textual representation of this element
+
+        Returns
+        -------
+        Textual representation
+        """
         if self._id is None:
             self._id = id_fromcells(self.cells, self.digits, self.p)
         return self._id
@@ -173,6 +184,8 @@ class Hosh:
     @classmethod
     def fromid(cls, id):
         """
+        Create an element from a textual id.
+
         Usage:
 
         >>> a = Hosh.fromid("abcdefabcdefabcdefabcdefabcdefab")
@@ -200,6 +213,14 @@ class Hosh:
         Parameters
         ----------
         id
+
+        Parameters
+        ----------
+        id
+
+        Returns
+        -------
+        A new Hosh object
         """
         if len(id) == 32:
             version = "UT32.4"
@@ -211,7 +232,8 @@ class Hosh:
 
     @classmethod
     def fromn(cls, n: int, version="UT32.4"):
-        """Hosh representing the given int.
+        """
+        Create a Hosh object representing the given int.
 
         Default 'p' is according to version UT64.4.
 
@@ -220,6 +242,15 @@ class Hosh:
         >>> h = Hosh.fromn(7647544756746324134134)
         >>> h.id
         '00_000000000019e9300ddd405c1c8fc'
+
+        Parameters
+        ----------
+        n
+        version
+
+        Returns
+        -------
+        A new Hosh object
         """
         p, order, _, _ = cls.group_props(version)
         if n > order:
@@ -228,6 +259,13 @@ class Hosh:
 
     @property
     def n(self):
+        """
+        Lexicographic rank of this eloement (according to the format adopted in internal integer cells.
+
+        Returns
+        -------
+        Number
+        """
         if self._n is None:
             self._n = cells2int(self.cells, self.p)
         return self._n
@@ -249,7 +287,7 @@ class Hosh:
 
         Returns
         -------
-
+        Short utf-8 textual representation
         """
         if self._sid is None:
             self._sid = b777enc(self.n, self.digits * 5 // 8)
@@ -257,6 +295,13 @@ class Hosh:
 
     @property
     def idc(self):
+        """
+        Colored textual representation of this element
+
+        Returns
+        -------
+        Textual representation
+        """
         if self._idc is None:
             self._idc = colorize128bit(self.id, self.digits)
         return self._idc
@@ -278,7 +323,7 @@ class Hosh:
 
         Returns
         -------
-
+        Short utf-8 colored textual representation
         """
         if self._sidc is None:
             self._sidc = colorize128bit(self.sid, self.digits * 5 // 8)
