@@ -19,10 +19,10 @@ New identifiers are easily created from the identity element `ø`
 ![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png)
 
 Operations can be reverted by the inverse of the identifier.
-![img_1.png](img_1.png)
+![img_1.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_1.png)
 
 Operations are associative. They are order-sensitive by default - they are called _ordered_ ids.
-![img_2.png](img_2.png)
+![img_2.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_2.png)
 
 However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) 
 identifiers are also available.
@@ -53,7 +53,7 @@ and [GitHub repository](https://github.com/davips/garoupa),
 one can find more information, at a higher level application perspective, 
 in this presentation:
 ![image](https://raw.githubusercontent.com/davips/garoupa/main/examples/capa-slides-gdocs.png)
-A lower level perspective is provided in the [API documentation](docs/garoupa/index.html).
+A lower level perspective is provided in the [API documentation](https://davips.github.io/garoupa).
 
 ## Python installation
 ### from package
@@ -197,11 +197,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[0, 2, 1, 3], 1, ds5»	*	«[0, 1, 3, 2], 3, ds6»	=	«[0, 2, 3, 1], 4, dr3»
-«[2, 3, 0, 1], 0, ds4»	*	«[1, 0, 3, 2], 2, ds3»	=	«[3, 2, 1, 0], 2, dr1»
-«[3, 2, 0, 1], 2, dr1»	*	«[2, 0, 1, 3], 2, dr0»	=	«[0, 3, 2, 1], 4, dr1»
-«[1, 2, 0, 3], 1, ds3»	*	«[1, 3, 0, 2], 0, ds7»	=	«[2, 3, 1, 0], 1, dr0»
-«[2, 1, 0, 3], 2, dr2»	*	«[1, 2, 0, 3], 3, dr6»	=	«[1, 0, 2, 3], 0, dr0»
+«[1, 0, 3, 2], 0, dr0»	*	«[2, 1, 0, 3], 3, ds4»	=	«[3, 0, 1, 2], 3, ds0»
+«[0, 2, 1, 3], 0, dr7»	*	«[3, 2, 0, 1], 1, dr3»	=	«[3, 1, 0, 2], 1, dr2»
+«[3, 2, 0, 1], 1, ds1»	*	«[2, 0, 3, 1], 1, ds6»	=	«[0, 3, 1, 2], 2, dr3»
+«[0, 1, 2, 3], 2, ds3»	*	«[2, 0, 1, 3], 0, ds7»	=	«[2, 0, 1, 3], 2, dr0»
+«[1, 2, 0, 3], 1, ds2»	*	«[2, 0, 3, 1], 3, dr1»	=	«[0, 1, 3, 2], 4, ds1»
 """
 ```
 
@@ -211,7 +211,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[5, 0, 10, 2, 9, 8, 4, 7, 6, 1, 3, 11]
+[7, 6, 1, 11, 2, 5, 9, 10, 4, 0, 3, 8]
 """
 ```
 
@@ -325,9 +325,9 @@ for G in Gs:
           f"\t~{100 * count / i} %", sep="")
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          877/10000:  12.0 bits	~8.77 %
-    |D8×D8×D8×D8| = 65536:         329/10000:  16.0 bits	~3.29 %
- |D8×D8×D8×D8×D8| = 1048576:       147/10000:  20.0 bits	~1.47 %
+       |D8×D8×D8| = 4096:          845/10000:  12.0 bits	~8.45 %
+    |D8×D8×D8×D8| = 65536:         399/10000:  16.0 bits	~3.99 %
+ |D8×D8×D8×D8×D8| = 1048576:       159/10000:  20.0 bits	~1.59 %
 """
 ```
 
@@ -413,7 +413,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 30/08/2021 22:02:43
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 30/08/2021 22:08:36
 """
 ```
 

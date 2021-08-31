@@ -19,10 +19,10 @@ New identifiers are easily created from the identity element `ø`
 ![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png)
 
 Operations can be reverted by the inverse of the identifier.
-![img_1.png](img_1.png)
+![img_1.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_1.png)
 
 Operations are associative. They are order-sensitive by default - they are called _ordered_ ids.
-![img_2.png](img_2.png)
+![img_2.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_2.png)
 
 However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) 
 identifiers are also available.
@@ -53,7 +53,7 @@ and [GitHub repository](https://github.com/davips/garoupa),
 one can find more information, at a higher level application perspective, 
 in this presentation:
 ![image](https://raw.githubusercontent.com/davips/garoupa/main/examples/capa-slides-gdocs.png)
-A lower level perspective is provided in the [API documentation](docs/garoupa/index.html).
+A lower level perspective is provided in the [API documentation](https://davips.github.io/garoupa).
 
 ## Python installation
 ### from package
