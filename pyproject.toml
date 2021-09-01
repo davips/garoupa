@@ -22,6 +22,7 @@ colored = "^1.4.2"
 progress = { version = "^1.5", optional = true }
 pathos = { version = "^0.2.7", optional = true }
 #hosh = { version = "^2.210810.0", optional = true }
+pdoc3 = "^0.10.0"
 
 [tool.poetry.dev-dependencies]
 pdoc3 = "^0.10.0"
