@@ -25,8 +25,16 @@ from unittest import TestCase
 import pytest
 
 from garoupa import ø, Ø
-from garoupa.hosh import DanglingEtype, CellValueTooHigh, Hosh, WrongContent, WrongVersion, WrongOperands, \
-    ElementTooHigh, WrongIdentifier
+from garoupa.hosh import (
+    DanglingEtype,
+    CellValueTooHigh,
+    Hosh,
+    WrongContent,
+    WrongVersion,
+    WrongOperands,
+    ElementTooHigh,
+    WrongIdentifier,
+)
 
 
 class TestLdict(TestCase):

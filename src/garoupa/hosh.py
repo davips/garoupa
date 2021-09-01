@@ -1,20 +1,20 @@
 #  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
-# 
+#
 #  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU General Public License
 #  along with garoupa.  If not, see <http://www.gnu.org/licenses/>.
-# 
+#
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and unethical regarding the effort and
@@ -24,8 +24,15 @@ from typing import Union
 
 from garoupa.misc.core import cells_id_fromblob, cells_fromid, id_fromcells
 from garoupa.misc.encoding.base777 import b777enc
-from garoupa.misc.exception import WrongOperands, WrongContent, DanglingEtype, CellValueTooHigh, WrongIdentifier, \
-    ElementTooHigh, WrongVersion
+from garoupa.misc.exception import (
+    WrongOperands,
+    WrongContent,
+    DanglingEtype,
+    CellValueTooHigh,
+    WrongIdentifier,
+    ElementTooHigh,
+    WrongVersion,
+)
 from garoupa.misc.math import int2cells, cells2int, cellsmul, cellsinv
 from garoupa.misc.colors import colorize128bit
 
@@ -97,6 +104,7 @@ class Hosh:
         UT32.4 is enough for most usages. It accepts more than 4 billion repetitions of the same operation in a row.
         UT64.4 provides unspeakable limits for operations, please see scientific paper for details.
     """
+
     shorter = False
     _repr = None
     _n, _id, _idc, _sid, _sidc, _etype = None, None, None, None, None, None
@@ -116,8 +124,9 @@ class Hosh:
                 etype = "ordered"
             self.cells, self._id = cells_id_fromblob(content, etype, self.bytes, self.p)
         else:
-            raise WrongContent(f"No valid content provided: {content}\n"
-                               f"It should be a bytes object to be hashed or a list of ints.")
+            raise WrongContent(
+                f"No valid content provided: {content}\n" f"It should be a bytes object to be hashed or a list of ints."
+            )
 
     @property
     def etype(self):
@@ -340,7 +349,7 @@ class Hosh:
     #         self._bits = bin(self.n)[2:].rjust(256, "0")
     #     return self._bits
 
-    def __mul__(self, other: Union['Hosh', str, bytes, int]):
+    def __mul__(self, other: Union["Hosh", str, bytes, int]):
         return Hosh(cellsmul(self.cells, self.convert(other).cells, self.p), version=self.version)
 
     def __invert__(self):
@@ -418,8 +427,9 @@ class Hosh:
         elif isinstance(other, list):
             other = Hosh(other, version=self.version)
         elif not isinstance(other, Hosh):
-            raise WrongOperands(id(self.__class__), id(other.__class__),
-                                f"Cannot convert {type(other)} to {type(self)}.")
+            raise WrongOperands(
+                id(self.__class__), id(other.__class__), f"Cannot convert {type(other)} to {type(self)}."
+            )
         if self.version != other.version:
             raise WrongVersion(f"Incompatible operands: {self.version} != {other.version}")
         return other
@@ -444,5 +454,10 @@ class Hosh:
         if version == "UT32.4":
             return 4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24
         elif version == "UT64.4":
-            return 18446744073709551557, 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249, 64, 48
+            return (
+                18446744073709551557,
+                39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249,
+                64,
+                48,
+            )
         raise WrongVersion("Unknown version:", version)

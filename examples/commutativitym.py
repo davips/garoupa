@@ -8,14 +8,18 @@ from garoupa.algebra.matrix.m8bit import M8bit
 def traverse(G):
     i, count = G.order, G.order
     for idx, a in enumerate(G.sorted()):
-        for b in list(G.sorted())[idx + 1:]:
+        for b in list(G.sorted())[idx + 1 :]:
             if a * b == b * a:
                 count += 2
             i += 2
-    print(f"|{G}| = ".rjust(20, ' '),
-          f"{G.order}:".ljust(10, ' '),
-          f"{count}/{i}:".rjust(15, ' '), f"  {G.bits} bits",
-          f"\t{100 * count / i} %", sep="")
+    print(
+        f"|{G}| = ".rjust(20, " "),
+        f"{G.order}:".ljust(10, " "),
+        f"{count}/{i}:".rjust(15, " "),
+        f"  {G.bits} bits",
+        f"\t{100 * count / i} %",
+        sep="",
+    )
 
 
 M1_4 = map(M, range(1, 5))
@@ -25,10 +29,14 @@ for G in chain(M1_4):
 
 for G in map(M, range(5, 9)):
     for comms, pairs in G.sampled_commuting_freq(pairs=10000, runs=2):
-        print(f"|{G}| = ".rjust(20, ' '),
-              f"{G.order}:".ljust(10, ' '),
-              f"{comms}/{pairs}:".rjust(15, ' '), f"  {G.bits} bits",
-              f"\t{100 * comms / pairs} %", sep="")
+        print(
+            f"|{G}| = ".rjust(20, " "),
+            f"{G.order}:".ljust(10, " "),
+            f"{comms}/{pairs}:".rjust(15, " "),
+            f"  {G.bits} bits",
+            f"\t{100 * comms / pairs} %",
+            sep="",
+        )
 # ...
 
 # Other, longer, results.

@@ -23,6 +23,7 @@
 
 They help writing complete tests."""
 
+
 class CellValueTooHigh(Exception):
     pass
 

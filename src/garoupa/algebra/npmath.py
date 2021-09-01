@@ -1,20 +1,20 @@
 #  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
-# 
+#
 #  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU General Public License
 #  along with garoupa.  If not, see <http://www.gnu.org/licenses/>.
-# 
+#
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
@@ -157,7 +157,7 @@ def bytes2bm(bs):
 
 
 def int2bm(n):
-    return bytes2bm(n.to_bytes(16, byteorder='big'))
+    return bytes2bm(n.to_bytes(16, byteorder="big"))
 
 
 def bmm(a, b, mod):
@@ -258,7 +258,7 @@ def bm2intl(m, bits):
     b = bits - 1
     for i in range(l - 1):
         for j in range(i + 1, l):
-            n += (int(m[i, j]) << b)
+            n += int(m[i, j]) << b
             b -= 1
     return n
 
@@ -309,6 +309,7 @@ def m2intl(m, o):
 #########################################
 #########################################
 #########################################
+
 
 def m4m(a, b, mod):
     """unitriangular matrix (modulo) multiplication"""

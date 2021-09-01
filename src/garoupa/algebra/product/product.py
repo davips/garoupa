@@ -163,9 +163,16 @@ class Product(Group):
             histb = compact(histb, binsizeb)
             hist = self.order_hist_mul(hista, histb)
             prod = f"{ga}*{gb}"
-            print("Pi:", self._pi_core(hist), f"\tHist size: {len(hist)}\t",
-                  show_timestamp and datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
-                  f"\t{prod}", binsizea, binsizeb, flush=True)
+            print(
+                "Pi:",
+                self._pi_core(hist),
+                f"\tHist size: {len(hist)}\t",
+                show_timestamp and datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                f"\t{prod}",
+                binsizea,
+                binsizeb,
+                flush=True,
+            )
             return prod, hist
 
         return dict(sorted(reduce(mul, hists())[1].items()))

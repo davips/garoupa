@@ -27,7 +27,7 @@ from .hosh import Hosh as H
 from .misc.helper import Helper
 
 __pdoc__ = {
-    'hosh': False,
+    "hosh": False,
 }
 
 Hosh = H

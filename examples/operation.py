@@ -32,4 +32,3 @@ print(f"{a * b} != {b * a}")
 # Hosh multiplication is associative.
 print(f"{a * (b * c)} = {(a * b) * c}")
 # ...
-

@@ -35,7 +35,7 @@ from garoupa.algebra.abs.element import Element
 
 
 class Group:
-    _commuting_pairs, _comparisons, _interrupt = Value('i', 0), Value('i', 0), Value('i', 0)
+    _commuting_pairs, _comparisons, _interrupt = Value("i", 0), Value("i", 0), Value("i", 0)
     _mutex = Lock()
     _euler, _order_hist, _pi = None, None, None
 
@@ -65,7 +65,7 @@ class Group:
             with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
                 comms = Group._commuting_pairs.value
                 n = Group._comparisons.value
-                for a, b in Bar('Processing', max=pairs).iter(islice(zip(A, B), 0, pairs)):
+                for a, b in Bar("Processing", max=pairs).iter(islice(zip(A, B), 0, pairs)):
                     if a * b == b * a:
                         if exitonhit:
                             with Group._interrupt.get_lock():
@@ -95,8 +95,9 @@ class Group:
 
     @property
     def comm_degree(self):
-        raise Exception(f"Not implemented for groups from class {self.name}."
-                        "HINT: Use sampled_comm_degree()", self.name)
+        raise Exception(
+            f"Not implemented for groups from class {self.name}." "HINT: Use sampled_comm_degree()", self.name
+        )
 
     def __iter__(self):
         raise Exception("Not implemented for groups of the class", self.name)
@@ -149,7 +150,8 @@ class Group:
         last_total, previous = -1, 0
         import pathos.multiprocessing as mp
         from progress.bar import Bar
-        with Bar('Processing', max=sample, suffix='%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds') as bar:
+
+        with Bar("Processing", max=sample, suffix="%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds") as bar:
             for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
                 bar.next()
                 now = bar.elapsed + 1
@@ -171,10 +173,12 @@ class Group:
 
     def __mul__(self, other):
         from garoupa.algebra.product import Product
+
         return Product(self, other)
 
     def __xor__(self, other):
         from garoupa.algebra.product import Product
+
         return Product(*repeat(self, other))
 
     __pow__ = __xor__

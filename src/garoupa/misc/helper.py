@@ -30,6 +30,7 @@ class Helper:
     """Internal use only.
 
     Not to be directly instantiated."""
+
     version: str
 
     def __call__(self, blob, etype="ordered"):
