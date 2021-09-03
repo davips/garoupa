@@ -20,9 +20,6 @@
 #  part of this work is illegal and unethical regarding the effort and
 #  time spent here.
 
-import re
-import unicodedata
-
 from bigfloat import *
 from sympy import isprime
 
@@ -62,98 +59,106 @@ def enc2(num):
     return encoded.rjust(32, "h")
 
 
-# for b, digits in [[124, 32], [252, 64], [156, 32]]:
-#     with precision(150):
-#         bb = b + 4
-#         base = 64
-#         n = pow(2 ** bb, 1 / 4)
-#         for i in range(int(n) - 100, 2 ** 300):
-#             if isprime(i):
-#                 p = i
-#                 hibase_digits = digits
-#                 lobase_digits = digits - 1
-#                 g = log(p ** 6) / log(2)
-#
-#                 # representáveis
-#                 comutantes = p ** 4
-#                 naocomutantes = base ** hibase_digits
-#                 tot = naocomutantes + comutantes
-#                 gmx = log(tot) / log(2)
-#
-#                 # print(p, g / gmx, g, gmx)
-#                 if gmx < g:
-#                     p = pold
-#                     g = gold
-#                     gmax = gmaxold
-#                     print()
-#                     print(b, int(p), f"base-{base}")
-#                     print("Z", log(p) / log(2), p / p ** 4, p ** 4 / p ** 6)
-#                     print("H", log(p ** 4) / log(2))
-#                     print("G", g)
-#                     print("Gmax", gmx)
-#                     print("com", log(comutantes) / log(2))
-#                     print("ncom", log(naocomutantes) / log(2))
-#                     print(gmx >= g)
-#                     break
-#                 pold = p
-#                 gold = g
-#                 gmaxold = gmx
-#                 print("vale:", p, g / gmx)
-#
-#         # mesclando alfabetos
-#         print()
-#         print("0" * digits)
-#         print("0" * (digits - 2) + "--", (enc(p - 1, a64) + "--").rjust(digits, "0"))
-#         print("0" * (digits - 2) + "1-", enc(2 ** b - 1, a16) + "-")
-#         print(enc(2 ** b - 1, a16) + "-", enc(p ** 4 - 1, aa).rjust(digits - 1, "0") + "-")
-#         print(("0" * (digits - 1)) + "1", enc(p ** 6 - 1 - p ** 4, a64).rjust(digits, "0"))
-#         e1 = 3
-#         e2 = digits - e1 - 1
-#         take = 46
-#         mixed = take ** e1 * 16 ** e2
-#         print("p**4-p = \t", log(p ** 4 - p) / log(2))
-#         print(f"{take}^{e1}*16^{e2}\t", log(mixed) / log(2))
-#         if e1 == 0:
-#             print("ffff..ff-  \t", log(dec(e2 * "f", a16)) / log(2))
-#         elif e2 == 0:
-#             print("ffff..ff-  \t", log(dec(e1 * "f", a64[:take])) / log(2))
-#         else:
-#             print("ffff..ff-  \t", log(dec(e1 * "f", a64[:take]) * dec(e2 * "f", a16)) / log(2))
-#
-#         # favorecendo  hexdigest tanto em 'com' como em 'noncom'
-#         e1 = 3
-#         e2 = digits - e1 - 1
-#         take = 46
-#         mixed = take ** e1 * 16 ** e2
-#         rest, z1 = p ** 6, 2 ** (bb // 4 - 4)
-#         print()
-#         print("0" * digits)
-#         print("-" + "0" * (digits - 1), "-" + (enc(z1 - 1, a16)).rjust(digits - 1, "0"))
-#         rest -= z1
-#         z2 = p - z1
-#         print("--" + "0" * (digits - 3) + "1", "--" + (enc(z2, a64)).rjust(digits - 2, "0"))
-#         rest -= z2
-#         h1 = 2 ** b - p
-#         """
-#         parei aqui
-#         dúvida: H\Z idealmente teria 128 bits (ou 124), mas isso pede G com 384 que requer 64*base64
-#         única solução:
-#
-#         """
-#         print("0" * (digits - 2) + "1-", (enc(h1, a16) + "-").rjust(digits, "0"))
-#         print()
-#         print("0" * (digits - 2) + "1-", enc(2 ** b - 1, a16) + "-")
-#         print(enc(2 ** b - 1, a16) + "-", enc(p ** 4 - 1, a64).rjust(digits - 1, "0") + "-")
-#         print(("0" * (digits - 1)) + "1", enc(p ** 6 - 1 - p ** 4, a64).rjust(digits, "0"))
-#         print("p**4-p = \t", log(p ** 4 - p) / log(2))
-#         print(f"{take}^{e1}*16^{e2}\t", log(mixed) / log(2))
-#         if e1 == 0:
-#             print("ffff..ff-  \t", log(dec(e2 * "f", a16)) / log(2))
-#         elif e2 == 0:
-#             print("ffff..ff-  \t", log(dec(e1 * "f", a64[:take])) / log(2))
-#         else:
-#             print("ffff..ff-  \t", log(dec(e1 * "f", a64[:take]) * dec(e2 * "f", a16)) / log(2))
-#         exit()
+for b, digits in [[156, 40]]:  # , [124, 32], [252, 64], [156, 32]]:
+    with precision(150):
+        bb = b + 4
+        base = 64
+        n = pow(2 ** bb, 1 / 4)
+        for i in range(int(n) - 100, 2 ** 300):
+            if isprime(i):
+                p = i
+                hibase_digits = digits
+                lobase_digits = digits - 1
+                g = log(p ** 6) / log(2)
+
+                # representáveis
+                comutantes = p ** 4
+                naocomutantes = base ** hibase_digits
+                tot = naocomutantes + comutantes
+                gmx = log(tot) / log(2)
+
+                # print(p, g / gmx, g, gmx)
+                if gmx < g:
+                    p = pold
+                    g = gold
+                    gmax = gmaxold
+                    print()
+                    print(b, int(p), f"base-{base}")
+                    print("Z", log(p) / log(2), p / p ** 4, p ** 4 / p ** 6)
+                    print("H", log(p ** 4) / log(2))
+                    print("G", g)
+                    print("Gmax", gmx)
+                    print("com", log(comutantes) / log(2))
+                    print("ncom", log(naocomutantes) / log(2))
+                    print(gmx >= g)
+                    break
+                pold = p
+                gold = g
+                gmaxold = gmx
+                # print("vale:", p, g / gmx)
+        #
+        #         # mesclando alfabetos
+        #         print()
+        #         print("0" * digits)
+        #         print("0" * (digits - 2) + "--", (enc(p - 1, a64) + "--").rjust(digits, "0"))
+        #         print("0" * (digits - 2) + "1-", enc(2 ** b - 1, a16) + "-")
+        #         print(enc(2 ** b - 1, a16) + "-", enc(p ** 4 - 1, aa).rjust(digits - 1, "0") + "-")
+        #         print(("0" * (digits - 1)) + "1", enc(p ** 6 - 1 - p ** 4, a64).rjust(digits, "0"))
+        #         e1 = 3
+        #         e2 = digits - e1 - 1
+        #         take = 46
+        #         mixed = take ** e1 * 16 ** e2
+        #         print("p**4-p = \t", log(p ** 4 - p) / log(2))
+        #         print(f"{take}^{e1}*16^{e2}\t", log(mixed) / log(2))
+        #         if e1 == 0:
+        #             print("ffff..ff-  \t", log(dec(e2 * "f", a16)) / log(2))
+        #         elif e2 == 0:
+        #             print("ffff..ff-  \t", log(dec(e1 * "f", a64[:take])) / log(2))
+        #         else:
+        #             print("ffff..ff-  \t", log(dec(e1 * "f", a64[:take]) * dec(e2 * "f", a16)) / log(2))
+        #
+        #         # favorecendo  hexdigest tanto em 'com' como em 'noncom'
+        # 160 bits
+        nn = dec("f" * 37, a16) * (16 * 64 + 16)
+        print(log(nn + p) / log(2))
+        mm = dec("f" * 37, a16) * 64 ** 2
+        print(nn / p ** 4, mm / p ** 4)
+        res, rem = divmod(p + p ** 4, 64 ** 2)
+        print(enc(res, a64) + "_" + enc(rem, a16))
+        exit()
+        e1 = 0
+        e2 = digits - e1 - 1
+        take = 46
+        mixed = take ** e1 * 16 ** e2
+        rest, z1 = p ** 6, 2 ** (bb // 4 - 4)
+        print()
+        print("0" * digits)
+        print("-" + "0" * (digits - 1), "-" + (enc(z1 - 1, a16)).rjust(digits - 1, "0"))
+        rest -= z1
+        z2 = p - z1
+        print("--" + "0" * (digits - 3) + "1", "--" + (enc(z2, a64)).rjust(digits - 2, "0"))
+        rest -= z2
+        h1 = 2 ** b - p
+        #         """
+        #         parei aqui
+        #         dúvida: H\Z idealmente teria 128 bits (ou 124), mas isso pede G com 384 que requer 64*base64
+        #         única solução:
+        #
+        #         """
+        print("0" * (digits - 2) + "1-", (enc(h1, a16) + "-").rjust(digits, "0"))
+        print()
+        print("0" * (digits - 2) + "1-", enc(2 ** b - 1, a16) + "-")
+        print(enc(2 ** b - 1, a16) + "-", enc(p ** 4 - 1, a64).rjust(digits - 1, "0") + "-")
+        print(("0" * (digits - 1)) + "1", enc(p ** 6 - 1 - p ** 4, a64).rjust(digits, "0"))
+        print("p**4-p = \t", log(p ** 4 - p) / log(2))
+        print(f"{take}^{e1}*16^{e2}\t", log(mixed) / log(2))
+        if e1 == 0:
+            print("ffff..ff-  \t", log(dec(e2 * "f", a16)) / log(2))
+        elif e2 == 0:
+            print("ffff..ff-  \t", log(dec(e1 * "f", a64[:take])) / log(2))
+        else:
+            print("ffff..ff-  \t", log(dec(e1 * "f", a64[:take]) * dec(e2 * "f", a16)) / log(2))
+        exit()
 
 """
 comuta      0       -> 2^124-1  -0000000000000000000000000000000 -> -fffffffffffffffffffffffffffffff
@@ -222,50 +227,51 @@ H 255.99999999999999958518917734321         G 376.56863289726056389874440898481
 # èéêëìíîïðñòóôõö
 # ùúûüý
 
-with precision(220):
-    p = 18446744073709551557
-    p = 4294967291
-    print()
-    ba = 16
-    print(f"b{ba}:", 3 * ba ** 31 > p ** 4, p ** 4 > dec(31 * "f", a64[:ba]))
-    print(f"b{ba}:", (ba ** 31 + 20 ** 30) / p ** 4, p ** 4 > dec(31 * "f", a64[:ba]))
-    print(f"b{ba}:", sum(64 * ba ** i for i in range(30, 1, -1)) * 4 / p ** 4, p ** 4 > dec(31 * "f", a64[:ba]))
-    # print(f"b{ba} digits needed to H:", log(p ** 4) / log(ba), f"p={p}", dec(31 * "f", a64[:ba]) < p ** 4)
-    # print("b64  digits needed to G\H:", log(p ** 6 - p ** 4) / log(64), f"p={p}")
-    # print("b422 digits needed to G\H:", log(p ** 6 - p ** 4) / log(422), f"p={p}")
-    # print(16 ** 29 * 64 ** 2 / p ** 4, p / p ** 4)
-    # print()
-    # print(enc(p ** 4, a16))
-    print(log(((64 ** 64) ** (1 / 6)) ** 4) / log(2))
-    print(enc(p - 1, a64[:16]))
-    print(enc(p ** 4 - 1 - 2**124, a64[16:36]), "___________________________")
-    print(enc(p ** 6 - 1 - p ** 4 +1, a64))
-    print(enc(p ** 4, a64))
-    print(dec("1111111111111111111111", a64) < p ** 4)
-    exit()
-
-    n = (2 ** 128) ** (1 / 4)
-    # n = (2 ** 256) ** (1 / 4)
-    for i in range(int(n), 2 ** 300):
-        if isprime(i):
-            p = i
-            break
-    print("p", p)
-    print("p", log(p ** 4) / log(2))
-    print("p", log(p ** 6 - p ** 4) / log(2), log(65 ** 63 * 40) / log(2))  # 4294967311
-    # print("p", log(p ** 6 - p ** 4) / log(2), log(65 ** 63 * 40) / log(2))  # 18446744073709551629
-    # print("b65  digits needed to |G\H| / 40:", log((p ** 6 - p ** 4) / 40) / log(65), f"p={p}")
-    """
-    H: 00000000000000000000000000000000 -> ffffffffffffffffffffffffffffffff -> g000003c00000546000034bc0000c5c0
-    G: h0000000000000000000000000000000 -> Z_______________________________
-                                        -> h0000000000000000000000000000000 -> hfffffffffffffffffffffffffffffff (pseudo) 
-                                        -> h0000000000000000000000000000000 -> _BxIYmOj_s2FWe1dulyp5v9saqWyb7Dy (real) 
-    
-    ghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._  ~
-    """
-    print(9999999999999, enc(p ** 4 - 2 ** 256 - 1, a64[:16]))
-    print()
-    print(enc2(p ** 6 - p ** 4 - 1))
+# with precision(220):
+#     p = 18446744073709551557
+#     p = 1099511627689  # 40
+#     p = 4294967291
+#     print()
+#     ba = 16
+#     print(f"b{ba}:", 3 * ba ** 31 > p ** 4, p ** 4 > dec(31 * "f", a64[:ba]))
+#     print(f"b{ba}:", (ba ** 31 + 20 ** 30) / p ** 4, p ** 4 > dec(31 * "f", a64[:ba]))
+#     print(f"b{ba}:", sum(64 * ba ** i for i in range(30, 1, -1)) * 4 / p ** 4, p ** 4 > dec(31 * "f", a64[:ba]))
+#     # print(f"b{ba} digits needed to H:", log(p ** 4) / log(ba), f"p={p}", dec(31 * "f", a64[:ba]) < p ** 4)
+#     # print("b64  digits needed to G\H:", log(p ** 6 - p ** 4) / log(64), f"p={p}")
+#     # print("b422 digits needed to G\H:", log(p ** 6 - p ** 4) / log(422), f"p={p}")
+#     # print(16 ** 29 * 64 ** 2 / p ** 4, p / p ** 4)
+#     # print()
+#     # print(enc(p ** 4, a16))
+#     print(log(((64 ** 64) ** (1 / 6)) ** 4) / log(2))
+#     print(enc(p - 1, a64[:16]))
+#     print(enc(p ** 4 - 1 - 2 ** 124, a64[16:36]), "___________________________")
+#     print(enc(p ** 6 - 1 - p ** 4 + 1, a64))
+#     print(enc(p ** 4, a64))
+#     print(dec("1111111111111111111111", a64) < p ** 4)
+#     exit()
+#
+#     n = (2 ** 128) ** (1 / 4)
+#     # n = (2 ** 256) ** (1 / 4)
+#     for i in range(int(n), 2 ** 300):
+#         if isprime(i):
+#             p = i
+#             break
+#     print("p", p)
+#     print("p", log(p ** 4) / log(2))
+#     print("p", log(p ** 6 - p ** 4) / log(2), log(65 ** 63 * 40) / log(2))  # 4294967311
+#     # print("p", log(p ** 6 - p ** 4) / log(2), log(65 ** 63 * 40) / log(2))  # 18446744073709551629
+#     # print("b65  digits needed to |G\H| / 40:", log((p ** 6 - p ** 4) / 40) / log(65), f"p={p}")
+#     """
+#     H: 00000000000000000000000000000000 -> ffffffffffffffffffffffffffffffff -> g000003c00000546000034bc0000c5c0
+#     G: h0000000000000000000000000000000 -> Z_______________________________
+#                                         -> h0000000000000000000000000000000 -> hfffffffffffffffffffffffffffffff (pseudo)
+#                                         -> h0000000000000000000000000000000 -> _BxIYmOj_s2FWe1dulyp5v9saqWyb7Dy (real)
+#
+#     ghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._  ~
+#     """
+#     print(9999999999999, enc(p ** 4 - 2 ** 256 - 1, a64[:16]))
+#     print()
+#     print(enc2(p ** 6 - p ** 4 - 1))
 
 # all = "".join(re.findall(r"\w+", "".join(chr(i) for i in range(600)
 #                                          if chr(i).isalnum()

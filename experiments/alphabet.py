@@ -249,4 +249,4 @@ with precision(200):
 # ø
 # ùúûüý
 # þ
-print(ord("º", ))
+# print(ord("º", ))
