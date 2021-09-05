@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
 # GaROUPa - Identification based on group theory
-GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) provides a reference implementation for the UT32.4/UT64.4 specification.  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
+GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) provides a reference implementation for the UT40.4 specification (among other versions).  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
 :-------------------------:|:-------------------------:
 <!--- [arXiv paper](xxxxxx) --->
 
@@ -33,7 +33,8 @@ This is how they affect each other:
 ![img_4.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_4.png)
 
 The chance of collision is determined by the number of possible identifiers of each type.
-Two versions are provided: UT32.4 and UT64.4 They can be easily implemented in other languages and are 
+Some versions are provided, e.g.: UT32.4, UT40.4 (default), UT64.4.
+They can be easily implemented in other languages and are 
 intended to be a specification on how to identify multi-valued objects and multi-step processes.
 Unordered ids use a very narrow range of the total number of identifiers because they are not very useful.
 One use could be the embedding of  authorship or other metadata to an object without worrying about the timing, 
@@ -91,7 +92,7 @@ b = Hosh(content=b"Some other binary content. Might be, e.g., an action or anoth
 c = a * b
 print(f"{a} * {b} = {c}")
 """
-4waH5WQxE4ZcYGH8ONu95Qn1N9os9GC8 * 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = 4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1
+8CG9so9N1nQ59uNO8HGYcZ4ExQW5Haw4mErvw8m8 * 7N-L-10JS-H5DN0-BXW2e5ENWFQFVWswyz39t8s9 = z3EgxfisgqbNXBd0eqDuFiaTblBLA5ZAUbvEZgOh
 """
 ```
 
@@ -100,8 +101,8 @@ print(~b)
 # Multiplication can be reverted by the inverse hosh. Zero is the identity hosh.
 print(f"{b} * {~b} = {b * ~b} = 0")
 """
-.z56eXm5eJOc9T3QfLhn7JDZs0QqfvOd
-0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 * .z56eXm5eJOc9T3QfLhn7JDZs0QqfvOd = 00000000000000000000000000000000 = 0
+Q6OjmYZSJ8pB3ogBVMKBOxVp-oZ80czvtUrSyTzS
+7N-L-10JS-H5DN0-BXW2e5ENWFQFVWswyz39t8s9 * Q6OjmYZSJ8pB3ogBVMKBOxVp-oZ80czvtUrSyTzS = 0000000000000000000000000000000000000000 = 0
 """
 ```
 
@@ -109,7 +110,7 @@ print(f"{b} * {~b} = {b * ~b} = 0")
 
 print(f"{b} * {ø} = {b * ø} = b")
 """
-0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 * 00000000000000000000000000000000 = 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = b
+7N-L-10JS-H5DN0-BXW2e5ENWFQFVWswyz39t8s9 * 0000000000000000000000000000000000000000 = 7N-L-10JS-H5DN0-BXW2e5ENWFQFVWswyz39t8s9 = b
 """
 ```
 
@@ -117,7 +118,7 @@ print(f"{b} * {ø} = {b * ø} = b")
 
 print(f"{c} * {~b} = {c * ~b} = {a} = a")
 """
-4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 * .z56eXm5eJOc9T3QfLhn7JDZs0QqfvOd = 4waH5WQxE4ZcYGH8ONu95Qn1N9os9GC8 = 4waH5WQxE4ZcYGH8ONu95Qn1N9os9GC8 = a
+z3EgxfisgqbNXBd0eqDuFiaTblBLA5ZAUbvEZgOh * Q6OjmYZSJ8pB3ogBVMKBOxVp-oZ80czvtUrSyTzS = 8CG9so9N1nQ59uNO8HGYcZ4ExQW5Haw4mErvw8m8 = 8CG9so9N1nQ59uNO8HGYcZ4ExQW5Haw4mErvw8m8 = a
 """
 ```
 
@@ -125,7 +126,7 @@ print(f"{c} * {~b} = {c * ~b} = {a} = a")
 
 print(f"{~a} * {c} = {~a * c} = {b} = b")
 """
-XvRkORbuogT-jPonP0LC4AdFvLfEZpQA * 4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 = 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = b
+RNvSdLI-5RiBBGL8NekctiQofWUIeYvXFP3wvTFT * z3EgxfisgqbNXBd0eqDuFiaTblBLA5ZAUbvEZgOh = 7N-L-10JS-H5DN0-BXW2e5ENWFQFVWswyz39t8s9 = 7N-L-10JS-H5DN0-BXW2e5ENWFQFVWswyz39t8s9 = b
 """
 ```
 
@@ -134,7 +135,7 @@ XvRkORbuogT-jPonP0LC4AdFvLfEZpQA * 4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 = 0sWVFQFWNE
 # Division is shorthand for reversion.
 print(f"{c} / {b} = {c / b} = a")
 """
-4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 / 0sWVFQFWNE5e2WXB-0ND5H-SJ01-L-N7 = 4waH5WQxE4ZcYGH8ONu95Qn1N9os9GC8 = a
+z3EgxfisgqbNXBd0eqDuFiaTblBLA5ZAUbvEZgOh / 7N-L-10JS-H5DN0-BXW2e5ENWFQFVWswyz39t8s9 = 8CG9so9N1nQ59uNO8HGYcZ4ExQW5Haw4mErvw8m8 = a
 """
 ```
 
@@ -143,7 +144,7 @@ print(f"{c} / {b} = {c / b} = a")
 # Hosh multiplication is not expected to be commutative.
 print(f"{a * b} != {b * a}")
 """
-4Z5ALLuspJ1.LCfAm-dn6jUOJo1nJvK1 != 4Z5ALLuspJ3DwvjmhSToHKD3jVKpyp.C
+z3EgxfisgqbNXBd0eqDuFiaTblBLA5ZAUbvEZgOh != wwSd0LaGvuV0W-yEOfgB-yVBMlNLA5ZAUbvEZgOh
 """
 ```
 
@@ -152,13 +153,8 @@ print(f"{a * b} != {b * a}")
 # Hosh multiplication is associative.
 print(f"{a * (b * c)} = {(a * b) * c}")
 """
-9Wb9veYUPrJmdnVfELfNLbNajWUpp50W = 9Wb9veYUPrJmdnVfELfNLbNajWUpp50W
+RuTcC4ZIr0Y1QLzYmytPRc087a8cbbW9Nj-gXxAz = RuTcC4ZIr0Y1QLzYmytPRc087a8cbbW9Nj-gXxAz
 """
-```
-
-```python3
-
-
 ```
 
 
@@ -199,11 +195,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[0, 1, 3, 2], 1, dr2»	*	«[3, 1, 0, 2], 2, ds1»	=	«[2, 1, 0, 3], 3, ds3»
-«[1, 2, 0, 3], 1, ds5»	*	«[1, 2, 0, 3], 1, dr7»	=	«[2, 0, 1, 3], 2, ds2»
-«[3, 0, 1, 2], 2, ds1»	*	«[2, 0, 3, 1], 2, ds7»	=	«[1, 3, 2, 0], 4, dr2»
-«[1, 0, 2, 3], 1, dr6»	*	«[3, 2, 0, 1], 0, ds0»	=	«[3, 2, 1, 0], 1, ds2»
-«[3, 2, 0, 1], 0, ds6»	*	«[1, 0, 3, 2], 1, dr4»	=	«[2, 3, 1, 0], 1, ds2»
+«[3, 0, 1, 2], 3, ds2»	*	«[1, 0, 3, 2], 1, dr0»	=	«[0, 3, 2, 1], 4, ds2»
+«[0, 3, 1, 2], 0, dr7»	*	«[0, 1, 3, 2], 3, dr7»	=	«[0, 3, 2, 1], 3, dr2»
+«[2, 0, 3, 1], 2, dr0»	*	«[0, 3, 1, 2], 1, ds3»	=	«[2, 1, 0, 3], 3, ds3»
+«[1, 0, 2, 3], 2, ds4»	*	«[1, 0, 3, 2], 0, dr7»	=	«[0, 1, 3, 2], 2, ds1»
+«[0, 3, 1, 2], 1, ds2»	*	«[0, 1, 2, 3], 0, ds4»	=	«[0, 3, 1, 2], 1, dr2»
 """
 ```
 
@@ -213,7 +209,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[4, 3, 6, 9, 10, 1, 5, 2, 7, 0, 11, 8]
+[4, 6, 1, 7, 8, 2, 0, 11, 10, 5, 3, 9]
 """
 ```
 
@@ -273,14 +269,18 @@ from garoupa.algebra.matrix.m import M
 def traverse(G):
     i, count = G.order, G.order
     for idx, a in enumerate(G.sorted()):
-        for b in list(G.sorted())[idx + 1:]:
+        for b in list(G.sorted())[idx + 1 :]:
             if a * b == b * a:
                 count += 2
             i += 2
-    print(f"|{G}| = ".rjust(20, ' '),
-          f"{G.order}:".ljust(10, ' '),
-          f"{count}/{i}:".rjust(15, ' '), f"  {G.bits} bits",
-          f"\t{100 * count / i} %", sep="")
+    print(
+        f"|{G}| = ".rjust(20, " "),
+        f"{G.order}:".ljust(10, " "),
+        f"{count}/{i}:".rjust(15, " "),
+        f"  {G.bits} bits",
+        f"\t{100 * count / i} %",
+        sep="",
+    )
 
 
 # Dihedral
@@ -321,15 +321,19 @@ for G in Gs:
         if i >= 10_000:
             break
         i += 1
-    print(f"|{G}| = ".rjust(20, ' '),
-          f"{G.order}:".ljust(10, ' '),
-          f"{count}/{i}:".rjust(15, ' '), f"  {G.bits} bits",
-          f"\t~{100 * count / i} %", sep="")
+    print(
+        f"|{G}| = ".rjust(20, " "),
+        f"{G.order}:".ljust(10, " "),
+        f"{count}/{i}:".rjust(15, " "),
+        f"  {G.bits} bits",
+        f"\t~{100 * count / i} %",
+        sep="",
+    )
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          825/10000:  12.0 bits	~8.25 %
-    |D8×D8×D8×D8| = 65536:         360/10000:  16.0 bits	~3.6 %
- |D8×D8×D8×D8×D8| = 1048576:       158/10000:  20.0 bits	~1.58 %
+       |D8×D8×D8| = 4096:          851/10000:  12.0 bits	~8.51 %
+    |D8×D8×D8×D8| = 65536:         370/10000:  16.0 bits	~3.7 %
+ |D8×D8×D8×D8×D8| = 1048576:       154/10000:  20.0 bits	~1.54 %
 """
 ```
 
@@ -407,15 +411,20 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
     if (inf, inf) in hist:
         del hist[(inf, inf)]
     hist = {int((k[0] + k[1]) / 2): v for k, v in hist.items()}
-    print(f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
-          G, G._pi_core(hist), datetime.now().strftime("%d/%m/%Y %H:%M:%S"), flush=True)
+    print(
+        f"\nbits: {log(G.order, 2):.2f}  Pc: {G.comm_degree or -1:.2e}   a^<{limit}=0: {bad}/{tot} = {bad / tot:.2e}",
+        G,
+        G._pi_core(hist),
+        datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+        flush=True,
+    )
 # * -> [Explicit FOR due to autogeneration of README through eval]
 """
 21.376617194973697 bits   Pc: 0.004113533525298232  order: 2722720 D5×D7×D11×D13×D17
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 31/08/2021 18:30:19
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 05/09/2021 03:32:51
 """
 ```
 
