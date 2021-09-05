@@ -46,7 +46,16 @@ since the order is not relevant when the consumer process looks up for keys, not
 Converselly, a chain of a data processing functions usually implies one step is dependent on the result of the previous step.
 This makes ordered ids the perfect fit to identify functions (and also their composition, as a consequence).
 
+### Relationships can also be represented
+Here is another possible use. ORCIDs are managed unique identifiers for researchers.
+They can be directly used as digests to create operable identifiers.
+We recommend the use of 40 digits to allow operations with SHA-1 hashes. 
+They are common in version control repositories among other uses.
+![img_orcid.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_orcid.png)
 
+Unordered relationships are represented by hybrid ids.
+Automatic transparent conversion between ORCID dashes by a hexdecimal character can be implemented in the future if needed.
+![img_orcid-comm.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_orcid-comm.png)
 
 ## More info
 <!--- [arXiv paper](xxxxxx) --->
@@ -194,11 +203,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[0, 1, 2, 3], 2, dr1»	*	«[3, 1, 0, 2], 2, dr3»	=	«[3, 1, 0, 2], 4, dr0»
-«[0, 1, 3, 2], 3, dr2»	*	«[3, 0, 1, 2], 0, dr4»	=	«[2, 0, 1, 3], 3, dr2»
-«[1, 3, 0, 2], 3, dr5»	*	«[1, 0, 2, 3], 3, dr5»	=	«[3, 1, 0, 2], 1, dr2»
-«[2, 1, 0, 3], 3, dr7»	*	«[1, 2, 0, 3], 3, dr0»	=	«[1, 0, 2, 3], 1, dr3»
-«[1, 3, 0, 2], 1, dr7»	*	«[2, 0, 1, 3], 3, dr4»	=	«[0, 1, 3, 2], 4, dr3»
+«[0, 3, 1, 2], 1, ds3»	*	«[2, 1, 0, 3], 0, ds5»	=	«[1, 3, 0, 2], 1, dr2»
+«[2, 0, 1, 3], 1, ds6»	*	«[3, 1, 0, 2], 3, ds6»	=	«[3, 0, 2, 1], 4, dr0»
+«[1, 0, 3, 2], 0, ds3»	*	«[1, 0, 3, 2], 1, dr1»	=	«[0, 1, 2, 3], 1, ds2»
+«[1, 2, 0, 3], 3, ds2»	*	«[0, 1, 3, 2], 3, ds4»	=	«[1, 2, 3, 0], 1, dr2»
+«[2, 3, 0, 1], 0, dr1»	*	«[0, 1, 3, 2], 3, ds6»	=	«[2, 3, 1, 0], 3, ds3»
 """
 ```
 
@@ -208,7 +217,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[11, 6, 1, 5, 7, 4, 9, 0, 3, 2, 10, 8]
+[9, 4, 7, 0, 10, 11, 5, 6, 3, 8, 1, 2]
 """
 ```
 
@@ -330,9 +339,9 @@ for G in Gs:
     )
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          838/10000:  12.0 bits	~8.38 %
-    |D8×D8×D8×D8| = 65536:         362/10000:  16.0 bits	~3.62 %
- |D8×D8×D8×D8×D8| = 1048576:       165/10000:  20.0 bits	~1.65 %
+       |D8×D8×D8| = 4096:          880/10000:  12.0 bits	~8.8 %
+    |D8×D8×D8×D8| = 65536:         359/10000:  16.0 bits	~3.59 %
+ |D8×D8×D8×D8×D8| = 1048576:       151/10000:  20.0 bits	~1.51 %
 """
 ```
 
@@ -423,7 +432,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 05/09/2021 04:42:29
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 05/09/2021 18:02:54
 """
 ```
 

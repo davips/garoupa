@@ -51,10 +51,11 @@ Here is another possible use. ORCIDs are managed unique identifiers for research
 They can be directly used as digests to create operable identifiers.
 We recommend the use of 40 digits to allow operations with SHA-1 hashes. 
 They are common in version control repositories among other uses.
-![img_orcid.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_orcid.png) | .
+![img_orcid.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_orcid.png)
 
 Unordered relationships are represented by hybrid ids.
-![img_orcid.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_orcid-comm.png) | .
+Automatic transparent conversion between ORCID dashes by a hexdecimal character can be implemented in the future if needed.
+![img_orcid-comm.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_orcid-comm.png)
 
 ## More info
 <!--- [arXiv paper](xxxxxx) --->

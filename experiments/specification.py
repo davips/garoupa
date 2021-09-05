@@ -90,5 +90,6 @@ for digits in [16, 32, 40, 64]:
               f"{3 * digits // 4}, "
               f"\n\"{n2id(1, digits, p)}\", \"{n2id(p - 1, digits, p)}\","
               f"\n\"{n2id(p, digits, p)}\", \"{n2id(p ** 4 - 1, digits, p)}\","
-              f"\n\"{n2id(p ** 4, digits, p)}\", \"{n2id(p ** 6 - 1, digits, p)}\"),\n"
+              f"\n\"{n2id(p ** 4, digits, p)}\", \"{n2id(p ** 6 - 1, digits, p)}\")"
               )
+        print()
