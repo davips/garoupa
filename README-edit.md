@@ -46,6 +46,12 @@ since the order is not relevant when the consumer process looks up for keys, not
 Converselly, a chain of a data processing functions usually implies one step is dependent on the result of the previous step.
 This makes ordered ids the perfect fit to identify functions (and also their composition, as a consequence).
 
+### Relationships can also be represented
+Here is another possible use. ORCIDs are managed unique identifiers for researchers.
+They can be directly used as digests to create operable identifiers.
+We recommend the use of 40 digits to allow operations with SHA-1 hashes. 
+They are common in version control repositories among other uses. 
+![img.png](img.png)
 
 
 ## More info

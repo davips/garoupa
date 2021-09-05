@@ -23,6 +23,8 @@
 from bigfloat import *
 from sympy import isprime
 
+from garoupa.misc.encoding.base import n2id
+
 a16 = tuple("0123456789abcdef")
 a16up = tuple("ghijklmnopqrstuv")
 a63 = tuple("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_")
@@ -46,17 +48,16 @@ def enc(num, alphabet):
     return encoded
 
 
-# 5x5 is not a good choice due to:
-p = (16 ** 40) ** (1 / 10)
-print(log(p ** 6) / log(2), p)  # |H1|=2^96 for 5x5 40-digit (bad) p=65536
-p = (16 ** 64) ** (1 / 10)
-print(log(p ** 4) / log(2), p)  # |H|=2^102 for 5x5 64-digit (not good) p=50859008
-p = (16 ** 80) ** (1 / 10)
-print(log(p ** 4) / log(2), p)  # |H|=2^128 for 5x5 80-digit (almost good) p=4294967296
+# # 5x5 is not a good choice due to:
+# p = (16 ** 40) ** (1 / 10)
+# print(log(p ** 6) / log(2), p)  # |H1|=2^96 for 5x5 40-digit (bad) p=65536
+# p = (16 ** 64) ** (1 / 10)
+# print(log(p ** 4) / log(2), p)  # |H|=2^102 for 5x5 64-digit (not good) p=50859008
+# p = (16 ** 80) ** (1 / 10)
+# print(log(p ** 4) / log(2), p)  # |H|=2^128 for 5x5 80-digit (almost good) p=4294967296
 
 # 4x4 is the choice
 for digits in [16, 32, 40, 64]:
-    print(f"\nDigits: {digits}")
     with precision(60):
         n = pow(64 ** digits, 1 / 6)  # |H| is defined by max possible G
         p = None
@@ -79,15 +80,15 @@ for digits in [16, 32, 40, 64]:
         # print(pow(64, digits) / (p ** 6 - p ** 4), "<- representable / |G\\H|")
 
         # relevant digests
-        digits_b16 = digits // 4 - 1
-        res, rem = divmod(p - 1, 16 ** digits_b16)
-        # print(f"{enc(res, a16)}{enc(rem, a16).rjust(digits_b16, '0')}".ljust(digits, "_"))
+        digits_b16a = digits // 4 - 1
         digits_b16 = digits - 3
         res, rem = divmod(p ** 4 - p, 16 ** digits_b16)
-        print(f"Group({p}, "
+        print(f"{digits}: Group({p}, "
               f"{p ** 4}, "
               f"{p ** 6}, "
               f"{digits}, "
-              f"{3 * digits // 4}, \"" +
-              f"{enc(res, a64)}_{enc(rem, a16).rjust(digits_b16, '0')}".ljust(digits, "_") +
-              "\")")
+              f"{3 * digits // 4}, "
+              f"\n\"{n2id(1, digits, p)}\", \"{n2id(p - 1, digits, p)}\","
+              f"\n\"{n2id(p, digits, p)}\", \"{n2id(p ** 4 - 1, digits, p)}\","
+              f"\n\"{n2id(p ** 4, digits, p)}\", \"{n2id(p ** 6 - 1, digits, p)}\"),\n"
+              )
