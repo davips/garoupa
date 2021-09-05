@@ -17,20 +17,20 @@ A product of identifiers produce a new identifier as shown below,
 where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
 New identifiers are easily created from the identity element `ø` 
 (or `identity` for people or systems allergic to utf-8 encoding).
-![img.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img.png)
+![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png)
 
 Operations can be reverted by the inverse of the identifier.
-![img_1.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_1.png)
+![img_1.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_1.png)
 
 Operations are associative. They are order-sensitive by default - they are called _ordered_ ids.
-![img_2.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_2.png)
+![img_2.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_2.png)
 
 However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) 
 identifiers are also available.
-![img_3.png](https://raw.githubusercontent.com/davips/garoupa/8b556816e14145fdd045f55f6de0a830d9e1865d/examples/img_3.png)
+![img_3.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_3.png)
 
 This is how they affect each other:
-![img_4.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_4.png)
+![img_4.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_4.png)
 
 The chance of collision is determined by the number of possible identifiers of each type.
 Some versions are provided, e.g.: UT32.4, UT40.4 (default), UT64.4.
@@ -40,7 +40,7 @@ Unordered ids use a very narrow range of the total number of identifiers because
 One use could be the embedding of  authorship or other metadata to an object without worrying about the timing, 
 since the resulting id will remain the same, 
 no matter when the unordered id is operated with the id of the object under construction.
-![img_5.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_5.png)
+![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png)
 
 Conversely, hybrid ids are excelent to represent values in a data structure like a map, 
 since the order is not relevant when the consumer process looks up for keys, not indexes.
@@ -170,7 +170,7 @@ print(repr(m.hosh))
 ## Performance
 Computation time for the simple operations performed by GaROUPa can be considered negligible for most applications,
 since the order of magnitude of creating and operating identifiers is around a few μs:
-![img_6.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_6.png)
+![img_6.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_6.png)
 On the other hand, we estimate up to ~7x gains in speed when porting the core code to  _rust_.
 The package [hosh](https://pypi.org/project/hosh) was a faster implementation of an earlier version of GaROUPa,
 It will be updated and fully compatible with current GaROUPa at major version `2.*.*`.
