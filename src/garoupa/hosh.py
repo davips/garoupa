@@ -22,6 +22,8 @@
 from sys import maxsize
 from typing import Union
 
+from garoupa.groups import UT40_4, groups
+from garoupa.misc.colors import colorize128bit
 from garoupa.misc.core import cells_id_fromblob, cells_fromid, id_fromcells
 from garoupa.misc.encoding.base777 import b777enc
 from garoupa.misc.exception import (
@@ -34,7 +36,6 @@ from garoupa.misc.exception import (
     WrongVersion,
 )
 from garoupa.misc.math import int2cells, cells2int, cellsmul, cellsinv
-from garoupa.misc.colors import colorize128bit
 
 
 class Hosh:
@@ -49,13 +50,13 @@ class Hosh:
     >>> a = Hosh(b"lots of data")
     >>> b = Hosh(b"lots of data 2")
     >>> a.id
-    '2Lo3TSO03yIBqYTFR6NKjKdC.oLyb0-.'
+    '.-0byLo.CdKjKN6RFTYqBIy30OST3oLyjYPf.6p8'
     >>> b.id
-    'lxqpsidKkkGXHiZg7h7aCUy-eI5esBXS'
+    'SXBse5Ie-yUCa7h7gZiHXGkkKdispqxlc4FnCYit'
     >>> (a * b).id
-    'ogOtjU.KnU-CpQqQouvwxhalU2VNUqC-'
+    'ALiaB9XPu.MoIwwoTPYrxqkGfVpktOgUv0tDB3IB'
     >>> (b * a).id
-    'ogOtjU.KnUY7mBeDIWEuE2OzLo9i44B0'
+    'gr9psTs5dYGrCCdgWMAPWM4dDDzktOgUv0tDB3IB'
     >>> a * b * ~b == a
     True
     >>> c = Hosh(b"lots of data 3")
@@ -78,19 +79,15 @@ class Hosh:
     True
     >>> a * z == z * a
     True
-    >>> from garoupa import ø, Ø
-    >>> print(ø)  # Handy syntax using ø or Ø for identity.
-    00000000000000000000000000000000
-    >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysd")  # str, bytes or int are converted as id, blob or element rank.
-    7ysdf98ysdf98ysdf98ysdfysdf98ysd
-    >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysd" * "6gdsf76df8gaf87gaf87gaf87agdfa78")
-    dOFFu0eLHn4nHvqBpdWh3iN-8PnC1PO6
-    >>> print(Ø)  # Version UT64.4
-    0000000000000000000000000000000000000000000000000000000000000000
-    >>> Ø.h * b"sdff" == Hosh(b"sdff","hybrid","UT64.4")  # etype=hybrid
-    True
+    >>> from garoupa import ø
+    >>> print(ø)  # Handy syntax using ø for identity.
+    0000000000000000000000000000000000000000
+    >>> print(ø * "7ysdf98ys34hg543hdf98ysdf98ysdfysdf98ysd")  # str, bytes or int are converted as id, blob or element rank.
+    7ysdf98ys34hg543hdf98ysdf98ysdfysdf98ysd
+    >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysdasddsa32" * "6gdsf76dfqwe123de8gaf87gaf87gaf87agdfa78")
+    94UrdYKjCGQWdd5P.W4xvFJgc9hZpIHlhytqHkaa
     >>> print(ø.u * b"sdff")
-    3_214e6b0_______________________
+    f_9e1a267c8_____________________________
 
     Parameters
     ----------
@@ -100,9 +97,10 @@ class Hosh:
         ordered, hybrid, unordered
         According to the subset of the desired element: Z, H\\Z or G\\H
     version
-        UT32.4 or UT64.4 changes the number of digits and robustness against collisions
-        UT32.4 is enough for most usages. It accepts more than 4 billion repetitions of the same operation in a row.
-        UT64.4 provides unspeakable limits for operations, please see scientific paper for details.
+        Group namedtuple: changes the number of digits and robustness against collisions
+        UT32_4 is enough for most usages. It accepts more than 4 billion repetitions of the same operation in a row.
+        UT64_4 provides unspeakable limits for operations, please see scientific paper for details.
+        UT40_4 is recommended and default, since it is the most compatible with other systems (git, SHA-1, etc)
     """
 
     shorter = False
@@ -110,9 +108,9 @@ class Hosh:
     _n, _id, _idc, _sid, _sidc, _etype = None, None, None, None, None, None
     _etype_inducer, _bits = None, None
 
-    def __init__(self, content, etype="default:ordered", version="UT32.4"):
+    def __init__(self, content, etype="default:ordered", version=UT40_4):
         self.version = version
-        self.p, self.order, self.digits, self.bytes = self.group_props(version)
+        self.p, self.p4, self.p6, self.digits, self.bytes, _ = version
         if isinstance(content, list):
             if etype != "default:ordered":
                 raise DanglingEtype(f"Cannot set etype={etype} when providing cells ({content}).")
@@ -199,9 +197,9 @@ class Hosh:
 
         >>> a = Hosh.fromid("abcdefabcdefabcdefabcdefabcdefab")
         >>> a.n
-        997946887123826552569543664509734108513592617499281126651
+        1094566309952642687224764830259410933250743749332933330234
         >>> a.cells
-        [682822972, 3959913371, 1088646845, 1948924621, 2273369721, 2635491741]
+        [748932665, 516513868, 468764361, 3316970622, 2727293743, 316029245]
         >>> a.etype
         'ordered'
         >>> bid = a.id[:2] + "_" + a.id[3:]
@@ -211,9 +209,9 @@ class Hosh:
         >>> b.id
         'ab_defabcdefabcdefabcdefabcdefab'
         >>> b.n
-        54155325045304951634162463017274306469
+        59377482839139050825606534576063885287
         >>> b.cells
-        [0, 0, 683536302, 823178997, 3937254300, 1531888570]
+        [0, 0, 749449200, 1774140626, 3139018916, 292801225]
         >>> b.etype
         'hybrid'
         >>> Hosh.fromid("0000000000000000000000000000000000000000000000000000000000000000") == 0
@@ -231,16 +229,13 @@ class Hosh:
         -------
         A new Hosh object
         """
-        if len(id) == 32:
-            version = "UT32.4"
-        elif len(id) == 64:
-            version = "UT64.4"
-        else:
+
+        if len(id) not in groups:
             raise WrongIdentifier(f"Wrong identifier length: {len(id)}   id:[{id}]")
-        return Hosh(cells_fromid(id, p=cls.group_props(version)[0]), version=version)
+        return Hosh(cells_fromid(id, p=groups[len(id)].p), version=groups[len(id)])
 
     @classmethod
-    def fromn(cls, n: int, version="UT32.4"):
+    def fromn(cls, n: int, version=UT40_4):
         """
         Create a Hosh object representing the given int.
 
@@ -250,7 +245,7 @@ class Hosh:
 
         >>> h = Hosh.fromn(7647544756746324134134)
         >>> h.id
-        '00_000000000019e9300ddd405c1c8fc'
+        '00_e49c1c505dcd0039e91000000000000000000'
 
         Parameters
         ----------
@@ -261,7 +256,7 @@ class Hosh:
         -------
         A new Hosh object
         """
-        p, order, _, _ = cls.group_props(version)
+        p, order = version.p, version.p6
         if n > order:
             raise ElementTooHigh(f"Element outside allowed range: {n} >= {order}")
         return Hosh(int2cells(n, p), version=version)
@@ -288,11 +283,7 @@ class Hosh:
 
         >>> from garoupa import ø
         >>> (ø * b'65e987978g').sid
-        'ĐãǚħHȩСЭĵʙĞŸιśԵəжʐƙö'
-
-        >>> from garoupa import Ø
-        >>> (Ø * b'65e987978g').sid
-        'ÊŰԝǮʎĹաΦƟzƶӣξʙСʠΠмΌВʜȉΖáςՔĦĢνԱCϔΘҳȖưΎìɚF'
+        'ȟɟìӧДɫŖāöơɟբƢŊþXÊϱՎҲģţՀɄЌ'
 
         Returns
         -------
@@ -324,11 +315,7 @@ class Hosh:
 
         >>> from garoupa import ø
         >>> print((ø * b'65e987978g').sidc)
-        \x1b[38;5;75m\x1b[1m\x1b[48;5;0mĐ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mã\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mǚ\x1b[0m\x1b[38;5;153m\x1b[1m\x1b[48;5;0mħ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mH\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mȩ\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mС\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mЭ\x1b[0m\x1b[38;5;74m\x1b[1m\x1b[48;5;0mĵ\x1b[0m\x1b[38;5;81m\x1b[1m\x1b[48;5;0mʙ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mĞ\x1b[0m\x1b[38;5;158m\x1b[1m\x1b[48;5;0mŸ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mι\x1b[0m\x1b[38;5;73m\x1b[1m\x1b[48;5;0mś\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mԵ\x1b[0m\x1b[38;5;74m\x1b[1m\x1b[48;5;0mə\x1b[0m\x1b[38;5;75m\x1b[1m\x1b[48;5;0mж\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mʐ\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mƙ\x1b[0m\x1b[38;5;153m\x1b[1m\x1b[48;5;0mö\x1b[0m
-
-        >>> from garoupa import Ø
-        >>> print((Ø * b'65e987978g').sidc)
-        \x1b[38;5;249m\x1b[1m\x1b[48;5;0mÊ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mŰ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mԝ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mǮ\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mʎ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mĹ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mա\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mΦ\x1b[0m\x1b[38;5;182m\x1b[1m\x1b[48;5;0mƟ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;179m\x1b[1m\x1b[48;5;0mƶ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mӣ\x1b[0m\x1b[38;5;104m\x1b[1m\x1b[48;5;0mξ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mʙ\x1b[0m\x1b[38;5;175m\x1b[1m\x1b[48;5;0mС\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mʠ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mΠ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mм\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mΌ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mВ\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mʜ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mȉ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mΖ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0má\x1b[0m\x1b[38;5;182m\x1b[1m\x1b[48;5;0mς\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mՔ\x1b[0m\x1b[38;5;179m\x1b[1m\x1b[48;5;0mĦ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mĢ\x1b[0m\x1b[38;5;104m\x1b[1m\x1b[48;5;0mν\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mԱ\x1b[0m\x1b[38;5;175m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mϔ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mΘ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mҳ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mȖ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mư\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mΎ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mì\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mɚ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mF\x1b[0m
+        \x1b[38;5;156m\x1b[1m\x1b[48;5;0mȟ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mɟ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mì\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mӧ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mД\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mɫ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mŖ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mā\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mö\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mơ\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mɟ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mբ\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mƢ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mŊ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mþ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mX\x1b[0m\x1b[38;5;156m\x1b[1m\x1b[48;5;0mÊ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mϱ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mՎ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mҲ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mģ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mţ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mՀ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mɄ\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mЌ\x1b[0m
 
         Returns
         -------
@@ -382,7 +369,7 @@ class Hosh:
         Usage:
 
         >>> Hosh(b"asdf86fasd").show(colored=False)
-        8nsZouodGbQ5.9OUrypqCzmYrK1t8hov
+        voh8t1KrYmzCqpyrUO9.5QbGdouoZsnExarMSa34
         """
         return print(self.idc if colored else self.id)
 
@@ -391,7 +378,7 @@ class Hosh:
         Usage:
 
         >>> Hosh(b"asdf86fasd").short(colored=False)
-        çÙkƝĜưŔнǒēòƣσåŴQӀՏмŷ
+        lϊӑơӫǯÃϺŮϳȐŁЬĽҪƉǏԛȪƜfÞӠȕՇ
         """
         return print(self.sidc if colored else self.sid)
 
@@ -404,11 +391,11 @@ class Hosh:
 
         >>> from garoupa import ø
         >>> ø.convert([0,0,0,0,0,0]).id
-        '00000000000000000000000000000000'
+        '0000000000000000000000000000000000000000'
 
         >>> from garoupa import Hosh
         >>> ø.convert(0).id
-        '00000000000000000000000000000000'
+        '0000000000000000000000000000000000000000'
 
         Parameters
         ----------
@@ -433,31 +420,3 @@ class Hosh:
         if self.version != other.version:
             raise WrongVersion(f"Incompatible operands: {self.version} != {other.version}")
         return other
-
-    @classmethod
-    def group_props(cls, version):
-        """
-        Usage:
-
-        >>> from garoupa import Hosh
-        >>> Hosh.group_props("UT32.4")
-        (4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24)
-
-        Parameters
-        ----------
-        version
-
-        Returns
-        -------
-
-        """
-        if version == "UT32.4":
-            return 4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24
-        elif version == "UT64.4":
-            return (
-                18446744073709551557,
-                39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249,
-                64,
-                48,
-            )
-        raise WrongVersion("Unknown version:", version)

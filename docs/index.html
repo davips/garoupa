@@ -53,30 +53,24 @@
 &#34;&#34;&#34;GaROUPa solves the problem of determining the identity of multi-valued objects or sequences of events
 (and provide extra modules for group theory)&#34;&#34;&#34;
 
-from garoupa.misc.identity import ø, Ø
+from garoupa.misc.identity import ø
+from .groups import UT40_4
 from .hosh import Hosh as H
 from .misc.helper import Helper
 
 __pdoc__ = {
-    &#39;hosh&#39;: False,
+    &#34;hosh&#34;: False,
 }
 
 Hosh = H
 &#34;&#34;&#34;All identifiers are instances of this class&#34;&#34;&#34;
 
-ħ = Helper(&#34;UT32.4&#34;)
+ħ = Helper(UT40_4)
 &#34;&#34;&#34;Shortcut to create 32-digit Hosh objects&#34;&#34;&#34;
-identity32 = ø()
+identity = ø()
 &#34;&#34;&#34;Shortcut to the 32-digit identity Hosh object&#34;&#34;&#34;
-ø = identity32
-&#34;&#34;&#34;Shortcut to the 32-digit identity Hosh object&#34;&#34;&#34;
-
-Ħ = Helper(&#34;UT64.4&#34;)
-&#34;&#34;&#34;Shortcut to create 64-digit Hosh objects&#34;&#34;&#34;
-identity64 = Ø()
-&#34;&#34;&#34;Shortcut to the 64-digit identity Hosh object&#34;&#34;&#34;
-Ø = identity64
-&#34;&#34;&#34;Shortcut to the 64-digit identity Hosh object&#34;&#34;&#34;</code></pre>
+ø = identity
+&#34;&#34;&#34;Shortcut to the 32-digit identity Hosh object&#34;&#34;&#34;</code></pre>
 </details>
 </section>
 <section>
@@ -85,6 +79,10 @@ identity64 = Ø()
 <dt><code class="name"><a title="garoupa.algebra" href="algebra/index.html">garoupa.algebra</a></code></dt>
 <dd>
 <div class="desc"><p>Abstract algebra groups …</p></div>
+</dd>
+<dt><code class="name"><a title="garoupa.groups" href="groups.html">garoupa.groups</a></code></dt>
+<dd>
+<div class="desc"></div>
 </dd>
 <dt><code class="name"><a title="garoupa.misc" href="misc/index.html">garoupa.misc</a></code></dt>
 <dd>
@@ -95,25 +93,13 @@ identity64 = Ø()
 <section>
 <h2 class="section-title" id="header-variables">Global variables</h2>
 <dl>
-<dt id="garoupa.identity32"><code class="name">var <span class="ident">identity32</span></code></dt>
+<dt id="garoupa.identity"><code class="name">var <span class="ident">identity</span></code></dt>
 <dd>
 <div class="desc"><p>Shortcut to the 32-digit identity Hosh object</p></div>
-</dd>
-<dt id="garoupa.identity64"><code class="name">var <span class="ident">identity64</span></code></dt>
-<dd>
-<div class="desc"><p>Shortcut to the 64-digit identity Hosh object</p></div>
-</dd>
-<dt id="garoupa.Ø"><code class="name">var <span class="ident">Ø</span></code></dt>
-<dd>
-<div class="desc"><p>Shortcut to the 64-digit identity Hosh object</p></div>
 </dd>
 <dt id="garoupa.ø"><code class="name">var <span class="ident">ø</span></code></dt>
 <dd>
 <div class="desc"><p>Shortcut to the 32-digit identity Hosh object</p></div>
-</dd>
-<dt id="garoupa.Ħ"><code class="name">var <span class="ident">Ħ</span></code></dt>
-<dd>
-<div class="desc"><p>Shortcut to create 64-digit Hosh objects</p></div>
 </dd>
 <dt id="garoupa.ħ"><code class="name">var <span class="ident">ħ</span></code></dt>
 <dd>
@@ -128,7 +114,7 @@ identity64 = Ø()
 <dl>
 <dt id="garoupa.Hosh"><code class="flex name class">
 <span>class <span class="ident">Hosh</span></span>
-<span>(</span><span>content, etype='default:ordered', version='UT32.4')</span>
+<span>(</span><span>content, etype='default:ordered', version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, last='.._87c2a630003eec7dffff561b0000004aeffff'))</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Operable hash.</p>
@@ -138,13 +124,13 @@ identity64 = Ø()
 &gt;&gt;&gt; a = Hosh(b&quot;lots of data&quot;)
 &gt;&gt;&gt; b = Hosh(b&quot;lots of data 2&quot;)
 &gt;&gt;&gt; a.id
-'2Lo3TSO03yIBqYTFR6NKjKdC.oLyb0-.'
+'.-0byLo.CdKjKN6RFTYqBIy30OST3oLyjYPf.6p8'
 &gt;&gt;&gt; b.id
-'lxqpsidKkkGXHiZg7h7aCUy-eI5esBXS'
+'SXBse5Ie-yUCa7h7gZiHXGkkKdispqxlc4FnCYit'
 &gt;&gt;&gt; (a * b).id
-'ogOtjU.KnU-CpQqQouvwxhalU2VNUqC-'
+'ALiaB9XPu.MoIwwoTPYrxqkGfVpktOgUv0tDB3IB'
 &gt;&gt;&gt; (b * a).id
-'ogOtjU.KnUY7mBeDIWEuE2OzLo9i44B0'
+'gr9psTs5dYGrCCdgWMAPWM4dDDzktOgUv0tDB3IB'
 &gt;&gt;&gt; a * b * ~b == a
 True
 &gt;&gt;&gt; c = Hosh(b&quot;lots of data 3&quot;)
@@ -167,19 +153,15 @@ True
 True
 &gt;&gt;&gt; a * z == z * a
 True
-&gt;&gt;&gt; from garoupa import ø, Ø
-&gt;&gt;&gt; print(ø)  # Handy syntax using ø or Ø for identity.
-00000000000000000000000000000000
-&gt;&gt;&gt; print(ø * &quot;7ysdf98ysdf98ysdf98ysdfysdf98ysd&quot;)  # str, bytes or int are converted as id, blob or element rank.
-7ysdf98ysdf98ysdf98ysdfysdf98ysd
-&gt;&gt;&gt; print(ø * &quot;7ysdf98ysdf98ysdf98ysdfysdf98ysd&quot; * &quot;6gdsf76df8gaf87gaf87gaf87agdfa78&quot;)
-dOFFu0eLHn4nHvqBpdWh3iN-8PnC1PO6
-&gt;&gt;&gt; print(Ø)  # Version UT64.4
-0000000000000000000000000000000000000000000000000000000000000000
-&gt;&gt;&gt; Ø.h * b&quot;sdff&quot; == Hosh(b&quot;sdff&quot;,&quot;hybrid&quot;,&quot;UT64.4&quot;)  # etype=hybrid
-True
+&gt;&gt;&gt; from garoupa import ø
+&gt;&gt;&gt; print(ø)  # Handy syntax using ø for identity.
+0000000000000000000000000000000000000000
+&gt;&gt;&gt; print(ø * &quot;7ysdf98ys34hg543hdf98ysdf98ysdfysdf98ysd&quot;)  # str, bytes or int are converted as id, blob or element rank.
+7ysdf98ys34hg543hdf98ysdf98ysdfysdf98ysd
+&gt;&gt;&gt; print(ø * &quot;7ysdf98ysdf98ysdf98ysdfysdf98ysdasddsa32&quot; * &quot;6gdsf76dfqwe123de8gaf87gaf87gaf87agdfa78&quot;)
+94UrdYKjCGQWdd5P.W4xvFJgc9hZpIHlhytqHkaa
 &gt;&gt;&gt; print(ø.u * b&quot;sdff&quot;)
-3_214e6b0_______________________
+f_9e1a267c8_____________________________
 </code></pre>
 <h2 id="parameters">Parameters</h2>
 <dl>
@@ -189,9 +171,10 @@ True
 <dd>ordered, hybrid, unordered
 According to the subset of the desired element: Z, H\Z or G\H</dd>
 <dt><strong><code>version</code></strong></dt>
-<dd>UT32.4 or UT64.4 changes the number of digits and robustness against collisions
-UT32.4 is enough for most usages. It accepts more than 4 billion repetitions of the same operation in a row.
-UT64.4 provides unspeakable limits for operations, please see scientific paper for details.</dd>
+<dd>Group namedtuple: changes the number of digits and robustness against collisions
+UT32_4 is enough for most usages. It accepts more than 4 billion repetitions of the same operation in a row.
+UT64_4 provides unspeakable limits for operations, please see scientific paper for details.
+UT40_4 is recommended and default, since it is the most compatible with other systems (git, SHA-1, etc)</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -209,13 +192,13 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
     &gt;&gt;&gt; a = Hosh(b&#34;lots of data&#34;)
     &gt;&gt;&gt; b = Hosh(b&#34;lots of data 2&#34;)
     &gt;&gt;&gt; a.id
-    &#39;2Lo3TSO03yIBqYTFR6NKjKdC.oLyb0-.&#39;
+    &#39;.-0byLo.CdKjKN6RFTYqBIy30OST3oLyjYPf.6p8&#39;
     &gt;&gt;&gt; b.id
-    &#39;lxqpsidKkkGXHiZg7h7aCUy-eI5esBXS&#39;
+    &#39;SXBse5Ie-yUCa7h7gZiHXGkkKdispqxlc4FnCYit&#39;
     &gt;&gt;&gt; (a * b).id
-    &#39;ogOtjU.KnU-CpQqQouvwxhalU2VNUqC-&#39;
+    &#39;ALiaB9XPu.MoIwwoTPYrxqkGfVpktOgUv0tDB3IB&#39;
     &gt;&gt;&gt; (b * a).id
-    &#39;ogOtjU.KnUY7mBeDIWEuE2OzLo9i44B0&#39;
+    &#39;gr9psTs5dYGrCCdgWMAPWM4dDDzktOgUv0tDB3IB&#39;
     &gt;&gt;&gt; a * b * ~b == a
     True
     &gt;&gt;&gt; c = Hosh(b&#34;lots of data 3&#34;)
@@ -238,19 +221,15 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
     True
     &gt;&gt;&gt; a * z == z * a
     True
-    &gt;&gt;&gt; from garoupa import ø, Ø
-    &gt;&gt;&gt; print(ø)  # Handy syntax using ø or Ø for identity.
-    00000000000000000000000000000000
-    &gt;&gt;&gt; print(ø * &#34;7ysdf98ysdf98ysdf98ysdfysdf98ysd&#34;)  # str, bytes or int are converted as id, blob or element rank.
-    7ysdf98ysdf98ysdf98ysdfysdf98ysd
-    &gt;&gt;&gt; print(ø * &#34;7ysdf98ysdf98ysdf98ysdfysdf98ysd&#34; * &#34;6gdsf76df8gaf87gaf87gaf87agdfa78&#34;)
-    dOFFu0eLHn4nHvqBpdWh3iN-8PnC1PO6
-    &gt;&gt;&gt; print(Ø)  # Version UT64.4
-    0000000000000000000000000000000000000000000000000000000000000000
-    &gt;&gt;&gt; Ø.h * b&#34;sdff&#34; == Hosh(b&#34;sdff&#34;,&#34;hybrid&#34;,&#34;UT64.4&#34;)  # etype=hybrid
-    True
+    &gt;&gt;&gt; from garoupa import ø
+    &gt;&gt;&gt; print(ø)  # Handy syntax using ø for identity.
+    0000000000000000000000000000000000000000
+    &gt;&gt;&gt; print(ø * &#34;7ysdf98ys34hg543hdf98ysdf98ysdfysdf98ysd&#34;)  # str, bytes or int are converted as id, blob or element rank.
+    7ysdf98ys34hg543hdf98ysdf98ysdfysdf98ysd
+    &gt;&gt;&gt; print(ø * &#34;7ysdf98ysdf98ysdf98ysdfysdf98ysdasddsa32&#34; * &#34;6gdsf76dfqwe123de8gaf87gaf87gaf87agdfa78&#34;)
+    94UrdYKjCGQWdd5P.W4xvFJgc9hZpIHlhytqHkaa
     &gt;&gt;&gt; print(ø.u * b&#34;sdff&#34;)
-    3_214e6b0_______________________
+    f_9e1a267c8_____________________________
 
     Parameters
     ----------
@@ -260,18 +239,20 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         ordered, hybrid, unordered
         According to the subset of the desired element: Z, H\\Z or G\\H
     version
-        UT32.4 or UT64.4 changes the number of digits and robustness against collisions
-        UT32.4 is enough for most usages. It accepts more than 4 billion repetitions of the same operation in a row.
-        UT64.4 provides unspeakable limits for operations, please see scientific paper for details.
+        Group namedtuple: changes the number of digits and robustness against collisions
+        UT32_4 is enough for most usages. It accepts more than 4 billion repetitions of the same operation in a row.
+        UT64_4 provides unspeakable limits for operations, please see scientific paper for details.
+        UT40_4 is recommended and default, since it is the most compatible with other systems (git, SHA-1, etc)
     &#34;&#34;&#34;
+
     shorter = False
     _repr = None
     _n, _id, _idc, _sid, _sidc, _etype = None, None, None, None, None, None
     _etype_inducer, _bits = None, None
 
-    def __init__(self, content, etype=&#34;default:ordered&#34;, version=&#34;UT32.4&#34;):
+    def __init__(self, content, etype=&#34;default:ordered&#34;, version=UT40_4):
         self.version = version
-        self.p, self.order, self.digits, self.bytes = self.group_props(version)
+        self.p, self.p4, self.p6, self.digits, self.bytes, _ = version
         if isinstance(content, list):
             if etype != &#34;default:ordered&#34;:
                 raise DanglingEtype(f&#34;Cannot set etype={etype} when providing cells ({content}).&#34;)
@@ -283,8 +264,9 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
                 etype = &#34;ordered&#34;
             self.cells, self._id = cells_id_fromblob(content, etype, self.bytes, self.p)
         else:
-            raise WrongContent(f&#34;No valid content provided: {content}\n&#34;
-                               f&#34;It should be a bytes object to be hashed or a list of ints.&#34;)
+            raise WrongContent(
+                f&#34;No valid content provided: {content}\n&#34; f&#34;It should be a bytes object to be hashed or a list of ints.&#34;
+            )
 
     @property
     def etype(self):
@@ -357,9 +339,9 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         &gt;&gt;&gt; a = Hosh.fromid(&#34;abcdefabcdefabcdefabcdefabcdefab&#34;)
         &gt;&gt;&gt; a.n
-        997946887123826552569543664509734108513592617499281126651
+        1094566309952642687224764830259410933250743749332933330234
         &gt;&gt;&gt; a.cells
-        [682822972, 3959913371, 1088646845, 1948924621, 2273369721, 2635491741]
+        [748932665, 516513868, 468764361, 3316970622, 2727293743, 316029245]
         &gt;&gt;&gt; a.etype
         &#39;ordered&#39;
         &gt;&gt;&gt; bid = a.id[:2] + &#34;_&#34; + a.id[3:]
@@ -369,9 +351,9 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         &gt;&gt;&gt; b.id
         &#39;ab_defabcdefabcdefabcdefabcdefab&#39;
         &gt;&gt;&gt; b.n
-        54155325045304951634162463017274306469
+        59377482839139050825606534576063885287
         &gt;&gt;&gt; b.cells
-        [0, 0, 683536302, 823178997, 3937254300, 1531888570]
+        [0, 0, 749449200, 1774140626, 3139018916, 292801225]
         &gt;&gt;&gt; b.etype
         &#39;hybrid&#39;
         &gt;&gt;&gt; Hosh.fromid(&#34;0000000000000000000000000000000000000000000000000000000000000000&#34;) == 0
@@ -389,16 +371,13 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         -------
         A new Hosh object
         &#34;&#34;&#34;
-        if len(id) == 32:
-            version = &#34;UT32.4&#34;
-        elif len(id) == 64:
-            version = &#34;UT64.4&#34;
-        else:
+
+        if len(id) not in groups:
             raise WrongIdentifier(f&#34;Wrong identifier length: {len(id)}   id:[{id}]&#34;)
-        return Hosh(cells_fromid(id, p=cls.group_props(version)[0]), version=version)
+        return Hosh(cells_fromid(id, p=groups[len(id)].p), version=groups[len(id)])
 
     @classmethod
-    def fromn(cls, n: int, version=&#34;UT32.4&#34;):
+    def fromn(cls, n: int, version=UT40_4):
         &#34;&#34;&#34;
         Create a Hosh object representing the given int.
 
@@ -408,7 +387,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         &gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
         &gt;&gt;&gt; h.id
-        &#39;00_000000000019e9300ddd405c1c8fc&#39;
+        &#39;00_e49c1c505dcd0039e91000000000000000000&#39;
 
         Parameters
         ----------
@@ -419,7 +398,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         -------
         A new Hosh object
         &#34;&#34;&#34;
-        p, order, _, _ = cls.group_props(version)
+        p, order = version.p, version.p6
         if n &gt; order:
             raise ElementTooHigh(f&#34;Element outside allowed range: {n} &gt;= {order}&#34;)
         return Hosh(int2cells(n, p), version=version)
@@ -446,11 +425,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         &gt;&gt;&gt; from garoupa import ø
         &gt;&gt;&gt; (ø * b&#39;65e987978g&#39;).sid
-        &#39;ĐãǚħHȩСЭĵʙĞŸιśԵəжʐƙö&#39;
-
-        &gt;&gt;&gt; from garoupa import Ø
-        &gt;&gt;&gt; (Ø * b&#39;65e987978g&#39;).sid
-        &#39;ÊŰԝǮʎĹաΦƟzƶӣξʙСʠΠмΌВʜȉΖáςՔĦĢνԱCϔΘҳȖưΎìɚF&#39;
+        &#39;ȟɟìӧДɫŖāöơɟբƢŊþXÊϱՎҲģţՀɄЌ&#39;
 
         Returns
         -------
@@ -482,11 +457,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         &gt;&gt;&gt; from garoupa import ø
         &gt;&gt;&gt; print((ø * b&#39;65e987978g&#39;).sidc)
-        \x1b[38;5;75m\x1b[1m\x1b[48;5;0mĐ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mã\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mǚ\x1b[0m\x1b[38;5;153m\x1b[1m\x1b[48;5;0mħ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mH\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mȩ\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mС\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mЭ\x1b[0m\x1b[38;5;74m\x1b[1m\x1b[48;5;0mĵ\x1b[0m\x1b[38;5;81m\x1b[1m\x1b[48;5;0mʙ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mĞ\x1b[0m\x1b[38;5;158m\x1b[1m\x1b[48;5;0mŸ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mι\x1b[0m\x1b[38;5;73m\x1b[1m\x1b[48;5;0mś\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mԵ\x1b[0m\x1b[38;5;74m\x1b[1m\x1b[48;5;0mə\x1b[0m\x1b[38;5;75m\x1b[1m\x1b[48;5;0mж\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mʐ\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mƙ\x1b[0m\x1b[38;5;153m\x1b[1m\x1b[48;5;0mö\x1b[0m
-
-        &gt;&gt;&gt; from garoupa import Ø
-        &gt;&gt;&gt; print((Ø * b&#39;65e987978g&#39;).sidc)
-        \x1b[38;5;249m\x1b[1m\x1b[48;5;0mÊ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mŰ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mԝ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mǮ\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mʎ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mĹ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mա\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mΦ\x1b[0m\x1b[38;5;182m\x1b[1m\x1b[48;5;0mƟ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;179m\x1b[1m\x1b[48;5;0mƶ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mӣ\x1b[0m\x1b[38;5;104m\x1b[1m\x1b[48;5;0mξ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mʙ\x1b[0m\x1b[38;5;175m\x1b[1m\x1b[48;5;0mС\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mʠ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mΠ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mм\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mΌ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mВ\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mʜ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mȉ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mΖ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0má\x1b[0m\x1b[38;5;182m\x1b[1m\x1b[48;5;0mς\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mՔ\x1b[0m\x1b[38;5;179m\x1b[1m\x1b[48;5;0mĦ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mĢ\x1b[0m\x1b[38;5;104m\x1b[1m\x1b[48;5;0mν\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mԱ\x1b[0m\x1b[38;5;175m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mϔ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mΘ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mҳ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mȖ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mư\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mΎ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mì\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mɚ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mF\x1b[0m
+        \x1b[38;5;156m\x1b[1m\x1b[48;5;0mȟ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mɟ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mì\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mӧ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mД\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mɫ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mŖ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mā\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mö\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mơ\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mɟ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mբ\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mƢ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mŊ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mþ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mX\x1b[0m\x1b[38;5;156m\x1b[1m\x1b[48;5;0mÊ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mϱ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mՎ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mҲ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mģ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mţ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mՀ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mɄ\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mЌ\x1b[0m
 
         Returns
         -------
@@ -507,7 +478,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
     #         self._bits = bin(self.n)[2:].rjust(256, &#34;0&#34;)
     #     return self._bits
 
-    def __mul__(self, other: Union[&#39;Hosh&#39;, str, bytes, int]):
+    def __mul__(self, other: Union[&#34;Hosh&#34;, str, bytes, int]):
         return Hosh(cellsmul(self.cells, self.convert(other).cells, self.p), version=self.version)
 
     def __invert__(self):
@@ -540,7 +511,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         Usage:
 
         &gt;&gt;&gt; Hosh(b&#34;asdf86fasd&#34;).show(colored=False)
-        8nsZouodGbQ5.9OUrypqCzmYrK1t8hov
+        voh8t1KrYmzCqpyrUO9.5QbGdouoZsnExarMSa34
         &#34;&#34;&#34;
         return print(self.idc if colored else self.id)
 
@@ -549,7 +520,7 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         Usage:
 
         &gt;&gt;&gt; Hosh(b&#34;asdf86fasd&#34;).short(colored=False)
-        çÙkƝĜưŔнǒēòƣσåŴQӀՏмŷ
+        lϊӑơӫǯÃϺŮϳȐŁЬĽҪƉǏԛȪƜfÞӠȕՇ
         &#34;&#34;&#34;
         return print(self.sidc if colored else self.sid)
 
@@ -562,11 +533,11 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 
         &gt;&gt;&gt; from garoupa import ø
         &gt;&gt;&gt; ø.convert([0,0,0,0,0,0]).id
-        &#39;00000000000000000000000000000000&#39;
+        &#39;0000000000000000000000000000000000000000&#39;
 
         &gt;&gt;&gt; from garoupa import Hosh
         &gt;&gt;&gt; ø.convert(0).id
-        &#39;00000000000000000000000000000000&#39;
+        &#39;0000000000000000000000000000000000000000&#39;
 
         Parameters
         ----------
@@ -585,34 +556,12 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
         elif isinstance(other, list):
             other = Hosh(other, version=self.version)
         elif not isinstance(other, Hosh):
-            raise WrongOperands(id(self.__class__), id(other.__class__),
-                                f&#34;Cannot convert {type(other)} to {type(self)}.&#34;)
+            raise WrongOperands(
+                id(self.__class__), id(other.__class__), f&#34;Cannot convert {type(other)} to {type(self)}.&#34;
+            )
         if self.version != other.version:
             raise WrongVersion(f&#34;Incompatible operands: {self.version} != {other.version}&#34;)
-        return other
-
-    @classmethod
-    def group_props(cls, version):
-        &#34;&#34;&#34;
-        Usage:
-
-        &gt;&gt;&gt; from garoupa import Hosh
-        &gt;&gt;&gt; Hosh.group_props(&#34;UT32.4&#34;)
-        (4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24)
-
-        Parameters
-        ----------
-        version
-
-        Returns
-        -------
-
-        &#34;&#34;&#34;
-        if version == &#34;UT32.4&#34;:
-            return 4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24
-        elif version == &#34;UT64.4&#34;:
-            return 18446744073709551557, 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249, 64, 48
-        raise WrongVersion(&#34;Unknown version:&#34;, version)</code></pre>
+        return other</code></pre>
 </details>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -635,9 +584,9 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; a = Hosh.fromid(&quot;abcdefabcdefabcdefabcdefabcdefab&quot;)
 &gt;&gt;&gt; a.n
-997946887123826552569543664509734108513592617499281126651
+1094566309952642687224764830259410933250743749332933330234
 &gt;&gt;&gt; a.cells
-[682822972, 3959913371, 1088646845, 1948924621, 2273369721, 2635491741]
+[748932665, 516513868, 468764361, 3316970622, 2727293743, 316029245]
 &gt;&gt;&gt; a.etype
 'ordered'
 &gt;&gt;&gt; bid = a.id[:2] + &quot;_&quot; + a.id[3:]
@@ -647,9 +596,9 @@ UT64.4 provides unspeakable limits for operations, please see scientific paper f
 &gt;&gt;&gt; b.id
 'ab_defabcdefabcdefabcdefabcdefab'
 &gt;&gt;&gt; b.n
-54155325045304951634162463017274306469
+59377482839139050825606534576063885287
 &gt;&gt;&gt; b.cells
-[0, 0, 683536302, 823178997, 3937254300, 1531888570]
+[0, 0, 749449200, 1774140626, 3139018916, 292801225]
 &gt;&gt;&gt; b.etype
 'hybrid'
 &gt;&gt;&gt; Hosh.fromid(&quot;0000000000000000000000000000000000000000000000000000000000000000&quot;) == 0
@@ -683,9 +632,9 @@ def fromid(cls, id):
 
     &gt;&gt;&gt; a = Hosh.fromid(&#34;abcdefabcdefabcdefabcdefabcdefab&#34;)
     &gt;&gt;&gt; a.n
-    997946887123826552569543664509734108513592617499281126651
+    1094566309952642687224764830259410933250743749332933330234
     &gt;&gt;&gt; a.cells
-    [682822972, 3959913371, 1088646845, 1948924621, 2273369721, 2635491741]
+    [748932665, 516513868, 468764361, 3316970622, 2727293743, 316029245]
     &gt;&gt;&gt; a.etype
     &#39;ordered&#39;
     &gt;&gt;&gt; bid = a.id[:2] + &#34;_&#34; + a.id[3:]
@@ -695,9 +644,9 @@ def fromid(cls, id):
     &gt;&gt;&gt; b.id
     &#39;ab_defabcdefabcdefabcdefabcdefab&#39;
     &gt;&gt;&gt; b.n
-    54155325045304951634162463017274306469
+    59377482839139050825606534576063885287
     &gt;&gt;&gt; b.cells
-    [0, 0, 683536302, 823178997, 3937254300, 1531888570]
+    [0, 0, 749449200, 1774140626, 3139018916, 292801225]
     &gt;&gt;&gt; b.etype
     &#39;hybrid&#39;
     &gt;&gt;&gt; Hosh.fromid(&#34;0000000000000000000000000000000000000000000000000000000000000000&#34;) == 0
@@ -715,17 +664,14 @@ def fromid(cls, id):
     -------
     A new Hosh object
     &#34;&#34;&#34;
-    if len(id) == 32:
-        version = &#34;UT32.4&#34;
-    elif len(id) == 64:
-        version = &#34;UT64.4&#34;
-    else:
+
+    if len(id) not in groups:
         raise WrongIdentifier(f&#34;Wrong identifier length: {len(id)}   id:[{id}]&#34;)
-    return Hosh(cells_fromid(id, p=cls.group_props(version)[0]), version=version)</code></pre>
+    return Hosh(cells_fromid(id, p=groups[len(id)].p), version=groups[len(id)])</code></pre>
 </details>
 </dd>
 <dt id="garoupa.Hosh.fromn"><code class="name flex">
-<span>def <span class="ident">fromn</span></span>(<span>n: int, version='UT32.4')</span>
+<span>def <span class="ident">fromn</span></span>(<span>n: int, version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, last='.._87c2a630003eec7dffff561b0000004aeffff'))</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create a Hosh object representing the given int.</p>
@@ -733,7 +679,7 @@ def fromid(cls, id):
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
 &gt;&gt;&gt; h.id
-'00_000000000019e9300ddd405c1c8fc'
+'00_e49c1c505dcd0039e91000000000000000000'
 </code></pre>
 <h2 id="parameters">Parameters</h2>
 <dl>
@@ -752,7 +698,7 @@ def fromid(cls, id):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def fromn(cls, n: int, version=&#34;UT32.4&#34;):
+def fromn(cls, n: int, version=UT40_4):
     &#34;&#34;&#34;
     Create a Hosh object representing the given int.
 
@@ -762,7 +708,7 @@ def fromn(cls, n: int, version=&#34;UT32.4&#34;):
 
     &gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
     &gt;&gt;&gt; h.id
-    &#39;00_000000000019e9300ddd405c1c8fc&#39;
+    &#39;00_e49c1c505dcd0039e91000000000000000000&#39;
 
     Parameters
     ----------
@@ -773,53 +719,10 @@ def fromn(cls, n: int, version=&#34;UT32.4&#34;):
     -------
     A new Hosh object
     &#34;&#34;&#34;
-    p, order, _, _ = cls.group_props(version)
+    p, order = version.p, version.p6
     if n &gt; order:
         raise ElementTooHigh(f&#34;Element outside allowed range: {n} &gt;= {order}&#34;)
     return Hosh(int2cells(n, p), version=version)</code></pre>
-</details>
-</dd>
-<dt id="garoupa.Hosh.group_props"><code class="name flex">
-<span>def <span class="ident">group_props</span></span>(<span>version)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Usage:</p>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Hosh
-&gt;&gt;&gt; Hosh.group_props(&quot;UT32.4&quot;)
-(4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24)
-</code></pre>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>version</code></strong></dt>
-<dd>&nbsp;</dd>
-</dl>
-<h2 id="returns">Returns</h2></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def group_props(cls, version):
-    &#34;&#34;&#34;
-    Usage:
-
-    &gt;&gt;&gt; from garoupa import Hosh
-    &gt;&gt;&gt; Hosh.group_props(&#34;UT32.4&#34;)
-    (4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24)
-
-    Parameters
-    ----------
-    version
-
-    Returns
-    -------
-
-    &#34;&#34;&#34;
-    if version == &#34;UT32.4&#34;:
-        return 4294967291, 6277101691541631771514589274378639120656724268335671295241, 32, 24
-    elif version == &#34;UT64.4&#34;:
-        return 18446744073709551557, 39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249, 64, 48
-    raise WrongVersion(&#34;Unknown version:&#34;, version)</code></pre>
 </details>
 </dd>
 </dl>
@@ -994,11 +897,7 @@ def n(self):
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import ø
 &gt;&gt;&gt; (ø * b'65e987978g').sid
-'ĐãǚħHȩСЭĵʙĞŸιśԵəжʐƙö'
-</code></pre>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Ø
-&gt;&gt;&gt; (Ø * b'65e987978g').sid
-'ÊŰԝǮʎĹաΦƟzƶӣξʙСʠΠмΌВʜȉΖáςՔĦĢνԱCϔΘҳȖưΎìɚF'
+'ȟɟìӧДɫŖāöơɟբƢŊþXÊϱՎҲģţՀɄЌ'
 </code></pre>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -1018,11 +917,7 @@ def sid(self):
 
     &gt;&gt;&gt; from garoupa import ø
     &gt;&gt;&gt; (ø * b&#39;65e987978g&#39;).sid
-    &#39;ĐãǚħHȩСЭĵʙĞŸιśԵəжʐƙö&#39;
-
-    &gt;&gt;&gt; from garoupa import Ø
-    &gt;&gt;&gt; (Ø * b&#39;65e987978g&#39;).sid
-    &#39;ÊŰԝǮʎĹաΦƟzƶӣξʙСʠΠмΌВʜȉΖáςՔĦĢνԱCϔΘҳȖưΎìɚF&#39;
+    &#39;ȟɟìӧДɫŖāöơɟբƢŊþXÊϱՎҲģţՀɄЌ&#39;
 
     Returns
     -------
@@ -1039,11 +934,7 @@ def sid(self):
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import ø
 &gt;&gt;&gt; print((ø * b'65e987978g').sidc)
-[38;5;75m[1m[48;5;0mĐ[0m[38;5;117m[1m[48;5;0mã[0m[38;5;159m[1m[48;5;0mǚ[0m[38;5;153m[1m[48;5;0mħ[0m[38;5;117m[1m[48;5;0mH[0m[38;5;159m[1m[48;5;0mȩ[0m[38;5;194m[1m[48;5;0mС[0m[38;5;146m[1m[48;5;0mЭ[0m[38;5;74m[1m[48;5;0mĵ[0m[38;5;81m[1m[48;5;0mʙ[0m[38;5;117m[1m[48;5;0mĞ[0m[38;5;158m[1m[48;5;0mŸ[0m[38;5;146m[1m[48;5;0mι[0m[38;5;73m[1m[48;5;0mś[0m[38;5;109m[1m[48;5;0mԵ[0m[38;5;74m[1m[48;5;0mə[0m[38;5;75m[1m[48;5;0mж[0m[38;5;117m[1m[48;5;0mʐ[0m[38;5;159m[1m[48;5;0mƙ[0m[38;5;153m[1m[48;5;0mö[0m
-</code></pre>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Ø
-&gt;&gt;&gt; print((Ø * b'65e987978g').sidc)
-[38;5;249m[1m[48;5;0mÊ[0m[38;5;249m[1m[48;5;0mŰ[0m[38;5;144m[1m[48;5;0mԝ[0m[38;5;144m[1m[48;5;0mǮ[0m[38;5;246m[1m[48;5;0mʎ[0m[38;5;109m[1m[48;5;0mĹ[0m[38;5;146m[1m[48;5;0mա[0m[38;5;150m[1m[48;5;0mΦ[0m[38;5;182m[1m[48;5;0mƟ[0m[38;5;150m[1m[48;5;0mz[0m[38;5;179m[1m[48;5;0mƶ[0m[38;5;137m[1m[48;5;0mӣ[0m[38;5;104m[1m[48;5;0mξ[0m[38;5;119m[1m[48;5;0mʙ[0m[38;5;175m[1m[48;5;0mС[0m[38;5;109m[1m[48;5;0mʠ[0m[38;5;249m[1m[48;5;0mΠ[0m[38;5;249m[1m[48;5;0mм[0m[38;5;144m[1m[48;5;0mΌ[0m[38;5;144m[1m[48;5;0mВ[0m[38;5;246m[1m[48;5;0mʜ[0m[38;5;109m[1m[48;5;0mȉ[0m[38;5;146m[1m[48;5;0mΖ[0m[38;5;150m[1m[48;5;0má[0m[38;5;182m[1m[48;5;0mς[0m[38;5;150m[1m[48;5;0mՔ[0m[38;5;179m[1m[48;5;0mĦ[0m[38;5;137m[1m[48;5;0mĢ[0m[38;5;104m[1m[48;5;0mν[0m[38;5;119m[1m[48;5;0mԱ[0m[38;5;175m[1m[48;5;0mC[0m[38;5;109m[1m[48;5;0mϔ[0m[38;5;249m[1m[48;5;0mΘ[0m[38;5;249m[1m[48;5;0mҳ[0m[38;5;144m[1m[48;5;0mȖ[0m[38;5;144m[1m[48;5;0mư[0m[38;5;246m[1m[48;5;0mΎ[0m[38;5;109m[1m[48;5;0mì[0m[38;5;146m[1m[48;5;0mɚ[0m[38;5;150m[1m[48;5;0mF[0m
+[38;5;156m[1m[48;5;0mȟ[0m[38;5;155m[1m[48;5;0mɟ[0m[38;5;185m[1m[48;5;0mì[0m[38;5;113m[1m[48;5;0mӧ[0m[38;5;119m[1m[48;5;0mД[0m[38;5;185m[1m[48;5;0mɫ[0m[38;5;113m[1m[48;5;0mŖ[0m[38;5;119m[1m[48;5;0mā[0m[38;5;149m[1m[48;5;0mö[0m[38;5;113m[1m[48;5;0mơ[0m[38;5;83m[1m[48;5;0mɟ[0m[38;5;155m[1m[48;5;0mբ[0m[38;5;149m[1m[48;5;0mƢ[0m[38;5;119m[1m[48;5;0mŊ[0m[38;5;185m[1m[48;5;0mþ[0m[38;5;119m[1m[48;5;0mX[0m[38;5;156m[1m[48;5;0mÊ[0m[38;5;155m[1m[48;5;0mϱ[0m[38;5;185m[1m[48;5;0mՎ[0m[38;5;113m[1m[48;5;0mҲ[0m[38;5;119m[1m[48;5;0mģ[0m[38;5;185m[1m[48;5;0mţ[0m[38;5;113m[1m[48;5;0mՀ[0m[38;5;119m[1m[48;5;0mɄ[0m[38;5;149m[1m[48;5;0mЌ[0m
 </code></pre>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -1063,11 +954,7 @@ def sidc(self):
 
     &gt;&gt;&gt; from garoupa import ø
     &gt;&gt;&gt; print((ø * b&#39;65e987978g&#39;).sidc)
-    \x1b[38;5;75m\x1b[1m\x1b[48;5;0mĐ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mã\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mǚ\x1b[0m\x1b[38;5;153m\x1b[1m\x1b[48;5;0mħ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mH\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mȩ\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mС\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mЭ\x1b[0m\x1b[38;5;74m\x1b[1m\x1b[48;5;0mĵ\x1b[0m\x1b[38;5;81m\x1b[1m\x1b[48;5;0mʙ\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mĞ\x1b[0m\x1b[38;5;158m\x1b[1m\x1b[48;5;0mŸ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mι\x1b[0m\x1b[38;5;73m\x1b[1m\x1b[48;5;0mś\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mԵ\x1b[0m\x1b[38;5;74m\x1b[1m\x1b[48;5;0mə\x1b[0m\x1b[38;5;75m\x1b[1m\x1b[48;5;0mж\x1b[0m\x1b[38;5;117m\x1b[1m\x1b[48;5;0mʐ\x1b[0m\x1b[38;5;159m\x1b[1m\x1b[48;5;0mƙ\x1b[0m\x1b[38;5;153m\x1b[1m\x1b[48;5;0mö\x1b[0m
-
-    &gt;&gt;&gt; from garoupa import Ø
-    &gt;&gt;&gt; print((Ø * b&#39;65e987978g&#39;).sidc)
-    \x1b[38;5;249m\x1b[1m\x1b[48;5;0mÊ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mŰ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mԝ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mǮ\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mʎ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mĹ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mա\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mΦ\x1b[0m\x1b[38;5;182m\x1b[1m\x1b[48;5;0mƟ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;179m\x1b[1m\x1b[48;5;0mƶ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mӣ\x1b[0m\x1b[38;5;104m\x1b[1m\x1b[48;5;0mξ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mʙ\x1b[0m\x1b[38;5;175m\x1b[1m\x1b[48;5;0mС\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mʠ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mΠ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mм\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mΌ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mВ\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mʜ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mȉ\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mΖ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0má\x1b[0m\x1b[38;5;182m\x1b[1m\x1b[48;5;0mς\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mՔ\x1b[0m\x1b[38;5;179m\x1b[1m\x1b[48;5;0mĦ\x1b[0m\x1b[38;5;137m\x1b[1m\x1b[48;5;0mĢ\x1b[0m\x1b[38;5;104m\x1b[1m\x1b[48;5;0mν\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mԱ\x1b[0m\x1b[38;5;175m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mϔ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mΘ\x1b[0m\x1b[38;5;249m\x1b[1m\x1b[48;5;0mҳ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mȖ\x1b[0m\x1b[38;5;144m\x1b[1m\x1b[48;5;0mư\x1b[0m\x1b[38;5;246m\x1b[1m\x1b[48;5;0mΎ\x1b[0m\x1b[38;5;109m\x1b[1m\x1b[48;5;0mì\x1b[0m\x1b[38;5;146m\x1b[1m\x1b[48;5;0mɚ\x1b[0m\x1b[38;5;150m\x1b[1m\x1b[48;5;0mF\x1b[0m
+    \x1b[38;5;156m\x1b[1m\x1b[48;5;0mȟ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mɟ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mì\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mӧ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mД\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mɫ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mŖ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mā\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mö\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mơ\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mɟ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mբ\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mƢ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mŊ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mþ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mX\x1b[0m\x1b[38;5;156m\x1b[1m\x1b[48;5;0mÊ\x1b[0m\x1b[38;5;155m\x1b[1m\x1b[48;5;0mϱ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mՎ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mҲ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mģ\x1b[0m\x1b[38;5;185m\x1b[1m\x1b[48;5;0mţ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mՀ\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mɄ\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mЌ\x1b[0m
 
     Returns
     -------
@@ -1088,11 +975,11 @@ def sidc(self):
 <div class="desc"><p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import ø
 &gt;&gt;&gt; ø.convert([0,0,0,0,0,0]).id
-'00000000000000000000000000000000'
+'0000000000000000000000000000000000000000'
 </code></pre>
 <pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Hosh
 &gt;&gt;&gt; ø.convert(0).id
-'00000000000000000000000000000000'
+'0000000000000000000000000000000000000000'
 </code></pre>
 <h2 id="parameters">Parameters</h2>
 <dl>
@@ -1110,11 +997,11 @@ def sidc(self):
 
     &gt;&gt;&gt; from garoupa import ø
     &gt;&gt;&gt; ø.convert([0,0,0,0,0,0]).id
-    &#39;00000000000000000000000000000000&#39;
+    &#39;0000000000000000000000000000000000000000&#39;
 
     &gt;&gt;&gt; from garoupa import Hosh
     &gt;&gt;&gt; ø.convert(0).id
-    &#39;00000000000000000000000000000000&#39;
+    &#39;0000000000000000000000000000000000000000&#39;
 
     Parameters
     ----------
@@ -1133,8 +1020,9 @@ def sidc(self):
     elif isinstance(other, list):
         other = Hosh(other, version=self.version)
     elif not isinstance(other, Hosh):
-        raise WrongOperands(id(self.__class__), id(other.__class__),
-                            f&#34;Cannot convert {type(other)} to {type(self)}.&#34;)
+        raise WrongOperands(
+            id(self.__class__), id(other.__class__), f&#34;Cannot convert {type(other)} to {type(self)}.&#34;
+        )
     if self.version != other.version:
         raise WrongVersion(f&#34;Incompatible operands: {self.version} != {other.version}&#34;)
     return other</code></pre>
@@ -1146,7 +1034,7 @@ def sidc(self):
 <dd>
 <div class="desc"><p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; Hosh(b&quot;asdf86fasd&quot;).short(colored=False)
-çÙkƝĜưŔнǒēòƣσåŴQӀՏмŷ
+lϊӑơӫǯÃϺŮϳȐŁЬĽҪƉǏԛȪƜfÞӠȕՇ
 </code></pre></div>
 <details class="source">
 <summary>
@@ -1157,7 +1045,7 @@ def sidc(self):
     Usage:
 
     &gt;&gt;&gt; Hosh(b&#34;asdf86fasd&#34;).short(colored=False)
-    çÙkƝĜưŔнǒēòƣσåŴQӀՏмŷ
+    lϊӑơӫǯÃϺŮϳȐŁЬĽҪƉǏԛȪƜfÞӠȕՇ
     &#34;&#34;&#34;
     return print(self.sidc if colored else self.sid)</code></pre>
 </details>
@@ -1168,7 +1056,7 @@ def sidc(self):
 <dd>
 <div class="desc"><p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; Hosh(b&quot;asdf86fasd&quot;).show(colored=False)
-8nsZouodGbQ5.9OUrypqCzmYrK1t8hov
+voh8t1KrYmzCqpyrUO9.5QbGdouoZsnExarMSa34
 </code></pre></div>
 <details class="source">
 <summary>
@@ -1179,7 +1067,7 @@ def sidc(self):
     Usage:
 
     &gt;&gt;&gt; Hosh(b&#34;asdf86fasd&#34;).show(colored=False)
-    8nsZouodGbQ5.9OUrypqCzmYrK1t8hov
+    voh8t1KrYmzCqpyrUO9.5QbGdouoZsnExarMSa34
     &#34;&#34;&#34;
     return print(self.idc if colored else self.id)</code></pre>
 </details>
@@ -1198,16 +1086,14 @@ def sidc(self):
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
 <li><code><a title="garoupa.algebra" href="algebra/index.html">garoupa.algebra</a></code></li>
+<li><code><a title="garoupa.groups" href="groups.html">garoupa.groups</a></code></li>
 <li><code><a title="garoupa.misc" href="misc/index.html">garoupa.misc</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-variables">Global variables</a></h3>
-<ul class="two-column">
-<li><code><a title="garoupa.identity32" href="#garoupa.identity32">identity32</a></code></li>
-<li><code><a title="garoupa.identity64" href="#garoupa.identity64">identity64</a></code></li>
-<li><code><a title="garoupa.Ø" href="#garoupa.Ø">Ø</a></code></li>
+<ul class="">
+<li><code><a title="garoupa.identity" href="#garoupa.identity">identity</a></code></li>
 <li><code><a title="garoupa.ø" href="#garoupa.ø">ø</a></code></li>
-<li><code><a title="garoupa.Ħ" href="#garoupa.Ħ">Ħ</a></code></li>
 <li><code><a title="garoupa.ħ" href="#garoupa.ħ">ħ</a></code></li>
 </ul>
 </li>
@@ -1221,7 +1107,6 @@ def sidc(self):
 <li><code><a title="garoupa.Hosh.etype_inducer" href="#garoupa.Hosh.etype_inducer">etype_inducer</a></code></li>
 <li><code><a title="garoupa.Hosh.fromid" href="#garoupa.Hosh.fromid">fromid</a></code></li>
 <li><code><a title="garoupa.Hosh.fromn" href="#garoupa.Hosh.fromn">fromn</a></code></li>
-<li><code><a title="garoupa.Hosh.group_props" href="#garoupa.Hosh.group_props">group_props</a></code></li>
 <li><code><a title="garoupa.Hosh.id" href="#garoupa.Hosh.id">id</a></code></li>
 <li><code><a title="garoupa.Hosh.idc" href="#garoupa.Hosh.idc">idc</a></code></li>
 <li><code><a title="garoupa.Hosh.n" href="#garoupa.Hosh.n">n</a></code></li>

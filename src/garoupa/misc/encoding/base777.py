@@ -25,7 +25,7 @@ Base to enable shorter ids, but at the expense of heavily adopting utf-8 (up to 
 
 777 chars provide 19.99631153679756 and 39.99262307569413 digits for 32 and 64 versions.
 The choice is not arbitrary. 777 is ideal to balance variability even in the most significant digit
-for both versions UT32.4 and UT64.4 of Hosh.
+for any version (UT32.4, UT40.4, UT64.4, ...) of Hosh.
 """
 alphabet = tuple(
     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzµÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåç"

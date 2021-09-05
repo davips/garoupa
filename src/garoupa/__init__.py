@@ -22,7 +22,8 @@
 """GaROUPa solves the problem of determining the identity of multi-valued objects or sequences of events
 (and provide extra modules for group theory)"""
 
-from garoupa.misc.identity import ø, Ø
+from garoupa.misc.identity import ø
+from .groups import UT40_4
 from .hosh import Hosh as H
 from .misc.helper import Helper
 
@@ -33,16 +34,9 @@ __pdoc__ = {
 Hosh = H
 """All identifiers are instances of this class"""
 
-ħ = Helper("UT32.4")
+ħ = Helper(UT40_4)
 """Shortcut to create 32-digit Hosh objects"""
-identity32 = ø()
+identity = ø()
 """Shortcut to the 32-digit identity Hosh object"""
-ø = identity32
+ø = identity
 """Shortcut to the 32-digit identity Hosh object"""
-
-Ħ = Helper("UT64.4")
-"""Shortcut to create 64-digit Hosh objects"""
-identity64 = Ø()
-"""Shortcut to the 64-digit identity Hosh object"""
-Ø = identity64
-"""Shortcut to the 64-digit identity Hosh object"""

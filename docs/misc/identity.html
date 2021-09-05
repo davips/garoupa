@@ -30,26 +30,27 @@
 <pre><code class="python">#  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
-# 
+#
 #  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU General Public License
 #  along with garoupa.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-# 
+#
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
 
 &#34;&#34;&#34;Some shortcuts to the null operand and to ease creating elements&#34;&#34;&#34;
+from garoupa.groups import UT40_4
 from garoupa.hosh import Hosh
 
 
@@ -64,10 +65,11 @@ class Identity(Hosh):
     Parameters
     ----------
     version
-        UT32.4 or UT64.4 changes the number of digits and robustness against collisions
+        UT40_4, UT64.4 or othe group changes the number of digits and robustness against collisions/ambiguity
     etype_inducer
         Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
     &#34;&#34;&#34;
+
     def __init__(self, version, etype_inducer=&#34;ordered&#34;):
         super().__init__([0, 0, 0, 0, 0, 0], version=version)
         self._etype_inducer = etype_inducer
@@ -79,14 +81,11 @@ class Identity(Hosh):
 
         Usage:
 
-        &gt;&gt;&gt; from garoupa import ø, Ø, Hosh
+        &gt;&gt;&gt; from garoupa import ø, Hosh
         &gt;&gt;&gt; a = ø.u * b&#34;654&#34;
         &gt;&gt;&gt; print(a)
-        2_e2b898e_______________________
-        &gt;&gt;&gt; b = Ø.u * b&#34;654&#34;
-        &gt;&gt;&gt; print(b)
-        f_ec361e9ebb223fc_______________________________________________
-        &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;, &#34;UT32.4&#34;) == a and b == Hosh(b&#34;654&#34;,&#34;unordered&#34;, &#34;UT64.4&#34;)
+        9_6a78c0056_____________________________
+        &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;) == a
         True
         &#34;&#34;&#34;
         return Identity(self.version, etype_inducer=&#34;unordered&#34;)
@@ -98,14 +97,11 @@ class Identity(Hosh):
 
         Usage:
 
-        &gt;&gt;&gt; from garoupa import Hosh, ø, Ø
+        &gt;&gt;&gt; from garoupa import Hosh, ø
         &gt;&gt;&gt; a = ø.h * b&#34;654&#34;
         &gt;&gt;&gt; print(a)
-        rf_a6340cfb8d0a6b7451ecb1a8317a1
-        &gt;&gt;&gt; b = Ø.h * b&#34;654&#34;
-        &gt;&gt;&gt; print(b)
-        rh_dc705c5c6cff41d8fe4f49956e425b275f3c091372d4a0ba8c673caa46edc
-        &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;, &#34;UT32.4&#34;) == a and b == Hosh(b&#34;654&#34;,&#34;hybrid&#34;, &#34;UT64.4&#34;)
+        eW_aebeb57cf1455dccdc1bd990950a03b0f2e29
+        &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;) == a
         True
         &#34;&#34;&#34;
         return Identity(self.version, etype_inducer=&#34;hybrid&#34;)
@@ -113,7 +109,7 @@ class Identity(Hosh):
 
 class ø(Identity):
     &#34;&#34;&#34;
-    32-digit identity element
+    40-digit identity element
 
     An Identity object is an innocuous identifier that represents a real world process that does nothing,
     or an empty data structure.
@@ -123,9 +119,9 @@ class ø(Identity):
 
     &gt;&gt;&gt; from garoupa import ø
     &gt;&gt;&gt; ø.id
-    &#39;00000000000000000000000000000000&#39;
+    &#39;0000000000000000000000000000000000000000&#39;
     &gt;&gt;&gt; print(ø * 872696823986235926596245)
-    00_000000000b8ccfd58058a15174a9b
+    00_dea47151b84085dfcc8b00000000000000000
 
     Parameters
     ----------
@@ -134,33 +130,33 @@ class ø(Identity):
     &#34;&#34;&#34;
 
     def __init__(self, etype_inducer=&#34;ordered&#34;):
-        super().__init__(&#34;UT32.4&#34;, etype_inducer)
+        super().__init__(UT40_4, etype_inducer)
 
 
-class Ø(Identity):
-    &#34;&#34;&#34;
-    64-digit identity element
-
-    An Identity object is an innocuous identifier that represents a real world process that does nothing,
-    or an empty data structure.
-    It is also useful as a shortcut to coerce some Python values directly to a Hosh object through multiplication.
-
-    Normal usage (as an already instantiated object:
-
-    &gt;&gt;&gt; from garoupa import Ø
-    &gt;&gt;&gt; Ø.id
-    &#39;0000000000000000000000000000000000000000000000000000000000000000&#39;
-    &gt;&gt;&gt; print(Ø * 872696823986235926596245)
-    00_00000000000000000000000000000000000000000b8cbfd58058b15174ad1
-
-    Parameters
-    ----------
-    etype_inducer
-        Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
-    &#34;&#34;&#34;
-
-    def __init__(self, etype_inducer=&#34;ordered&#34;):
-        super().__init__(&#34;UT64.4&#34;, etype_inducer)</code></pre>
+# class Ø(Identity):
+#     &#34;&#34;&#34;
+#     64-digit identity element
+#
+#     An Identity object is an innocuous identifier that represents a real world process that does nothing,
+#     or an empty data structure.
+#     It is also useful as a shortcut to coerce some Python values directly to a Hosh object through multiplication.
+#
+#     Normal usage (as an already instantiated object:
+#
+#     &gt;&gt;&gt; from garoupa import Ø
+#     &gt;&gt;&gt; Ø.id
+#     &#39;0000000000000000000000000000000000000000000000000000000000000000&#39;
+#     &gt;&gt;&gt; print(Ø * 872696823986235926596245)
+#     00_00000000000000000000000000000000000000000b8cbfd58058b15174ad1
+#
+#     Parameters
+#     ----------
+#     etype_inducer
+#         Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
+#     &#34;&#34;&#34;
+#
+#     def __init__(self, etype_inducer=&#34;ordered&#34;):
+#         super().__init__(&#34;UT64.4&#34;, etype_inducer)</code></pre>
 </details>
 </section>
 <section>
@@ -184,7 +180,7 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
 <h2 id="parameters">Parameters</h2>
 <dl>
 <dt><strong><code>version</code></strong></dt>
-<dd>UT32.4 or UT64.4 changes the number of digits and robustness against collisions</dd>
+<dd>UT40_4, UT64.4 or othe group changes the number of digits and robustness against collisions/ambiguity</dd>
 <dt><strong><code>etype_inducer</code></strong></dt>
 <dd>Element type of a future multiplication by a raw Python value: 'unordered', 'ordered', 'hybrid'</dd>
 </dl></div>
@@ -203,10 +199,11 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
     Parameters
     ----------
     version
-        UT32.4 or UT64.4 changes the number of digits and robustness against collisions
+        UT40_4, UT64.4 or othe group changes the number of digits and robustness against collisions/ambiguity
     etype_inducer
         Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
     &#34;&#34;&#34;
+
     def __init__(self, version, etype_inducer=&#34;ordered&#34;):
         super().__init__([0, 0, 0, 0, 0, 0], version=version)
         self._etype_inducer = etype_inducer
@@ -218,14 +215,11 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
 
         Usage:
 
-        &gt;&gt;&gt; from garoupa import ø, Ø, Hosh
+        &gt;&gt;&gt; from garoupa import ø, Hosh
         &gt;&gt;&gt; a = ø.u * b&#34;654&#34;
         &gt;&gt;&gt; print(a)
-        2_e2b898e_______________________
-        &gt;&gt;&gt; b = Ø.u * b&#34;654&#34;
-        &gt;&gt;&gt; print(b)
-        f_ec361e9ebb223fc_______________________________________________
-        &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;, &#34;UT32.4&#34;) == a and b == Hosh(b&#34;654&#34;,&#34;unordered&#34;, &#34;UT64.4&#34;)
+        9_6a78c0056_____________________________
+        &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;) == a
         True
         &#34;&#34;&#34;
         return Identity(self.version, etype_inducer=&#34;unordered&#34;)
@@ -237,14 +231,11 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
 
         Usage:
 
-        &gt;&gt;&gt; from garoupa import Hosh, ø, Ø
+        &gt;&gt;&gt; from garoupa import Hosh, ø
         &gt;&gt;&gt; a = ø.h * b&#34;654&#34;
         &gt;&gt;&gt; print(a)
-        rf_a6340cfb8d0a6b7451ecb1a8317a1
-        &gt;&gt;&gt; b = Ø.h * b&#34;654&#34;
-        &gt;&gt;&gt; print(b)
-        rh_dc705c5c6cff41d8fe4f49956e425b275f3c091372d4a0ba8c673caa46edc
-        &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;, &#34;UT32.4&#34;) == a and b == Hosh(b&#34;654&#34;,&#34;hybrid&#34;, &#34;UT64.4&#34;)
+        eW_aebeb57cf1455dccdc1bd990950a03b0f2e29
+        &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;) == a
         True
         &#34;&#34;&#34;
         return Identity(self.version, etype_inducer=&#34;hybrid&#34;)</code></pre>
@@ -255,7 +246,6 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
-<li><a title="garoupa.misc.identity.Ø" href="#garoupa.misc.identity.Ø">Ø</a></li>
 <li><a title="garoupa.misc.identity.ø" href="#garoupa.misc.identity.ø">ø</a></li>
 </ul>
 <h3>Instance variables</h3>
@@ -265,14 +255,11 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
 <div class="desc"><p>Shortcut to induce etype=hybrid in the next operand, when it is given as a bytes object.
 default=Ordered, h=Hybrid and u=Unordered</p>
 <p>Usage:</p>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Hosh, ø, Ø
+<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Hosh, ø
 &gt;&gt;&gt; a = ø.h * b&quot;654&quot;
 &gt;&gt;&gt; print(a)
-rf_a6340cfb8d0a6b7451ecb1a8317a1
-&gt;&gt;&gt; b = Ø.h * b&quot;654&quot;
-&gt;&gt;&gt; print(b)
-rh_dc705c5c6cff41d8fe4f49956e425b275f3c091372d4a0ba8c673caa46edc
-&gt;&gt;&gt; Hosh(b&quot;654&quot;, &quot;hybrid&quot;, &quot;UT32.4&quot;) == a and b == Hosh(b&quot;654&quot;,&quot;hybrid&quot;, &quot;UT64.4&quot;)
+eW_aebeb57cf1455dccdc1bd990950a03b0f2e29
+&gt;&gt;&gt; Hosh(b&quot;654&quot;, &quot;hybrid&quot;) == a
 True
 </code></pre></div>
 <details class="source">
@@ -286,14 +273,11 @@ def h(self):
 
     Usage:
 
-    &gt;&gt;&gt; from garoupa import Hosh, ø, Ø
+    &gt;&gt;&gt; from garoupa import Hosh, ø
     &gt;&gt;&gt; a = ø.h * b&#34;654&#34;
     &gt;&gt;&gt; print(a)
-    rf_a6340cfb8d0a6b7451ecb1a8317a1
-    &gt;&gt;&gt; b = Ø.h * b&#34;654&#34;
-    &gt;&gt;&gt; print(b)
-    rh_dc705c5c6cff41d8fe4f49956e425b275f3c091372d4a0ba8c673caa46edc
-    &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;, &#34;UT32.4&#34;) == a and b == Hosh(b&#34;654&#34;,&#34;hybrid&#34;, &#34;UT64.4&#34;)
+    eW_aebeb57cf1455dccdc1bd990950a03b0f2e29
+    &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;) == a
     True
     &#34;&#34;&#34;
     return Identity(self.version, etype_inducer=&#34;hybrid&#34;)</code></pre>
@@ -304,14 +288,11 @@ def h(self):
 <div class="desc"><p>Shortcut to induce etype=unordered in the next operand, when it is not a ready Hosh object.
 default=Ordered, h=Hybrid and u=Unordered</p>
 <p>Usage:</p>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import ø, Ø, Hosh
+<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import ø, Hosh
 &gt;&gt;&gt; a = ø.u * b&quot;654&quot;
 &gt;&gt;&gt; print(a)
-2_e2b898e_______________________
-&gt;&gt;&gt; b = Ø.u * b&quot;654&quot;
-&gt;&gt;&gt; print(b)
-f_ec361e9ebb223fc_______________________________________________
-&gt;&gt;&gt; Hosh(b&quot;654&quot;, &quot;unordered&quot;, &quot;UT32.4&quot;) == a and b == Hosh(b&quot;654&quot;,&quot;unordered&quot;, &quot;UT64.4&quot;)
+9_6a78c0056_____________________________
+&gt;&gt;&gt; Hosh(b&quot;654&quot;, &quot;unordered&quot;) == a
 True
 </code></pre></div>
 <details class="source">
@@ -325,14 +306,11 @@ def u(self):
 
     Usage:
 
-    &gt;&gt;&gt; from garoupa import ø, Ø, Hosh
+    &gt;&gt;&gt; from garoupa import ø, Hosh
     &gt;&gt;&gt; a = ø.u * b&#34;654&#34;
     &gt;&gt;&gt; print(a)
-    2_e2b898e_______________________
-    &gt;&gt;&gt; b = Ø.u * b&#34;654&#34;
-    &gt;&gt;&gt; print(b)
-    f_ec361e9ebb223fc_______________________________________________
-    &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;, &#34;UT32.4&#34;) == a and b == Hosh(b&#34;654&#34;,&#34;unordered&#34;, &#34;UT64.4&#34;)
+    9_6a78c0056_____________________________
+    &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;) == a
     True
     &#34;&#34;&#34;
     return Identity(self.version, etype_inducer=&#34;unordered&#34;)</code></pre>
@@ -340,86 +318,21 @@ def u(self):
 </dd>
 </dl>
 </dd>
-<dt id="garoupa.misc.identity.Ø"><code class="flex name class">
-<span>class <span class="ident">Ø</span></span>
-<span>(</span><span>etype_inducer='ordered')</span>
-</code></dt>
-<dd>
-<div class="desc"><p>64-digit identity element</p>
-<p>An Identity object is an innocuous identifier that represents a real world process that does nothing,
-or an empty data structure.
-It is also useful as a shortcut to coerce some Python values directly to a Hosh object through multiplication.</p>
-<p>Normal usage (as an already instantiated object:</p>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Ø
-&gt;&gt;&gt; Ø.id
-'0000000000000000000000000000000000000000000000000000000000000000'
-&gt;&gt;&gt; print(Ø * 872696823986235926596245)
-00_00000000000000000000000000000000000000000b8cbfd58058b15174ad1
-</code></pre>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>etype_inducer</code></strong></dt>
-<dd>Element type of a future multiplication by a raw Python value: 'unordered', 'ordered', 'hybrid'</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class Ø(Identity):
-    &#34;&#34;&#34;
-    64-digit identity element
-
-    An Identity object is an innocuous identifier that represents a real world process that does nothing,
-    or an empty data structure.
-    It is also useful as a shortcut to coerce some Python values directly to a Hosh object through multiplication.
-
-    Normal usage (as an already instantiated object:
-
-    &gt;&gt;&gt; from garoupa import Ø
-    &gt;&gt;&gt; Ø.id
-    &#39;0000000000000000000000000000000000000000000000000000000000000000&#39;
-    &gt;&gt;&gt; print(Ø * 872696823986235926596245)
-    00_00000000000000000000000000000000000000000b8cbfd58058b15174ad1
-
-    Parameters
-    ----------
-    etype_inducer
-        Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
-    &#34;&#34;&#34;
-
-    def __init__(self, etype_inducer=&#34;ordered&#34;):
-        super().__init__(&#34;UT64.4&#34;, etype_inducer)</code></pre>
-</details>
-<h3>Ancestors</h3>
-<ul class="hlist">
-<li><a title="garoupa.misc.identity.Identity" href="#garoupa.misc.identity.Identity">Identity</a></li>
-<li>garoupa.hosh.Hosh</li>
-</ul>
-<h3>Inherited members</h3>
-<ul class="hlist">
-<li><code><b><a title="garoupa.misc.identity.Identity" href="#garoupa.misc.identity.Identity">Identity</a></b></code>:
-<ul class="hlist">
-<li><code><a title="garoupa.misc.identity.Identity.h" href="#garoupa.misc.identity.Identity.h">h</a></code></li>
-<li><code><a title="garoupa.misc.identity.Identity.u" href="#garoupa.misc.identity.Identity.u">u</a></code></li>
-</ul>
-</li>
-</ul>
-</dd>
 <dt id="garoupa.misc.identity.ø"><code class="flex name class">
 <span>class <span class="ident">ø</span></span>
 <span>(</span><span>etype_inducer='ordered')</span>
 </code></dt>
 <dd>
-<div class="desc"><p>32-digit identity element</p>
+<div class="desc"><p>40-digit identity element</p>
 <p>An Identity object is an innocuous identifier that represents a real world process that does nothing,
 or an empty data structure.
 It is also useful as a shortcut to coerce some Python values directly to a Hosh object through multiplication.</p>
 <p>Normal usage (as an already instantiated object:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import ø
 &gt;&gt;&gt; ø.id
-'00000000000000000000000000000000'
+'0000000000000000000000000000000000000000'
 &gt;&gt;&gt; print(ø * 872696823986235926596245)
-00_000000000b8ccfd58058a15174a9b
+00_dea47151b84085dfcc8b00000000000000000
 </code></pre>
 <h2 id="parameters">Parameters</h2>
 <dl>
@@ -432,7 +345,7 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
 </summary>
 <pre><code class="python">class ø(Identity):
     &#34;&#34;&#34;
-    32-digit identity element
+    40-digit identity element
 
     An Identity object is an innocuous identifier that represents a real world process that does nothing,
     or an empty data structure.
@@ -442,9 +355,9 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
 
     &gt;&gt;&gt; from garoupa import ø
     &gt;&gt;&gt; ø.id
-    &#39;00000000000000000000000000000000&#39;
+    &#39;0000000000000000000000000000000000000000&#39;
     &gt;&gt;&gt; print(ø * 872696823986235926596245)
-    00_000000000b8ccfd58058a15174a9b
+    00_dea47151b84085dfcc8b00000000000000000
 
     Parameters
     ----------
@@ -453,7 +366,7 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
     &#34;&#34;&#34;
 
     def __init__(self, etype_inducer=&#34;ordered&#34;):
-        super().__init__(&#34;UT32.4&#34;, etype_inducer)</code></pre>
+        super().__init__(UT40_4, etype_inducer)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -492,9 +405,6 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
 <li><code><a title="garoupa.misc.identity.Identity.h" href="#garoupa.misc.identity.Identity.h">h</a></code></li>
 <li><code><a title="garoupa.misc.identity.Identity.u" href="#garoupa.misc.identity.Identity.u">u</a></code></li>
 </ul>
-</li>
-<li>
-<h4><code><a title="garoupa.misc.identity.Ø" href="#garoupa.misc.identity.Ø">Ø</a></code></h4>
 </li>
 <li>
 <h4><code><a title="garoupa.misc.identity.ø" href="#garoupa.misc.identity.ø">ø</a></code></h4>

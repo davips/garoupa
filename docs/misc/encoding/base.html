@@ -30,20 +30,20 @@
 <pre><code class="python">#  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
-# 
+#
 #  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU General Public License
 #  along with garoupa.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-# 
+#
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
@@ -67,10 +67,11 @@ b8r = dict((c, v) for v, c in enumerate(b8))
 
 
 def dec(string, ralphabet):
-    &#34;&#34;&#34;
+    &#34;&#34;&#34;Convert a little-endian textual digest to a number
+
     Usage:
 
-    &gt;&gt;&gt; dec(&#34;aa&#34;, ralphabet=b64r) == 10 * 64 + 10
+    &gt;&gt;&gt; dec(&#34;ba&#34;, ralphabet=b64r) == 10 * 64 + 11
     True
 
     Parameters
@@ -84,17 +85,20 @@ def dec(string, ralphabet):
     &#34;&#34;&#34;
     num = 0
     b = len(ralphabet)
-    for char in string:
-        num = num * b + ralphabet[char]
+    i = len(string)
+    while i &gt; 0:
+        i -= 1
+        num = num * b + ralphabet[string[i]]
     return num
 
 
 def enc(num, alphabet, digits):
-    &#34;&#34;&#34;
+    &#34;&#34;&#34;Convert a number to a little-endian textual digest
+
     Usage:
 
     &gt;&gt;&gt; enc(123456, b64, 10)
-    &#39;0000000u90&#39;
+    &#39;09u0000000&#39;
     &gt;&gt;&gt; n = dec(enc(123456, b64, 10), b64r)
     &gt;&gt;&gt; n == 123456
     True
@@ -110,8 +114,8 @@ def enc(num, alphabet, digits):
     b = len(alphabet)
     while num:
         num, rem = divmod(num, b)
-        encoded = alphabet[rem] + encoded
-    return encoded.rjust(digits, alphabet[0])
+        encoded += alphabet[rem]
+    return encoded.ljust(digits, alphabet[0])
 
 
 def id2n(id, p):
@@ -121,48 +125,48 @@ def id2n(id, p):
     &gt;&gt;&gt; p = 4294967291
     &gt;&gt;&gt; id2n(&#34;00000000000000000000000000000000&#34;,p)              # Identity
     0
-    &gt;&gt;&gt; id2n(&#34;0_0000001_______________________&#34;,p)              # First unordered
+    &gt;&gt;&gt; id2n(&#34;0_1000000_______________________&#34;,p)              # First unordered
     1
     &gt;&gt;&gt; id2n(&#34;0_fffffff_______________________&#34;,p) == 16**7 - 1
     True
-    &gt;&gt;&gt; id2n(&#34;f_ffffffa_______________________&#34;,p) == p - 1     # Last unordered
+    &gt;&gt;&gt; id2n(&#34;f_affffff_______________________&#34;,p) == p - 1     # Last unordered
     True
-    &gt;&gt;&gt; id2n(&#34;00_00000000000000000000000000001&#34;,p)              # First hybrid
+    &gt;&gt;&gt; id2n(&#34;00_10000000000000000000000000000&#34;,p)              # First hybrid
     4294967291
-    &gt;&gt;&gt; id2n(&#34;.._fffec00000095fffffe0b00000276&#34;,p) == p**4-1    # Last hybrid
+    &gt;&gt;&gt; id2n(&#34;.._67200000b0efffff59000000cefff&#34;,p) == p**4-1    # Last hybrid
     True
-    &gt;&gt;&gt; id2n(&#34;00000000000000000000000000000001&#34;,p) == p**4      # First Ordered
+    &gt;&gt;&gt; id2n(&#34;10000000000000000000000000000000&#34;,p) == p**4      # First Ordered
     True
-    &gt;&gt;&gt; id2n(&#34;....Uw000nn...pg000A2f..Kbo003Go&#34;,p) == p**6-1    # Last Ordered
+    &gt;&gt;&gt; id2n(&#34;oG300obK..f2A000gp...nn000wU....&#34;,p) == p**6-1    # Last Ordered
     True
     &gt;&gt;&gt; # Version UT64.4
     &gt;&gt;&gt; p = 18446744073709551557
     &gt;&gt;&gt; id2n(&#34;0000000000000000000000000000000000000000000000000000000000000000&#34;,p)              # Identity
     0
-    &gt;&gt;&gt; id2n(&#34;0_000000000000001_______________________________________________&#34;,p)              # First unordered
+    &gt;&gt;&gt; id2n(&#34;0_100000000000000_______________________________________________&#34;,p)              # First unordered
     1
     &gt;&gt;&gt; id2n(&#34;0_fffffffffffffff_______________________________________________&#34;,p) == 16**15 - 1
     True
-    &gt;&gt;&gt; id2n(&#34;f_fffffffffffffc4_______________________________________________&#34;,p) == p - 1     # Last unordered
+    &gt;&gt;&gt; id2n(&#34;f_4cfffffffffffff_______________________________________________&#34;,p) == p - 1     # Last unordered
     True
-    &gt;&gt;&gt; id2n(&#34;00_0000000000000000000000000000000000000000000000000000000000001&#34;,p)              # First hybrid
+    &gt;&gt;&gt; id2n(&#34;00_1000000000000000000000000000000000000000000000000000000000000&#34;,p)              # First hybrid
     18446744073709551557
-    &gt;&gt;&gt; id2n(&#34;.._fffffffffff140000000000005195fffffffffff376f30000000000b8e5ac&#34;,p) == p**4-1    # Last hybrid
+    &gt;&gt;&gt; id2n(&#34;.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff&#34;,p) == p**4-1    # Last hybrid
     True
-    &gt;&gt;&gt; id2n(&#34;0000000000000000000000000000000000000000000000000000000000000001&#34;,p) == p**4      # First Ordered
+    &gt;&gt;&gt; id2n(&#34;1000000000000000000000000000000000000000000000000000000000000000&#34;,p) == p**4      # First Ordered
     True
-    &gt;&gt;&gt; id2n(&#34;.........FU00000003bZv......MleM000000Hl80z.....05Z2Ow0000DhrLwo&#34;,p) == p**6-1    # Last Ordered
+    &gt;&gt;&gt; id2n(&#34;owLrhD0000wO2Z50.....z08lH000000MelM......vZb30000000UF.........&#34;,p) == p**6-1    # Last Ordered
     True
     &gt;&gt;&gt; try:
-    ...     id2n(&#34;23rt_4t24t234t23t23t32t23t23rt_4t24t234t23t23t32t23t23rt_4t24t23&#34;, p)
+    ...     id2n(&#34;32t42t4_tr32t32t23t32t32t432t42t4_tr32t32t23t32t32t432t42t4_tr32&#34;, p)
     ... except Exception as e:
     ...     print(e)
-    Invalid position for &#39;_&#39; in id 23rt_4t24t234t23t23t32t23t23rt_4t24t234t23t23t32t23t23rt_4t24t23
+    Invalid position for &#39;_&#39; in id 32t42t4_tr32t32t23t32t32t432t42t4_tr32t32t23t32t32t432t42t4_tr32
     &gt;&gt;&gt; try:
-    ...     id2n(&#34;.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123&#34;, p)
+    ...     id2n(&#34;3212t32t432t32t422t32t23t32t32t432t432t32t23t32.................&#34;, p)
     ... except Exception as e:
     ...     print(e)
-    Ordered id (.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123) with n 39402006196394479212279040100136092515698659329147013992262201319596801387366846232950291543016464135950927013148147 outside allowed range for its kind: [115792089237316193942174975457431254695161196299352022581048345476735855814001;39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810248].
+    Ordered id (3212t32t432t32t422t32t23t32t32t432t432t32t23t32.................) with n 39402006196394479212279040100136092515698659329147013992262201319596801387366846232950291543016464135950927013148147 outside allowed range for its kind: [115792089237316193942174975457431254695161196299352022581048345476735855814001;39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810248].
 
     Parameters
     ----------
@@ -176,7 +180,7 @@ def id2n(id, p):
     if id[1] == &#34;_&#34;:
         hexsize = len(id) // 4 - 1
         a = dec(id[:1], b16r)
-        b = dec(id[2:(hexsize + 2)], b16r)
+        b = dec(id[2: (hexsize + 2)], b16r)
         n = a * 16 ** hexsize + b
         kind, lower, upper = &#34;Unordered&#34;, 1, p - 1
     elif id[2] == &#34;_&#34;:
@@ -205,39 +209,39 @@ def n2id(num, digits, p):
     &gt;&gt;&gt; n2id(0,32,p)    # Identity
     &#39;00000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(1,32,p)        # First unordered
-    &#39;0_0000001_______________________&#39;
+    &#39;0_1000000_______________________&#39;
     &gt;&gt;&gt; n2id(16**7-1,32,p)
     &#39;0_fffffff_______________________&#39;
     &gt;&gt;&gt; n2id(p-1,32,p)      # Last unordered
-    &#39;f_ffffffa_______________________&#39;
+    &#39;f_affffff_______________________&#39;
     &gt;&gt;&gt; n2id(p,32,p)        # First hybrid
-    &#39;00_00000000000000000000000000001&#39;
+    &#39;00_10000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(p**4-1,32,p)   # Last hybrid
-    &#39;.._fffec00000095fffffe0b00000276&#39;
+    &#39;.._67200000b0efffff59000000cefff&#39;
     &gt;&gt;&gt; n2id(p**4,32,p)     # First Ordered
-    &#39;00000000000000000000000000000001&#39;
+    &#39;10000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(p**6-1,32,p)   # Last Ordered
-    &#39;....Uw000nn...pg000A2f..Kbo003Go&#39;
+    &#39;oG300obK..f2A000gp...nn000wU....&#39;
     &gt;&gt;&gt; # Version UT64.4
     &gt;&gt;&gt; p = 18446744073709551557
     &gt;&gt;&gt; n2id(0,64,p)    # Identity
     &#39;0000000000000000000000000000000000000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(1,64,p)        # First unordered
-    &#39;0_000000000000001_______________________________________________&#39;
+    &#39;0_100000000000000_______________________________________________&#39;
     &gt;&gt;&gt; n2id(16**15-1,64,p)
     &#39;0_fffffffffffffff_______________________________________________&#39;
     &gt;&gt;&gt; n2id(16**15,64,p)
     &#39;1_000000000000000_______________________________________________&#39;
     &gt;&gt;&gt; n2id(p-1,64,p)      # Last unordered
-    &#39;f_fffffffffffffc4_______________________________________________&#39;
+    &#39;f_4cfffffffffffff_______________________________________________&#39;
     &gt;&gt;&gt; n2id(p,64,p)        # First hybrid
-    &#39;00_0000000000000000000000000000000000000000000000000000000000001&#39;
+    &#39;00_1000000000000000000000000000000000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(p**4-1,64,p)   # Last hybrid
-    &#39;.._fffffffffff140000000000005195fffffffffff376f30000000000b8e5ac&#39;
+    &#39;.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff&#39;
     &gt;&gt;&gt; n2id(p**4,64,p)     # First Ordered
-    &#39;0000000000000000000000000000000000000000000000000000000000000001&#39;
+    &#39;1000000000000000000000000000000000000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(p**6-1,64,p)   # Last Ordered
-    &#39;.........FU00000003bZv......MleM000000Hl80z.....05Z2Ow0000DhrLwo&#39;
+    &#39;owLrhD0000wO2Z50.....z08lH000000MelM......vZb30000000UF.........&#39;
     &gt;&gt;&gt; p = 4294967291
     &gt;&gt;&gt; try:
     ...     n2id(p**6, 32, p)
@@ -260,7 +264,7 @@ def n2id(num, digits, p):
     -------
 
     &#34;&#34;&#34;
-    if num &lt; 0 or num &gt;= p**6:
+    if num &lt; 0 or num &gt;= p ** 6:
         raise Exception(f&#34;Number {num} outside allowed range: [0;{p ** 6 - 1}]&#34;)
     elif num &gt;= p ** 4:
         return enc(num - p ** 4 + 1, b64, digits)
@@ -290,8 +294,9 @@ def n2id(num, digits, p):
 <span>def <span class="ident">dec</span></span>(<span>string, ralphabet)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Usage:</p>
-<pre><code class="language-python-repl">&gt;&gt;&gt; dec(&quot;aa&quot;, ralphabet=b64r) == 10 * 64 + 10
+<div class="desc"><p>Convert a little-endian textual digest to a number</p>
+<p>Usage:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; dec(&quot;ba&quot;, ralphabet=b64r) == 10 * 64 + 11
 True
 </code></pre>
 <h2 id="parameters">Parameters</h2>
@@ -307,10 +312,11 @@ True
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def dec(string, ralphabet):
-    &#34;&#34;&#34;
+    &#34;&#34;&#34;Convert a little-endian textual digest to a number
+
     Usage:
 
-    &gt;&gt;&gt; dec(&#34;aa&#34;, ralphabet=b64r) == 10 * 64 + 10
+    &gt;&gt;&gt; dec(&#34;ba&#34;, ralphabet=b64r) == 10 * 64 + 11
     True
 
     Parameters
@@ -324,8 +330,10 @@ True
     &#34;&#34;&#34;
     num = 0
     b = len(ralphabet)
-    for char in string:
-        num = num * b + ralphabet[char]
+    i = len(string)
+    while i &gt; 0:
+        i -= 1
+        num = num * b + ralphabet[string[i]]
     return num</code></pre>
 </details>
 </dd>
@@ -333,9 +341,10 @@ True
 <span>def <span class="ident">enc</span></span>(<span>num, alphabet, digits)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Usage:</p>
+<div class="desc"><p>Convert a number to a little-endian textual digest</p>
+<p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; enc(123456, b64, 10)
-'0000000u90'
+'09u0000000'
 &gt;&gt;&gt; n = dec(enc(123456, b64, 10), b64r)
 &gt;&gt;&gt; n == 123456
 True
@@ -350,11 +359,12 @@ Cannot encode negative number -1
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def enc(num, alphabet, digits):
-    &#34;&#34;&#34;
+    &#34;&#34;&#34;Convert a number to a little-endian textual digest
+
     Usage:
 
     &gt;&gt;&gt; enc(123456, b64, 10)
-    &#39;0000000u90&#39;
+    &#39;09u0000000&#39;
     &gt;&gt;&gt; n = dec(enc(123456, b64, 10), b64r)
     &gt;&gt;&gt; n == 123456
     True
@@ -370,8 +380,8 @@ Cannot encode negative number -1
     b = len(alphabet)
     while num:
         num, rem = divmod(num, b)
-        encoded = alphabet[rem] + encoded
-    return encoded.rjust(digits, alphabet[0])</code></pre>
+        encoded += alphabet[rem]
+    return encoded.ljust(digits, alphabet[0])</code></pre>
 </details>
 </dd>
 <dt id="garoupa.misc.encoding.base.id2n"><code class="name flex">
@@ -382,48 +392,48 @@ Cannot encode negative number -1
 <pre><code class="language-python-repl">&gt;&gt;&gt; p = 4294967291
 &gt;&gt;&gt; id2n(&quot;00000000000000000000000000000000&quot;,p)              # Identity
 0
-&gt;&gt;&gt; id2n(&quot;0_0000001_______________________&quot;,p)              # First unordered
+&gt;&gt;&gt; id2n(&quot;0_1000000_______________________&quot;,p)              # First unordered
 1
 &gt;&gt;&gt; id2n(&quot;0_fffffff_______________________&quot;,p) == 16**7 - 1
 True
-&gt;&gt;&gt; id2n(&quot;f_ffffffa_______________________&quot;,p) == p - 1     # Last unordered
+&gt;&gt;&gt; id2n(&quot;f_affffff_______________________&quot;,p) == p - 1     # Last unordered
 True
-&gt;&gt;&gt; id2n(&quot;00_00000000000000000000000000001&quot;,p)              # First hybrid
+&gt;&gt;&gt; id2n(&quot;00_10000000000000000000000000000&quot;,p)              # First hybrid
 4294967291
-&gt;&gt;&gt; id2n(&quot;.._fffec00000095fffffe0b00000276&quot;,p) == p**4-1    # Last hybrid
+&gt;&gt;&gt; id2n(&quot;.._67200000b0efffff59000000cefff&quot;,p) == p**4-1    # Last hybrid
 True
-&gt;&gt;&gt; id2n(&quot;00000000000000000000000000000001&quot;,p) == p**4      # First Ordered
+&gt;&gt;&gt; id2n(&quot;10000000000000000000000000000000&quot;,p) == p**4      # First Ordered
 True
-&gt;&gt;&gt; id2n(&quot;....Uw000nn...pg000A2f..Kbo003Go&quot;,p) == p**6-1    # Last Ordered
+&gt;&gt;&gt; id2n(&quot;oG300obK..f2A000gp...nn000wU....&quot;,p) == p**6-1    # Last Ordered
 True
 &gt;&gt;&gt; # Version UT64.4
 &gt;&gt;&gt; p = 18446744073709551557
 &gt;&gt;&gt; id2n(&quot;0000000000000000000000000000000000000000000000000000000000000000&quot;,p)              # Identity
 0
-&gt;&gt;&gt; id2n(&quot;0_000000000000001_______________________________________________&quot;,p)              # First unordered
+&gt;&gt;&gt; id2n(&quot;0_100000000000000_______________________________________________&quot;,p)              # First unordered
 1
 &gt;&gt;&gt; id2n(&quot;0_fffffffffffffff_______________________________________________&quot;,p) == 16**15 - 1
 True
-&gt;&gt;&gt; id2n(&quot;f_fffffffffffffc4_______________________________________________&quot;,p) == p - 1     # Last unordered
+&gt;&gt;&gt; id2n(&quot;f_4cfffffffffffff_______________________________________________&quot;,p) == p - 1     # Last unordered
 True
-&gt;&gt;&gt; id2n(&quot;00_0000000000000000000000000000000000000000000000000000000000001&quot;,p)              # First hybrid
+&gt;&gt;&gt; id2n(&quot;00_1000000000000000000000000000000000000000000000000000000000000&quot;,p)              # First hybrid
 18446744073709551557
-&gt;&gt;&gt; id2n(&quot;.._fffffffffff140000000000005195fffffffffff376f30000000000b8e5ac&quot;,p) == p**4-1    # Last hybrid
+&gt;&gt;&gt; id2n(&quot;.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff&quot;,p) == p**4-1    # Last hybrid
 True
-&gt;&gt;&gt; id2n(&quot;0000000000000000000000000000000000000000000000000000000000000001&quot;,p) == p**4      # First Ordered
+&gt;&gt;&gt; id2n(&quot;1000000000000000000000000000000000000000000000000000000000000000&quot;,p) == p**4      # First Ordered
 True
-&gt;&gt;&gt; id2n(&quot;.........FU00000003bZv......MleM000000Hl80z.....05Z2Ow0000DhrLwo&quot;,p) == p**6-1    # Last Ordered
+&gt;&gt;&gt; id2n(&quot;owLrhD0000wO2Z50.....z08lH000000MelM......vZb30000000UF.........&quot;,p) == p**6-1    # Last Ordered
 True
 &gt;&gt;&gt; try:
-...     id2n(&quot;23rt_4t24t234t23t23t32t23t23rt_4t24t234t23t23t32t23t23rt_4t24t23&quot;, p)
+...     id2n(&quot;32t42t4_tr32t32t23t32t32t432t42t4_tr32t32t23t32t32t432t42t4_tr32&quot;, p)
 ... except Exception as e:
 ...     print(e)
-Invalid position for '_' in id 23rt_4t24t234t23t23t32t23t23rt_4t24t234t23t23t32t23t23rt_4t24t23
+Invalid position for '_' in id 32t42t4_tr32t32t23t32t32t432t42t4_tr32t32t23t32t32t432t42t4_tr32
 &gt;&gt;&gt; try:
-...     id2n(&quot;.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123&quot;, p)
+...     id2n(&quot;3212t32t432t32t422t32t23t32t32t432t432t32t23t32.................&quot;, p)
 ... except Exception as e:
 ...     print(e)
-Ordered id (.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123) with n 39402006196394479212279040100136092515698659329147013992262201319596801387366846232950291543016464135950927013148147 outside allowed range for its kind: [115792089237316193942174975457431254695161196299352022581048345476735855814001;39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810248].
+Ordered id (3212t32t432t32t422t32t23t32t32t432t432t32t23t32.................) with n 39402006196394479212279040100136092515698659329147013992262201319596801387366846232950291543016464135950927013148147 outside allowed range for its kind: [115792089237316193942174975457431254695161196299352022581048345476735855814001;39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810248].
 </code></pre>
 <h2 id="parameters">Parameters</h2>
 <dl>
@@ -444,48 +454,48 @@ Ordered id (.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123) wi
     &gt;&gt;&gt; p = 4294967291
     &gt;&gt;&gt; id2n(&#34;00000000000000000000000000000000&#34;,p)              # Identity
     0
-    &gt;&gt;&gt; id2n(&#34;0_0000001_______________________&#34;,p)              # First unordered
+    &gt;&gt;&gt; id2n(&#34;0_1000000_______________________&#34;,p)              # First unordered
     1
     &gt;&gt;&gt; id2n(&#34;0_fffffff_______________________&#34;,p) == 16**7 - 1
     True
-    &gt;&gt;&gt; id2n(&#34;f_ffffffa_______________________&#34;,p) == p - 1     # Last unordered
+    &gt;&gt;&gt; id2n(&#34;f_affffff_______________________&#34;,p) == p - 1     # Last unordered
     True
-    &gt;&gt;&gt; id2n(&#34;00_00000000000000000000000000001&#34;,p)              # First hybrid
+    &gt;&gt;&gt; id2n(&#34;00_10000000000000000000000000000&#34;,p)              # First hybrid
     4294967291
-    &gt;&gt;&gt; id2n(&#34;.._fffec00000095fffffe0b00000276&#34;,p) == p**4-1    # Last hybrid
+    &gt;&gt;&gt; id2n(&#34;.._67200000b0efffff59000000cefff&#34;,p) == p**4-1    # Last hybrid
     True
-    &gt;&gt;&gt; id2n(&#34;00000000000000000000000000000001&#34;,p) == p**4      # First Ordered
+    &gt;&gt;&gt; id2n(&#34;10000000000000000000000000000000&#34;,p) == p**4      # First Ordered
     True
-    &gt;&gt;&gt; id2n(&#34;....Uw000nn...pg000A2f..Kbo003Go&#34;,p) == p**6-1    # Last Ordered
+    &gt;&gt;&gt; id2n(&#34;oG300obK..f2A000gp...nn000wU....&#34;,p) == p**6-1    # Last Ordered
     True
     &gt;&gt;&gt; # Version UT64.4
     &gt;&gt;&gt; p = 18446744073709551557
     &gt;&gt;&gt; id2n(&#34;0000000000000000000000000000000000000000000000000000000000000000&#34;,p)              # Identity
     0
-    &gt;&gt;&gt; id2n(&#34;0_000000000000001_______________________________________________&#34;,p)              # First unordered
+    &gt;&gt;&gt; id2n(&#34;0_100000000000000_______________________________________________&#34;,p)              # First unordered
     1
     &gt;&gt;&gt; id2n(&#34;0_fffffffffffffff_______________________________________________&#34;,p) == 16**15 - 1
     True
-    &gt;&gt;&gt; id2n(&#34;f_fffffffffffffc4_______________________________________________&#34;,p) == p - 1     # Last unordered
+    &gt;&gt;&gt; id2n(&#34;f_4cfffffffffffff_______________________________________________&#34;,p) == p - 1     # Last unordered
     True
-    &gt;&gt;&gt; id2n(&#34;00_0000000000000000000000000000000000000000000000000000000000001&#34;,p)              # First hybrid
+    &gt;&gt;&gt; id2n(&#34;00_1000000000000000000000000000000000000000000000000000000000000&#34;,p)              # First hybrid
     18446744073709551557
-    &gt;&gt;&gt; id2n(&#34;.._fffffffffff140000000000005195fffffffffff376f30000000000b8e5ac&#34;,p) == p**4-1    # Last hybrid
+    &gt;&gt;&gt; id2n(&#34;.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff&#34;,p) == p**4-1    # Last hybrid
     True
-    &gt;&gt;&gt; id2n(&#34;0000000000000000000000000000000000000000000000000000000000000001&#34;,p) == p**4      # First Ordered
+    &gt;&gt;&gt; id2n(&#34;1000000000000000000000000000000000000000000000000000000000000000&#34;,p) == p**4      # First Ordered
     True
-    &gt;&gt;&gt; id2n(&#34;.........FU00000003bZv......MleM000000Hl80z.....05Z2Ow0000DhrLwo&#34;,p) == p**6-1    # Last Ordered
+    &gt;&gt;&gt; id2n(&#34;owLrhD0000wO2Z50.....z08lH000000MelM......vZb30000000UF.........&#34;,p) == p**6-1    # Last Ordered
     True
     &gt;&gt;&gt; try:
-    ...     id2n(&#34;23rt_4t24t234t23t23t32t23t23rt_4t24t234t23t23t32t23t23rt_4t24t23&#34;, p)
+    ...     id2n(&#34;32t42t4_tr32t32t23t32t32t432t42t4_tr32t32t23t32t32t432t42t4_tr32&#34;, p)
     ... except Exception as e:
     ...     print(e)
-    Invalid position for &#39;_&#39; in id 23rt_4t24t234t23t23t32t23t23rt_4t24t234t23t23t32t23t23rt_4t24t23
+    Invalid position for &#39;_&#39; in id 32t42t4_tr32t32t23t32t32t432t42t4_tr32t32t23t32t32t432t42t4_tr32
     &gt;&gt;&gt; try:
-    ...     id2n(&#34;.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123&#34;, p)
+    ...     id2n(&#34;3212t32t432t32t422t32t23t32t32t432t432t32t23t32.................&#34;, p)
     ... except Exception as e:
     ...     print(e)
-    Ordered id (.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123) with n 39402006196394479212279040100136092515698659329147013992262201319596801387366846232950291543016464135950927013148147 outside allowed range for its kind: [115792089237316193942174975457431254695161196299352022581048345476735855814001;39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810248].
+    Ordered id (3212t32t432t32t422t32t23t32t32t432t432t32t23t32.................) with n 39402006196394479212279040100136092515698659329147013992262201319596801387366846232950291543016464135950927013148147 outside allowed range for its kind: [115792089237316193942174975457431254695161196299352022581048345476735855814001;39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810248].
 
     Parameters
     ----------
@@ -499,7 +509,7 @@ Ordered id (.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123) wi
     if id[1] == &#34;_&#34;:
         hexsize = len(id) // 4 - 1
         a = dec(id[:1], b16r)
-        b = dec(id[2:(hexsize + 2)], b16r)
+        b = dec(id[2: (hexsize + 2)], b16r)
         n = a * 16 ** hexsize + b
         kind, lower, upper = &#34;Unordered&#34;, 1, p - 1
     elif id[2] == &#34;_&#34;:
@@ -529,39 +539,39 @@ Ordered id (.................23t32t23t234t234t23t23t32t23t224t23t234t23t2123) wi
 &gt;&gt;&gt; n2id(0,32,p)    # Identity
 '00000000000000000000000000000000'
 &gt;&gt;&gt; n2id(1,32,p)        # First unordered
-'0_0000001_______________________'
+'0_1000000_______________________'
 &gt;&gt;&gt; n2id(16**7-1,32,p)
 '0_fffffff_______________________'
 &gt;&gt;&gt; n2id(p-1,32,p)      # Last unordered
-'f_ffffffa_______________________'
+'f_affffff_______________________'
 &gt;&gt;&gt; n2id(p,32,p)        # First hybrid
-'00_00000000000000000000000000001'
+'00_10000000000000000000000000000'
 &gt;&gt;&gt; n2id(p**4-1,32,p)   # Last hybrid
-'.._fffec00000095fffffe0b00000276'
+'.._67200000b0efffff59000000cefff'
 &gt;&gt;&gt; n2id(p**4,32,p)     # First Ordered
-'00000000000000000000000000000001'
+'10000000000000000000000000000000'
 &gt;&gt;&gt; n2id(p**6-1,32,p)   # Last Ordered
-'....Uw000nn...pg000A2f..Kbo003Go'
+'oG300obK..f2A000gp...nn000wU....'
 &gt;&gt;&gt; # Version UT64.4
 &gt;&gt;&gt; p = 18446744073709551557
 &gt;&gt;&gt; n2id(0,64,p)    # Identity
 '0000000000000000000000000000000000000000000000000000000000000000'
 &gt;&gt;&gt; n2id(1,64,p)        # First unordered
-'0_000000000000001_______________________________________________'
+'0_100000000000000_______________________________________________'
 &gt;&gt;&gt; n2id(16**15-1,64,p)
 '0_fffffffffffffff_______________________________________________'
 &gt;&gt;&gt; n2id(16**15,64,p)
 '1_000000000000000_______________________________________________'
 &gt;&gt;&gt; n2id(p-1,64,p)      # Last unordered
-'f_fffffffffffffc4_______________________________________________'
+'f_4cfffffffffffff_______________________________________________'
 &gt;&gt;&gt; n2id(p,64,p)        # First hybrid
-'00_0000000000000000000000000000000000000000000000000000000000001'
+'00_1000000000000000000000000000000000000000000000000000000000000'
 &gt;&gt;&gt; n2id(p**4-1,64,p)   # Last hybrid
-'.._fffffffffff140000000000005195fffffffffff376f30000000000b8e5ac'
+'.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff'
 &gt;&gt;&gt; n2id(p**4,64,p)     # First Ordered
-'0000000000000000000000000000000000000000000000000000000000000001'
+'1000000000000000000000000000000000000000000000000000000000000000'
 &gt;&gt;&gt; n2id(p**6-1,64,p)   # Last Ordered
-'.........FU00000003bZv......MleM000000Hl80z.....05Z2Ow0000DhrLwo'
+'owLrhD0000wO2Z50.....z08lH000000MelM......vZb30000000UF.........'
 &gt;&gt;&gt; p = 4294967291
 &gt;&gt;&gt; try:
 ...     n2id(p**6, 32, p)
@@ -596,39 +606,39 @@ Number -1 outside allowed range: [0;62771016915416317715145892743786391206567242
     &gt;&gt;&gt; n2id(0,32,p)    # Identity
     &#39;00000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(1,32,p)        # First unordered
-    &#39;0_0000001_______________________&#39;
+    &#39;0_1000000_______________________&#39;
     &gt;&gt;&gt; n2id(16**7-1,32,p)
     &#39;0_fffffff_______________________&#39;
     &gt;&gt;&gt; n2id(p-1,32,p)      # Last unordered
-    &#39;f_ffffffa_______________________&#39;
+    &#39;f_affffff_______________________&#39;
     &gt;&gt;&gt; n2id(p,32,p)        # First hybrid
-    &#39;00_00000000000000000000000000001&#39;
+    &#39;00_10000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(p**4-1,32,p)   # Last hybrid
-    &#39;.._fffec00000095fffffe0b00000276&#39;
+    &#39;.._67200000b0efffff59000000cefff&#39;
     &gt;&gt;&gt; n2id(p**4,32,p)     # First Ordered
-    &#39;00000000000000000000000000000001&#39;
+    &#39;10000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(p**6-1,32,p)   # Last Ordered
-    &#39;....Uw000nn...pg000A2f..Kbo003Go&#39;
+    &#39;oG300obK..f2A000gp...nn000wU....&#39;
     &gt;&gt;&gt; # Version UT64.4
     &gt;&gt;&gt; p = 18446744073709551557
     &gt;&gt;&gt; n2id(0,64,p)    # Identity
     &#39;0000000000000000000000000000000000000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(1,64,p)        # First unordered
-    &#39;0_000000000000001_______________________________________________&#39;
+    &#39;0_100000000000000_______________________________________________&#39;
     &gt;&gt;&gt; n2id(16**15-1,64,p)
     &#39;0_fffffffffffffff_______________________________________________&#39;
     &gt;&gt;&gt; n2id(16**15,64,p)
     &#39;1_000000000000000_______________________________________________&#39;
     &gt;&gt;&gt; n2id(p-1,64,p)      # Last unordered
-    &#39;f_fffffffffffffc4_______________________________________________&#39;
+    &#39;f_4cfffffffffffff_______________________________________________&#39;
     &gt;&gt;&gt; n2id(p,64,p)        # First hybrid
-    &#39;00_0000000000000000000000000000000000000000000000000000000000001&#39;
+    &#39;00_1000000000000000000000000000000000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(p**4-1,64,p)   # Last hybrid
-    &#39;.._fffffffffff140000000000005195fffffffffff376f30000000000b8e5ac&#39;
+    &#39;.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff&#39;
     &gt;&gt;&gt; n2id(p**4,64,p)     # First Ordered
-    &#39;0000000000000000000000000000000000000000000000000000000000000001&#39;
+    &#39;1000000000000000000000000000000000000000000000000000000000000000&#39;
     &gt;&gt;&gt; n2id(p**6-1,64,p)   # Last Ordered
-    &#39;.........FU00000003bZv......MleM000000Hl80z.....05Z2Ow0000DhrLwo&#39;
+    &#39;owLrhD0000wO2Z50.....z08lH000000MelM......vZb30000000UF.........&#39;
     &gt;&gt;&gt; p = 4294967291
     &gt;&gt;&gt; try:
     ...     n2id(p**6, 32, p)
@@ -651,7 +661,7 @@ Number -1 outside allowed range: [0;62771016915416317715145892743786391206567242
     -------
 
     &#34;&#34;&#34;
-    if num &lt; 0 or num &gt;= p**6:
+    if num &lt; 0 or num &gt;= p ** 6:
         raise Exception(f&#34;Number {num} outside allowed range: [0;{p ** 6 - 1}]&#34;)
     elif num &gt;= p ** 4:
         return enc(num - p ** 4 + 1, b64, digits)

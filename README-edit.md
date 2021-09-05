@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/davips/garoupa/branch/main/graph/badge.svg)](https://codecov.io/gh/davips/garoupa)
 
 # GaROUPa - Identification based on group theory
-GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) provides a reference implementation for the UT32.4/UT64.4 specification.  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
+GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) provides a reference implementation for the UT40.4 specification (among other versions).  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
 :-------------------------:|:-------------------------:
 <!--- [arXiv paper](xxxxxx) --->
 
@@ -33,7 +33,8 @@ This is how they affect each other:
 ![img_4.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img_4.png)
 
 The chance of collision is determined by the number of possible identifiers of each type.
-Two versions are provided: UT32.4 and UT64.4 They can be easily implemented in other languages and are 
+Some versions are provided, e.g.: UT32.4, UT40.4 (default), UT64.4.
+They can be easily implemented in other languages and are 
 intended to be a specification on how to identify multi-valued objects and multi-step processes.
 Unordered ids use a very narrow range of the total number of identifiers because they are not very useful.
 One use could be the embedding of  authorship or other metadata to an object without worrying about the timing, 

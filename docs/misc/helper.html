@@ -59,6 +59,7 @@ class Helper:
     &#34;&#34;&#34;Internal use only.
 
     Not to be directly instantiated.&#34;&#34;&#34;
+
     version: str
 
     def __call__(self, blob, etype=&#34;ordered&#34;):
@@ -98,6 +99,7 @@ class Helper:
     &#34;&#34;&#34;Internal use only.
 
     Not to be directly instantiated.&#34;&#34;&#34;
+
     version: str
 
     def __call__(self, blob, etype=&#34;ordered&#34;):
@@ -129,9 +131,9 @@ class Helper:
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; a = Hosh.fromid(&quot;abcdefabcdefabcdefabcdefabcdefab&quot;)
 &gt;&gt;&gt; a.n
-997946887123826552569543664509734108513592617499281126651
+1094566309952642687224764830259410933250743749332933330234
 &gt;&gt;&gt; a.cells
-[682822972, 3959913371, 1088646845, 1948924621, 2273369721, 2635491741]
+[748932665, 516513868, 468764361, 3316970622, 2727293743, 316029245]
 &gt;&gt;&gt; a.etype
 'ordered'
 &gt;&gt;&gt; bid = a.id[:2] + &quot;_&quot; + a.id[3:]
@@ -141,9 +143,9 @@ class Helper:
 &gt;&gt;&gt; b.id
 'ab_defabcdefabcdefabcdefabcdefab'
 &gt;&gt;&gt; b.n
-54155325045304951634162463017274306469
+59377482839139050825606534576063885287
 &gt;&gt;&gt; b.cells
-[0, 0, 683536302, 823178997, 3937254300, 1531888570]
+[0, 0, 749449200, 1774140626, 3139018916, 292801225]
 &gt;&gt;&gt; b.etype
 'hybrid'
 &gt;&gt;&gt; Hosh.fromid(&quot;0000000000000000000000000000000000000000000000000000000000000000&quot;) == 0
@@ -177,9 +179,9 @@ def fromid(cls, id):
 
     &gt;&gt;&gt; a = Hosh.fromid(&#34;abcdefabcdefabcdefabcdefabcdefab&#34;)
     &gt;&gt;&gt; a.n
-    997946887123826552569543664509734108513592617499281126651
+    1094566309952642687224764830259410933250743749332933330234
     &gt;&gt;&gt; a.cells
-    [682822972, 3959913371, 1088646845, 1948924621, 2273369721, 2635491741]
+    [748932665, 516513868, 468764361, 3316970622, 2727293743, 316029245]
     &gt;&gt;&gt; a.etype
     &#39;ordered&#39;
     &gt;&gt;&gt; bid = a.id[:2] + &#34;_&#34; + a.id[3:]
@@ -189,9 +191,9 @@ def fromid(cls, id):
     &gt;&gt;&gt; b.id
     &#39;ab_defabcdefabcdefabcdefabcdefab&#39;
     &gt;&gt;&gt; b.n
-    54155325045304951634162463017274306469
+    59377482839139050825606534576063885287
     &gt;&gt;&gt; b.cells
-    [0, 0, 683536302, 823178997, 3937254300, 1531888570]
+    [0, 0, 749449200, 1774140626, 3139018916, 292801225]
     &gt;&gt;&gt; b.etype
     &#39;hybrid&#39;
     &gt;&gt;&gt; Hosh.fromid(&#34;0000000000000000000000000000000000000000000000000000000000000000&#34;) == 0
@@ -209,17 +211,14 @@ def fromid(cls, id):
     -------
     A new Hosh object
     &#34;&#34;&#34;
-    if len(id) == 32:
-        version = &#34;UT32.4&#34;
-    elif len(id) == 64:
-        version = &#34;UT64.4&#34;
-    else:
+
+    if len(id) not in groups:
         raise WrongIdentifier(f&#34;Wrong identifier length: {len(id)}   id:[{id}]&#34;)
-    return Hosh(cells_fromid(id, p=cls.group_props(version)[0]), version=version)</code></pre>
+    return Hosh(cells_fromid(id, p=groups[len(id)].p), version=groups[len(id)])</code></pre>
 </details>
 </dd>
 <dt id="garoupa.misc.helper.Helper.fromn"><code class="name flex">
-<span>def <span class="ident">fromn</span></span>(<span>n: int, version='UT32.4')</span>
+<span>def <span class="ident">fromn</span></span>(<span>n: int, version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, last='.._87c2a630003eec7dffff561b0000004aeffff'))</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create a Hosh object representing the given int.</p>
@@ -227,7 +226,7 @@ def fromid(cls, id):
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
 &gt;&gt;&gt; h.id
-'00_000000000019e9300ddd405c1c8fc'
+'00_e49c1c505dcd0039e91000000000000000000'
 </code></pre>
 <h2 id="parameters">Parameters</h2>
 <dl>
@@ -246,7 +245,7 @@ def fromid(cls, id):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def fromn(cls, n: int, version=&#34;UT32.4&#34;):
+def fromn(cls, n: int, version=UT40_4):
     &#34;&#34;&#34;
     Create a Hosh object representing the given int.
 
@@ -256,7 +255,7 @@ def fromn(cls, n: int, version=&#34;UT32.4&#34;):
 
     &gt;&gt;&gt; h = Hosh.fromn(7647544756746324134134)
     &gt;&gt;&gt; h.id
-    &#39;00_000000000019e9300ddd405c1c8fc&#39;
+    &#39;00_e49c1c505dcd0039e91000000000000000000&#39;
 
     Parameters
     ----------
@@ -267,7 +266,7 @@ def fromn(cls, n: int, version=&#34;UT32.4&#34;):
     -------
     A new Hosh object
     &#34;&#34;&#34;
-    p, order, _, _ = cls.group_props(version)
+    p, order = version.p, version.p6
     if n &gt; order:
         raise ElementTooHigh(f&#34;Element outside allowed range: {n} &gt;= {order}&#34;)
     return Hosh(int2cells(n, p), version=version)</code></pre>

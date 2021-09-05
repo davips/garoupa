@@ -30,20 +30,20 @@
 <pre><code class="python">#  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
-# 
+#
 #  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU General Public License
 #  along with garoupa.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-# 
+#
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
@@ -186,7 +186,7 @@ def bytes2bm(bs):
 
 
 def int2bm(n):
-    return bytes2bm(n.to_bytes(16, byteorder=&#39;big&#39;))
+    return bytes2bm(n.to_bytes(16, byteorder=&#34;big&#34;))
 
 
 def bmm(a, b, mod):
@@ -287,7 +287,7 @@ def bm2intl(m, bits):
     b = bits - 1
     for i in range(l - 1):
         for j in range(i + 1, l):
-            n += (int(m[i, j]) &lt;&lt; b)
+            n += int(m[i, j]) &lt;&lt; b
             b -= 1
     return n
 
@@ -338,6 +338,7 @@ def m2intl(m, o):
 #########################################
 #########################################
 #########################################
+
 
 def m4m(a, b, mod):
     &#34;&#34;&#34;unitriangular matrix (modulo) multiplication&#34;&#34;&#34;
@@ -475,7 +476,7 @@ def m4inv(m, o):
     b = bits - 1
     for i in range(l - 1):
         for j in range(i + 1, l):
-            n += (int(m[i, j]) &lt;&lt; b)
+            n += int(m[i, j]) &lt;&lt; b
             b -= 1
     return n</code></pre>
 </details>
@@ -659,7 +660,7 @@ def m4inv(m, o):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def int2bm(n):
-    return bytes2bm(n.to_bytes(16, byteorder=&#39;big&#39;))</code></pre>
+    return bytes2bm(n.to_bytes(16, byteorder=&#34;big&#34;))</code></pre>
 </details>
 </dd>
 <dt id="garoupa.algebra.npmath.int2bm6"><code class="name flex">

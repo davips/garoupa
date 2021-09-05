@@ -63,7 +63,7 @@ from garoupa.algebra.abs.element import Element
 
 
 class Group:
-    _commuting_pairs, _comparisons, _interrupt = Value(&#39;i&#39;, 0), Value(&#39;i&#39;, 0), Value(&#39;i&#39;, 0)
+    _commuting_pairs, _comparisons, _interrupt = Value(&#34;i&#34;, 0), Value(&#34;i&#34;, 0), Value(&#34;i&#34;, 0)
     _mutex = Lock()
     _euler, _order_hist, _pi = None, None, None
 
@@ -93,7 +93,7 @@ class Group:
             with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
                 comms = Group._commuting_pairs.value
                 n = Group._comparisons.value
-                for a, b in Bar(&#39;Processing&#39;, max=pairs).iter(islice(zip(A, B), 0, pairs)):
+                for a, b in Bar(&#34;Processing&#34;, max=pairs).iter(islice(zip(A, B), 0, pairs)):
                     if a * b == b * a:
                         if exitonhit:
                             with Group._interrupt.get_lock():
@@ -123,8 +123,9 @@ class Group:
 
     @property
     def comm_degree(self):
-        raise Exception(f&#34;Not implemented for groups from class {self.name}.&#34;
-                        &#34;HINT: Use sampled_comm_degree()&#34;, self.name)
+        raise Exception(
+            f&#34;Not implemented for groups from class {self.name}.&#34; &#34;HINT: Use sampled_comm_degree()&#34;, self.name
+        )
 
     def __iter__(self):
         raise Exception(&#34;Not implemented for groups of the class&#34;, self.name)
@@ -177,7 +178,8 @@ class Group:
         last_total, previous = -1, 0
         import pathos.multiprocessing as mp
         from progress.bar import Bar
-        with Bar(&#39;Processing&#39;, max=sample, suffix=&#39;%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds&#39;) as bar:
+
+        with Bar(&#34;Processing&#34;, max=sample, suffix=&#34;%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds&#34;) as bar:
             for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
                 bar.next()
                 now = bar.elapsed + 1
@@ -199,10 +201,12 @@ class Group:
 
     def __mul__(self, other):
         from garoupa.algebra.product import Product
+
         return Product(self, other)
 
     def __xor__(self, other):
         from garoupa.algebra.product import Product
+
         return Product(*repeat(self, other))
 
     __pow__ = __xor__
@@ -330,7 +334,7 @@ class Group:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Group:
-    _commuting_pairs, _comparisons, _interrupt = Value(&#39;i&#39;, 0), Value(&#39;i&#39;, 0), Value(&#39;i&#39;, 0)
+    _commuting_pairs, _comparisons, _interrupt = Value(&#34;i&#34;, 0), Value(&#34;i&#34;, 0), Value(&#34;i&#34;, 0)
     _mutex = Lock()
     _euler, _order_hist, _pi = None, None, None
 
@@ -360,7 +364,7 @@ class Group:
             with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
                 comms = Group._commuting_pairs.value
                 n = Group._comparisons.value
-                for a, b in Bar(&#39;Processing&#39;, max=pairs).iter(islice(zip(A, B), 0, pairs)):
+                for a, b in Bar(&#34;Processing&#34;, max=pairs).iter(islice(zip(A, B), 0, pairs)):
                     if a * b == b * a:
                         if exitonhit:
                             with Group._interrupt.get_lock():
@@ -390,8 +394,9 @@ class Group:
 
     @property
     def comm_degree(self):
-        raise Exception(f&#34;Not implemented for groups from class {self.name}.&#34;
-                        &#34;HINT: Use sampled_comm_degree()&#34;, self.name)
+        raise Exception(
+            f&#34;Not implemented for groups from class {self.name}.&#34; &#34;HINT: Use sampled_comm_degree()&#34;, self.name
+        )
 
     def __iter__(self):
         raise Exception(&#34;Not implemented for groups of the class&#34;, self.name)
@@ -444,7 +449,8 @@ class Group:
         last_total, previous = -1, 0
         import pathos.multiprocessing as mp
         from progress.bar import Bar
-        with Bar(&#39;Processing&#39;, max=sample, suffix=&#39;%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds&#39;) as bar:
+
+        with Bar(&#34;Processing&#34;, max=sample, suffix=&#34;%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds&#34;) as bar:
             for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
                 bar.next()
                 now = bar.elapsed + 1
@@ -466,10 +472,12 @@ class Group:
 
     def __mul__(self, other):
         from garoupa.algebra.product import Product
+
         return Product(self, other)
 
     def __xor__(self, other):
         from garoupa.algebra.product import Product
+
         return Product(*repeat(self, other))
 
     __pow__ = __xor__
@@ -661,8 +669,9 @@ def lcm(cls, a, b):
 </summary>
 <pre><code class="python">@property
 def comm_degree(self):
-    raise Exception(f&#34;Not implemented for groups from class {self.name}.&#34;
-                    &#34;HINT: Use sampled_comm_degree()&#34;, self.name)</code></pre>
+    raise Exception(
+        f&#34;Not implemented for groups from class {self.name}.&#34; &#34;HINT: Use sampled_comm_degree()&#34;, self.name
+    )</code></pre>
 </details>
 </dd>
 <dt id="garoupa.algebra.matrix.group.Group.order_hist"><code class="name">var <span class="ident">order_hist</span></code></dt>
@@ -833,7 +842,7 @@ def pi(self):
         with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
             comms = Group._commuting_pairs.value
             n = Group._comparisons.value
-            for a, b in Bar(&#39;Processing&#39;, max=pairs).iter(islice(zip(A, B), 0, pairs)):
+            for a, b in Bar(&#34;Processing&#34;, max=pairs).iter(islice(zip(A, B), 0, pairs)):
                 if a * b == b * a:
                     if exitonhit:
                         with Group._interrupt.get_lock():
@@ -928,7 +937,8 @@ def pi(self):
     last_total, previous = -1, 0
     import pathos.multiprocessing as mp
     from progress.bar import Bar
-    with Bar(&#39;Processing&#39;, max=sample, suffix=&#39;%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds&#39;) as bar:
+
+    with Bar(&#34;Processing&#34;, max=sample, suffix=&#34;%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds&#34;) as bar:
         for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
             bar.next()
             now = bar.elapsed + 1

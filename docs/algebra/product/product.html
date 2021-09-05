@@ -191,9 +191,16 @@ class Product(Group):
             histb = compact(histb, binsizeb)
             hist = self.order_hist_mul(hista, histb)
             prod = f&#34;{ga}*{gb}&#34;
-            print(&#34;Pi:&#34;, self._pi_core(hist), f&#34;\tHist size: {len(hist)}\t&#34;,
-                  show_timestamp and datetime.now().strftime(&#34;%d/%m/%Y %H:%M:%S&#34;),
-                  f&#34;\t{prod}&#34;, binsizea, binsizeb, flush=True)
+            print(
+                &#34;Pi:&#34;,
+                self._pi_core(hist),
+                f&#34;\tHist size: {len(hist)}\t&#34;,
+                show_timestamp and datetime.now().strftime(&#34;%d/%m/%Y %H:%M:%S&#34;),
+                f&#34;\t{prod}&#34;,
+                binsizea,
+                binsizeb,
+                flush=True,
+            )
             return prod, hist
 
         return dict(sorted(reduce(mul, hists())[1].items()))</code></pre>
@@ -348,9 +355,16 @@ class Product(Group):
             histb = compact(histb, binsizeb)
             hist = self.order_hist_mul(hista, histb)
             prod = f&#34;{ga}*{gb}&#34;
-            print(&#34;Pi:&#34;, self._pi_core(hist), f&#34;\tHist size: {len(hist)}\t&#34;,
-                  show_timestamp and datetime.now().strftime(&#34;%d/%m/%Y %H:%M:%S&#34;),
-                  f&#34;\t{prod}&#34;, binsizea, binsizeb, flush=True)
+            print(
+                &#34;Pi:&#34;,
+                self._pi_core(hist),
+                f&#34;\tHist size: {len(hist)}\t&#34;,
+                show_timestamp and datetime.now().strftime(&#34;%d/%m/%Y %H:%M:%S&#34;),
+                f&#34;\t{prod}&#34;,
+                binsizea,
+                binsizeb,
+                flush=True,
+            )
             return prod, hist
 
         return dict(sorted(reduce(mul, hists())[1].items()))</code></pre>
@@ -538,9 +552,16 @@ Pi: 0.11385896951373144         Hist size: 24    False  D3*D5*D7*D9 [4] [1]
         histb = compact(histb, binsizeb)
         hist = self.order_hist_mul(hista, histb)
         prod = f&#34;{ga}*{gb}&#34;
-        print(&#34;Pi:&#34;, self._pi_core(hist), f&#34;\tHist size: {len(hist)}\t&#34;,
-              show_timestamp and datetime.now().strftime(&#34;%d/%m/%Y %H:%M:%S&#34;),
-              f&#34;\t{prod}&#34;, binsizea, binsizeb, flush=True)
+        print(
+            &#34;Pi:&#34;,
+            self._pi_core(hist),
+            f&#34;\tHist size: {len(hist)}\t&#34;,
+            show_timestamp and datetime.now().strftime(&#34;%d/%m/%Y %H:%M:%S&#34;),
+            f&#34;\t{prod}&#34;,
+            binsizea,
+            binsizeb,
+            flush=True,
+        )
         return prod, hist
 
     return dict(sorted(reduce(mul, hists())[1].items()))</code></pre>

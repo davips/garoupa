@@ -149,7 +149,7 @@ def cellsmul(a, b, mod):
         (a[2] + b[2] + a[3] * b[0]) % mod,
         (a[3] + b[3]) % mod,
         (a[4] + b[4] + a[1] * b[3]) % mod,
-        (a[5] + b[5] + a[1] * b[2] + a[4] * b[0]) % mod
+        (a[5] + b[5] + a[1] * b[2] + a[4] * b[0]) % mod,
     ]
 
 
@@ -187,7 +187,7 @@ def cellsinv(m, mod):
         (m[3] * m[0] - m[2]) % mod,
         -m[3] % mod,
         (m[1] * m[3] - m[4]) % mod,
-        (m[1] * m[2] + m[4] * m[0] - m[1] * m[3] * m[0] - m[5]) % mod
+        (m[1] * m[2] + m[4] * m[0] - m[1] * m[3] * m[0] - m[5]) % mod,
     ]</code></pre>
 </details>
 </section>
@@ -315,7 +315,7 @@ True
         (m[3] * m[0] - m[2]) % mod,
         -m[3] % mod,
         (m[1] * m[3] - m[4]) % mod,
-        (m[1] * m[2] + m[4] * m[0] - m[1] * m[3] * m[0] - m[5]) % mod
+        (m[1] * m[2] + m[4] * m[0] - m[1] * m[3] * m[0] - m[5]) % mod,
     ]</code></pre>
 </details>
 </dd>
@@ -395,7 +395,7 @@ True
         (a[2] + b[2] + a[3] * b[0]) % mod,
         (a[3] + b[3]) % mod,
         (a[4] + b[4] + a[1] * b[3]) % mod,
-        (a[5] + b[5] + a[1] * b[2] + a[4] * b[0]) % mod
+        (a[5] + b[5] + a[1] * b[2] + a[4] * b[0]) % mod,
     ]</code></pre>
 </details>
 </dd>

@@ -21,6 +21,7 @@
 #  time spent here.
 
 """Some shortcuts to the null operand and to ease creating elements"""
+from garoupa.groups import UT40_4
 from garoupa.hosh import Hosh
 
 
@@ -35,7 +36,7 @@ class Identity(Hosh):
     Parameters
     ----------
     version
-        UT32.4 or UT64.4 changes the number of digits and robustness against collisions
+        UT40_4, UT64.4 or othe group changes the number of digits and robustness against collisions/ambiguity
     etype_inducer
         Element type of a future multiplication by a raw Python value: 'unordered', 'ordered', 'hybrid'
     """
@@ -51,14 +52,11 @@ class Identity(Hosh):
 
         Usage:
 
-        >>> from garoupa import ø, Ø, Hosh
+        >>> from garoupa import ø, Hosh
         >>> a = ø.u * b"654"
         >>> print(a)
-        2_e2b898e_______________________
-        >>> b = Ø.u * b"654"
-        >>> print(b)
-        f_ec361e9ebb223fc_______________________________________________
-        >>> Hosh(b"654", "unordered", "UT32.4") == a and b == Hosh(b"654","unordered", "UT64.4")
+        9_6a78c0056_____________________________
+        >>> Hosh(b"654", "unordered") == a
         True
         """
         return Identity(self.version, etype_inducer="unordered")
@@ -70,14 +68,11 @@ class Identity(Hosh):
 
         Usage:
 
-        >>> from garoupa import Hosh, ø, Ø
+        >>> from garoupa import Hosh, ø
         >>> a = ø.h * b"654"
         >>> print(a)
-        rf_a6340cfb8d0a6b7451ecb1a8317a1
-        >>> b = Ø.h * b"654"
-        >>> print(b)
-        rh_dc705c5c6cff41d8fe4f49956e425b275f3c091372d4a0ba8c673caa46edc
-        >>> Hosh(b"654", "hybrid", "UT32.4") == a and b == Hosh(b"654","hybrid", "UT64.4")
+        eW_aebeb57cf1455dccdc1bd990950a03b0f2e29
+        >>> Hosh(b"654", "hybrid") == a
         True
         """
         return Identity(self.version, etype_inducer="hybrid")
@@ -85,7 +80,7 @@ class Identity(Hosh):
 
 class ø(Identity):
     """
-    32-digit identity element
+    40-digit identity element
 
     An Identity object is an innocuous identifier that represents a real world process that does nothing,
     or an empty data structure.
@@ -95,9 +90,9 @@ class ø(Identity):
 
     >>> from garoupa import ø
     >>> ø.id
-    '00000000000000000000000000000000'
+    '0000000000000000000000000000000000000000'
     >>> print(ø * 872696823986235926596245)
-    00_000000000b8ccfd58058a15174a9b
+    00_dea47151b84085dfcc8b00000000000000000
 
     Parameters
     ----------
@@ -106,30 +101,30 @@ class ø(Identity):
     """
 
     def __init__(self, etype_inducer="ordered"):
-        super().__init__("UT32.4", etype_inducer)
+        super().__init__(UT40_4, etype_inducer)
 
 
-class Ø(Identity):
-    """
-    64-digit identity element
-
-    An Identity object is an innocuous identifier that represents a real world process that does nothing,
-    or an empty data structure.
-    It is also useful as a shortcut to coerce some Python values directly to a Hosh object through multiplication.
-
-    Normal usage (as an already instantiated object:
-
-    >>> from garoupa import Ø
-    >>> Ø.id
-    '0000000000000000000000000000000000000000000000000000000000000000'
-    >>> print(Ø * 872696823986235926596245)
-    00_00000000000000000000000000000000000000000b8cbfd58058b15174ad1
-
-    Parameters
-    ----------
-    etype_inducer
-        Element type of a future multiplication by a raw Python value: 'unordered', 'ordered', 'hybrid'
-    """
-
-    def __init__(self, etype_inducer="ordered"):
-        super().__init__("UT64.4", etype_inducer)
+# class Ø(Identity):
+#     """
+#     64-digit identity element
+#
+#     An Identity object is an innocuous identifier that represents a real world process that does nothing,
+#     or an empty data structure.
+#     It is also useful as a shortcut to coerce some Python values directly to a Hosh object through multiplication.
+#
+#     Normal usage (as an already instantiated object:
+#
+#     >>> from garoupa import Ø
+#     >>> Ø.id
+#     '0000000000000000000000000000000000000000000000000000000000000000'
+#     >>> print(Ø * 872696823986235926596245)
+#     00_00000000000000000000000000000000000000000b8cbfd58058b15174ad1
+#
+#     Parameters
+#     ----------
+#     etype_inducer
+#         Element type of a future multiplication by a raw Python value: 'unordered', 'ordered', 'hybrid'
+#     """
+#
+#     def __init__(self, etype_inducer="ordered"):
+#         super().__init__("UT64.4", etype_inducer)

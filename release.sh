@@ -15,6 +15,7 @@ echo; echo
 echo
 echo "----------------- docs... -----------------------"
 read -p "press enter"
+rm docs -rf
 poetry run pdoc --html --force garoupa -o docs
 mv docs/garoupa/* docs/
 rm docs/garoupa -rf

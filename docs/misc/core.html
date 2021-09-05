@@ -32,20 +32,20 @@ However, the performance of GaROUPa seems already very high, making the 'rust' i
 <pre><code class="python">#  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
-# 
+#
 #  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU General Public License
 #  along with garoupa.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-# 
+#
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and unethical regarding the effort and
@@ -71,11 +71,11 @@ def cells_id_fromblob(blob, etype, nbytes, p):
     Usage:
 
     &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;unordered&#34;, 48, 18446744073709551557)
-    ([0, 0, 0, 0, 0, 12851939186879403454], &#39;b_25b429914de95be_______________________________________________&#39;)
+    ([0, 0, 0, 0, 0, 12851939186879403454], &#39;b_eb59ed419924b52_______________________________________________&#39;)
     &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;hybrid&#34;, 48, 18446744073709551557)
-    ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], &#39;Et_cac755fd13d8adac82825b91b4671424594642a77a4a2cf9f4dabb065c5e8&#39;)
+    ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], &#39;tE_8e5c560bbad4f9fc2a4a77a2464954241764b19b52828cada8d31df557cac&#39;)
     &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;ordered&#34;, 48, 18446744073709551557)
-    ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], &#39;qxcXeFhW8X2tXztiqgTRlQYZYfIuM1JLZVojkHHC01nn0w6Q41ciQMx096xAv59E&#39;)
+    ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], &#39;E95vAx690xMQic14Q6w0nn10CHHkjoVZLJ1MuIfYZYQlRTgqitzXt2X8WhFeXcxq&#39;)
 
     Parameters
     ----------
@@ -115,22 +115,22 @@ def id_fromcells(cells, digits, p):
     &gt;&gt;&gt; p = 4294967291
     &gt;&gt;&gt; id_fromcells([0,0,0,0,0,0], 32, p) == &#39;00000000000000000000000000000000&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == &#39;f_ffffffa_______________________&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == &#39;f_affffff_______________________&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == &#39;00_00000000000000000000000000001&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == &#39;00_10000000000000000000000000000&#39;
     True
     &gt;&gt;&gt; res,c1 = divmod(2**120-1+p-1, p)
     &gt;&gt;&gt; res,c2 = divmod(res, p)
     &gt;&gt;&gt; c4,c3 = divmod(res, p)
-    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == &#39;0f_fffffffffffffffffffffffffffff&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == &#39;f0_fffffffffffffffffffffffffffff&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == &#39;0g_00000000000000000000000000000&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == &#39;g0_00000000000000000000000000000&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == &#39;.._fffec00000095fffffe0b00000276&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == &#39;.._67200000b0efffff59000000cefff&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == &#39;00000000000000000000000000000001&#39;
+    &gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == &#39;10000000000000000000000000000000&#39;
     True
-    &gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == &#39;....Uw000nn...pg000A2f..Kbo003Go&#39;
+    &gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == &#39;oG300obK..f2A000gp...nn000wU....&#39;
     True
 
     Parameters
@@ -158,22 +158,22 @@ def cells_fromid(id, p):
     &gt;&gt;&gt; p = 4294967291
     &gt;&gt;&gt; cells_fromid(&#39;00000000000000000000000000000000&#39;, p) == [0,0,0,0,0,0]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;f_ffffffa_______________________&#39;, p) == [0,0,0,0,0,p-1]
+    &gt;&gt;&gt; cells_fromid(&#39;f_affffff_______________________&#39;, p) == [0,0,0,0,0,p-1]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;00_00000000000000000000000000001&#39;, p) == [0,0,0,0,1,0]
+    &gt;&gt;&gt; cells_fromid(&#39;00_10000000000000000000000000000&#39;, p) == [0,0,0,0,1,0]
     True
     &gt;&gt;&gt; res,c1 = divmod(16**30 - 1 + p - 1, p)
     &gt;&gt;&gt; res,c2 = divmod(res, p)
     &gt;&gt;&gt; c4,c3 = divmod(res, p)
-    &gt;&gt;&gt; cells_fromid(&#39;0f_fffffffffffffffffffffffffffff&#39;, p) == [0,0,c4,c3,c2,c1]
+    &gt;&gt;&gt; cells_fromid(&#39;f0_fffffffffffffffffffffffffffff&#39;, p) == [0,0,c4,c3,c2,c1]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;0g_00000000000000000000000000000&#39;, p) == [0,0,c4,c3,c2,c1+1]
+    &gt;&gt;&gt; cells_fromid(&#39;g0_00000000000000000000000000000&#39;, p) == [0,0,c4,c3,c2,c1+1]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;.._fffec00000095fffffe0b00000276&#39;, p) == [0,0,p-1,p-1,p-1,p-1]
+    &gt;&gt;&gt; cells_fromid(&#39;.._67200000b0efffff59000000cefff&#39;, p) == [0,0,p-1,p-1,p-1,p-1]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;00000000000000000000000000000001&#39;, p) == [0,1,0,0,0,0]
+    &gt;&gt;&gt; cells_fromid(&#39;10000000000000000000000000000000&#39;, p) == [0,1,0,0,0,0]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;....Uw000nn...pg000A2f..Kbo003Go&#39;, p) == [p-1,p-1,p-1,p-1,p-1,p-1]
+    &gt;&gt;&gt; cells_fromid(&#39;oG300obK..f2A000gp...nn000wU....&#39;, p) == [p-1,p-1,p-1,p-1,p-1,p-1]
     True
 
     Parameters
@@ -227,22 +227,22 @@ persistent setting, and it has no effect if <code>data</code> is omitted.</p></d
 <pre><code class="language-python-repl">&gt;&gt;&gt; p = 4294967291
 &gt;&gt;&gt; cells_fromid('00000000000000000000000000000000', p) == [0,0,0,0,0,0]
 True
-&gt;&gt;&gt; cells_fromid('f_ffffffa_______________________', p) == [0,0,0,0,0,p-1]
+&gt;&gt;&gt; cells_fromid('f_affffff_______________________', p) == [0,0,0,0,0,p-1]
 True
-&gt;&gt;&gt; cells_fromid('00_00000000000000000000000000001', p) == [0,0,0,0,1,0]
+&gt;&gt;&gt; cells_fromid('00_10000000000000000000000000000', p) == [0,0,0,0,1,0]
 True
 &gt;&gt;&gt; res,c1 = divmod(16**30 - 1 + p - 1, p)
 &gt;&gt;&gt; res,c2 = divmod(res, p)
 &gt;&gt;&gt; c4,c3 = divmod(res, p)
-&gt;&gt;&gt; cells_fromid('0f_fffffffffffffffffffffffffffff', p) == [0,0,c4,c3,c2,c1]
+&gt;&gt;&gt; cells_fromid('f0_fffffffffffffffffffffffffffff', p) == [0,0,c4,c3,c2,c1]
 True
-&gt;&gt;&gt; cells_fromid('0g_00000000000000000000000000000', p) == [0,0,c4,c3,c2,c1+1]
+&gt;&gt;&gt; cells_fromid('g0_00000000000000000000000000000', p) == [0,0,c4,c3,c2,c1+1]
 True
-&gt;&gt;&gt; cells_fromid('.._fffec00000095fffffe0b00000276', p) == [0,0,p-1,p-1,p-1,p-1]
+&gt;&gt;&gt; cells_fromid('.._67200000b0efffff59000000cefff', p) == [0,0,p-1,p-1,p-1,p-1]
 True
-&gt;&gt;&gt; cells_fromid('00000000000000000000000000000001', p) == [0,1,0,0,0,0]
+&gt;&gt;&gt; cells_fromid('10000000000000000000000000000000', p) == [0,1,0,0,0,0]
 True
-&gt;&gt;&gt; cells_fromid('....Uw000nn...pg000A2f..Kbo003Go', p) == [p-1,p-1,p-1,p-1,p-1,p-1]
+&gt;&gt;&gt; cells_fromid('oG300obK..f2A000gp...nn000wU....', p) == [p-1,p-1,p-1,p-1,p-1,p-1]
 True
 </code></pre>
 <h2 id="parameters">Parameters</h2>
@@ -267,22 +267,22 @@ according to the paper</dd>
     &gt;&gt;&gt; p = 4294967291
     &gt;&gt;&gt; cells_fromid(&#39;00000000000000000000000000000000&#39;, p) == [0,0,0,0,0,0]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;f_ffffffa_______________________&#39;, p) == [0,0,0,0,0,p-1]
+    &gt;&gt;&gt; cells_fromid(&#39;f_affffff_______________________&#39;, p) == [0,0,0,0,0,p-1]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;00_00000000000000000000000000001&#39;, p) == [0,0,0,0,1,0]
+    &gt;&gt;&gt; cells_fromid(&#39;00_10000000000000000000000000000&#39;, p) == [0,0,0,0,1,0]
     True
     &gt;&gt;&gt; res,c1 = divmod(16**30 - 1 + p - 1, p)
     &gt;&gt;&gt; res,c2 = divmod(res, p)
     &gt;&gt;&gt; c4,c3 = divmod(res, p)
-    &gt;&gt;&gt; cells_fromid(&#39;0f_fffffffffffffffffffffffffffff&#39;, p) == [0,0,c4,c3,c2,c1]
+    &gt;&gt;&gt; cells_fromid(&#39;f0_fffffffffffffffffffffffffffff&#39;, p) == [0,0,c4,c3,c2,c1]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;0g_00000000000000000000000000000&#39;, p) == [0,0,c4,c3,c2,c1+1]
+    &gt;&gt;&gt; cells_fromid(&#39;g0_00000000000000000000000000000&#39;, p) == [0,0,c4,c3,c2,c1+1]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;.._fffec00000095fffffe0b00000276&#39;, p) == [0,0,p-1,p-1,p-1,p-1]
+    &gt;&gt;&gt; cells_fromid(&#39;.._67200000b0efffff59000000cefff&#39;, p) == [0,0,p-1,p-1,p-1,p-1]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;00000000000000000000000000000001&#39;, p) == [0,1,0,0,0,0]
+    &gt;&gt;&gt; cells_fromid(&#39;10000000000000000000000000000000&#39;, p) == [0,1,0,0,0,0]
     True
-    &gt;&gt;&gt; cells_fromid(&#39;....Uw000nn...pg000A2f..Kbo003Go&#39;, p) == [p-1,p-1,p-1,p-1,p-1,p-1]
+    &gt;&gt;&gt; cells_fromid(&#39;oG300obK..f2A000gp...nn000wU....&#39;, p) == [p-1,p-1,p-1,p-1,p-1,p-1]
     True
 
     Parameters
@@ -308,11 +308,11 @@ according to the paper</dd>
 <p>ps. Blake3 returns a digest with the most significant byte on the right.</p>
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; cells_id_fromblob(b&quot;sdff&quot;, &quot;unordered&quot;, 48, 18446744073709551557)
-([0, 0, 0, 0, 0, 12851939186879403454], 'b_25b429914de95be_______________________________________________')
+([0, 0, 0, 0, 0, 12851939186879403454], 'b_eb59ed419924b52_______________________________________________')
 &gt;&gt;&gt; cells_id_fromblob(b&quot;sdff&quot;, &quot;hybrid&quot;, 48, 18446744073709551557)
-([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], 'Et_cac755fd13d8adac82825b91b4671424594642a77a4a2cf9f4dabb065c5e8')
+([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], 'tE_8e5c560bbad4f9fc2a4a77a2464954241764b19b52828cada8d31df557cac')
 &gt;&gt;&gt; cells_id_fromblob(b&quot;sdff&quot;, &quot;ordered&quot;, 48, 18446744073709551557)
-([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], 'qxcXeFhW8X2tXztiqgTRlQYZYfIuM1JLZVojkHHC01nn0w6Q41ciQMx096xAv59E')
+([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], 'E95vAx690xMQic14Q6w0nn10CHHkjoVZLJ1MuIfYZYQlRTgqitzXt2X8WhFeXcxq')
 </code></pre>
 <h2 id="parameters">Parameters</h2>
 <dl>
@@ -344,11 +344,11 @@ according to the paper.</dd>
     Usage:
 
     &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;unordered&#34;, 48, 18446744073709551557)
-    ([0, 0, 0, 0, 0, 12851939186879403454], &#39;b_25b429914de95be_______________________________________________&#39;)
+    ([0, 0, 0, 0, 0, 12851939186879403454], &#39;b_eb59ed419924b52_______________________________________________&#39;)
     &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;hybrid&#34;, 48, 18446744073709551557)
-    ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], &#39;Et_cac755fd13d8adac82825b91b4671424594642a77a4a2cf9f4dabb065c5e8&#39;)
+    ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], &#39;tE_8e5c560bbad4f9fc2a4a77a2464954241764b19b52828cada8d31df557cac&#39;)
     &gt;&gt;&gt; cells_id_fromblob(b&#34;sdff&#34;, &#34;ordered&#34;, 48, 18446744073709551557)
-    ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], &#39;qxcXeFhW8X2tXztiqgTRlQYZYfIuM1JLZVojkHHC01nn0w6Q41ciQMx096xAv59E&#39;)
+    ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], &#39;E95vAx690xMQic14Q6w0nn10CHHkjoVZLJ1MuIfYZYQlRTgqitzXt2X8WhFeXcxq&#39;)
 
     Parameters
     ----------
@@ -389,22 +389,22 @@ according to the paper.</dd>
 <pre><code class="language-python-repl">&gt;&gt;&gt; p = 4294967291
 &gt;&gt;&gt; id_fromcells([0,0,0,0,0,0], 32, p) == '00000000000000000000000000000000'
 True
-&gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == 'f_ffffffa_______________________'
+&gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == 'f_affffff_______________________'
 True
-&gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == '00_00000000000000000000000000001'
+&gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == '00_10000000000000000000000000000'
 True
 &gt;&gt;&gt; res,c1 = divmod(2**120-1+p-1, p)
 &gt;&gt;&gt; res,c2 = divmod(res, p)
 &gt;&gt;&gt; c4,c3 = divmod(res, p)
-&gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == '0f_fffffffffffffffffffffffffffff'
+&gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == 'f0_fffffffffffffffffffffffffffff'
 True
-&gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == '0g_00000000000000000000000000000'
+&gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == 'g0_00000000000000000000000000000'
 True
-&gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == '.._fffec00000095fffffe0b00000276'
+&gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == '.._67200000b0efffff59000000cefff'
 True
-&gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == '00000000000000000000000000000001'
+&gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == '10000000000000000000000000000000'
 True
-&gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == '....Uw000nn...pg000A2f..Kbo003Go'
+&gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == 'oG300obK..f2A000gp...nn000wU....'
 True
 </code></pre>
 <h2 id="parameters">Parameters</h2>
@@ -431,22 +431,22 @@ according to the paper</dd>
     &gt;&gt;&gt; p = 4294967291
     &gt;&gt;&gt; id_fromcells([0,0,0,0,0,0], 32, p) == &#39;00000000000000000000000000000000&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == &#39;f_ffffffa_______________________&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,0,p-1], 32, p) == &#39;f_affffff_______________________&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == &#39;00_00000000000000000000000000001&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,0,0,1,0], 32, p) == &#39;00_10000000000000000000000000000&#39;
     True
     &gt;&gt;&gt; res,c1 = divmod(2**120-1+p-1, p)
     &gt;&gt;&gt; res,c2 = divmod(res, p)
     &gt;&gt;&gt; c4,c3 = divmod(res, p)
-    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == &#39;0f_fffffffffffffffffffffffffffff&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1], 32, p) == &#39;f0_fffffffffffffffffffffffffffff&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == &#39;0g_00000000000000000000000000000&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == &#39;g0_00000000000000000000000000000&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == &#39;.._fffec00000095fffffe0b00000276&#39;
+    &gt;&gt;&gt; id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == &#39;.._67200000b0efffff59000000cefff&#39;
     True
-    &gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == &#39;00000000000000000000000000000001&#39;
+    &gt;&gt;&gt; id_fromcells([0,1,0,0,0,0], 32, p) == &#39;10000000000000000000000000000000&#39;
     True
-    &gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == &#39;....Uw000nn...pg000A2f..Kbo003Go&#39;
+    &gt;&gt;&gt; id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == &#39;oG300obK..f2A000gp...nn000wU....&#39;
     True
 
     Parameters

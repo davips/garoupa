@@ -107,7 +107,7 @@ class D(Group):
         dic = {&#34;n&#34;: self.n, &#34;seed&#34;: self.seed}
         dic.update(kwargs)
         return self.__class__(**dic)
-    
+
     @property
     def order_hist(self):
         &#34;&#34;&#34;Sorted histogram of element orders.
@@ -137,6 +137,7 @@ class D(Group):
             if self.gcd(i, d) == 1:
                 phi += 1
         return phi
+
 
 #     @property
 #     def order_hist(self):
@@ -242,7 +243,7 @@ class D(Group):
         dic = {&#34;n&#34;: self.n, &#34;seed&#34;: self.seed}
         dic.update(kwargs)
         return self.__class__(**dic)
-    
+
     @property
     def order_hist(self):
         &#34;&#34;&#34;Sorted histogram of element orders.

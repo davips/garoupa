@@ -24,7 +24,8 @@ from unittest import TestCase
 
 import pytest
 
-from garoupa import ø, Ø
+from garoupa import ø
+from garoupa.groups import UT64_4, UT40_4
 from garoupa.hosh import (
     DanglingEtype,
     CellValueTooHigh,
@@ -35,11 +36,13 @@ from garoupa.hosh import (
     ElementTooHigh,
     WrongIdentifier,
 )
+from garoupa.misc.identity import Identity
 
 
 class TestLdict(TestCase):
     def test_exceps(self):
-        p = 4294967291
+        p = UT40_4.p
+        i64 = Identity(UT64_4)
         with pytest.raises(CellValueTooHigh):
             Hosh([0, 0, p + 1, 0, 0, 0])
         with pytest.raises(DanglingEtype):
@@ -47,11 +50,11 @@ class TestLdict(TestCase):
         with pytest.raises(WrongContent):
             Hosh(124124)
         with pytest.raises(ElementTooHigh):
-            Hosh.fromn(2 ** 193)
+            Hosh.fromn(2 ** 241)
         with pytest.raises(WrongVersion):
-            Hosh.group_props("dang")
+            ø.convert(i64)
         with pytest.raises(WrongVersion):
-            Hosh(b"1234").convert(Ø)
+            Hosh(b"1234").convert(i64)
         with pytest.raises(WrongOperands):
             Hosh(b"1234").convert({})
         with pytest.raises(WrongIdentifier):

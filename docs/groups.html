@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>garoupa.algebra API documentation</title>
-<meta name="description" content="Abstract algebra groups …" />
+<title>garoupa.groups API documentation</title>
+<meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,14 +19,9 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>garoupa.algebra</code></h1>
+<h1 class="title">Module <code>garoupa.groups</code></h1>
 </header>
 <section id="section-intro">
-<p>Abstract algebra groups</p>
-<p>This module was useful while studying alternative groups before sticking with UT(n,p).
-It is kept here in the hope someone find it useful.
-However, it is not the focus of this package.
-Some classes require 'poetry install -E full' to add numpy or other heavy dependencies.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -50,60 +45,75 @@ Some classes require 'poetry install -E full' to add numpy or other heavy depend
 #
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
-#  part of this work is illegal and is unethical regarding the effort and
+#  part of this work is illegal and unethical regarding the effort and
 #  time spent here.
+from collections import namedtuple
 
-&#34;&#34;&#34;Abstract algebra groups
+Group = namedtuple(&#34;Group&#34;, &#34;p p4 p6 digits bytes last&#34;)
+&#34;&#34;&#34;Group properties&#34;&#34;&#34;
 
-This module was useful while studying alternative groups before sticking with UT(n,p).
-It is kept here in the hope someone find it useful.
-However, it is not the focus of this package.
-Some classes require &#39;poetry install -E full&#39; to add numpy or other heavy dependencies.
-&#34;&#34;&#34;</code></pre>
+groups = {
+    16: Group(65521, 18429861372428076481, 79119421429263970001791209121, 16, 12, &#34;Y._0d5c34bc54504&#34;),
+    32: Group(4294967291, 340282365336375215945099464469838299761,
+              6277101691541631771514589274378639120656724268335671295241, 32, 24, &#34;.._67200000b0efffff59000000cefff&#34;),
+    40: Group(1099511627689, 1461501636868331575725436266114840805196834679841,
+              1766847063939562670646036165286872353986524172769430561878277294118845361, 40, 30,
+              &#34;.._87c2a630003eec7dffff561b0000004aeffff&#34;),
+    64: Group(18446744073709551557, 115792089237316193942174975457431254695161196299352022581048345476735855814001,
+              39402006196394478456139629384141450683325994812909116356652328479007639701989040511471346632255226219324457074810249,
+              64, 48, &#34;.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff&#34;)
+}
+UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt><code class="name"><a title="garoupa.algebra.abs" href="abs/index.html">garoupa.algebra.abs</a></code></dt>
+<dt id="garoupa.groups.Group"><code class="flex name class">
+<span>class <span class="ident">Group</span></span>
+<span>(</span><span>p, p4, p6, digits, bytes, last)</span>
+</code></dt>
 <dd>
-<div class="desc"><p>Abstract classes</p></div>
+<div class="desc"><p>Group(p, p4, p6, digits, bytes, last)</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="garoupa.groups.Group.bytes"><code class="name">var <span class="ident">bytes</span></code></dt>
+<dd>
+<div class="desc"><p>Alias for field number 4</p></div>
 </dd>
-<dt><code class="name"><a title="garoupa.algebra.cyclic" href="cyclic/index.html">garoupa.algebra.cyclic</a></code></dt>
+<dt id="garoupa.groups.Group.digits"><code class="name">var <span class="ident">digits</span></code></dt>
 <dd>
-<div class="desc"><p>Groups and respective elements that can be cyclic depending on the parameter choice</p></div>
+<div class="desc"><p>Alias for field number 3</p></div>
 </dd>
-<dt><code class="name"><a title="garoupa.algebra.dihedral" href="dihedral/index.html">garoupa.algebra.dihedral</a></code></dt>
+<dt id="garoupa.groups.Group.last"><code class="name">var <span class="ident">last</span></code></dt>
 <dd>
-<div class="desc"><p>Dihedral group and respective elements</p></div>
+<div class="desc"><p>Alias for field number 5</p></div>
 </dd>
-<dt><code class="name"><a title="garoupa.algebra.math" href="math.html">garoupa.algebra.math</a></code></dt>
+<dt id="garoupa.groups.Group.p"><code class="name">var <span class="ident">p</span></code></dt>
 <dd>
-<div class="desc"><p>Operations with permutations</p></div>
+<div class="desc"><p>Alias for field number 0</p></div>
 </dd>
-<dt><code class="name"><a title="garoupa.algebra.matrix" href="matrix/index.html">garoupa.algebra.matrix</a></code></dt>
+<dt id="garoupa.groups.Group.p4"><code class="name">var <span class="ident">p4</span></code></dt>
 <dd>
-<div class="desc"><p>Some matrix group and respective elements</p></div>
+<div class="desc"><p>Alias for field number 1</p></div>
 </dd>
-<dt><code class="name"><a title="garoupa.algebra.npmath" href="npmath.html">garoupa.algebra.npmath</a></code></dt>
+<dt id="garoupa.groups.Group.p6"><code class="name">var <span class="ident">p6</span></code></dt>
 <dd>
-<div class="desc"><p>Operations using numpy</p></div>
-</dd>
-<dt><code class="name"><a title="garoupa.algebra.product" href="product/index.html">garoupa.algebra.product</a></code></dt>
-<dd>
-<div class="desc"><p>Direct product group and respective element</p></div>
-</dd>
-<dt><code class="name"><a title="garoupa.algebra.symmetric" href="symmetric/index.html">garoupa.algebra.symmetric</a></code></dt>
-<dd>
-<div class="desc"><p>Symmetric ('permutation') group and respective element</p></div>
+<div class="desc"><p>Alias for field number 2</p></div>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -114,19 +124,22 @@ Some classes require &#39;poetry install -E full&#39; to add numpy or other heav
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="garoupa" href="../index.html">garoupa</a></code></li>
+<li><code><a title="garoupa" href="index.html">garoupa</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
-<li><code><a title="garoupa.algebra.abs" href="abs/index.html">garoupa.algebra.abs</a></code></li>
-<li><code><a title="garoupa.algebra.cyclic" href="cyclic/index.html">garoupa.algebra.cyclic</a></code></li>
-<li><code><a title="garoupa.algebra.dihedral" href="dihedral/index.html">garoupa.algebra.dihedral</a></code></li>
-<li><code><a title="garoupa.algebra.math" href="math.html">garoupa.algebra.math</a></code></li>
-<li><code><a title="garoupa.algebra.matrix" href="matrix/index.html">garoupa.algebra.matrix</a></code></li>
-<li><code><a title="garoupa.algebra.npmath" href="npmath.html">garoupa.algebra.npmath</a></code></li>
-<li><code><a title="garoupa.algebra.product" href="product/index.html">garoupa.algebra.product</a></code></li>
-<li><code><a title="garoupa.algebra.symmetric" href="symmetric/index.html">garoupa.algebra.symmetric</a></code></li>
+<li>
+<h4><code><a title="garoupa.groups.Group" href="#garoupa.groups.Group">Group</a></code></h4>
+<ul class="two-column">
+<li><code><a title="garoupa.groups.Group.bytes" href="#garoupa.groups.Group.bytes">bytes</a></code></li>
+<li><code><a title="garoupa.groups.Group.digits" href="#garoupa.groups.Group.digits">digits</a></code></li>
+<li><code><a title="garoupa.groups.Group.last" href="#garoupa.groups.Group.last">last</a></code></li>
+<li><code><a title="garoupa.groups.Group.p" href="#garoupa.groups.Group.p">p</a></code></li>
+<li><code><a title="garoupa.groups.Group.p4" href="#garoupa.groups.Group.p4">p4</a></code></li>
+<li><code><a title="garoupa.groups.Group.p6" href="#garoupa.groups.Group.p6">p6</a></code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

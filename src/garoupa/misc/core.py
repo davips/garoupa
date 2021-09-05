@@ -40,11 +40,11 @@ def cells_id_fromblob(blob, etype, nbytes, p):
     Usage:
 
     >>> cells_id_fromblob(b"sdff", "unordered", 48, 18446744073709551557)
-    ([0, 0, 0, 0, 0, 12851939186879403454], 'b_25b429914de95be_______________________________________________')
+    ([0, 0, 0, 0, 0, 12851939186879403454], 'b_eb59ed419924b52_______________________________________________')
     >>> cells_id_fromblob(b"sdff", "hybrid", 48, 18446744073709551557)
-    ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], 'Et_cac755fd13d8adac82825b91b4671424594642a77a4a2cf9f4dabb065c5e8')
+    ([0, 0, 11663386755101441530, 14149014035580258010, 17255310882252753130, 12851939186879403454], 'tE_8e5c560bbad4f9fc2a4a77a2464954241764b19b52828cada8d31df557cac')
     >>> cells_id_fromblob(b"sdff", "ordered", 48, 18446744073709551557)
-    ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], 'qxcXeFhW8X2tXztiqgTRlQYZYfIuM1JLZVojkHHC01nn0w6Q41ciQMx096xAv59E')
+    ([7643518115363038250, 15715161175032162863, 11663386755101441530, 14149014035580258010, 17255310882252753129, 12851939186879403454], 'E95vAx690xMQic14Q6w0nn10CHHkjoVZLJ1MuIfYZYQlRTgqitzXt2X8WhFeXcxq')
 
     Parameters
     ----------
@@ -84,22 +84,22 @@ def id_fromcells(cells, digits, p):
     >>> p = 4294967291
     >>> id_fromcells([0,0,0,0,0,0], 32, p) == '00000000000000000000000000000000'
     True
-    >>> id_fromcells([0,0,0,0,0,p-1], 32, p) == 'f_ffffffa_______________________'
+    >>> id_fromcells([0,0,0,0,0,p-1], 32, p) == 'f_affffff_______________________'
     True
-    >>> id_fromcells([0,0,0,0,1,0], 32, p) == '00_00000000000000000000000000001'
+    >>> id_fromcells([0,0,0,0,1,0], 32, p) == '00_10000000000000000000000000000'
     True
     >>> res,c1 = divmod(2**120-1+p-1, p)
     >>> res,c2 = divmod(res, p)
     >>> c4,c3 = divmod(res, p)
-    >>> id_fromcells([0,0,c4,c3,c2,c1], 32, p) == '0f_fffffffffffffffffffffffffffff'
+    >>> id_fromcells([0,0,c4,c3,c2,c1], 32, p) == 'f0_fffffffffffffffffffffffffffff'
     True
-    >>> id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == '0g_00000000000000000000000000000'
+    >>> id_fromcells([0,0,c4,c3,c2,c1+1], 32, p) == 'g0_00000000000000000000000000000'
     True
-    >>> id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == '.._fffec00000095fffffe0b00000276'
+    >>> id_fromcells([0,0,p-1,p-1,p-1,p-1], 32, p) == '.._67200000b0efffff59000000cefff'
     True
-    >>> id_fromcells([0,1,0,0,0,0], 32, p) == '00000000000000000000000000000001'
+    >>> id_fromcells([0,1,0,0,0,0], 32, p) == '10000000000000000000000000000000'
     True
-    >>> id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == '....Uw000nn...pg000A2f..Kbo003Go'
+    >>> id_fromcells([p-1,p-1,p-1,p-1,p-1,p-1], 32, p) == 'oG300obK..f2A000gp...nn000wU....'
     True
 
     Parameters
@@ -127,22 +127,22 @@ def cells_fromid(id, p):
     >>> p = 4294967291
     >>> cells_fromid('00000000000000000000000000000000', p) == [0,0,0,0,0,0]
     True
-    >>> cells_fromid('f_ffffffa_______________________', p) == [0,0,0,0,0,p-1]
+    >>> cells_fromid('f_affffff_______________________', p) == [0,0,0,0,0,p-1]
     True
-    >>> cells_fromid('00_00000000000000000000000000001', p) == [0,0,0,0,1,0]
+    >>> cells_fromid('00_10000000000000000000000000000', p) == [0,0,0,0,1,0]
     True
     >>> res,c1 = divmod(16**30 - 1 + p - 1, p)
     >>> res,c2 = divmod(res, p)
     >>> c4,c3 = divmod(res, p)
-    >>> cells_fromid('0f_fffffffffffffffffffffffffffff', p) == [0,0,c4,c3,c2,c1]
+    >>> cells_fromid('f0_fffffffffffffffffffffffffffff', p) == [0,0,c4,c3,c2,c1]
     True
-    >>> cells_fromid('0g_00000000000000000000000000000', p) == [0,0,c4,c3,c2,c1+1]
+    >>> cells_fromid('g0_00000000000000000000000000000', p) == [0,0,c4,c3,c2,c1+1]
     True
-    >>> cells_fromid('.._fffec00000095fffffe0b00000276', p) == [0,0,p-1,p-1,p-1,p-1]
+    >>> cells_fromid('.._67200000b0efffff59000000cefff', p) == [0,0,p-1,p-1,p-1,p-1]
     True
-    >>> cells_fromid('00000000000000000000000000000001', p) == [0,1,0,0,0,0]
+    >>> cells_fromid('10000000000000000000000000000000', p) == [0,1,0,0,0,0]
     True
-    >>> cells_fromid('....Uw000nn...pg000A2f..Kbo003Go', p) == [p-1,p-1,p-1,p-1,p-1,p-1]
+    >>> cells_fromid('oG300obK..f2A000gp...nn000wU....', p) == [p-1,p-1,p-1,p-1,p-1,p-1]
     True
 
     Parameters

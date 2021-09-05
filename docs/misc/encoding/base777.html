@@ -25,7 +25,7 @@
 <p>Base to enable shorter ids, but at the expense of heavily adopting utf-8 (up to 2-byte) chars</p>
 <p>777 chars provide 19.99631153679756 and 39.99262307569413 digits for 32 and 64 versions.
 The choice is not arbitrary. 777 is ideal to balance variability even in the most significant digit
-for both versions UT32.4 and UT64.4 of Hosh.</p>
+for any version (UT32.4, UT40.4, UT64.4, &hellip;) of Hosh.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -33,20 +33,20 @@ for both versions UT32.4 and UT64.4 of Hosh.</p>
 <pre><code class="python">#  Copyright (c) 2021. Davi Pereira dos Santos
 #  This file is part of the garoupa project.
 #  Please respect the license - more about this in the section (*) below.
-# 
+#
 #  garoupa is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  garoupa is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU General Public License
 #  along with garoupa.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-# 
+#
 #  (*) Removing authorship by any means, e.g. by distribution of derived
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
@@ -57,7 +57,7 @@ Base to enable shorter ids, but at the expense of heavily adopting utf-8 (up to 
 
 777 chars provide 19.99631153679756 and 39.99262307569413 digits for 32 and 64 versions.
 The choice is not arbitrary. 777 is ideal to balance variability even in the most significant digit
-for both versions UT32.4 and UT64.4 of Hosh.
+for any version (UT32.4, UT40.4, UT64.4, ...) of Hosh.
 &#34;&#34;&#34;
 alphabet = tuple(
     &#34;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzµÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåç&#34;
