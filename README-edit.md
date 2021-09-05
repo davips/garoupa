@@ -12,35 +12,34 @@ Here, data versioning and composition of processing steps are directly mapped as
 We call each of the latter a Hosh, i.e., an identifier is an _**o**perable **hash**_.
 
 ## Overview
+A product of identifiers produce a new identifier as shown below, where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
 
-A product of identifiers produce a new identifier as shown below,
-where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
-New identifiers are easily created from the identity element `ø` 
-(or `identity` for people or systems allergic to utf-8 encoding).
-![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png)
+![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png) | New identifiers are easily <br> created from the identity <br> element `ø`. Also available as `identity` for people <br>or systems allergic to <br>utf-8 encoding.
+-------------------------|-------------------------
 
-Operations can be reverted by the inverse of the identifier.
-![img_1.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_1.png)
+![img_1.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_1.png) | Operations can be reverted by the inverse of the identifier.
+-------------------------|-------------------------
 
-Operations are associative. They are order-sensitive by default - they are called _ordered_ ids.
-![img_2.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_2.png)
+![img_2.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_2.png) | Operations are associative. <br>They are order-sensitive by default, <br>in which case they are called _ordered_ ids.
+-------------------------|-------------------------
 
-However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) 
-identifiers are also available.
-![img_3.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_3.png)
+However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) identifiers are also available. | .
+-------------------------|-------------------------
+![img_3.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_3.png) | .
 
-This is how they affect each other:
-![img_4.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_4.png)
+This is how they affect each other: | .
+-------------------------|-------------------------
+![img_4.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_4.png) | .
 
 The chance of collision is determined by the number of possible identifiers of each type.
 Some versions are provided, e.g.: UT32.4, UT40.4 (default), UT64.4.
 They can be easily implemented in other languages and are 
 intended to be a specification on how to identify multi-valued objects and multi-step processes.
 Unordered ids use a very narrow range of the total number of identifiers because they are not very useful.
-One use could be the embedding of  authorship or other metadata to an object without worrying about the timing, 
-since the resulting id will remain the same, 
-no matter when the unordered id is operated with the id of the object under construction.
-![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png)
+
+One use for unordered ids could be the embedding of  authorship or other metadata to an object without worrying about the timing, since the resulting id will remain the same, no matter when the unordered id is operated with the id of the object under construction. | . 
+-------------------------|-------------------------
+![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png) | . 
 
 Conversely, hybrid ids are excelent to represent values in a data structure like a map, 
 since the order is not relevant when the consumer process looks up for keys, not indexes.
