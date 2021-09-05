@@ -12,35 +12,34 @@ Here, data versioning and composition of processing steps are directly mapped as
 We call each of the latter a Hosh, i.e., an identifier is an _**o**perable **hash**_.
 
 ## Overview
+A product of identifiers produce a new identifier as shown below, where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
 
-A product of identifiers produce a new identifier as shown below,
-where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
-New identifiers are easily created from the identity element `ø` 
-(or `identity` for people or systems allergic to utf-8 encoding).
-![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png)
+![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png) | New identifiers are easily <br> created from the identity <br> element `ø`. Also available as `identity` for people <br>or systems allergic to <br>utf-8 encoding.
+-------------------------|-------------------------
 
-Operations can be reverted by the inverse of the identifier.
-![img_1.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_1.png)
+![img_1.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_1.png) | Operations can be reverted by the inverse of the identifier.
+-------------------------|-------------------------
 
-Operations are associative. They are order-sensitive by default - they are called _ordered_ ids.
-![img_2.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_2.png)
+![img_2.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_2.png) | Operations are associative. <br>They are order-sensitive by default, <br>in which case they are called _ordered_ ids.
+-------------------------|-------------------------
 
-However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) 
-identifiers are also available.
-![img_3.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_3.png)
+However, order-insensitive (called _unordered_) and order-insensitive-among-themselves (called _hybrid_) identifiers are also available. | .
+-------------------------|-------------------------
+![img_3.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_3.png) | .
 
-This is how they affect each other:
-![img_4.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_4.png)
+This is how they affect each other: | .
+-------------------------|-------------------------
+![img_4.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_4.png) | .
 
 The chance of collision is determined by the number of possible identifiers of each type.
 Some versions are provided, e.g.: UT32.4, UT40.4 (default), UT64.4.
 They can be easily implemented in other languages and are 
 intended to be a specification on how to identify multi-valued objects and multi-step processes.
 Unordered ids use a very narrow range of the total number of identifiers because they are not very useful.
-One use could be the embedding of  authorship or other metadata to an object without worrying about the timing, 
-since the resulting id will remain the same, 
-no matter when the unordered id is operated with the id of the object under construction.
-![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png)
+
+One use for unordered ids could be the embedding of  authorship or other metadata to an object without worrying about the timing, since the resulting id will remain the same, no matter when the unordered id is operated with the id of the object under construction. | . 
+-------------------------|-------------------------
+![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png) | . 
 
 Conversely, hybrid ids are excelent to represent values in a data structure like a map, 
 since the order is not relevant when the consumer process looks up for keys, not indexes.
@@ -195,11 +194,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[2, 0, 1, 3], 3, dr4»	*	«[0, 1, 3, 2], 1, dr7»	=	«[2, 0, 3, 1], 4, dr3»
-«[1, 2, 0, 3], 0, ds2»	*	«[3, 0, 2, 1], 2, ds6»	=	«[3, 1, 0, 2], 2, dr0»
-«[3, 0, 1, 2], 2, ds2»	*	«[1, 0, 2, 3], 2, dr5»	=	«[0, 3, 1, 2], 4, ds1»
-«[2, 0, 3, 1], 3, ds5»	*	«[0, 2, 1, 3], 1, ds6»	=	«[2, 3, 0, 1], 4, dr3»
-«[2, 0, 3, 1], 1, ds3»	*	«[0, 1, 2, 3], 1, ds0»	=	«[2, 0, 3, 1], 2, dr3»
+«[0, 1, 2, 3], 2, dr1»	*	«[3, 1, 0, 2], 2, dr3»	=	«[3, 1, 0, 2], 4, dr0»
+«[0, 1, 3, 2], 3, dr2»	*	«[3, 0, 1, 2], 0, dr4»	=	«[2, 0, 1, 3], 3, dr2»
+«[1, 3, 0, 2], 3, dr5»	*	«[1, 0, 2, 3], 3, dr5»	=	«[3, 1, 0, 2], 1, dr2»
+«[2, 1, 0, 3], 3, dr7»	*	«[1, 2, 0, 3], 3, dr0»	=	«[1, 0, 2, 3], 1, dr3»
+«[1, 3, 0, 2], 1, dr7»	*	«[2, 0, 1, 3], 3, dr4»	=	«[0, 1, 3, 2], 4, dr3»
 """
 ```
 
@@ -209,7 +208,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[6, 8, 9, 5, 2, 11, 0, 3, 1, 7, 4, 10]
+[11, 6, 1, 5, 7, 4, 9, 0, 3, 2, 10, 8]
 """
 ```
 
@@ -331,9 +330,9 @@ for G in Gs:
     )
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          844/10000:  12.0 bits	~8.44 %
-    |D8×D8×D8×D8| = 65536:         356/10000:  16.0 bits	~3.56 %
- |D8×D8×D8×D8×D8| = 1048576:       146/10000:  20.0 bits	~1.46 %
+       |D8×D8×D8| = 4096:          838/10000:  12.0 bits	~8.38 %
+    |D8×D8×D8×D8| = 65536:         362/10000:  16.0 bits	~3.62 %
+ |D8×D8×D8×D8×D8| = 1048576:       165/10000:  20.0 bits	~1.65 %
 """
 ```
 
@@ -424,7 +423,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 05/09/2021 04:12:17
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 05/09/2021 04:42:29
 """
 ```
 
