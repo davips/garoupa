@@ -16,7 +16,7 @@ We call each of the latter a Hosh, i.e., an identifier is an _**o**perable **has
 A product of identifiers produce a new identifier as shown below,
 where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
 New identifiers are easily created from the identity element `ø` 
-(or `identity32` for people or systems allergic to utf-8 encoding).
+(or `identity` for people or systems allergic to utf-8 encoding).
 ![img.png](https://raw.githubusercontent.com/davips/garoupa/14cb45b888eb8a18ae093d200075c1a8a7e9cacb/examples/img.png)
 
 Operations can be reverted by the inverse of the identifier.

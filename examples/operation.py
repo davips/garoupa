@@ -1,5 +1,5 @@
 # Basic operations
-from garoupa import Hosh, ø  # ø is a shortcut for identity32 (AltGr+O in most keyboards)
+from garoupa import Hosh, ø  # ø is a shortcut for identity (AltGr+O in most keyboards)
 
 # Hoshes (operable hash-based elements) can be multiplied.
 a = Hosh(content=b"Some large binary content...")

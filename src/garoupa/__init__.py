@@ -22,8 +22,8 @@
 """GaROUPa solves the problem of determining the identity of multi-valued objects or sequences of events
 (and provide extra modules for group theory)"""
 
-from garoupa.misc.identity import ø
-from .groups import UT40_4
+from garoupa.misc.identity import ø, Identity
+from .groups import *
 from .hosh import Hosh as H
 from .misc.helper import Helper
 
