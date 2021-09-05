@@ -50,9 +50,11 @@ This makes ordered ids the perfect fit to identify functions (and also their com
 Here is another possible use. ORCIDs are managed unique identifiers for researchers.
 They can be directly used as digests to create operable identifiers.
 We recommend the use of 40 digits to allow operations with SHA-1 hashes. 
-They are common in version control repositories among other uses. 
-![img.png](img.png)
+They are common in version control repositories among other uses.
+![img_orcid.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_orcid.png) | .
 
+Unordered relationships are represented by hybrid ids.
+![img_orcid.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_orcid-comm.png) | .
 
 ## More info
 <!--- [arXiv paper](xxxxxx) --->
