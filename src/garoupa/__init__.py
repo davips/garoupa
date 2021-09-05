@@ -35,8 +35,8 @@ Hosh = H
 """All identifiers are instances of this class"""
 
 ħ = Helper(UT40_4)
-"""Shortcut to create 32-digit Hosh objects"""
+"""UTF-8 shortcut to create 40-digit Hosh objects (AltGr+H in most keyboards)"""
 identity = ø()
-"""Shortcut to the 32-digit identity Hosh object"""
+"""Shortcut to the 40-digit identity Hosh object"""
 ø = identity
-"""Shortcut to the 32-digit identity Hosh object"""
+"""UTF-8 shortcut to the 40-digit identity Hosh object (AltGr+O in most keyboards)"""
