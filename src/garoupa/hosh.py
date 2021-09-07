@@ -127,7 +127,7 @@ class Hosh:
 
     def __init__(self, content, etype="default:ordered", version=UT40_4):
         self.version = version
-        self.p, self.p4, self.p6, self.digits, self.bytes, _, _, _, _, _, _, self.rho = version
+        self.p, self.p4, self.p6, self.digits, self.bytes, _, _, _, _, _, _, self.rho, self.delete = version
         if isinstance(content, list):
             if etype != "default:ordered":
                 raise DanglingEtype(f"Cannot set etype={etype} when providing cells ({content}).")
