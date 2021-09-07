@@ -35,8 +35,17 @@ Hosh = H
 """All identifiers are instances of this class"""
 
 ħ = Helper(UT40_4)
-"""UTF-8 shortcut to create 40-digit Hosh objects (AltGr+H in most keyboards)"""
+"""UTF-8 shortcut to create 40-digit Hosh objects (AltGr+H in most keyboards)
+
+Other options are also available: ħ16, ħ32, ħ40, ħ64"""
+
 identity = ø()
 """Shortcut to the 40-digit identity Hosh object"""
+
 ø = identity
-"""UTF-8 shortcut to the 40-digit identity Hosh object (AltGr+O in most keyboards)"""
+"""UTF-8 shortcut to the 40-digit identity Hosh object (AltGr+O in most keyboards)
+
+Other options are also available: ø16, ø32, ø40, ø64"""
+
+ħ16, ħ32, ħ40, ħ64 = [Helper(version) for version in groups.values()]
+ø16, ø32, ø40, ø64 = [Identity(version) for version in groups.values()]

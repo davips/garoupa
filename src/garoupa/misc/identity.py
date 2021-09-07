@@ -40,6 +40,7 @@ class Identity(Hosh):
     etype_inducer
         Element type of a future multiplication by a raw Python value: 'unordered', 'ordered', 'hybrid'
     """
+    _u, _h = None, None
 
     def __init__(self, version, etype_inducer="ordered"):
         super().__init__([0, 0, 0, 0, 0, 0], version=version)
@@ -59,7 +60,9 @@ class Identity(Hosh):
         >>> Hosh(b"654", "unordered") == a
         True
         """
-        return Identity(self.version, etype_inducer="unordered")
+        if self._u is None:
+            self._u = Identity(self.version, etype_inducer="unordered")
+        return self._u
 
     @property
     def h(self):
@@ -75,7 +78,9 @@ class Identity(Hosh):
         >>> Hosh(b"654", "hybrid") == a
         True
         """
-        return Identity(self.version, etype_inducer="hybrid")
+        if self._h is None:
+            self._h = Identity(self.version, etype_inducer="hybrid")
+        return self._h
 
 
 class ø(Identity):
@@ -102,7 +107,6 @@ class ø(Identity):
 
     def __init__(self, etype_inducer="ordered"):
         super().__init__(UT40_4, etype_inducer)
-
 
 # class Ø(Identity):
 #     """

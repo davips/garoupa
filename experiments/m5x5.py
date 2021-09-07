@@ -1,8 +1,4 @@
-from math import log, sqrt, cos, atan, sin
-
-from sympy import Matrix, simplify, solve, pprint, Symbol, isprime
-from sympy.abc import x, y, p
-from sympy.physics.units.quantities import Quantity
+from sympy import Matrix, simplify, solve, pprint
 
 # print(solve(p**6-p**4+63**32))
 # l=[-sqrt(6)*sqrt(-2*(184743873840546494742982456323*sqrt(307172690294505835115734622361390168374710441749827424122949) + 102390896764835278371911540787130056124903480583275808040985)**(1/3) + 2*2**(1/3) + 2**(2/3)*(184743873840546494742982456323*sqrt(307172690294505835115734622361390168374710441749827424122949) + 102390896764835278371911540787130056124903480583275808040985)**(2/3))/(6*(184743873840546494742982456323*sqrt(307172690294505835115734622361390168374710441749827424122949) + 102390896764835278371911540787130056124903480583275808040985)**(1/6)),
@@ -120,6 +116,64 @@ b = Matrix([[1, 0, 0, "b14", "b15"],
             [0, 0, 0, 1, 0],
             [0, 0, 0, 0, 1]])
 pprint(a * b, wrap_line=False)
+
+print()
+a = Matrix([[1, 0, "a13", "a14"],
+            [0, 1, 0, "a24"],
+            [0, 0, 1, "a34"],
+            [0, 0, 0, 1]])
+b = Matrix([[1, 0, "b13", "b14"],  # ok
+            [0, 1, 0, "b24"],
+            [0, 0, 1, "b34"],
+            [0, 0, 0, 1]])
+pprint(a * b, wrap_line=False)
+
+print()
+a = Matrix([[1, "a12", "a13", 0],
+            [0, 1, 0, "a24"],
+            [0, 0, 1, "a34"],
+            [0, 0, 0, 1]])
+b = Matrix([[1, "b12", "b13", 0],
+            [0, 1, 0, "b24"],
+            [0, 0, 1, "b34"],
+            [0, 0, 0, 1]])
+pprint(a * b, wrap_line=False)
+
+print()
+a = Matrix([[1, "a12", 0, "a14"],
+            [0, 1, "a23", 0],
+            [0, 0, 1, "a34"],
+            [0, 0, 0, 1]])
+b = Matrix([[1, "b12", 0, "b14"],
+            [0, 1, "b23", 0],
+            [0, 0, 1, "b34"],
+            [0, 0, 0, 1]])
+pprint(a * b, wrap_line=False)
+
+print()
+a = Matrix([[1, "a12", "a13", "a14"],
+            [0, 1, "a23", "a24"],
+            [0, 0, 1, "a34"],
+            [0, 0, 0, 1]])
+b = Matrix([[1, "b12", "b13", "b14"],
+            [0, 1, "b23", "b24"],
+            [0, 0, 1, "b34"],
+            [0, 0, 0, 1]])
+pprint(a * b, wrap_line=False)
+
+print()
+a = Matrix([[1, "a12", "a13", "a14"],
+            [0, 1, 0,0],
+            [0, 0, 1, "a34"],
+            [0, 0, 0, 1]])
+b = Matrix([[1, "b12", "b13", "b14"],
+            [0, 1, 0,0],
+            [0, 0, 1, "b34"],
+            [0, 0, 0, 1]])
+pprint(a * b, wrap_line=False)
+
+print()
+
 exit()
 I = Matrix.eye(4, 4)
 print("a")
@@ -187,7 +241,7 @@ pprint(a * b, wrap_line=False)
 print()
 pprint(b * a, wrap_line=False)
 print()
-pprint(simplify(a * b) )
+pprint(simplify(a * b))
 pprint(simplify(b * a))
-pprint(solve(a*b-b*a))
+pprint(solve(a * b - b * a))
 print(Matrix([["a1"]]) == Matrix([["a1"]]))

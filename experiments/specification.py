@@ -48,13 +48,21 @@ def enc(num, alphabet):
     return encoded
 
 
-# # 5x5 is not a good choice due to:
-# p = (16 ** 40) ** (1 / 10)
-# print(log(p ** 6) / log(2), p)  # |H1|=2^96 for 5x5 40-digit (bad) p=65536
-# p = (16 ** 64) ** (1 / 10)
-# print(log(p ** 4) / log(2), p)  # |H|=2^102 for 5x5 64-digit (not good) p=50859008
-# p = (16 ** 80) ** (1 / 10)
-# print(log(p ** 4) / log(2), p)  # |H|=2^128 for 5x5 80-digit (almost good) p=4294967296
+# # 5x5 is not a good choice...
+# If 16777216 is acceptable, it is perfect.
+# for digits in [40]:#, 64]:
+#     p = (64 ** digits) ** (1 / 10)
+#     print((5 * p ** 4 - 5 * p ** 2 + 1) / p ** 10, digits, log(p ** 4) / log(2), log(p ** 6) / log(2),
+#           log(p ** 10) / log(2), p, sep="\t")
+#     # p = (161 ** digits) ** (1 / 10)
+#     # print((5 * p ** 4 - 5 * p ** 2 + 1) / p ** 10, digits, log(p ** 4) / log(2), log(p ** 6) / log(2),
+#     #       log(p ** 10) / log(2), p, sep="\t")
+#     print()
+# p = 4294967291
+# print(32, (2 * p ** 3 + p ** 2 - 2 * p) / p ** 6)
+# p = 1099511627689
+# print(40, (2 * p ** 3 + p ** 2 - 2 * p) / p ** 6)
+# exit()
 
 # 4x4 is the choice
 for digits in [16, 32, 40, 64]:

@@ -86,8 +86,13 @@ class Hosh:
     7ysdf98ys34hg543hdf98ysdf98ysdfysdf98ysd
     >>> print(ø * "7ysdf98ysdf98ysdf98ysdfysdf98ysdasddsa32" * "6gdsf76dfqwe123de8gaf87gaf87gaf87agdfa78")
     94UrdYKjCGQWdd5P.W4xvFJgc9hZpIHlhytqHkaa
-    >>> print(ø.u * b"sdff")
+    >>> h = ø.u * b"sdff"
+    >>> print(h)
     f_9e1a267c8_____________________________
+    >>> x.id, (+x).id  # Making an ordered x.
+    ('ZN_60eec3e6c7b68087329e16b581401a6bb2b1f', '6BDj3b7Mmj7n-6B8XYaP3akO7400s9FlG4AtcHTp')
+    >>> +x * y != y * +x
+    True
 
     Parameters
     ----------
@@ -106,11 +111,11 @@ class Hosh:
     shorter = False
     _repr = None
     _n, _id, _idc, _sid, _sidc, _etype = None, None, None, None, None, None
-    _etype_inducer, _bits = None, None
+    _etype_inducer, _bits, _ø = None, None, None
 
     def __init__(self, content, etype="default:ordered", version=UT40_4):
         self.version = version
-        self.p, self.p4, self.p6, self.digits, self.bytes, _, _, _, _, _, _ = version
+        self.p, self.p4, self.p6, self.digits, self.bytes, _, _, _, _, _, _, self.rho = version
         if isinstance(content, list):
             if etype != "default:ordered":
                 raise DanglingEtype(f"Cannot set etype={etype} when providing cells ({content}).")
@@ -125,6 +130,22 @@ class Hosh:
             raise WrongContent(
                 f"No valid content provided: {content}\n" f"It should be a bytes object to be hashed or a list of ints."
             )
+
+    @property
+    def ø(self):
+        """Identity element compatible with this Hosh object
+
+        Usage:
+
+        >>> from garoupa import Hosh
+        >>> Hosh(b"23987rg23").ø.id
+        '0000000000000000000000000000000000000000'
+        >>> Hosh(b"23987rg23").ø.etype
+        'unordered'
+        """
+        if self._ø is None:
+            self._ø = Hosh([0, 0, 0, 0, 0, 0], version=self.version)
+        return self._ø
 
     @property
     def etype(self):
@@ -338,6 +359,18 @@ class Hosh:
 
     def __mul__(self, other: Union["Hosh", str, bytes, int]):
         return Hosh(cellsmul(self.cells, self.convert(other).cells, self.p), version=self.version)
+
+    def __rmul__(self, other: Union["Hosh", str, bytes, int]):
+        return Hosh(cellsmul(self.convert(other).cells, self.cells, self.p), version=self.version)
+
+    def __pos__(self):
+        """Change disposition of cells in a way that even hybrid ids will not commute.
+
+        Also revert disposition of cells making them hybrid again."""
+        cells = self.cells.copy()
+        cells[3] = cells[0]
+        cells[0] = self.cells[3]
+        return Hosh(cells, version=self.version)
 
     def __invert__(self):
         return Hosh(cellsinv(self.cells, self.p), version=self.version)
