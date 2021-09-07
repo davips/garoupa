@@ -69,6 +69,7 @@ class Identity(Hosh):
     etype_inducer
         Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
     &#34;&#34;&#34;
+    _u, _h = None, None
 
     def __init__(self, version, etype_inducer=&#34;ordered&#34;):
         super().__init__([0, 0, 0, 0, 0, 0], version=version)
@@ -88,7 +89,9 @@ class Identity(Hosh):
         &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;) == a
         True
         &#34;&#34;&#34;
-        return Identity(self.version, etype_inducer=&#34;unordered&#34;)
+        if self._u is None:
+            self._u = Identity(self.version, etype_inducer=&#34;unordered&#34;)
+        return self._u
 
     @property
     def h(self):
@@ -104,7 +107,9 @@ class Identity(Hosh):
         &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;) == a
         True
         &#34;&#34;&#34;
-        return Identity(self.version, etype_inducer=&#34;hybrid&#34;)
+        if self._h is None:
+            self._h = Identity(self.version, etype_inducer=&#34;hybrid&#34;)
+        return self._h
 
 
 class ø(Identity):
@@ -131,7 +136,6 @@ class ø(Identity):
 
     def __init__(self, etype_inducer=&#34;ordered&#34;):
         super().__init__(UT40_4, etype_inducer)
-
 
 # class Ø(Identity):
 #     &#34;&#34;&#34;
@@ -203,6 +207,7 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
     etype_inducer
         Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
     &#34;&#34;&#34;
+    _u, _h = None, None
 
     def __init__(self, version, etype_inducer=&#34;ordered&#34;):
         super().__init__([0, 0, 0, 0, 0, 0], version=version)
@@ -222,7 +227,9 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
         &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;) == a
         True
         &#34;&#34;&#34;
-        return Identity(self.version, etype_inducer=&#34;unordered&#34;)
+        if self._u is None:
+            self._u = Identity(self.version, etype_inducer=&#34;unordered&#34;)
+        return self._u
 
     @property
     def h(self):
@@ -238,7 +245,9 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
         &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;) == a
         True
         &#34;&#34;&#34;
-        return Identity(self.version, etype_inducer=&#34;hybrid&#34;)</code></pre>
+        if self._h is None:
+            self._h = Identity(self.version, etype_inducer=&#34;hybrid&#34;)
+        return self._h</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -280,7 +289,9 @@ def h(self):
     &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;hybrid&#34;) == a
     True
     &#34;&#34;&#34;
-    return Identity(self.version, etype_inducer=&#34;hybrid&#34;)</code></pre>
+    if self._h is None:
+        self._h = Identity(self.version, etype_inducer=&#34;hybrid&#34;)
+    return self._h</code></pre>
 </details>
 </dd>
 <dt id="garoupa.misc.identity.Identity.u"><code class="name">var <span class="ident">u</span></code></dt>
@@ -313,7 +324,9 @@ def u(self):
     &gt;&gt;&gt; Hosh(b&#34;654&#34;, &#34;unordered&#34;) == a
     True
     &#34;&#34;&#34;
-    return Identity(self.version, etype_inducer=&#34;unordered&#34;)</code></pre>
+    if self._u is None:
+        self._u = Identity(self.version, etype_inducer=&#34;unordered&#34;)
+    return self._u</code></pre>
 </details>
 </dd>
 </dl>

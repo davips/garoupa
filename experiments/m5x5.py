@@ -174,6 +174,19 @@ pprint(a * b, wrap_line=False)
 
 print()
 
+print()
+a = Matrix([[1, 1,1,1],
+            [0, 1, 1,1],
+            [0, 0, 1, "a34"],
+            [0, 0, 0, 1]])
+b = Matrix([[1, 1,1,1],
+            [0, 1, 1,1],
+            [0, 0, 1, "b34"],
+            [0, 0, 0, 1]])
+pprint(a * b, wrap_line=False)
+
+print()
+
 exit()
 I = Matrix.eye(4, 4)
 print("a")
