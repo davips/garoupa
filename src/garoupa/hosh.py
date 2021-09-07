@@ -95,13 +95,15 @@ class Hosh:
     True
     >>> --x == x
     True
-    >>> x & y == -(-x * -y)  # a & b is a shortcut for -(-a & -b)
+    >>> x ** y == -(-x * -y)  # a & b is a shortcut for -(-a & -b)
     True
-    >>> x & y != y & x
+    >>> x ** y != y ** x
     True
-    >>> (x & b"1") * (y & b"2") != (x & b"2") * (y & b"1")
+    >>> (x ** b"1") * (y ** b"2") != (x ** b"2") * (y ** b"1")
     True
-    >>> (x & b"1") * (y & b"2") == (y & b"2") * (x & b"1")
+    >>> (x ** b"1") * (y ** b"2") == (y ** b"2") * (x ** b"1")
+    True
+    >>> (x ** y) // y == x
     True
 
     Parameters
@@ -373,11 +375,17 @@ class Hosh:
     def __rmul__(self, other: Union["Hosh", str, bytes, int]):
         return Hosh(cellsmul(self.convert(other).cells, self.cells, self.p), version=self.version)
 
-    def __rand__(self, other):
+    def __rpow__(self, other):
         return -(-self.convert(other) * -self)
 
-    def __and__(self, other):
-        return -(-self * -self.convert(other))
+    def __pow__(self, power, modulo=None):
+        return -(-self * -self.convert(power))
+
+    def __rfloordiv__(self, other):
+        return -(-self.convert(other) / -self)
+
+    def __floordiv__(self, other):
+        return -(-self / -self.convert(other))
 
     def __neg__(self):
         """Change disposition of cells in a way that even hybrid ids will not commute.
