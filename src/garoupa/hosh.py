@@ -89,9 +89,19 @@ class Hosh:
     >>> h = ø.u * b"sdff"
     >>> print(h)
     f_9e1a267c8_____________________________
-    >>> x.id, (+x).id  # Making an ordered x.
+    >>> x.id, (-x).id  # Making an ordered x.
     ('ZN_60eec3e6c7b68087329e16b581401a6bb2b1f', '6BDj3b7Mmj7n-6B8XYaP3akO7400s9FlG4AtcHTp')
-    >>> +x * y != y * +x
+    >>> -x * y != y * -x
+    True
+    >>> --x == x
+    True
+    >>> x & y == -(-x * -y)  # a & b is a shortcut for -(-a & -b)
+    True
+    >>> x & y != y & x
+    True
+    >>> (x & b"1") * (y & b"2") != (x & b"2") * (y & b"1")
+    True
+    >>> (x & b"1") * (y & b"2") == (y & b"2") * (x & b"1")
     True
 
     Parameters
@@ -363,7 +373,13 @@ class Hosh:
     def __rmul__(self, other: Union["Hosh", str, bytes, int]):
         return Hosh(cellsmul(self.convert(other).cells, self.cells, self.p), version=self.version)
 
-    def __pos__(self):
+    def __rand__(self, other):
+        return -(-self.convert(other) * -self)
+
+    def __and__(self, other):
+        return -(-self * -self.convert(other))
+
+    def __neg__(self):
         """Change disposition of cells in a way that even hybrid ids will not commute.
 
         Also revert disposition of cells making them hybrid again."""
