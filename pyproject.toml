@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "garoupa"
-version = "2.210907.7"
+version = "2.210907.8"
 description = "Predictable operable hash-based identifiers and abstract algebra groups"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
@@ -38,7 +38,7 @@ ipython = "^7.27.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[[tool.poetry.source]]
-name = "dvpypi"
-url = "http://localhost:8080/simple"
+# 
+# [[tool.poetry.source]]
+# name = "dvpypi"
+# url = "http://localhost:8080/simple"
