@@ -125,7 +125,7 @@ Other options are also available: ø16, ø32, ø40, ø64&#34;&#34;&#34;
 <dl>
 <dt id="garoupa.Hosh"><code class="flex name class">
 <span>class <span class="ident">Hosh</span></span>
-<span>(</span><span>content, etype='default:ordered', version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, firstp='0_100000000_____________________________', lastp='f_8afffffff_____________________________', firstp4='00_1000000000000000000000000000000000000', lastp4='.._87c2a630003eec7dffff561b0000004aeffff', firstp6='1000000000000000000000000000000000000000', lastp6='g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....', rho='---------------------------------------0'))</span>
+<span>(</span><span>content, etype='default:ordered', version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, firstp='0_100000000_____________________________', lastp='f_8afffffff_____________________________', firstp4='00_1000000000000000000000000000000000000', lastp4='.._87c2a630003eec7dffff561b0000004aeffff', firstp6='1000000000000000000000000000000000000000', lastp6='g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....', rho='---------------------------------------0', delete='--------------------....................'))</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Operable hash.</p>
@@ -297,7 +297,7 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
 
     def __init__(self, content, etype=&#34;default:ordered&#34;, version=UT40_4):
         self.version = version
-        self.p, self.p4, self.p6, self.digits, self.bytes, _, _, _, _, _, _, self.rho = version
+        self.p, self.p4, self.p6, self.digits, self.bytes, _, _, _, _, _, _, self.rho, self.delete = version
         if isinstance(content, list):
             if etype != &#34;default:ordered&#34;:
                 raise DanglingEtype(f&#34;Cannot set etype={etype} when providing cells ({content}).&#34;)
@@ -569,6 +569,9 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
     def __invert__(self):
         return Hosh(cellsinv(self.cells, self.p), version=self.version)
 
+    def __rtruediv__(self, other):
+        return Hosh(cellsmul(self.convert(other).cells, cellsinv(self.cells, self.p), self.p), version=self.version)
+
     def __truediv__(self, other):
         return Hosh(cellsmul(self.cells, cellsinv(self.convert(other).cells, self.p), self.p), version=self.version)
 
@@ -756,7 +759,7 @@ def fromid(cls, id):
 </details>
 </dd>
 <dt id="garoupa.Hosh.fromn"><code class="name flex">
-<span>def <span class="ident">fromn</span></span>(<span>n: int, version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, firstp='0_100000000_____________________________', lastp='f_8afffffff_____________________________', firstp4='00_1000000000000000000000000000000000000', lastp4='.._87c2a630003eec7dffff561b0000004aeffff', firstp6='1000000000000000000000000000000000000000', lastp6='g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....', rho='---------------------------------------0'))</span>
+<span>def <span class="ident">fromn</span></span>(<span>n: int, version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, firstp='0_100000000_____________________________', lastp='f_8afffffff_____________________________', firstp4='00_1000000000000000000000000000000000000', lastp4='.._87c2a630003eec7dffff561b0000004aeffff', firstp6='1000000000000000000000000000000000000000', lastp6='g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....', rho='---------------------------------------0', delete='--------------------....................'))</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create a Hosh object representing the given int.</p>

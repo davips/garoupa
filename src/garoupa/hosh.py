@@ -399,6 +399,9 @@ class Hosh:
     def __invert__(self):
         return Hosh(cellsinv(self.cells, self.p), version=self.version)
 
+    def __rtruediv__(self, other):
+        return Hosh(cellsmul(self.convert(other).cells, cellsinv(self.cells, self.p), self.p), version=self.version)
+
     def __truediv__(self, other):
         return Hosh(cellsmul(self.cells, cellsinv(self.convert(other).cells, self.p), self.p), version=self.version)
 

@@ -49,7 +49,7 @@
 #  time spent here.
 from collections import namedtuple
 
-Group = namedtuple(&#34;Group&#34;, &#34;p p4 p6 digits bytes firstp lastp firstp4 lastp4 firstp6 lastp6 rho&#34;)
+Group = namedtuple(&#34;Group&#34;, &#34;p p4 p6 digits bytes firstp lastp firstp4 lastp4 firstp6 lastp6 rho delete&#34;)
 &#34;&#34;&#34;Group properties&#34;&#34;&#34;
 
 groups = {
@@ -57,7 +57,7 @@ groups = {
               &#34;0_100___________&#34;, &#34;f_0ff___________&#34;,
               &#34;00_1000000000000&#34;, &#34;Y._0d5c34bc54504&#34;,
               &#34;1000000000000000&#34;, &#34;wzMzLecAryfbdoW.&#34;,
-              &#34;---------------0&#34;
+              &#34;---------------0&#34;, &#34;--------........&#34;
               ),
 
     32: Group(4294967291, 340282365336375215945099464469838299761,
@@ -65,7 +65,7 @@ groups = {
               &#34;0_1000000_______________________&#34;, &#34;f_affffff_______________________&#34;,
               &#34;00_10000000000000000000000000000&#34;, &#34;.._67200000b0efffff59000000cefff&#34;,
               &#34;10000000000000000000000000000000&#34;, &#34;oG300obK..f2A000gp...nn000wU....&#34;,
-              &#34;-------------------------------0&#34;
+              &#34;-------------------------------0&#34;, &#34;----------------................&#34;,
               ),
 
     40: Group(1099511627689, 1461501636868331575725436266114840805196834679841,
@@ -73,7 +73,7 @@ groups = {
               &#34;0_100000000_____________________________&#34;, &#34;f_8afffffff_____________________________&#34;,
               &#34;00_1000000000000000000000000000000000000&#34;, &#34;.._87c2a630003eec7dffff561b0000004aeffff&#34;,
               &#34;1000000000000000000000000000000000000000&#34;, &#34;g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....&#34;,
-              &#34;---------------------------------------0&#34;
+              &#34;---------------------------------------0&#34;, &#34;--------------------....................&#34;,
               ),
 
     64: Group(18446744073709551557, 115792089237316193942174975457431254695161196299352022581048345476735855814001,
@@ -85,7 +85,8 @@ groups = {
               &#34;.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff&#34;,
               &#34;1000000000000000000000000000000000000000000000000000000000000000&#34;,
               &#34;owLrhD0000wO2Z50.....z08lH000000MelM......vZb30000000UF.........&#34;,
-              &#34;---------------------------------------------------------------0&#34;
+              &#34;---------------------------------------------------------------0&#34;,
+              &#34;--------------------------------................................&#34;
               ),
 
 }
@@ -103,10 +104,10 @@ UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 <dl>
 <dt id="garoupa.groups.Group"><code class="flex name class">
 <span>class <span class="ident">Group</span></span>
-<span>(</span><span>p, p4, p6, digits, bytes, firstp, lastp, firstp4, lastp4, firstp6, lastp6, rho)</span>
+<span>(</span><span>p, p4, p6, digits, bytes, firstp, lastp, firstp4, lastp4, firstp6, lastp6, rho, delete)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Group(p, p4, p6, digits, bytes, firstp, lastp, firstp4, lastp4, firstp6, lastp6, rho)</p></div>
+<div class="desc"><p>Group(p, p4, p6, digits, bytes, firstp, lastp, firstp4, lastp4, firstp6, lastp6, rho, delete)</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li>builtins.tuple</li>
@@ -116,6 +117,10 @@ UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 <dt id="garoupa.groups.Group.bytes"><code class="name">var <span class="ident">bytes</span></code></dt>
 <dd>
 <div class="desc"><p>Alias for field number 4</p></div>
+</dd>
+<dt id="garoupa.groups.Group.delete"><code class="name">var <span class="ident">delete</span></code></dt>
+<dd>
+<div class="desc"><p>Alias for field number 12</p></div>
 </dd>
 <dt id="garoupa.groups.Group.digits"><code class="name">var <span class="ident">digits</span></code></dt>
 <dd>
@@ -183,6 +188,7 @@ UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 <h4><code><a title="garoupa.groups.Group" href="#garoupa.groups.Group">Group</a></code></h4>
 <ul class="two-column">
 <li><code><a title="garoupa.groups.Group.bytes" href="#garoupa.groups.Group.bytes">bytes</a></code></li>
+<li><code><a title="garoupa.groups.Group.delete" href="#garoupa.groups.Group.delete">delete</a></code></li>
 <li><code><a title="garoupa.groups.Group.digits" href="#garoupa.groups.Group.digits">digits</a></code></li>
 <li><code><a title="garoupa.groups.Group.firstp" href="#garoupa.groups.Group.firstp">firstp</a></code></li>
 <li><code><a title="garoupa.groups.Group.firstp4" href="#garoupa.groups.Group.firstp4">firstp4</a></code></li>
