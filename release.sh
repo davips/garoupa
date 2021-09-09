@@ -25,9 +25,7 @@ echo; echo
 
 echo "---------------- readme ----------------"
 read -p "press enter"
-source venv/bin/activate
-autoreadme -i README-edit.md -s examples/ -o README.md
-deactivate
+poetry run autoreadme -i README-edit.md -s examples/ -o README.md
 echo "---------------- readme done ----------------"
 echo; echo
 

@@ -23,6 +23,7 @@
 from hashlib import md5
 
 import colored
+from ansi2html import Ansi2HTMLConverter
 from colored import stylize
 
 
@@ -56,3 +57,8 @@ def colorize128bit(id, digits, ampl=0.8, change=0.44):
         b = max(margin, lim(fgb + change * (db - 128)))
         out += f"{paint(c, int(r), int(g), int(b))}"
     return out
+
+
+# def ansi2html(ansi):
+#     conv = Ansi2HTMLConverter()
+#     return conv.convert(ansi)
