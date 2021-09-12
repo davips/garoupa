@@ -82,6 +82,3 @@ class TestLdict(TestCase):
         self.assertNotEqual(c ** d, d ** c)
         self.assertEqual(c, c ** d // d)
 
-
-def test_hosh():
-    assert False

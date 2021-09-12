@@ -89,13 +89,13 @@ class Hosh:
     >>> h = ø.u * b"sdff"
     >>> print(h)
     f_9e1a267c8_____________________________
-    >>> x.id, (-x).id  # Making an ordered x.
+    >>> x.id, (+x).id  # Making an ordered x.
     ('ZN_60eec3e6c7b68087329e16b581401a6bb2b1f', '6BDj3b7Mmj7n-6B8XYaP3akO7400s9FlG4AtcHTp')
     >>> -x * y != y * -x
     True
     >>> --x == x
     True
-    >>> x ** y == -(-x * -y)  # a & b is a shortcut for -(-a & -b)
+    >>> x ** y == +(+x * +y)  # a ** b is a shortcut for +(+a * +b)
     True
     >>> x ** y != y ** x
     True
@@ -373,15 +373,54 @@ class Hosh:
         return Hosh(cellsmul(self.cells, self.convert(other).cells, self.p), version=self.version)
 
     def __rmul__(self, other: Union["Hosh", str, bytes, int]):
+        """
+        >>> from garoupa import ø
+        >>> (ø * b"13dfv34y4" )* b"434vbfrdg" == b"13dfv34y4" * (ø * b"434vbfrdg")
+        True
+
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        """
         return Hosh(cellsmul(self.convert(other).cells, self.cells, self.p), version=self.version)
 
     def __rpow__(self, other):
-        return +(+self.convert(other) + +self)
+        """
+        >>> from garoupa import ø
+        >>> (ø * b"13dfv34y4") ** b"434vbfrdg" == b"13dfv34y4" ** (ø * b"434vbfrdg")
+        True
+
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        """
+        return +(+self.convert(other) * +self)
 
     def __pow__(self, power, modulo=None):
         return +(+self * +self.convert(power))
 
     def __rfloordiv__(self, other):
+        """
+        >>> from garoupa import ø
+        >>> (ø * b"13dfv34y4") // b"434vbfrdg" == b"13dfv34y4" // (ø * b"434vbfrdg")
+        True
+
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        """
         return +(+self.convert(other) / +self)
 
     def __floordiv__(self, other):
@@ -431,6 +470,19 @@ class Hosh:
         return Hosh(cellsinv(self.cells, self.p), version=self.version)
 
     def __rtruediv__(self, other):
+        """
+        >>> from garoupa import ø
+        >>> (ø * b"13dfv34y4") / b"434vbfrdg" == b"13dfv34y4" / (ø * b"434vbfrdg")
+        True
+
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        """
         return Hosh(cellsmul(self.convert(other).cells, cellsinv(self.cells, self.p), self.p), version=self.version)
 
     def __truediv__(self, other):

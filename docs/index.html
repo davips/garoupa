@@ -174,13 +174,13 @@ True
 &gt;&gt;&gt; h = ø.u * b&quot;sdff&quot;
 &gt;&gt;&gt; print(h)
 f_9e1a267c8_____________________________
-&gt;&gt;&gt; x.id, (-x).id  # Making an ordered x.
+&gt;&gt;&gt; x.id, (+x).id  # Making an ordered x.
 ('ZN_60eec3e6c7b68087329e16b581401a6bb2b1f', '6BDj3b7Mmj7n-6B8XYaP3akO7400s9FlG4AtcHTp')
 &gt;&gt;&gt; -x * y != y * -x
 True
 &gt;&gt;&gt; --x == x
 True
-&gt;&gt;&gt; x ** y == -(-x * -y)  # a &amp; b is a shortcut for -(-a &amp; -b)
+&gt;&gt;&gt; x ** y == +(+x * +y)  # a ** b is a shortcut for +(+a * +b)
 True
 &gt;&gt;&gt; x ** y != y ** x
 True
@@ -259,13 +259,13 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
     &gt;&gt;&gt; h = ø.u * b&#34;sdff&#34;
     &gt;&gt;&gt; print(h)
     f_9e1a267c8_____________________________
-    &gt;&gt;&gt; x.id, (-x).id  # Making an ordered x.
+    &gt;&gt;&gt; x.id, (+x).id  # Making an ordered x.
     (&#39;ZN_60eec3e6c7b68087329e16b581401a6bb2b1f&#39;, &#39;6BDj3b7Mmj7n-6B8XYaP3akO7400s9FlG4AtcHTp&#39;)
     &gt;&gt;&gt; -x * y != y * -x
     True
     &gt;&gt;&gt; --x == x
     True
-    &gt;&gt;&gt; x ** y == -(-x * -y)  # a &amp; b is a shortcut for -(-a &amp; -b)
+    &gt;&gt;&gt; x ** y == +(+x * +y)  # a ** b is a shortcut for +(+a * +b)
     True
     &gt;&gt;&gt; x ** y != y ** x
     True
@@ -543,24 +543,94 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         return Hosh(cellsmul(self.cells, self.convert(other).cells, self.p), version=self.version)
 
     def __rmul__(self, other: Union[&#34;Hosh&#34;, str, bytes, int]):
+        &#34;&#34;&#34;
+        &gt;&gt;&gt; from garoupa import ø
+        &gt;&gt;&gt; (ø * b&#34;13dfv34y4&#34; )* b&#34;434vbfrdg&#34; == b&#34;13dfv34y4&#34; * (ø * b&#34;434vbfrdg&#34;)
+        True
+
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        &#34;&#34;&#34;
         return Hosh(cellsmul(self.convert(other).cells, self.cells, self.p), version=self.version)
 
     def __rpow__(self, other):
-        return -(-self.convert(other) * -self)
+        &#34;&#34;&#34;
+        &gt;&gt;&gt; from garoupa import ø
+        &gt;&gt;&gt; (ø * b&#34;13dfv34y4&#34;) ** b&#34;434vbfrdg&#34; == b&#34;13dfv34y4&#34; ** (ø * b&#34;434vbfrdg&#34;)
+        True
+
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        &#34;&#34;&#34;
+        return +(+self.convert(other) * +self)
 
     def __pow__(self, power, modulo=None):
-        return -(-self * -self.convert(power))
+        return +(+self * +self.convert(power))
 
     def __rfloordiv__(self, other):
-        return -(-self.convert(other) / -self)
+        &#34;&#34;&#34;
+        &gt;&gt;&gt; from garoupa import ø
+        &gt;&gt;&gt; (ø * b&#34;13dfv34y4&#34;) // b&#34;434vbfrdg&#34; == b&#34;13dfv34y4&#34; // (ø * b&#34;434vbfrdg&#34;)
+        True
+
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        &#34;&#34;&#34;
+        return +(+self.convert(other) / +self)
 
     def __floordiv__(self, other):
-        return -(-self / -self.convert(other))
+        &#34;&#34;&#34;Lift&#34;&#34;&#34;
+        return +(+self / +self.convert(other))
 
     def __neg__(self):
-        &#34;&#34;&#34;Change disposition of cells in a way that even hybrid ids will not commute.
+        &#34;&#34;&#34;Change disposition of element-matrix cells in a way that even hybrid ids will not commute.
+        ps. This differs from +hosh because it creates a lower element.
 
-        Also revert disposition of cells making them hybrid again.&#34;&#34;&#34;
+        Switch positions of cells a2 and a4. This operation is it own inverse.
+
+        Cells are represented as a list in the format: [a5, a4, a3, a2, a1, a0]
+        Cells are represented as a matrix in the format:
+        1 a4 a1 a0
+        0  1 a2 a3
+        0  0  1 a5
+        0  0  0  1
+
+        &#34;&#34;&#34;
+        cells = self.cells.copy()
+        cells[3] = cells[1]
+        cells[1] = self.cells[3]
+        return Hosh(cells, version=self.version)
+
+    def __pos__(self):
+        &#34;&#34;&#34;Change disposition of element-matrix cells in a way that even hybrid ids will not commute.
+        ps. This differs from -hosh because it creates a higher element.
+        For this reason it is adopted in __floordiv__
+
+        Switch positions of cells a2 and a5. This operation is it own inverse.
+
+        Cells are represented as a list in the format: [a5, a4, a3, a2, a1, a0]
+        Cells are represented as a matrix in the format:
+        1 a4 a1 a0
+        0  1 a2 a3
+        0  0  1 a5
+        0  0  0  1
+
+        &#34;&#34;&#34;
         cells = self.cells.copy()
         cells[3] = cells[0]
         cells[0] = self.cells[3]
@@ -570,6 +640,19 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         return Hosh(cellsinv(self.cells, self.p), version=self.version)
 
     def __rtruediv__(self, other):
+        &#34;&#34;&#34;
+        &gt;&gt;&gt; from garoupa import ø
+        &gt;&gt;&gt; (ø * b&#34;13dfv34y4&#34;) / b&#34;434vbfrdg&#34; == b&#34;13dfv34y4&#34; / (ø * b&#34;434vbfrdg&#34;)
+        True
+
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        &#34;&#34;&#34;
         return Hosh(cellsmul(self.convert(other).cells, cellsinv(self.cells, self.p), self.p), version=self.version)
 
     def __truediv__(self, other):

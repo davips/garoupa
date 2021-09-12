@@ -84,7 +84,11 @@ def colorize128bit(id, digits, ampl=0.8, change=0.44):
         g = max(margin, lim(fgg + change * (dg - 128)))
         b = max(margin, lim(fgb + change * (db - 128)))
         out += f&#34;{paint(c, int(r), int(g), int(b))}&#34;
-    return out</code></pre>
+    return out
+
+# def ansi2html(ansi):
+#     conv = Ansi2HTMLConverter()
+#     return conv.convert(ansi)</code></pre>
 </details>
 </section>
 <section>
