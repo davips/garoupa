@@ -1,4 +1,4 @@
-from sympy import Matrix, simplify, solve, pprint
+from sympy import Matrix, pprint
 
 # print(solve(p**6-p**4+63**32))
 # l=[-sqrt(6)*sqrt(-2*(184743873840546494742982456323*sqrt(307172690294505835115734622361390168374710441749827424122949) + 102390896764835278371911540787130056124903480583275808040985)**(1/3) + 2*2**(1/3) + 2**(2/3)*(184743873840546494742982456323*sqrt(307172690294505835115734622361390168374710441749827424122949) + 102390896764835278371911540787130056124903480583275808040985)**(2/3))/(6*(184743873840546494742982456323*sqrt(307172690294505835115734622361390168374710441749827424122949) + 102390896764835278371911540787130056124903480583275808040985)**(1/6)),
@@ -163,11 +163,11 @@ pprint(a * b, wrap_line=False)
 
 print()
 a = Matrix([[1, "a12", "a13", "a14"],
-            [0, 1, 0,0],
+            [0, 1, 0, 0],
             [0, 0, 1, "a34"],
             [0, 0, 0, 1]])
 b = Matrix([[1, "b12", "b13", "b14"],
-            [0, 1, 0,0],
+            [0, 1, 0, 0],
             [0, 0, 1, "b34"],
             [0, 0, 0, 1]])
 pprint(a * b, wrap_line=False)
@@ -175,86 +175,149 @@ pprint(a * b, wrap_line=False)
 print()
 
 print()
-a = Matrix([[1, 1,1,1],
-            [0, 1, 1,1],
+a = Matrix([[1, 1, 1, 1],
+            [0, 1, 1, 1],
             [0, 0, 1, "a34"],
             [0, 0, 0, 1]])
-b = Matrix([[1, 1,1,1],
-            [0, 1, 1,1],
+b = Matrix([[1, 1, 1, 1],
+            [0, 1, 1, 1],
             [0, 0, 1, "b34"],
             [0, 0, 0, 1]])
 pprint(a * b, wrap_line=False)
 
 print()
 
-exit()
-I = Matrix.eye(4, 4)
-print("a")
-pprint(a, wrap_line=False)
-print()
-print("a*b")
-pprint(a * b, wrap_line=False)
-
-# h = 2 ** 32 - 5
-# print(h ** 4 / h ** 6)
-# print(h ** 7 / h ** 9)
-# print(pow(2 ** 256, 1 / 10))
+# I = Matrix.eye(4, 4)
+# print("a")
+# pprint(a, wrap_line=False)
+# print()
+# print("a*b")
+# pprint(a * b, wrap_line=False)
 #
-# for bits in [128, 256]:
-#     for g in range(6, 12):
-#         h = g * 2 // 3 + 1
-#         p = int(pow(2 ** bits, 1 / h))
-#         for i in range(p + 1000, p, -1):
-#             if isprime(i):
-#                 p = i
-#                 break
-#         print(h, g, log(p ** h, 2), log(p ** g, 2), p)
-#     print()
+# # h = 2 ** 32 - 5
+# # print(h ** 4 / h ** 6)
+# # print(h ** 7 / h ** 9)
+# # print(pow(2 ** 256, 1 / 10))
+# #
+# # for bits in [128, 256]:
+# #     for g in range(6, 12):
+# #         h = g * 2 // 3 + 1
+# #         p = int(pow(2 ** bits, 1 / h))
+# #         for i in range(p + 1000, p, -1):
+# #             if isprime(i):
+# #                 p = i
+# #                 break
+# #         print(h, g, log(p ** h, 2), log(p ** g, 2), p)
+# #     print()
+# #
+# # print()
+# # bits = 256
+# # for h in range(1,150):
+# #     for g in range(h,h+125):
+# #         # g = 14
+# #         # h = 10
+# #         digits = bits//4
+# #         p = int(pow(2 ** bits, 1 / h))
+# #         for i in range(p + 1000, p, -1):
+# #             if isprime(i):
+# #                 p = i
+# #                 break
+# #         # print(h, g, log(p ** h, 2), log(p ** g, 2), p)
+# #         # print(log(p ** 7, 49))
+# #
+# #         alphabet = tuple("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL_")
+# #         rev_alphabet = dict((c, v) for v, c in enumerate(alphabet))
+# #
+# #
+# #         def dec(string):
+# #             num = 0
+# #             for char in string:
+# #                 num = num * len(alphabet) + rev_alphabet[char]
+# #             return num
+# #
+# #
+# #         def enc(num):
+# #             encoded = ""
+# #             while num:
+# #                 num, rem = divmod(num, len(alphabet))
+# #                 encoded = alphabet[rem] + encoded
+# #             return encoded
+# #
+# #         if len(enc(p ** g - 1))==digits:
+# #             print(g,h,enc(p ** g - 1), log(dec("f" * digits), len(alphabet)), log(p ** g - 1, len(alphabet)),p, sep='\t')
+#
 #
 # print()
-# bits = 256
-# for h in range(1,150):
-#     for g in range(h,h+125):
-#         # g = 14
-#         # h = 10
-#         digits = bits//4
-#         p = int(pow(2 ** bits, 1 / h))
-#         for i in range(p + 1000, p, -1):
-#             if isprime(i):
-#                 p = i
-#                 break
-#         # print(h, g, log(p ** h, 2), log(p ** g, 2), p)
-#         # print(log(p ** 7, 49))
-#
-#         alphabet = tuple("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL_")
-#         rev_alphabet = dict((c, v) for v, c in enumerate(alphabet))
-#
-#
-#         def dec(string):
-#             num = 0
-#             for char in string:
-#                 num = num * len(alphabet) + rev_alphabet[char]
-#             return num
-#
-#
-#         def enc(num):
-#             encoded = ""
-#             while num:
-#                 num, rem = divmod(num, len(alphabet))
-#                 encoded = alphabet[rem] + encoded
-#             return encoded
-#
-#         if len(enc(p ** g - 1))==digits:
-#             print(g,h,enc(p ** g - 1), log(dec("f" * digits), len(alphabet)), log(p ** g - 1, len(alphabet)),p, sep='\t')
+# print("a*b")
+# pprint(a * b, wrap_line=False)
+# print()
+# pprint(b * a, wrap_line=False)
+# print()
+# pprint(simplify(a * b))
+# pprint(simplify(b * a))
+# pprint(solve(a * b - b * a))
+# print(Matrix([["a1"]]) == Matrix([["a1"]]))
 
 
 print()
-print("a*b")
+a = Matrix([[1, "a12", "a13", "a14"],
+            [0, 1, "a23", "a24"],
+            [0, 0, 1, "a34"],
+            [0, 0, 0, 1]])
+b = Matrix([[1, 0, "b13", "b14"],
+            [0, 1, "b23", "b24"],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]])
 pprint(a * b, wrap_line=False)
+
 print()
-pprint(b * a, wrap_line=False)
+a = Matrix([[1, "a12", "a13", "a14", "a15"],
+            [0, 1, "a23", "a24", "a25"],
+            [0, 0, 1, "a34", "a35"],
+            [0, 0, 0, 1, "a45"],
+            [0, 0, 0, 0, 1]
+            ])
+b = Matrix([[1, 0, "b12", "b13", "b14"],  # produz mais multiplicações e mais diversas
+            [0, 1, "b22", "b23", "b24"],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 1]
+            ])
+pprint(b*a, wrap_line=False)
+
 print()
-pprint(simplify(a * b))
-pprint(simplify(b * a))
-pprint(solve(a * b - b * a))
-print(Matrix([["a1"]]) == Matrix([["a1"]]))
+b = Matrix([[1, 0, 0, "b13", "b14"],
+            [0, 1, 0, "b23", "b24"],
+            [0, 0, 1, "b34", "b35"],
+            [0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 1]
+            ])
+pprint(b*a, wrap_line=False)
+
+
+print()
+a = Matrix([[1, 0, "a13", "a14"],
+            [0, 1, 0, "a24"],
+            [0, 0, 1, "a34"],
+            [0, 0, 0, 1]])
+b = Matrix([[1, 0, "b13", "b14"],
+            [0, 1, 0, "b24"],
+            [0, 0, 1, "b34"],
+            [0, 0, 0, 1]])
+pprint(a*b, wrap_line=False)
+print()
+pprint(b*a, wrap_line=False)
+
+
+print()
+a = Matrix([[1, "a12", "a13", "a14"],
+            [0, 1,  "a23",0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]])
+b = Matrix([[1, "b12", "b13", "b14"],
+            [0, 1, "b23",0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]])
+pprint(a*b, wrap_line=False)
+print()
+pprint(b*a, wrap_line=False)

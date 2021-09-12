@@ -68,3 +68,20 @@ class TestLdict(TestCase):
         b = ø * [9, 8, 7, 6, 5, 4]
         self.assertEqual([15, 13, 11, 9, 7, 5], (a + b).cells)
         self.assertEqual(repr(a * b / b), repr(a))
+
+        self.assertEqual([6, 8, 7, 9, 5, 4], (+b).cells)
+        self.assertEqual([9, 6, 7, 8, 5, 4], (-b).cells)
+        c = ø * [0, 0, 7, 6, 5, 4]
+        d = ø * [0, 0, 3, 2, 5, 8]
+        e = ø * [0, 0, 8, 3, 4, 7]
+        self.assertEqual(-+c, +c)
+        self.assertEqual(+-c, -c)
+
+        self.assertEqual(c * d, d * c)
+        self.assertEqual([0, 0, 10, 8, 10, 42], d ** c)
+        self.assertNotEqual(c ** d, d ** c)
+        self.assertEqual(c, c ** d // d)
+
+
+def test_hosh():
+    assert False

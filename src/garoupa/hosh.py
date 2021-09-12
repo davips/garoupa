@@ -376,21 +376,52 @@ class Hosh:
         return Hosh(cellsmul(self.convert(other).cells, self.cells, self.p), version=self.version)
 
     def __rpow__(self, other):
-        return -(-self.convert(other) * -self)
+        return +(+self.convert(other) + +self)
 
     def __pow__(self, power, modulo=None):
-        return -(-self * -self.convert(power))
+        return +(+self * +self.convert(power))
 
     def __rfloordiv__(self, other):
-        return -(-self.convert(other) / -self)
+        return +(+self.convert(other) / +self)
 
     def __floordiv__(self, other):
-        return -(-self / -self.convert(other))
+        """Lift"""
+        return +(+self / +self.convert(other))
 
     def __neg__(self):
-        """Change disposition of cells in a way that even hybrid ids will not commute.
+        """Change disposition of element-matrix cells in a way that even hybrid ids will not commute.
+        ps. This differs from +hosh because it creates a lower element.
 
-        Also revert disposition of cells making them hybrid again."""
+        Switch positions of cells a2 and a4. This operation is it own inverse.
+
+        Cells are represented as a list in the format: [a5, a4, a3, a2, a1, a0]
+        Cells are represented as a matrix in the format:
+        1 a4 a1 a0
+        0  1 a2 a3
+        0  0  1 a5
+        0  0  0  1
+
+        """
+        cells = self.cells.copy()
+        cells[3] = cells[1]
+        cells[1] = self.cells[3]
+        return Hosh(cells, version=self.version)
+
+    def __pos__(self):
+        """Change disposition of element-matrix cells in a way that even hybrid ids will not commute.
+        ps. This differs from -hosh because it creates a higher element.
+        For this reason it is adopted in __floordiv__
+
+        Switch positions of cells a2 and a5. This operation is it own inverse.
+
+        Cells are represented as a list in the format: [a5, a4, a3, a2, a1, a0]
+        Cells are represented as a matrix in the format:
+        1 a4 a1 a0
+        0  1 a2 a3
+        0  0  1 a5
+        0  0  0  1
+
+        """
         cells = self.cells.copy()
         cells[3] = cells[0]
         cells[0] = self.cells[3]

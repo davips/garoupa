@@ -24,6 +24,7 @@ from bigfloat import *
 from sympy import isprime
 
 from garoupa.misc.encoding.base import n2id
+from unimatrix import order, PU
 
 a16 = tuple("0123456789abcdef")
 a16up = tuple("ghijklmnopqrstuv")
@@ -86,6 +87,7 @@ for digits in [16, 32, 40, 64]:
         # print(pow(p ** 6 - p ** 4, 1 / digits), f": min. alphabet to fit G\\H into {digits} digits")
         # print(64 ** 2 * pow(16, digits - 3) / (p ** 4 - p), "<- representable / |H\\Z|")
         # print(pow(64, digits) / (p ** 6 - p ** 4), "<- representable / |G\\H|")
+        print(PU(p))
 
         # relevant digests
         digits_b16a = digits // 4 - 1
