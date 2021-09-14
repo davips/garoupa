@@ -209,12 +209,12 @@ from the standard library.</p>
 - <code>data</code> (optional): Input bytes to hash. This is equivalent to calling
 <code>update</code> on the returned hasher.</p>
 <p>Keyword arguments:
-- <code>key</code>: A 32-byte key. Setting this to non-None enables the keyed
-hashing mode.
-- <code>context</code>: A context string. Setting this to non-None enables the key
-derivation mode. Context strings should be hardcoded, globally
-unique, and application-specific. <code>context</code> and <code>key</code> cannot be used
-at the same time.
+- <code>key</code>: A 32-byte key. Setting this to non-None enables the BLAKE3
+keyed hashing mode.
+- <code>derive_key_context</code>: A hardcoded, globally unique,
+application-specific context string. Setting this to non-None enables
+the BLAKE3 key derivation mode. <code>derive_key_context</code> and <code>key</code> cannot
+be used at the same time.
 - <code>multithreading</code>: See the <code>multithreading</code> argument on the <code>update</code>
 method. This flag only applies to this one function call. It is not a
 persistent setting, and it has no effect if <code>data</code> is omitted.</p></div>
