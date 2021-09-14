@@ -52,6 +52,7 @@ They can be easily implemented in other languages and are
 intended to be a specification on how to identify multi-valued objects and multi-step processes.
 Unordered ids use a very narrow range of the total number of identifiers.
 This is not a problem as they are not very useful.
+
 One use for unordered ids could be the embedding of authorship or other metadata into an object without worrying about the timing, since the resulting id will remain the same, no matter when the unordered id is operated with the id of the object under construction. | . 
 -------------------------|-------------------------
 ![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png) | . 
@@ -217,11 +218,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[1, 2, 0, 3], 2, dr0»	*	«[2, 0, 1, 3], 3, dr7»	=	«[0, 1, 2, 3], 0, dr3»
-«[1, 2, 0, 3], 3, ds4»	*	«[0, 1, 3, 2], 0, dr5»	=	«[1, 2, 3, 0], 3, ds3»
-«[2, 0, 1, 3], 0, dr6»	*	«[0, 1, 3, 2], 2, ds6»	=	«[2, 0, 3, 1], 2, ds0»
-«[1, 3, 0, 2], 0, dr5»	*	«[1, 0, 3, 2], 1, ds1»	=	«[3, 1, 2, 0], 1, ds2»
-«[2, 1, 0, 3], 1, ds5»	*	«[3, 0, 2, 1], 2, dr2»	=	«[3, 2, 0, 1], 3, ds3»
+«[3, 2, 0, 1], 0, ds3»	*	«[0, 1, 2, 3], 2, ds5»	=	«[3, 2, 0, 1], 2, dr2»
+«[0, 2, 1, 3], 2, dr7»	*	«[0, 1, 2, 3], 3, ds0»	=	«[0, 2, 1, 3], 0, ds3»
+«[1, 0, 3, 2], 2, dr5»	*	«[3, 1, 0, 2], 1, dr2»	=	«[2, 0, 1, 3], 3, dr3»
+«[1, 3, 0, 2], 3, dr2»	*	«[3, 0, 1, 2], 0, dr5»	=	«[2, 1, 3, 0], 3, dr3»
+«[0, 1, 2, 3], 3, dr1»	*	«[0, 2, 1, 3], 2, ds4»	=	«[0, 2, 1, 3], 0, ds1»
 """
 ```
 
@@ -231,7 +232,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[5, 8, 7, 10, 3, 2, 1, 11, 4, 6, 0, 9]
+[1, 2, 9, 3, 7, 11, 10, 0, 6, 5, 4, 8]
 """
 ```
 
@@ -353,9 +354,9 @@ for G in Gs:
     )
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          823/10000:  12.0 bits	~8.23 %
-    |D8×D8×D8×D8| = 65536:         349/10000:  16.0 bits	~3.49 %
- |D8×D8×D8×D8×D8| = 1048576:       149/10000:  20.0 bits	~1.49 %
+       |D8×D8×D8| = 4096:          808/10000:  12.0 bits	~8.08 %
+    |D8×D8×D8×D8| = 65536:         376/10000:  16.0 bits	~3.76 %
+ |D8×D8×D8×D8×D8| = 1048576:       172/10000:  20.0 bits	~1.72 %
 """
 ```
 
@@ -446,7 +447,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 14/09/2021 03:18:03
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 14/09/2021 03:23:32
 """
 ```
 

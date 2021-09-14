@@ -52,6 +52,7 @@ They can be easily implemented in other languages and are
 intended to be a specification on how to identify multi-valued objects and multi-step processes.
 Unordered ids use a very narrow range of the total number of identifiers.
 This is not a problem as they are not very useful.
+
 One use for unordered ids could be the embedding of authorship or other metadata into an object without worrying about the timing, since the resulting id will remain the same, no matter when the unordered id is operated with the id of the object under construction. | . 
 -------------------------|-------------------------
 ![img_5.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img_5.png) | . 
