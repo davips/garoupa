@@ -15,28 +15,29 @@ packages = [
 full = ["progress", "pathos", "numpy", "hosh"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-wheel = "^0.36.2"
-blake3 = "^0.1.8"
+python = ">=3.8,<3.11"
+wheel = "^0.37.0"
+blake3 = "^0.2.0"
 colored = "^1.4.2"
-progress = { version = "^1.5", optional = true }
-pathos = { version = "^0.2.7", optional = true }
-#hosh = { version = "^2.210810.0", optional = true }
 pdoc3 = "^0.10.0"
 ansi2html = "^1.6.0"
+#hosh = { version = "^2.210810.0", optional = true }
+progress = { version = "^1.6", optional = true }
+pathos = { version = "^0.2.8", optional = true }
 
 [tool.poetry.dev-dependencies]
+# hosh = "^2.210810.0"
 pdoc3 = "^0.10.0"
 autoreadme = "^0.2102.20"
-pytest = "^6.2.2"
-pytest-cov = "^2.11.1"
-progress = "^1.5"
-pathos = "^0.2.7"
-numpy = "^1.20.1"
+pytest = "^6.2.5"
+pytest-cov = "^2.12.1"
+progress = "^1.6"
+pathos = "^0.2.8"
+numpy = "^1.21.2"
 ipython = "^7.27.0"
-# hosh = "^2.210810.0"
-bigfloat = "^0.4.0"
+bigfloat = { version = "^0.4.0", optional = true }
 pypi-server = "^0.4.8"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
