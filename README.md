@@ -15,7 +15,7 @@
  
 
 
-GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) / [code](https://github.com/davips/garoupa) provides a reference implementation for the UT*.4 specification presented [here](https://arxiv.org/abs/2109.06028).  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
+GaROUPa solves the identification problem of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) / [code](https://github.com/davips/garoupa) provides a reference implementation for the UT*.4 specification presented [here](https://arxiv.org/abs/2109.06028).  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
 :-------------------------:|:-------------------------:
 
 We adopt a novel paradigm to universally unique identification (UUID), making identifiers deterministic and predictable, 
@@ -24,10 +24,11 @@ Here, data versioning and composition of processing steps are directly mapped as
 We call each of the latter a Hosh, i.e., an identifier is an _**o**perable **h**a**sh**_.
 
 A complete implementation of the remaining ideas from the [paper](https://arxiv.org/abs/2109.06028) is provided in this
-[lazy dict](https://davips.github.io/ldict) which depends on GaROUPa and serves as an advanced usage example.
+[lazy dict](https://pypi.org/project/ldict/2.211016.3) which depends on GaROUPa and serves as an advanced usage example.
+<br>[_A new, entirely rewritten, version will be available as a [cacheable lazy dict](https://pypi.org/project/cdict) around november/2021._]
 
 ## Overview
-A product of identifiers produce a new identifier as shown below, where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
+A product of identifiers produces a new identifier as shown below, where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
 
 ![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png) | New identifiers are easily <br> created from the identity <br> element `ø`. Also available as `identity` for people <br>or systems allergic to <br>utf-8 encoding.
 -------------------------|-------------------------
@@ -218,11 +219,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[3, 2, 0, 1], 0, ds3»	*	«[0, 1, 2, 3], 2, ds5»	=	«[3, 2, 0, 1], 2, dr2»
-«[0, 2, 1, 3], 2, dr7»	*	«[0, 1, 2, 3], 3, ds0»	=	«[0, 2, 1, 3], 0, ds3»
-«[1, 0, 3, 2], 2, dr5»	*	«[3, 1, 0, 2], 1, dr2»	=	«[2, 0, 1, 3], 3, dr3»
-«[1, 3, 0, 2], 3, dr2»	*	«[3, 0, 1, 2], 0, dr5»	=	«[2, 1, 3, 0], 3, dr3»
-«[0, 1, 2, 3], 3, dr1»	*	«[0, 2, 1, 3], 2, ds4»	=	«[0, 2, 1, 3], 0, ds1»
+«[2, 1, 0, 3], 2, ds4»	*	«[3, 1, 0, 2], 1, dr0»	=	«[3, 1, 2, 0], 3, ds0»
+«[0, 1, 3, 2], 3, ds5»	*	«[1, 0, 2, 3], 2, ds7»	=	«[1, 0, 3, 2], 0, dr2»
+«[0, 1, 3, 2], 0, dr2»	*	«[0, 1, 2, 3], 0, ds2»	=	«[0, 1, 3, 2], 0, ds0»
+«[1, 0, 3, 2], 2, dr6»	*	«[1, 2, 0, 3], 0, dr0»	=	«[0, 3, 1, 2], 2, dr2»
+«[0, 1, 2, 3], 1, dr0»	*	«[1, 2, 0, 3], 2, ds7»	=	«[1, 2, 0, 3], 3, ds3»
 """
 ```
 
@@ -232,7 +233,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[1, 2, 9, 3, 7, 11, 10, 0, 6, 5, 4, 8]
+[5, 9, 0, 8, 10, 1, 3, 6, 11, 2, 4, 7]
 """
 ```
 
@@ -354,9 +355,9 @@ for G in Gs:
     )
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          808/10000:  12.0 bits	~8.08 %
-    |D8×D8×D8×D8| = 65536:         376/10000:  16.0 bits	~3.76 %
- |D8×D8×D8×D8×D8| = 1048576:       172/10000:  20.0 bits	~1.72 %
+       |D8×D8×D8| = 4096:          896/10000:  12.0 bits	~8.96 %
+    |D8×D8×D8×D8| = 65536:         378/10000:  16.0 bits	~3.78 %
+ |D8×D8×D8×D8×D8| = 1048576:       153/10000:  20.0 bits	~1.53 %
 """
 ```
 
@@ -447,7 +448,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 14/09/2021 03:23:32
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 16/10/2021 22:19:00
 """
 ```
 
