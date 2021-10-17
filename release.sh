@@ -13,6 +13,13 @@ echo "----------------- tested -----------------------"
 echo; echo
 
 echo
+echo "----------------- checking... -----------------------"
+read -p "press enter"
+poetry run flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics --ignore E741
+echo "----------------- checked -----------------------"
+echo; echo
+
+echo
 echo "----------------- docs... -----------------------"
 read -p "press enter"
 rm docs -rf
