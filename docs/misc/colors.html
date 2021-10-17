@@ -54,8 +54,22 @@ from hashlib import md5
 import colored
 from colored import stylize
 
+from garoupa.config import GLOBAL
+
 
 def paint(txt, fgr, fgg, fgb):
+    &#34;&#34;&#34;
+    &gt;&gt;&gt; from garoupa import setup, ø
+    &gt;&gt;&gt; ø * b&#34;asd&#34;
+    \x1b[38;5;71m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mx\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0m8\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mA\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mt\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mU\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0m5\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mV\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mb\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mn\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mw\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0m6\x1b[0m
+    &gt;&gt;&gt; setup(dark_theme=False)
+    &gt;&gt;&gt; ø * b&#34;asd&#34;
+    \x1b[38;5;132m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0mx\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0m8\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mA\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mt\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mU\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0m5\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mV\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0mb\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0mn\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mw\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0m6\x1b[0m
+    &#34;&#34;&#34;
+    if not GLOBAL[&#34;dark_theme&#34;]:
+        fgr = 255 - fgr
+        fgg = 255 - fgg
+        fgb = 255 - fgb
     fgcolor = f&#34;#{hex(fgr)[2:].rjust(2, &#39;0&#39;)}{hex(fgg)[2:].rjust(2, &#39;0&#39;)}{hex(fgb)[2:].rjust(2, &#39;0&#39;)}&#34;
     return stylize(txt, colored.fg(fgcolor) + colored.attr(&#34;bold&#34;) + colored.bg(&#34;#000000&#34;))
 
@@ -85,7 +99,6 @@ def colorize128bit(id, digits, ampl=0.8, change=0.44):
         b = max(margin, lim(fgb + change * (db - 128)))
         out += f&#34;{paint(c, int(r), int(g), int(b))}&#34;
     return out
-
 
 # def ansi2html(ansi):
 #     conv = Ansi2HTMLConverter()
@@ -152,12 +165,30 @@ True
 <span>def <span class="ident">paint</span></span>(<span>txt, fgr, fgg, fgb)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import setup, ø
+&gt;&gt;&gt; ø * b&quot;asd&quot;
+[38;5;71m[1m[48;5;0mL[0m[38;5;83m[1m[48;5;0ms[0m[38;5;107m[1m[48;5;0mx[0m[38;5;83m[1m[48;5;0mC[0m[38;5;107m[1m[48;5;0ma[0m[38;5;83m[1m[48;5;0mj[0m[38;5;107m[1m[48;5;0ml[0m[38;5;78m[1m[48;5;0mK[0m[38;5;119m[1m[48;5;0m8[0m[38;5;113m[1m[48;5;0m3[0m[38;5;113m[1m[48;5;0m0[0m[38;5;107m[1m[48;5;0mA[0m[38;5;72m[1m[48;5;0mK[0m[38;5;83m[1m[48;5;0mq[0m[38;5;149m[1m[48;5;0mt[0m[38;5;107m[1m[48;5;0mU[0m[38;5;71m[1m[48;5;0m5[0m[38;5;83m[1m[48;5;0mv[0m[38;5;107m[1m[48;5;0m0[0m[38;5;83m[1m[48;5;0mC[0m[38;5;107m[1m[48;5;0m9[0m[38;5;83m[1m[48;5;0mY[0m[38;5;107m[1m[48;5;0mV[0m[38;5;78m[1m[48;5;0m9[0m[38;5;119m[1m[48;5;0mb[0m[38;5;113m[1m[48;5;0mQ[0m[38;5;113m[1m[48;5;0mn[0m[38;5;107m[1m[48;5;0mZ[0m[38;5;72m[1m[48;5;0mJ[0m[38;5;83m[1m[48;5;0m1[0m[38;5;149m[1m[48;5;0mw[0m[38;5;107m[1m[48;5;0mG[0m[38;5;71m[1m[48;5;0m3[0m[38;5;83m[1m[48;5;0mq[0m[38;5;107m[1m[48;5;0ms[0m[38;5;83m[1m[48;5;0ml[0m[38;5;107m[1m[48;5;0mW[0m[38;5;83m[1m[48;5;0m9[0m[38;5;107m[1m[48;5;0mZ[0m[38;5;78m[1m[48;5;0m6[0m
+&gt;&gt;&gt; setup(dark_theme=False)
+&gt;&gt;&gt; ø * b&quot;asd&quot;
+[38;5;132m[1m[48;5;0mL[0m[38;5;127m[1m[48;5;0ms[0m[38;5;60m[1m[48;5;0mx[0m[38;5;127m[1m[48;5;0mC[0m[38;5;96m[1m[48;5;0ma[0m[38;5;127m[1m[48;5;0mj[0m[38;5;97m[1m[48;5;0ml[0m[38;5;126m[1m[48;5;0mK[0m[38;5;91m[1m[48;5;0m8[0m[38;5;55m[1m[48;5;0m3[0m[38;5;91m[1m[48;5;0m0[0m[38;5;97m[1m[48;5;0mA[0m[38;5;132m[1m[48;5;0mK[0m[38;5;127m[1m[48;5;0mq[0m[38;5;55m[1m[48;5;0mt[0m[38;5;97m[1m[48;5;0mU[0m[38;5;132m[1m[48;5;0m5[0m[38;5;127m[1m[48;5;0mv[0m[38;5;60m[1m[48;5;0m0[0m[38;5;127m[1m[48;5;0mC[0m[38;5;96m[1m[48;5;0m9[0m[38;5;127m[1m[48;5;0mY[0m[38;5;97m[1m[48;5;0mV[0m[38;5;126m[1m[48;5;0m9[0m[38;5;91m[1m[48;5;0mb[0m[38;5;55m[1m[48;5;0mQ[0m[38;5;91m[1m[48;5;0mn[0m[38;5;97m[1m[48;5;0mZ[0m[38;5;132m[1m[48;5;0mJ[0m[38;5;127m[1m[48;5;0m1[0m[38;5;55m[1m[48;5;0mw[0m[38;5;97m[1m[48;5;0mG[0m[38;5;132m[1m[48;5;0m3[0m[38;5;127m[1m[48;5;0mq[0m[38;5;60m[1m[48;5;0ms[0m[38;5;127m[1m[48;5;0ml[0m[38;5;96m[1m[48;5;0mW[0m[38;5;127m[1m[48;5;0m9[0m[38;5;97m[1m[48;5;0mZ[0m[38;5;126m[1m[48;5;0m6[0m
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def paint(txt, fgr, fgg, fgb):
+    &#34;&#34;&#34;
+    &gt;&gt;&gt; from garoupa import setup, ø
+    &gt;&gt;&gt; ø * b&#34;asd&#34;
+    \x1b[38;5;71m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mx\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0m8\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mA\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mt\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mU\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0m5\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mV\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mb\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mn\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mw\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0m6\x1b[0m
+    &gt;&gt;&gt; setup(dark_theme=False)
+    &gt;&gt;&gt; ø * b&#34;asd&#34;
+    \x1b[38;5;132m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0mx\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0m8\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mA\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mt\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mU\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0m5\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mV\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0mb\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0mn\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mw\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0m6\x1b[0m
+    &#34;&#34;&#34;
+    if not GLOBAL[&#34;dark_theme&#34;]:
+        fgr = 255 - fgr
+        fgg = 255 - fgg
+        fgb = 255 - fgb
     fgcolor = f&#34;#{hex(fgr)[2:].rjust(2, &#39;0&#39;)}{hex(fgg)[2:].rjust(2, &#39;0&#39;)}{hex(fgb)[2:].rjust(2, &#39;0&#39;)}&#34;
     return stylize(txt, colored.fg(fgcolor) + colored.attr(&#34;bold&#34;) + colored.bg(&#34;#000000&#34;))</code></pre>
 </details>
