@@ -15,7 +15,7 @@
  
 
 
-GaROUPa solves the problem of easily determining the identity of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) / [code](https://github.com/davips/garoupa) provides a reference implementation for the UT*.4 specification presented [here](https://arxiv.org/abs/2109.06028).  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
+GaROUPa solves the identification problem of multi-valued objects or sequences of events.<br>This [Python library](https://pypi.org/project/garoupa) / [code](https://github.com/davips/garoupa) provides a reference implementation for the UT*.4 specification presented [here](https://arxiv.org/abs/2109.06028).  | ![fir0002  flagstaffotos [at] gmail.com Canon 20D + Tamron 28-75mm f/2.8, GFDL 1.2 &lt;http://www.gnu.org/licenses/old-licenses/fdl-1.2.html&gt;, via Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Malabar_grouper_melb_aquarium.jpg/256px-Malabar_grouper_melb_aquarium.jpg)
 :-------------------------:|:-------------------------:
 
 We adopt a novel paradigm to universally unique identification (UUID), making identifiers deterministic and predictable, 
@@ -24,10 +24,11 @@ Here, data versioning and composition of processing steps are directly mapped as
 We call each of the latter a Hosh, i.e., an identifier is an _**o**perable **h**a**sh**_.
 
 A complete implementation of the remaining ideas from the [paper](https://arxiv.org/abs/2109.06028) is provided in this
-[lazy dict](https://davips.github.io/ldict) which depends on GaROUPa and serves as an advanced usage example.
+[lazy dict](https://pypi.org/project/ldict/2.211016.3) which depends on GaROUPa and serves as an advanced usage example.
+<br>[_A new, entirely rewritten, version will be available as a [cacheable lazy dict](https://pypi.org/project/cdict) around november/2021._]
 
 ## Overview
-A product of identifiers produce a new identifier as shown below, where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
+A product of identifiers produces a new identifier as shown below, where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
 
 ![img.png](https://raw.githubusercontent.com/davips/garoupa/main/examples/img.png) | New identifiers are easily <br> created from the identity <br> element `ø`. Also available as `identity` for people <br>or systems allergic to <br>utf-8 encoding.
 -------------------------|-------------------------
