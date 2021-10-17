@@ -19,34 +19,10 @@
 #  works or verbatim, obfuscated, compiled or rewritten versions of any
 #  part of this work is illegal and is unethical regarding the effort and
 #  time spent here.
-"""GaROUPa solves the problem of determining the identity of multi-valued objects or sequences of events
-(and provide extra modules for group theory)"""
 
-from .config import setup
-from .groups import *
-from .hosh import Hosh as H
-from .misc.helper import Helper
-from .misc.identity import ø, Identity
+GLOBAL = {}
+GLOBAL["dark_theme"] = True
 
-__pdoc__ = {
-    "hosh": False,
-}
 
-Hosh = H
-"""All identifiers are instances of this class"""
-
-ħ = Helper(UT40_4)
-"""UTF-8 shortcut to create 40-digit Hosh objects (AltGr+H in most keyboards)
-
-Other options are also available: ħ16, ħ32, ħ40, ħ64"""
-
-identity = ø()
-"""Shortcut to the 40-digit identity Hosh object"""
-
-ø = identity
-"""UTF-8 shortcut to the 40-digit identity Hosh object (AltGr+O in most keyboards)
-
-Other options are also available: ø16, ø32, ø40, ø64"""
-
-ħ16, ħ32, ħ40, ħ64 = [Helper(version) for version in groups.values()]
-ø16, ø32, ø40, ø64 = [Identity(version) for version in groups.values()]
+def setup(dark_theme):
+    GLOBAL["dark_theme"] = dark_theme

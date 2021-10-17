@@ -25,8 +25,22 @@ from hashlib import md5
 import colored
 from colored import stylize
 
+from garoupa.config import GLOBAL
+
 
 def paint(txt, fgr, fgg, fgb):
+    """
+    >>> from garoupa import setup, ø
+    >>> ø * b"asd"
+    \x1b[38;5;71m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mx\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0m8\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mA\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mt\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mU\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0m5\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mV\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mb\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mn\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mw\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0m6\x1b[0m
+    >>> setup(dark_theme=False)
+    >>> ø * b"asd"
+    \x1b[38;5;132m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0mx\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0m8\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mA\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mt\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mU\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0m5\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mV\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0mb\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;0mn\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;0mw\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;0m6\x1b[0m
+    """
+    if not GLOBAL["dark_theme"]:
+        fgr = 255 - fgr
+        fgg = 255 - fgg
+        fgb = 255 - fgb
     fgcolor = f"#{hex(fgr)[2:].rjust(2, '0')}{hex(fgg)[2:].rjust(2, '0')}{hex(fgb)[2:].rjust(2, '0')}"
     return stylize(txt, colored.fg(fgcolor) + colored.attr("bold") + colored.bg("#000000"))
 
@@ -56,7 +70,6 @@ def colorize128bit(id, digits, ampl=0.8, change=0.44):
         b = max(margin, lim(fgb + change * (db - 128)))
         out += f"{paint(c, int(r), int(g), int(b))}"
     return out
-
 
 # def ansi2html(ansi):
 #     conv = Ansi2HTMLConverter()
