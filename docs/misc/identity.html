@@ -69,6 +69,7 @@ class Identity(Hosh):
     etype_inducer
         Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
     &#34;&#34;&#34;
+
     _u, _h = None, None
 
     def __init__(self, version, etype_inducer=&#34;ordered&#34;):
@@ -136,6 +137,7 @@ class ø(Identity):
 
     def __init__(self, etype_inducer=&#34;ordered&#34;):
         super().__init__(UT40_4, etype_inducer)
+
 
 # class Ø(Identity):
 #     &#34;&#34;&#34;
@@ -207,6 +209,7 @@ It is also useful as a shortcut to coerce some Python values directly to a Hosh 
     etype_inducer
         Element type of a future multiplication by a raw Python value: &#39;unordered&#39;, &#39;ordered&#39;, &#39;hybrid&#39;
     &#34;&#34;&#34;
+
     _u, _h = None, None
 
     def __init__(self, version, etype_inducer=&#34;ordered&#34;):
