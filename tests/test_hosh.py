@@ -81,4 +81,3 @@ class TestLdict(TestCase):
         self.assertEqual([0, 0, 10, 8, 10, 42], d ** c)
         self.assertNotEqual(c ** d, d ** c)
         self.assertEqual(c, c ** d // d)
-

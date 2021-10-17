@@ -151,7 +151,7 @@ def id2n(id, p):
     if id[1] == "_":
         hexsize = len(id) // 4 - 1
         a = dec(id[:1], b16r)
-        b = dec(id[2: (hexsize + 2)], b16r)
+        b = dec(id[2 : (hexsize + 2)], b16r)
         n = a * 16 ** hexsize + b
         kind, lower, upper = "Unordered", 1, p - 1
     elif id[2] == "_":
@@ -250,5 +250,6 @@ def n2id(num, digits, p):
         return str(b16[a]) + "_" + enc(b, b16, hexsize) + (digits - hexsize - 2) * "_"
     elif num == 0:
         return "0" * digits
+
 
 # TODO memoize exponents, by passing an object, e.g.: o.p, o.p4, o.p6

@@ -57,6 +57,7 @@ def colorize128bit(id, digits, ampl=0.8, change=0.44):
         out += f"{paint(c, int(r), int(g), int(b))}"
     return out
 
+
 # def ansi2html(ansi):
 #     conv = Ansi2HTMLConverter()
 #     return conv.convert(ansi)
