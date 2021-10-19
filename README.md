@@ -24,8 +24,9 @@ Here, data versioning and composition of processing steps are directly mapped as
 We call each of the latter a Hosh, i.e., an identifier is an _**o**perable **h**a**sh**_.
 
 A complete implementation of the remaining ideas from the [paper](https://arxiv.org/abs/2109.06028) is provided in this
-[lazy dict](https://pypi.org/project/ldict/2.211016.3) which depends on GaROUPa and serves as an advanced usage example.
-<br>[_A new, entirely rewritten, version will be available as a [cacheable lazy dict](https://pypi.org/project/cdict) around november/2021._]
+[cacheable lazy dict](https://pypi.org/project/ldict/2.211016.3) which depends on GaROUPa and serves as an advanced usage example.
+<br>
+A more robust (entirely rewritten) version is available in the package [idict](https://pypi.org/project/idict).
 
 ## Overview
 A product of identifiers produces a new identifier as shown below, where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
@@ -219,11 +220,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[3, 1, 0, 2], 1, dr1»	*	«[2, 3, 0, 1], 3, ds1»	=	«[0, 2, 3, 1], 4, ds2»
-«[1, 3, 0, 2], 2, ds4»	*	«[2, 1, 0, 3], 2, ds1»	=	«[0, 3, 1, 2], 4, dr3»
-«[2, 0, 3, 1], 2, ds2»	*	«[1, 2, 0, 3], 2, dr4»	=	«[0, 3, 2, 1], 4, ds2»
-«[0, 1, 2, 3], 2, dr5»	*	«[3, 2, 0, 1], 3, ds0»	=	«[3, 2, 0, 1], 0, ds1»
-«[3, 0, 1, 2], 1, dr3»	*	«[0, 2, 1, 3], 3, dr7»	=	«[3, 1, 0, 2], 4, dr2»
+«[0, 1, 3, 2], 0, dr6»	*	«[2, 1, 0, 3], 0, ds4»	=	«[3, 1, 0, 2], 0, ds2»
+«[2, 0, 1, 3], 2, ds1»	*	«[1, 0, 3, 2], 2, ds6»	=	«[0, 2, 3, 1], 4, dr3»
+«[1, 0, 3, 2], 3, ds6»	*	«[3, 0, 1, 2], 0, dr1»	=	«[2, 1, 0, 3], 3, ds1»
+«[1, 0, 3, 2], 3, ds7»	*	«[0, 3, 1, 2], 3, dr0»	=	«[1, 2, 0, 3], 1, ds3»
+«[1, 0, 2, 3], 1, ds5»	*	«[2, 0, 3, 1], 3, dr2»	=	«[2, 1, 3, 0], 4, ds3»
 """
 ```
 
@@ -233,7 +234,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[10, 3, 8, 9, 2, 11, 6, 7, 0, 1, 4, 5]
+[7, 10, 6, 2, 8, 3, 5, 9, 4, 1, 0, 11]
 """
 ```
 
@@ -355,9 +356,9 @@ for G in Gs:
     )
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          832/10000:  12.0 bits	~8.32 %
+       |D8×D8×D8| = 4096:          782/10000:  12.0 bits	~7.82 %
     |D8×D8×D8×D8| = 65536:         344/10000:  16.0 bits	~3.44 %
- |D8×D8×D8×D8×D8| = 1048576:       145/10000:  20.0 bits	~1.45 %
+ |D8×D8×D8×D8×D8| = 1048576:       143/10000:  20.0 bits	~1.43 %
 """
 ```
 
@@ -448,7 +449,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 17/10/2021 20:34:24
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 19/10/2021 07:26:48
 """
 ```
 

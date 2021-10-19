@@ -24,8 +24,9 @@ Here, data versioning and composition of processing steps are directly mapped as
 We call each of the latter a Hosh, i.e., an identifier is an _**o**perable **h**a**sh**_.
 
 A complete implementation of the remaining ideas from the [paper](https://arxiv.org/abs/2109.06028) is provided in this
-[lazy dict](https://pypi.org/project/ldict/2.211016.3) which depends on GaROUPa and serves as an advanced usage example.
-<br>[_A new, entirely rewritten, version will be available as a [cacheable lazy dict](https://pypi.org/project/cdict) around november/2021._]
+[cacheable lazy dict](https://pypi.org/project/ldict/2.211016.3) which depends on GaROUPa and serves as an advanced usage example.
+<br>
+A more robust (entirely rewritten) version is available in the package [idict](https://pypi.org/project/idict).
 
 ## Overview
 A product of identifiers produces a new identifier as shown below, where sequences of bytes (`b"..."`) are passed to simulate binary objects to be hashed.
