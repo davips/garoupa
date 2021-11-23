@@ -325,13 +325,22 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         Usage:
 
         &gt;&gt;&gt; from garoupa import Hosh
-        &gt;&gt;&gt; Hosh(b&#34;23987rg23&#34;).ø.id
-        &#39;0000000000000000000000000000000000000000&#39;
-        &gt;&gt;&gt; Hosh(b&#34;23987rg23&#34;).ø.etype
+        &gt;&gt;&gt; (b := Hosh(b&#34;23987rg23&#34;)).id
+        &#39;J5.uRTue8X4r1xu.JFkPbURVVGvTRPSFLncXdyzj&#39;
+        &gt;&gt;&gt; b.etype
+        &#39;ordered&#39;
+        &gt;&gt;&gt; b.ø.etype
         &#39;unordered&#39;
+        &gt;&gt;&gt; b.etype == b.ø.etype_inducer
+        True
+        &gt;&gt;&gt; b.ø.id
+        &#39;0000000000000000000000000000000000000000&#39;
+        &gt;&gt;&gt; (b.ø * b&#34;qwer&#34;).etype
+        &#39;ordered&#39;
         &#34;&#34;&#34;
         if self._ø is None:
-            self._ø = Hosh([0, 0, 0, 0, 0, 0], version=self.version)
+            from garoupa import Identity
+            self._ø = Identity(version=self.version, etype_inducer=self.etype)
         return self._ø
 
     @property
@@ -1146,10 +1155,18 @@ def sidc(self):
 <div class="desc"><p>Identity element compatible with this Hosh object</p>
 <p>Usage:</p>
 <pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Hosh
-&gt;&gt;&gt; Hosh(b&quot;23987rg23&quot;).ø.id
-'0000000000000000000000000000000000000000'
-&gt;&gt;&gt; Hosh(b&quot;23987rg23&quot;).ø.etype
+&gt;&gt;&gt; (b := Hosh(b&quot;23987rg23&quot;)).id
+'J5.uRTue8X4r1xu.JFkPbURVVGvTRPSFLncXdyzj'
+&gt;&gt;&gt; b.etype
+'ordered'
+&gt;&gt;&gt; b.ø.etype
 'unordered'
+&gt;&gt;&gt; b.etype == b.ø.etype_inducer
+True
+&gt;&gt;&gt; b.ø.id
+'0000000000000000000000000000000000000000'
+&gt;&gt;&gt; (b.ø * b&quot;qwer&quot;).etype
+'ordered'
 </code></pre></div>
 <details class="source">
 <summary>
@@ -1162,13 +1179,22 @@ def ø(self):
     Usage:
 
     &gt;&gt;&gt; from garoupa import Hosh
-    &gt;&gt;&gt; Hosh(b&#34;23987rg23&#34;).ø.id
-    &#39;0000000000000000000000000000000000000000&#39;
-    &gt;&gt;&gt; Hosh(b&#34;23987rg23&#34;).ø.etype
+    &gt;&gt;&gt; (b := Hosh(b&#34;23987rg23&#34;)).id
+    &#39;J5.uRTue8X4r1xu.JFkPbURVVGvTRPSFLncXdyzj&#39;
+    &gt;&gt;&gt; b.etype
+    &#39;ordered&#39;
+    &gt;&gt;&gt; b.ø.etype
     &#39;unordered&#39;
+    &gt;&gt;&gt; b.etype == b.ø.etype_inducer
+    True
+    &gt;&gt;&gt; b.ø.id
+    &#39;0000000000000000000000000000000000000000&#39;
+    &gt;&gt;&gt; (b.ø * b&#34;qwer&#34;).etype
+    &#39;ordered&#39;
     &#34;&#34;&#34;
     if self._ø is None:
-        self._ø = Hosh([0, 0, 0, 0, 0, 0], version=self.version)
+        from garoupa import Identity
+        self._ø = Identity(version=self.version, etype_inducer=self.etype)
     return self._ø</code></pre>
 </details>
 </dd>

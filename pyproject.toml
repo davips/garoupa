@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "garoupa"
-version = "2.211019.3"
+version = "2.211123.1"
 description = "Predictable operable hash-based identifiers and abstract algebra groups"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
@@ -20,7 +20,7 @@ experiments = ["bigfloat"]
 python = ">=3.8,<3.11"
 wheel = "^0.37.0"
 blake3 = "^0.2.0"
-colored = "^1.4.2"
+colored = "1.4.2"
 ansi2html = "^1.6.0"
 #hosh = { version = "^2.0.0", optional = true }  #  not implemented yet
 progress = { version = "^1.6", optional = true }
