@@ -150,13 +150,22 @@ class Hosh:
         Usage:
 
         >>> from garoupa import Hosh
-        >>> Hosh(b"23987rg23").ø.id
-        '0000000000000000000000000000000000000000'
-        >>> Hosh(b"23987rg23").ø.etype
+        >>> (b := Hosh(b"23987rg23")).id
+        'J5.uRTue8X4r1xu.JFkPbURVVGvTRPSFLncXdyzj'
+        >>> b.etype
+        'ordered'
+        >>> b.ø.etype
         'unordered'
+        >>> b.etype == b.ø.etype_inducer
+        True
+        >>> b.ø.id
+        '0000000000000000000000000000000000000000'
+        >>> (b.ø * b"qwer").etype
+        'ordered'
         """
         if self._ø is None:
-            self._ø = Hosh([0, 0, 0, 0, 0, 0], version=self.version)
+            from garoupa import Identity
+            self._ø = Identity(version=self.version, etype_inducer=self.etype)
         return self._ø
 
     @property
