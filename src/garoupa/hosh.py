@@ -165,6 +165,7 @@ class Hosh:
         """
         if self._ø is None:
             from garoupa import Identity
+
             self._ø = Identity(version=self.version, etype_inducer=self.etype)
         return self._ø
 

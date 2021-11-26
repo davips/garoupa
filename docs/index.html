@@ -340,6 +340,7 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         &#34;&#34;&#34;
         if self._ø is None:
             from garoupa import Identity
+
             self._ø = Identity(version=self.version, etype_inducer=self.etype)
         return self._ø
 
@@ -1194,6 +1195,7 @@ def ø(self):
     &#34;&#34;&#34;
     if self._ø is None:
         from garoupa import Identity
+
         self._ø = Identity(version=self.version, etype_inducer=self.etype)
     return self._ø</code></pre>
 </details>
