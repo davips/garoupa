@@ -13,21 +13,15 @@ echo "----------------- tested -----------------------"
 echo; echo
 
 echo
-echo "----------------- checking... -----------------------"
-read -p "press enter"
-poetry run flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics --ignore E741
-echo "----------------- checked -----------------------"
-echo; echo
-
-echo
-echo "----------------- docs... -----------------------"
+echo "----------------- docs/black... -----------------------"
 read -p "press enter"
 rm docs -rf
+poetry run black -l120 src/ tests/
 poetry run pdoc --html --force garoupa -o docs
 mv docs/garoupa/* docs/
 rm docs/garoupa -rf
 git add docs
-echo "----------------- docs done -----------------------"
+echo "----------------- docs/black done -----------------------"
 echo; echo
 
 echo "---------------- readme ----------------"
