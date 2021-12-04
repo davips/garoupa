@@ -23,7 +23,7 @@ from sys import maxsize
 from typing import Union
 
 from garoupa.groups import UT40_4, groups
-from garoupa.misc.colors import colorize128bit
+from garoupa.misc.colors import colorize128bit, ansi2html
 from garoupa.misc.core import cells_id_fromblob, cells_fromid, id_fromcells
 from garoupa.misc.encoding.base777 import b777enc
 from garoupa.misc.exception import (
@@ -165,6 +165,7 @@ class Hosh:
         """
         if self._ø is None:
             from garoupa import Identity
+
             self._ø = Identity(version=self.version, etype_inducer=self.etype)
         return self._ø
 
@@ -338,7 +339,7 @@ class Hosh:
     @property
     def idc(self):
         """
-        Colored textual representation of this element
+        Colored textual (ANSI) representation of this element
 
         Returns
         -------
@@ -347,6 +348,17 @@ class Hosh:
         if self._idc is None:
             self._idc = colorize128bit(self.id, self.digits)
         return self._idc
+
+    @property
+    def html(self):
+        """
+        HTML page containing a colored textual representation of this element
+
+        Returns
+        -------
+        Textual representation
+        """
+        return ansi2html(self.idc)
 
     @property
     def sidc(self):
