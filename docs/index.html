@@ -297,7 +297,7 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
 
     shorter = False
     _repr = None
-    _n, _id, _idc, _sid, _sidc, _etype = None, None, None, None, None, None
+    _n, _id, _ansi, _sid, _sidc, _etype, _rgb = None, None, None, None, None, None, None
     _etype_inducer, _bits, _ø = None, None, None
 
     def __init__(self, content, etype=&#34;default:ordered&#34;, version=UT40_4):
@@ -512,17 +512,38 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         return self._sid
 
     @property
-    def idc(self):
-        &#34;&#34;&#34;
+    def ansi(self):
+        r&#34;&#34;&#34;
         Colored textual (ANSI) representation of this element
+
+        &gt;&gt;&gt; from garoupa import Hosh
+        &gt;&gt;&gt; Hosh.fromid(&#34;Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoP&#34;).ansi
+        &#39;\x1b[38;5;229m\x1b[1m\x1b[48;5;0mI\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m7\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m2\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mB\x1b[0m\x1b[38;5;216m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;186m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;181m\x1b[1m\x1b[48;5;0mi\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;229m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mO\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0me\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;216m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;186m\x1b[1m\x1b[48;5;0mF\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mT\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;181m\x1b[1m\x1b[48;5;0mm\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;229m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mP\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0md\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mP\x1b[0m&#39;
 
         Returns
         -------
         Textual representation
         &#34;&#34;&#34;
-        if self._idc is None:
-            self._idc = colorize128bit(self.id, self.digits)
-        return self._idc
+        if self._ansi is None:
+            self._ansi = id2ansi(self.id)
+        return self._ansi
+
+    @property
+    def idc(self):
+        return self.ansi
+
+    @property
+    def rgb(self):
+        &#34;&#34;&#34;
+        Colored textual (RGB) representation of this element
+
+        &gt;&gt;&gt; from garoupa import Hosh
+        &gt;&gt;&gt; Hosh.fromid(&#34;Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoP&#34;).rgb
+        [[6, 28, 104], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187], [255, 255, 127], [255, 206, 98], [242, 176, 123], [212, 201, 138], [237, 216, 120], [252, 198, 115], [234, 193, 174], [229, 253, 204], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187], [255, 255, 127], [255, 206, 98], [242, 176, 123], [212, 201, 138], [237, 216, 120], [252, 198, 115], [234, 193, 174], [229, 253, 204], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187]]
+        &#34;&#34;&#34;
+        if self._rgb is None:
+            self._rgb = id2rgb(self.id)
+        return self._rgb
 
     @property
     def html(self):
@@ -533,7 +554,7 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         -------
         Textual representation
         &#34;&#34;&#34;
-        return ansi2html(self.idc)
+        return ansi2html(self.ansi)
 
     @property
     def sidc(self):
@@ -551,7 +572,7 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         Short utf-8 colored textual representation
         &#34;&#34;&#34;
         if self._sidc is None:
-            self._sidc = colorize128bit(self.sid, self.digits * 5 // 8)
+            self._sidc = id2ansi(self.sid)
         return self._sidc
 
     def __repr__(self):
@@ -925,6 +946,40 @@ def fromn(cls, n: int, version=UT40_4):
 </dl>
 <h3>Instance variables</h3>
 <dl>
+<dt id="garoupa.Hosh.ansi"><code class="name">var <span class="ident">ansi</span></code></dt>
+<dd>
+<div class="desc"><p>Colored textual (ANSI) representation of this element</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Hosh
+&gt;&gt;&gt; Hosh.fromid(&quot;Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoP&quot;).ansi
+'\x1b[38;5;229m\x1b[1m\x1b[48;5;0mI\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m7\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m2\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mB\x1b[0m\x1b[38;5;216m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;186m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;181m\x1b[1m\x1b[48;5;0mi\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;229m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mO\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0me\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;216m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;186m\x1b[1m\x1b[48;5;0mF\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mT\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;181m\x1b[1m\x1b[48;5;0mm\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;229m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mP\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0md\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mP\x1b[0m'
+</code></pre>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Textual representation</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def ansi(self):
+    r&#34;&#34;&#34;
+    Colored textual (ANSI) representation of this element
+
+    &gt;&gt;&gt; from garoupa import Hosh
+    &gt;&gt;&gt; Hosh.fromid(&#34;Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoP&#34;).ansi
+    &#39;\x1b[38;5;229m\x1b[1m\x1b[48;5;0mI\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m7\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m2\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mB\x1b[0m\x1b[38;5;216m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;186m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;181m\x1b[1m\x1b[48;5;0mi\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;229m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mO\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0me\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;216m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;186m\x1b[1m\x1b[48;5;0mF\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mT\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;181m\x1b[1m\x1b[48;5;0mm\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;229m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mP\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0md\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mP\x1b[0m&#39;
+
+    Returns
+    -------
+    Textual representation
+    &#34;&#34;&#34;
+    if self._ansi is None:
+        self._ansi = id2ansi(self.id)
+    return self._ansi</code></pre>
+</details>
+</dd>
 <dt id="garoupa.Hosh.etype"><code class="name">var <span class="ident">etype</span></code></dt>
 <dd>
 <div class="desc"><p>Type of this element</p>
@@ -1031,7 +1086,7 @@ def html(self):
     -------
     Textual representation
     &#34;&#34;&#34;
-    return ansi2html(self.idc)</code></pre>
+    return ansi2html(self.ansi)</code></pre>
 </details>
 </dd>
 <dt id="garoupa.Hosh.id"><code class="name">var <span class="ident">id</span></code></dt>
@@ -1062,28 +1117,14 @@ def id(self):
 </dd>
 <dt id="garoupa.Hosh.idc"><code class="name">var <span class="ident">idc</span></code></dt>
 <dd>
-<div class="desc"><p>Colored textual (ANSI) representation of this element</p>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>Textual representation</code></dt>
-<dd>&nbsp;</dd>
-</dl></div>
+<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
 def idc(self):
-    &#34;&#34;&#34;
-    Colored textual (ANSI) representation of this element
-
-    Returns
-    -------
-    Textual representation
-    &#34;&#34;&#34;
-    if self._idc is None:
-        self._idc = colorize128bit(self.id, self.digits)
-    return self._idc</code></pre>
+    return self.ansi</code></pre>
 </details>
 </dd>
 <dt id="garoupa.Hosh.n"><code class="name">var <span class="ident">n</span></code></dt>
@@ -1110,6 +1151,31 @@ def n(self):
     if self._n is None:
         self._n = cells2int(self.cells, self.p)
     return self._n</code></pre>
+</details>
+</dd>
+<dt id="garoupa.Hosh.rgb"><code class="name">var <span class="ident">rgb</span></code></dt>
+<dd>
+<div class="desc"><p>Colored textual (RGB) representation of this element</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa import Hosh
+&gt;&gt;&gt; Hosh.fromid(&quot;Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoP&quot;).rgb
+[[6, 28, 104], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187], [255, 255, 127], [255, 206, 98], [242, 176, 123], [212, 201, 138], [237, 216, 120], [252, 198, 115], [234, 193, 174], [229, 253, 204], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187], [255, 255, 127], [255, 206, 98], [242, 176, 123], [212, 201, 138], [237, 216, 120], [252, 198, 115], [234, 193, 174], [229, 253, 204], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187]]
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def rgb(self):
+    &#34;&#34;&#34;
+    Colored textual (RGB) representation of this element
+
+    &gt;&gt;&gt; from garoupa import Hosh
+    &gt;&gt;&gt; Hosh.fromid(&#34;Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoP&#34;).rgb
+    [[6, 28, 104], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187], [255, 255, 127], [255, 206, 98], [242, 176, 123], [212, 201, 138], [237, 216, 120], [252, 198, 115], [234, 193, 174], [229, 253, 204], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187], [255, 255, 127], [255, 206, 98], [242, 176, 123], [212, 201, 138], [237, 216, 120], [252, 198, 115], [234, 193, 174], [229, 253, 204], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187]]
+    &#34;&#34;&#34;
+    if self._rgb is None:
+        self._rgb = id2rgb(self.id)
+    return self._rgb</code></pre>
 </details>
 </dd>
 <dt id="garoupa.Hosh.sid"><code class="name">var <span class="ident">sid</span></code></dt>
@@ -1182,7 +1248,7 @@ def sidc(self):
     Short utf-8 colored textual representation
     &#34;&#34;&#34;
     if self._sidc is None:
-        self._sidc = colorize128bit(self.sid, self.digits * 5 // 8)
+        self._sidc = id2ansi(self.sid)
     return self._sidc</code></pre>
 </details>
 </dd>
@@ -1373,6 +1439,7 @@ voh8t1KrYmzCqpyrUO9.5QbGdouoZsnExarMSa34
 <li>
 <h4><code><a title="garoupa.Hosh" href="#garoupa.Hosh">Hosh</a></code></h4>
 <ul class="two-column">
+<li><code><a title="garoupa.Hosh.ansi" href="#garoupa.Hosh.ansi">ansi</a></code></li>
 <li><code><a title="garoupa.Hosh.convert" href="#garoupa.Hosh.convert">convert</a></code></li>
 <li><code><a title="garoupa.Hosh.etype" href="#garoupa.Hosh.etype">etype</a></code></li>
 <li><code><a title="garoupa.Hosh.etype_inducer" href="#garoupa.Hosh.etype_inducer">etype_inducer</a></code></li>
@@ -1382,6 +1449,7 @@ voh8t1KrYmzCqpyrUO9.5QbGdouoZsnExarMSa34
 <li><code><a title="garoupa.Hosh.id" href="#garoupa.Hosh.id">id</a></code></li>
 <li><code><a title="garoupa.Hosh.idc" href="#garoupa.Hosh.idc">idc</a></code></li>
 <li><code><a title="garoupa.Hosh.n" href="#garoupa.Hosh.n">n</a></code></li>
+<li><code><a title="garoupa.Hosh.rgb" href="#garoupa.Hosh.rgb">rgb</a></code></li>
 <li><code><a title="garoupa.Hosh.short" href="#garoupa.Hosh.short">short</a></code></li>
 <li><code><a title="garoupa.Hosh.shorter" href="#garoupa.Hosh.shorter">shorter</a></code></li>
 <li><code><a title="garoupa.Hosh.show" href="#garoupa.Hosh.show">show</a></code></li>
