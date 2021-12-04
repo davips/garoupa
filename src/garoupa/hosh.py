@@ -23,7 +23,7 @@ from sys import maxsize
 from typing import Union
 
 from garoupa.groups import UT40_4, groups
-from garoupa.misc.colors import colorize128bit, ansi2html
+from garoupa.misc.colors import ansi2html, id2ansi, id2rgb
 from garoupa.misc.core import cells_id_fromblob, cells_fromid, id_fromcells
 from garoupa.misc.encoding.base777 import b777enc
 from garoupa.misc.exception import (
@@ -122,7 +122,7 @@ class Hosh:
 
     shorter = False
     _repr = None
-    _n, _id, _idc, _sid, _sidc, _etype = None, None, None, None, None, None
+    _n, _id, _ansi, _sid, _sidc, _etype, _rgb = None, None, None, None, None, None, None
     _etype_inducer, _bits, _ø = None, None, None
 
     def __init__(self, content, etype="default:ordered", version=UT40_4):
@@ -337,17 +337,38 @@ class Hosh:
         return self._sid
 
     @property
-    def idc(self):
-        """
+    def ansi(self):
+        r"""
         Colored textual (ANSI) representation of this element
+
+        >>> from garoupa import Hosh
+        >>> Hosh.fromid("Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoP").ansi
+        '\x1b[38;5;229m\x1b[1m\x1b[48;5;0mI\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mz\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m7\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m2\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mB\x1b[0m\x1b[38;5;216m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;186m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;181m\x1b[1m\x1b[48;5;0mi\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;229m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mO\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0me\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m6\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;216m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;186m\x1b[1m\x1b[48;5;0mF\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mT\x1b[0m\x1b[38;5;221m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;181m\x1b[1m\x1b[48;5;0mm\x1b[0m\x1b[38;5;194m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;229m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mP\x1b[0m\x1b[38;5;228m\x1b[1m\x1b[48;5;0mf\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0md\x1b[0m\x1b[38;5;222m\x1b[1m\x1b[48;5;0mo\x1b[0m\x1b[38;5;223m\x1b[1m\x1b[48;5;0mP\x1b[0m'
 
         Returns
         -------
         Textual representation
         """
-        if self._idc is None:
-            self._idc = colorize128bit(self.id, self.digits)
-        return self._idc
+        if self._ansi is None:
+            self._ansi = id2ansi(self.id)
+        return self._ansi
+
+    @property
+    def idc(self):
+        return self.ansi
+
+    @property
+    def rgb(self):
+        """
+        Colored textual (RGB) representation of this element
+
+        >>> from garoupa import Hosh
+        >>> Hosh.fromid("Iaz3L67a2BQv0GifoWOjWale6LYFTGmJJ1ZPfdoP").rgb
+        [[6, 28, 104], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187], [255, 255, 127], [255, 206, 98], [242, 176, 123], [212, 201, 138], [237, 216, 120], [252, 198, 115], [234, 193, 174], [229, 253, 204], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187], [255, 255, 127], [255, 206, 98], [242, 176, 123], [212, 201, 138], [237, 216, 120], [252, 198, 115], [234, 193, 174], [229, 253, 204], [255, 255, 184], [255, 255, 141], [255, 220, 155], [255, 233, 172], [255, 250, 139], [255, 218, 144], [254, 223, 150], [255, 229, 187]]
+        """
+        if self._rgb is None:
+            self._rgb = id2rgb(self.id)
+        return self._rgb
 
     @property
     def html(self):
@@ -358,7 +379,7 @@ class Hosh:
         -------
         Textual representation
         """
-        return ansi2html(self.idc)
+        return ansi2html(self.ansi)
 
     @property
     def sidc(self):
@@ -376,7 +397,7 @@ class Hosh:
         Short utf-8 colored textual representation
         """
         if self._sidc is None:
-            self._sidc = colorize128bit(self.sid, self.digits * 5 // 8)
+            self._sidc = id2ansi(self.sid)
         return self._sidc
 
     def __repr__(self):

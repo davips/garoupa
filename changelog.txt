@@ -1,2 +1,5 @@
+2.211204
+    Add rgb/ansi to show id, e.g., in html pages
+
 2.211202
     Add HTML colored textual representation
