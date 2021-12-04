@@ -514,7 +514,7 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
     @property
     def idc(self):
         &#34;&#34;&#34;
-        Colored textual representation of this element
+        Colored textual (ANSI) representation of this element
 
         Returns
         -------
@@ -523,6 +523,17 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         if self._idc is None:
             self._idc = colorize128bit(self.id, self.digits)
         return self._idc
+
+    @property
+    def html(self):
+        &#34;&#34;&#34;
+        HTML page containing a colored textual representation of this element
+
+        Returns
+        -------
+        Textual representation
+        &#34;&#34;&#34;
+        return ansi2html(self.idc)
 
     @property
     def sidc(self):
@@ -999,6 +1010,30 @@ def etype_inducer(self):
     return self._etype_inducer</code></pre>
 </details>
 </dd>
+<dt id="garoupa.Hosh.html"><code class="name">var <span class="ident">html</span></code></dt>
+<dd>
+<div class="desc"><p>HTML page containing a colored textual representation of this element</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Textual representation</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def html(self):
+    &#34;&#34;&#34;
+    HTML page containing a colored textual representation of this element
+
+    Returns
+    -------
+    Textual representation
+    &#34;&#34;&#34;
+    return ansi2html(self.idc)</code></pre>
+</details>
+</dd>
 <dt id="garoupa.Hosh.id"><code class="name">var <span class="ident">id</span></code></dt>
 <dd>
 <div class="desc"><p>Textual representation of this element</p>
@@ -1027,7 +1062,7 @@ def id(self):
 </dd>
 <dt id="garoupa.Hosh.idc"><code class="name">var <span class="ident">idc</span></code></dt>
 <dd>
-<div class="desc"><p>Colored textual representation of this element</p>
+<div class="desc"><p>Colored textual (ANSI) representation of this element</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>Textual representation</code></dt>
@@ -1040,7 +1075,7 @@ def id(self):
 <pre><code class="python">@property
 def idc(self):
     &#34;&#34;&#34;
-    Colored textual representation of this element
+    Colored textual (ANSI) representation of this element
 
     Returns
     -------
@@ -1343,6 +1378,7 @@ voh8t1KrYmzCqpyrUO9.5QbGdouoZsnExarMSa34
 <li><code><a title="garoupa.Hosh.etype_inducer" href="#garoupa.Hosh.etype_inducer">etype_inducer</a></code></li>
 <li><code><a title="garoupa.Hosh.fromid" href="#garoupa.Hosh.fromid">fromid</a></code></li>
 <li><code><a title="garoupa.Hosh.fromn" href="#garoupa.Hosh.fromn">fromn</a></code></li>
+<li><code><a title="garoupa.Hosh.html" href="#garoupa.Hosh.html">html</a></code></li>
 <li><code><a title="garoupa.Hosh.id" href="#garoupa.Hosh.id">id</a></code></li>
 <li><code><a title="garoupa.Hosh.idc" href="#garoupa.Hosh.idc">idc</a></code></li>
 <li><code><a title="garoupa.Hosh.n" href="#garoupa.Hosh.n">n</a></code></li>
