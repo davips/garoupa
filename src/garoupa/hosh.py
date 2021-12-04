@@ -209,6 +209,8 @@ class Hosh:
         'unordered'
         >>> Hosh(b"12124").etype_inducer
         'ordered'
+        >>> Hosh(b"12124", etype="hybrid").etype_inducer
+        'hybrid'
 
         Returns
         -------

@@ -36,7 +36,7 @@ class Identity(Hosh):
     Parameters
     ----------
     version
-        UT40_4, UT64.4 or othe group changes the number of digits and robustness against collisions/ambiguity
+        UT40_4, UT64.4 or other group changes the number of digits and robustness against collisions/ambiguity
     etype_inducer
         Element type of a future multiplication by a raw Python value: 'unordered', 'ordered', 'hybrid'
     """
