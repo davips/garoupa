@@ -122,7 +122,7 @@ def pmat_mult(a, b):
     -------
 
     &#34;&#34;&#34;
-    if len(a) != len(b):
+    if len(a) != len(b):  # pragma: no cover
         raise Exception(&#34;a and b should have same length.&#34;)
     return [a[x] for x in b]
 
@@ -317,7 +317,7 @@ def pmat_inv(m):
     -------
 
     &#34;&#34;&#34;
-    if len(a) != len(b):
+    if len(a) != len(b):  # pragma: no cover
         raise Exception(&#34;a and b should have same length.&#34;)
     return [a[x] for x in b]</code></pre>
 </details>

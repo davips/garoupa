@@ -109,7 +109,7 @@ def enc(num, alphabet, digits):
     Cannot encode negative number -1
     &#34;&#34;&#34;
     encoded = &#34;&#34;
-    if num &lt; 0:
+    if num &lt; 0:  # pragma: no cover
         raise Exception(f&#34;Cannot encode negative number {num}&#34;)
     b = len(alphabet)
     while num:
@@ -194,9 +194,9 @@ def id2n(id, p):
             return 0
         n += p ** 4 - 1
         kind, lower, upper = &#34;Ordered&#34;, p ** 4, p ** 6 - 1
-    else:
+    else:  # pragma: no cover
         raise Exception(f&#34;Invalid position for &#39;_&#39; in id {id}&#34;)
-    if not lower &lt;= n &lt;= upper:
+    if not lower &lt;= n &lt;= upper:  # pragma: no cover
         raise Exception(f&#34;{kind} id ({id}) with n {n} outside allowed range for its kind: [{lower};{upper}].&#34;)
     return n
 
@@ -264,7 +264,7 @@ def n2id(num, digits, p):
     -------
 
     &#34;&#34;&#34;
-    if num &lt; 0 or num &gt;= p ** 6:
+    if num &lt; 0 or num &gt;= p ** 6:  # pragma: no cover
         raise Exception(f&#34;Number {num} outside allowed range: [0;{p ** 6 - 1}]&#34;)
     elif num &gt;= p ** 4:
         return enc(num - p ** 4 + 1, b64, digits)
@@ -376,7 +376,7 @@ Cannot encode negative number -1
     Cannot encode negative number -1
     &#34;&#34;&#34;
     encoded = &#34;&#34;
-    if num &lt; 0:
+    if num &lt; 0:  # pragma: no cover
         raise Exception(f&#34;Cannot encode negative number {num}&#34;)
     b = len(alphabet)
     while num:
@@ -524,9 +524,9 @@ Ordered id (3212t32t432t32t422t32t23t32t32t432t432t32t23t32.................) wi
             return 0
         n += p ** 4 - 1
         kind, lower, upper = &#34;Ordered&#34;, p ** 4, p ** 6 - 1
-    else:
+    else:  # pragma: no cover
         raise Exception(f&#34;Invalid position for &#39;_&#39; in id {id}&#34;)
-    if not lower &lt;= n &lt;= upper:
+    if not lower &lt;= n &lt;= upper:  # pragma: no cover
         raise Exception(f&#34;{kind} id ({id}) with n {n} outside allowed range for its kind: [{lower};{upper}].&#34;)
     return n</code></pre>
 </details>
@@ -662,7 +662,7 @@ Number -1 outside allowed range: [0;62771016915416317715145892743786391206567242
     -------
 
     &#34;&#34;&#34;
-    if num &lt; 0 or num &gt;= p ** 6:
+    if num &lt; 0 or num &gt;= p ** 6:  # pragma: no cover
         raise Exception(f&#34;Number {num} outside allowed range: [0;{p ** 6 - 1}]&#34;)
     elif num &gt;= p ** 4:
         return enc(num - p ** 4 + 1, b64, digits)
