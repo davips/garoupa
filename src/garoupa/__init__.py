@@ -50,3 +50,29 @@ Other options are also available: ø16, ø32, ø40, ø64"""
 
 ħ16, ħ32, ħ40, ħ64 = [Helper(version) for version in groups.values()]
 ø16, ø32, ø40, ø64 = [Identity(version) for version in groups.values()]
+
+
+def rho_elem(index, asbin=False):
+    """
+    >>> rho_elem(1).id
+    'L9.Vd4B6O6z0WdCgyk4mx1v118i91N.DkR7nS5Ua'
+    >>> rho_elem(2).id
+    'Od4uNccS.19C9PuEHnzB-VK0GKFajq5VJUJi1rCf'
+    >>> rho_elem(2, asbin=True)
+    b'<RESERVED ELEMENT: rho_2>'
+    """
+    r = f"<RESERVED ELEMENT: rho_{index}>".encode()
+    return r if asbin else Hosh(r)
+
+
+def removal_elem(field, asbin=False):
+    """
+    >>> removal_elem("_myfield").id
+    'zZgRpxed-6aboKQ39.v5.HfBjr3j8WJlDwYVvUpi'
+    >>> removal_elem("myfield").id
+    'eE-IoUO1EiZkxKkRyrXJcgXHc0pTD2As7IODrxTc'
+    >>> removal_elem("myfield", asbin=True)
+    b'<RESERVED ELEMENT: DELETE VALUE AT FIELD myfield>'
+    """
+    r = f"<RESERVED ELEMENT: DELETE VALUE AT FIELD {field}>".encode()
+    return r if asbin else Hosh(r)
