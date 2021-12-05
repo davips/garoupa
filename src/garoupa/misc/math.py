@@ -54,7 +54,7 @@ def int2cells(num, mod):
     num, m[2] = divmod(num, mod)
     num, m[1] = divmod(num, mod)
     rest, m[0] = divmod(num, mod)
-    if rest != 0:
+    if rest != 0:  # pragma: no cover
         raise Exception(f"Number {num} too large for given mod {mod}")
     return m
 

@@ -80,7 +80,7 @@ def enc(num, alphabet, digits):
     Cannot encode negative number -1
     """
     encoded = ""
-    if num < 0:
+    if num < 0:  # pragma: no cover
         raise Exception(f"Cannot encode negative number {num}")
     b = len(alphabet)
     while num:
@@ -165,9 +165,9 @@ def id2n(id, p):
             return 0
         n += p ** 4 - 1
         kind, lower, upper = "Ordered", p ** 4, p ** 6 - 1
-    else:
+    else:  # pragma: no cover
         raise Exception(f"Invalid position for '_' in id {id}")
-    if not lower <= n <= upper:
+    if not lower <= n <= upper:  # pragma: no cover
         raise Exception(f"{kind} id ({id}) with n {n} outside allowed range for its kind: [{lower};{upper}].")
     return n
 
@@ -235,7 +235,7 @@ def n2id(num, digits, p):
     -------
 
     """
-    if num < 0 or num >= p ** 6:
+    if num < 0 or num >= p ** 6:  # pragma: no cover
         raise Exception(f"Number {num} outside allowed range: [0;{p ** 6 - 1}]")
     elif num >= p ** 4:
         return enc(num - p ** 4 + 1, b64, digits)

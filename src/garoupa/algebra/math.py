@@ -93,7 +93,7 @@ def pmat_mult(a, b):
     -------
 
     """
-    if len(a) != len(b):
+    if len(a) != len(b):  # pragma: no cover
         raise Exception("a and b should have same length.")
     return [a[x] for x in b]
 
