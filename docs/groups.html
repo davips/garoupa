@@ -49,7 +49,7 @@
 #  time spent here.
 from collections import namedtuple
 
-Group = namedtuple(&#34;Group&#34;, &#34;p p4 p6 digits bytes firstp lastp firstp4 lastp4 firstp6 lastp6 rho delete&#34;)
+Group = namedtuple(&#34;Group&#34;, &#34;p p4 p6 digits bytes firstp lastp firstp4 lastp4 firstp6 lastp6&#34;)
 &#34;&#34;&#34;Group properties&#34;&#34;&#34;
 
 groups = {
@@ -65,8 +65,6 @@ groups = {
         &#34;Y._0d5c34bc54504&#34;,
         &#34;1000000000000000&#34;,
         &#34;wzMzLecAryfbdoW.&#34;,
-        &#34;---------------0&#34;,
-        &#34;--------........&#34;,
     ),
     32: Group(
         4294967291,
@@ -80,8 +78,6 @@ groups = {
         &#34;.._67200000b0efffff59000000cefff&#34;,
         &#34;10000000000000000000000000000000&#34;,
         &#34;oG300obK..f2A000gp...nn000wU....&#34;,
-        &#34;-------------------------------0&#34;,
-        &#34;----------------................&#34;,
     ),
     40: Group(
         1099511627689,
@@ -95,8 +91,6 @@ groups = {
         &#34;.._87c2a630003eec7dffff561b0000004aeffff&#34;,
         &#34;1000000000000000000000000000000000000000&#34;,
         &#34;g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....&#34;,
-        &#34;---------------------------------------0&#34;,
-        &#34;--------------------....................&#34;,
     ),
     64: Group(
         18446744073709551557,
@@ -110,8 +104,6 @@ groups = {
         &#34;.._ca5e8b00000000003f673fffffffffff591500000000000041fffffffffff&#34;,
         &#34;1000000000000000000000000000000000000000000000000000000000000000&#34;,
         &#34;owLrhD0000wO2Z50.....z08lH000000MelM......vZb30000000UF.........&#34;,
-        &#34;---------------------------------------------------------------0&#34;,
-        &#34;--------------------------------................................&#34;,
     ),
 }
 UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
@@ -128,10 +120,10 @@ UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 <dl>
 <dt id="garoupa.groups.Group"><code class="flex name class">
 <span>class <span class="ident">Group</span></span>
-<span>(</span><span>p, p4, p6, digits, bytes, firstp, lastp, firstp4, lastp4, firstp6, lastp6, rho, delete)</span>
+<span>(</span><span>p, p4, p6, digits, bytes, firstp, lastp, firstp4, lastp4, firstp6, lastp6)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Group(p, p4, p6, digits, bytes, firstp, lastp, firstp4, lastp4, firstp6, lastp6, rho, delete)</p></div>
+<div class="desc"><p>Group(p, p4, p6, digits, bytes, firstp, lastp, firstp4, lastp4, firstp6, lastp6)</p></div>
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li>builtins.tuple</li>
@@ -141,10 +133,6 @@ UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 <dt id="garoupa.groups.Group.bytes"><code class="name">var <span class="ident">bytes</span></code></dt>
 <dd>
 <div class="desc"><p>Alias for field number 4</p></div>
-</dd>
-<dt id="garoupa.groups.Group.delete"><code class="name">var <span class="ident">delete</span></code></dt>
-<dd>
-<div class="desc"><p>Alias for field number 12</p></div>
 </dd>
 <dt id="garoupa.groups.Group.digits"><code class="name">var <span class="ident">digits</span></code></dt>
 <dd>
@@ -186,10 +174,6 @@ UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 <dd>
 <div class="desc"><p>Alias for field number 2</p></div>
 </dd>
-<dt id="garoupa.groups.Group.rho"><code class="name">var <span class="ident">rho</span></code></dt>
-<dd>
-<div class="desc"><p>Alias for field number 11</p></div>
-</dd>
 </dl>
 </dd>
 </dl>
@@ -212,7 +196,6 @@ UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 <h4><code><a title="garoupa.groups.Group" href="#garoupa.groups.Group">Group</a></code></h4>
 <ul class="two-column">
 <li><code><a title="garoupa.groups.Group.bytes" href="#garoupa.groups.Group.bytes">bytes</a></code></li>
-<li><code><a title="garoupa.groups.Group.delete" href="#garoupa.groups.Group.delete">delete</a></code></li>
 <li><code><a title="garoupa.groups.Group.digits" href="#garoupa.groups.Group.digits">digits</a></code></li>
 <li><code><a title="garoupa.groups.Group.firstp" href="#garoupa.groups.Group.firstp">firstp</a></code></li>
 <li><code><a title="garoupa.groups.Group.firstp4" href="#garoupa.groups.Group.firstp4">firstp4</a></code></li>
@@ -223,7 +206,6 @@ UT16_4, UT32_4, UT40_4, UT64_4 = groups.values()</code></pre>
 <li><code><a title="garoupa.groups.Group.p" href="#garoupa.groups.Group.p">p</a></code></li>
 <li><code><a title="garoupa.groups.Group.p4" href="#garoupa.groups.Group.p4">p4</a></code></li>
 <li><code><a title="garoupa.groups.Group.p6" href="#garoupa.groups.Group.p6">p6</a></code></li>
-<li><code><a title="garoupa.groups.Group.rho" href="#garoupa.groups.Group.rho">rho</a></code></li>
 </ul>
 </li>
 </ul>

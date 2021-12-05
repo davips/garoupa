@@ -80,7 +80,33 @@ identity = ø()
 Other options are also available: ø16, ø32, ø40, ø64&#34;&#34;&#34;
 
 ħ16, ħ32, ħ40, ħ64 = [Helper(version) for version in groups.values()]
-ø16, ø32, ø40, ø64 = [Identity(version) for version in groups.values()]</code></pre>
+ø16, ø32, ø40, ø64 = [Identity(version) for version in groups.values()]
+
+
+def rho_elem(index, asbin=False):
+    &#34;&#34;&#34;
+    &gt;&gt;&gt; rho_elem(1).id
+    &#39;L9.Vd4B6O6z0WdCgyk4mx1v118i91N.DkR7nS5Ua&#39;
+    &gt;&gt;&gt; rho_elem(2).id
+    &#39;Od4uNccS.19C9PuEHnzB-VK0GKFajq5VJUJi1rCf&#39;
+    &gt;&gt;&gt; rho_elem(2, asbin=True)
+    b&#39;&lt;RESERVED ELEMENT: rho_2&gt;&#39;
+    &#34;&#34;&#34;
+    r = f&#34;&lt;RESERVED ELEMENT: rho_{index}&gt;&#34;.encode()
+    return r if asbin else Hosh(r)
+
+
+def removal_elem(field, asbin=False):
+    &#34;&#34;&#34;
+    &gt;&gt;&gt; removal_elem(&#34;_myfield&#34;).id
+    &#39;zZgRpxed-6aboKQ39.v5.HfBjr3j8WJlDwYVvUpi&#39;
+    &gt;&gt;&gt; removal_elem(&#34;myfield&#34;).id
+    &#39;eE-IoUO1EiZkxKkRyrXJcgXHc0pTD2As7IODrxTc&#39;
+    &gt;&gt;&gt; removal_elem(&#34;myfield&#34;, asbin=True)
+    b&#39;&lt;RESERVED ELEMENT: DELETE VALUE AT FIELD myfield&gt;&#39;
+    &#34;&#34;&#34;
+    r = f&#34;&lt;RESERVED ELEMENT: DELETE VALUE AT FIELD {field}&gt;&#34;.encode()
+    return r if asbin else Hosh(r)</code></pre>
 </details>
 </section>
 <section>
@@ -124,13 +150,72 @@ Other options are also available: ø16, ø32, ø40, ø64&#34;&#34;&#34;
 </dl>
 </section>
 <section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="garoupa.removal_elem"><code class="name flex">
+<span>def <span class="ident">removal_elem</span></span>(<span>field, asbin=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><pre><code class="language-python-repl">&gt;&gt;&gt; removal_elem(&quot;_myfield&quot;).id
+'zZgRpxed-6aboKQ39.v5.HfBjr3j8WJlDwYVvUpi'
+&gt;&gt;&gt; removal_elem(&quot;myfield&quot;).id
+'eE-IoUO1EiZkxKkRyrXJcgXHc0pTD2As7IODrxTc'
+&gt;&gt;&gt; removal_elem(&quot;myfield&quot;, asbin=True)
+b'&lt;RESERVED ELEMENT: DELETE VALUE AT FIELD myfield&gt;'
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def removal_elem(field, asbin=False):
+    &#34;&#34;&#34;
+    &gt;&gt;&gt; removal_elem(&#34;_myfield&#34;).id
+    &#39;zZgRpxed-6aboKQ39.v5.HfBjr3j8WJlDwYVvUpi&#39;
+    &gt;&gt;&gt; removal_elem(&#34;myfield&#34;).id
+    &#39;eE-IoUO1EiZkxKkRyrXJcgXHc0pTD2As7IODrxTc&#39;
+    &gt;&gt;&gt; removal_elem(&#34;myfield&#34;, asbin=True)
+    b&#39;&lt;RESERVED ELEMENT: DELETE VALUE AT FIELD myfield&gt;&#39;
+    &#34;&#34;&#34;
+    r = f&#34;&lt;RESERVED ELEMENT: DELETE VALUE AT FIELD {field}&gt;&#34;.encode()
+    return r if asbin else Hosh(r)</code></pre>
+</details>
+</dd>
+<dt id="garoupa.rho_elem"><code class="name flex">
+<span>def <span class="ident">rho_elem</span></span>(<span>index, asbin=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><pre><code class="language-python-repl">&gt;&gt;&gt; rho_elem(1).id
+'L9.Vd4B6O6z0WdCgyk4mx1v118i91N.DkR7nS5Ua'
+&gt;&gt;&gt; rho_elem(2).id
+'Od4uNccS.19C9PuEHnzB-VK0GKFajq5VJUJi1rCf'
+&gt;&gt;&gt; rho_elem(2, asbin=True)
+b'&lt;RESERVED ELEMENT: rho_2&gt;'
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rho_elem(index, asbin=False):
+    &#34;&#34;&#34;
+    &gt;&gt;&gt; rho_elem(1).id
+    &#39;L9.Vd4B6O6z0WdCgyk4mx1v118i91N.DkR7nS5Ua&#39;
+    &gt;&gt;&gt; rho_elem(2).id
+    &#39;Od4uNccS.19C9PuEHnzB-VK0GKFajq5VJUJi1rCf&#39;
+    &gt;&gt;&gt; rho_elem(2, asbin=True)
+    b&#39;&lt;RESERVED ELEMENT: rho_2&gt;&#39;
+    &#34;&#34;&#34;
+    r = f&#34;&lt;RESERVED ELEMENT: rho_{index}&gt;&#34;.encode()
+    return r if asbin else Hosh(r)</code></pre>
+</details>
+</dd>
+</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
 <dt id="garoupa.Hosh"><code class="flex name class">
 <span>class <span class="ident">Hosh</span></span>
-<span>(</span><span>content, etype='default:ordered', version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, firstp='0_100000000_____________________________', lastp='f_8afffffff_____________________________', firstp4='00_1000000000000000000000000000000000000', lastp4='.._87c2a630003eec7dffff561b0000004aeffff', firstp6='1000000000000000000000000000000000000000', lastp6='g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....', rho='---------------------------------------0', delete='--------------------....................'))</span>
+<span>(</span><span>content, etype='default:ordered', version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, firstp='0_100000000_____________________________', lastp='f_8afffffff_____________________________', firstp4='00_1000000000000000000000000000000000000', lastp4='.._87c2a630003eec7dffff561b0000004aeffff', firstp6='1000000000000000000000000000000000000000', lastp6='g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....'))</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Operable hash.</p>
@@ -302,7 +387,7 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
 
     def __init__(self, content, etype=&#34;default:ordered&#34;, version=UT40_4):
         self.version = version
-        self.p, self.p4, self.p6, self.digits, self.bytes, _, _, _, _, _, _, self.rho, self.delete = version
+        self.p, self.p4, self.p6, self.digits, self.bytes, _, _, _, _, _, _ = version
         if isinstance(content, list):
             if etype != &#34;default:ordered&#34;:
                 raise DanglingEtype(f&#34;Cannot set etype={etype} when providing cells ({content}).&#34;)
@@ -384,6 +469,8 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         &#39;unordered&#39;
         &gt;&gt;&gt; Hosh(b&#34;12124&#34;).etype_inducer
         &#39;ordered&#39;
+        &gt;&gt;&gt; Hosh(b&#34;12124&#34;, etype=&#34;hybrid&#34;).etype_inducer
+        &#39;hybrid&#39;
 
         Returns
         -------
@@ -889,7 +976,7 @@ def fromid(cls, id):
 </details>
 </dd>
 <dt id="garoupa.Hosh.fromn"><code class="name flex">
-<span>def <span class="ident">fromn</span></span>(<span>n: int, version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, firstp='0_100000000_____________________________', lastp='f_8afffffff_____________________________', firstp4='00_1000000000000000000000000000000000000', lastp4='.._87c2a630003eec7dffff561b0000004aeffff', firstp6='1000000000000000000000000000000000000000', lastp6='g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....', rho='---------------------------------------0', delete='--------------------....................'))</span>
+<span>def <span class="ident">fromn</span></span>(<span>n: int, version=Group(p=1099511627689, p4=1461501636868331575725436266114840805196834679841, p6=1766847063939562670646036165286872353986524172769430561878277294118845361, digits=40, bytes=30, firstp='0_100000000_____________________________', lastp='f_8afffffff_____________________________', firstp4='00_1000000000000000000000000000000000000', lastp4='.._87c2a630003eec7dffff561b0000004aeffff', firstp6='1000000000000000000000000000000000000000', lastp6='g-8KOjCQREq2Vz8VTc30gLMd..vvX6000ov.....'))</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create a Hosh object representing the given int.</p>
@@ -1032,6 +1119,8 @@ def etype(self):
 'unordered'
 &gt;&gt;&gt; Hosh(b&quot;12124&quot;).etype_inducer
 'ordered'
+&gt;&gt;&gt; Hosh(b&quot;12124&quot;, etype=&quot;hybrid&quot;).etype_inducer
+'hybrid'
 </code></pre>
 <h2 id="returns">Returns</h2>
 <p>'ordered', 'hybrid', 'unordered'</p></div>
@@ -1055,6 +1144,8 @@ def etype_inducer(self):
     &#39;unordered&#39;
     &gt;&gt;&gt; Hosh(b&#34;12124&#34;).etype_inducer
     &#39;ordered&#39;
+    &gt;&gt;&gt; Hosh(b&#34;12124&#34;, etype=&#34;hybrid&#34;).etype_inducer
+    &#39;hybrid&#39;
 
     Returns
     -------
@@ -1432,6 +1523,12 @@ voh8t1KrYmzCqpyrUO9.5QbGdouoZsnExarMSa34
 <li><code><a title="garoupa.identity" href="#garoupa.identity">identity</a></code></li>
 <li><code><a title="garoupa.ø" href="#garoupa.ø">ø</a></code></li>
 <li><code><a title="garoupa.ħ" href="#garoupa.ħ">ħ</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="garoupa.removal_elem" href="#garoupa.removal_elem">removal_elem</a></code></li>
+<li><code><a title="garoupa.rho_elem" href="#garoupa.rho_elem">rho_elem</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
