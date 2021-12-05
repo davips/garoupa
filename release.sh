@@ -61,7 +61,7 @@ echo; echo
 
 echo "------------------- push ----------------------"
 read -p "press enter"
-git push
+git push origin main "v$(poetry version | cut -d' ' -f2)"
 echo "------------------- pushed ----------------------"
 echo; echo
 
