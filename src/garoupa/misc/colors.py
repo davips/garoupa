@@ -73,9 +73,9 @@ def id2rgb(id, ampl=0.8, change=0.44, dark=None):
         g = max(margin, lim(fgg + change * (dg - 128)))
         b = max(margin, lim(fgb + change * (db - 128)))
         if not dark:
-            r = r - 255
-            g = g - 255
-            b = b - 255
+            r = r - 200
+            g = g - 200
+            b = b - 200
             if r < 0 or g < 0 or b < 0:
                 worst = min([r, g, b])
                 r -= worst
