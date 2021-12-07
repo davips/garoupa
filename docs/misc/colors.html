@@ -102,16 +102,21 @@ def id2rgb(id, ampl=0.8, change=0.44, dark=None):
         g = max(margin, lim(fgg + change * (dg - 128)))
         b = max(margin, lim(fgb + change * (db - 128)))
         if not dark:
-            r = 0.7 * r
-            g = 0.7 * g
-            b = 0.7 * b
+            r *= 0.7
+            g *= 0.7
+            b *= 0.7
         out.append([int(r), int(g), int(b)])
         bgr += r
         bgg += g
         bgb += b
-    bgr = int(255 - bgr / digits)
-    bgg = int(255 - bgg / digits)
-    bgb = int(255 - bgb / digits)
+    if dark:
+        bgr = int(255 - bgr / digits)
+        bgg = int(255 - bgg / digits)
+        bgb = int(255 - bgb / digits)
+    else:
+        bgr = int(255 - 0.5 * bgr / digits)
+        bgg = int(255 - 0.5 * bgg / digits)
+        bgb = int(255 - 0.5 * bgb / digits)
     return [[bgr, bgg, bgb]] + out
 
 
@@ -201,16 +206,21 @@ def ansi2html(ansi, **kwargs):
         g = max(margin, lim(fgg + change * (dg - 128)))
         b = max(margin, lim(fgb + change * (db - 128)))
         if not dark:
-            r = 0.7 * r
-            g = 0.7 * g
-            b = 0.7 * b
+            r *= 0.7
+            g *= 0.7
+            b *= 0.7
         out.append([int(r), int(g), int(b)])
         bgr += r
         bgg += g
         bgb += b
-    bgr = int(255 - bgr / digits)
-    bgg = int(255 - bgg / digits)
-    bgb = int(255 - bgb / digits)
+    if dark:
+        bgr = int(255 - bgr / digits)
+        bgg = int(255 - bgg / digits)
+        bgb = int(255 - bgb / digits)
+    else:
+        bgr = int(255 - 0.5 * bgr / digits)
+        bgg = int(255 - 0.5 * bgg / digits)
+        bgb = int(255 - 0.5 * bgb / digits)
     return [[bgr, bgg, bgb]] + out</code></pre>
 </details>
 </dd>
