@@ -114,9 +114,9 @@ def id2rgb(id, ampl=0.8, change=0.44, dark=None):
         bgg = int(255 - bgg / digits)
         bgb = int(255 - bgb / digits)
     else:
-        bgr = int(255 - 0.5 * bgr / digits)
-        bgg = int(255 - 0.5 * bgg / digits)
-        bgb = int(255 - 0.5 * bgb / digits)
+        bgr = int(255 - 0.75 * bgr / digits)
+        bgg = int(255 - 0.75 * bgg / digits)
+        bgb = int(255 - 0.75 * bgb / digits)
     return [[bgr, bgg, bgb]] + out
 
 
@@ -218,9 +218,9 @@ def ansi2html(ansi, **kwargs):
         bgg = int(255 - bgg / digits)
         bgb = int(255 - bgb / digits)
     else:
-        bgr = int(255 - 0.5 * bgr / digits)
-        bgg = int(255 - 0.5 * bgg / digits)
-        bgb = int(255 - 0.5 * bgb / digits)
+        bgr = int(255 - 0.75 * bgr / digits)
+        bgg = int(255 - 0.75 * bgg / digits)
+        bgb = int(255 - 0.75 * bgb / digits)
     return [[bgr, bgg, bgb]] + out</code></pre>
 </details>
 </dd>
