@@ -1,4 +1,5 @@
 2.211207
+Improve contrast for non-dark theme
 Keep consistency between dark and light themes
 
 2.211204
