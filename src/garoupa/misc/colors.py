@@ -36,15 +36,12 @@ def paint(txt, fgr, fgg, fgb):
     \x1b[38;5;71m\x1b[1m\x1b[48;5;0mL\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mx\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ma\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mj\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0m8\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mA\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mK\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mt\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mU\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0m5\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mv\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0m0\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mC\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mY\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mV\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;119m\x1b[1m\x1b[48;5;0mb\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mQ\x1b[0m\x1b[38;5;113m\x1b[1m\x1b[48;5;0mn\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;72m\x1b[1m\x1b[48;5;0mJ\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0m1\x1b[0m\x1b[38;5;149m\x1b[1m\x1b[48;5;0mw\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mG\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;0m3\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0mq\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0ms\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0ml\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mW\x1b[0m\x1b[38;5;83m\x1b[1m\x1b[48;5;0m9\x1b[0m\x1b[38;5;107m\x1b[1m\x1b[48;5;0mZ\x1b[0m\x1b[38;5;78m\x1b[1m\x1b[48;5;0m6\x1b[0m
     >>> setup(dark_theme=False)
     >>> ø * b"asd"
-    \x1b[38;5;132m\x1b[1m\x1b[48;5;15mL\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15ms\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;15mx\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15mC\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;15ma\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15mj\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;15ml\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;15mK\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;15m8\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;15m3\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;15m0\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;15mA\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;15mK\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15mq\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;15mt\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;15mU\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;15m5\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15mv\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;15m0\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15mC\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;15m9\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15mY\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;15mV\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;15m9\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;15mb\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;15mQ\x1b[0m\x1b[38;5;91m\x1b[1m\x1b[48;5;15mn\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;15mZ\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;15mJ\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15m1\x1b[0m\x1b[38;5;55m\x1b[1m\x1b[48;5;15mw\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;15mG\x1b[0m\x1b[38;5;132m\x1b[1m\x1b[48;5;15m3\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15mq\x1b[0m\x1b[38;5;60m\x1b[1m\x1b[48;5;15ms\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15ml\x1b[0m\x1b[38;5;96m\x1b[1m\x1b[48;5;15mW\x1b[0m\x1b[38;5;127m\x1b[1m\x1b[48;5;15m9\x1b[0m\x1b[38;5;97m\x1b[1m\x1b[48;5;15mZ\x1b[0m\x1b[38;5;126m\x1b[1m\x1b[48;5;15m6\x1b[0m
+    \x1b[38;5;65m\x1b[1m\x1b[48;5;15mL\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15ms\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15mx\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15mC\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15ma\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15mj\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15ml\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;15mK\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;15m8\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;15m3\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15m0\x1b[0m\x1b[38;5;64m\x1b[1m\x1b[48;5;15mA\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15mK\x1b[0m\x1b[38;5;35m\x1b[1m\x1b[48;5;15mq\x1b[0m\x1b[38;5;106m\x1b[1m\x1b[48;5;15mt\x1b[0m\x1b[38;5;64m\x1b[1m\x1b[48;5;15mU\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15m5\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15mv\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15m0\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15mC\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15m9\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15mY\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15mV\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;15m9\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;15mb\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;15mQ\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15mn\x1b[0m\x1b[38;5;64m\x1b[1m\x1b[48;5;15mZ\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15mJ\x1b[0m\x1b[38;5;35m\x1b[1m\x1b[48;5;15m1\x1b[0m\x1b[38;5;106m\x1b[1m\x1b[48;5;15mw\x1b[0m\x1b[38;5;64m\x1b[1m\x1b[48;5;15mG\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15m3\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15mq\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15ms\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15ml\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15mW\x1b[0m\x1b[38;5;70m\x1b[1m\x1b[48;5;15m9\x1b[0m\x1b[38;5;65m\x1b[1m\x1b[48;5;15mZ\x1b[0m\x1b[38;5;71m\x1b[1m\x1b[48;5;15m6\x1b[0m
     """
-    if not GLOBAL["dark_theme"]:
-        fgr = 255 - fgr
-        fgg = 255 - fgg
-        fgb = 255 - fgb
-        bgcolor = colored.bg("#FFFFFF")
-    else:
+    if GLOBAL["dark_theme"]:
         bgcolor = colored.bg("#000000")
+    else:
+        bgcolor = colored.bg("#FFFFFF")
     fgcolor = f"#{hex(fgr)[2:].rjust(2, '0')}{hex(fgg)[2:].rjust(2, '0')}{hex(fgb)[2:].rjust(2, '0')}"
     return stylize(txt, colored.fg(fgcolor) + colored.attr("bold") + bgcolor)
 
@@ -59,7 +56,9 @@ def id2ansi(id, ampl=0.8, change=0.44):
     return "".join(strs)
 
 
-def id2rgb(id, ampl=0.8, change=0.44):
+def id2rgb(id, ampl=0.8, change=0.44, dark=None):
+    if dark is None:
+        dark = GLOBAL["dark_theme"]
     digits = len(id)
     numbers = md5(id.encode()).digest()
     margin = 64
@@ -73,6 +72,10 @@ def id2rgb(id, ampl=0.8, change=0.44):
         r = max(margin, lim(fgr + change * (dr - 128)))
         g = max(margin, lim(fgg + change * (dg - 128)))
         b = max(margin, lim(fgb + change * (db - 128)))
+        if not dark:
+            r = 0.7 * r
+            g = 0.7 * g
+            b = 0.7 * b
         out.append([int(r), int(g), int(b)])
         bgr += r
         bgg += g

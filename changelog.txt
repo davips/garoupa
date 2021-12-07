@@ -1,3 +1,6 @@
+2.211207
+Keep consistency between dark and light themes
+
 2.211204
     Replace weak hash key2id by strong implicit hashing of key.encode()
     Add rgb/ansi to show id, e.g., in html pages
