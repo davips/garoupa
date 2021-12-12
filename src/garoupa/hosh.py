@@ -105,6 +105,8 @@ class Hosh:
     True
     >>> (x ** y) // y == x
     True
+    >>> f + e == e + f  # Alternative (always unordered, i.e., form an Abelian group) operation
+    True
 
     Parameters
     ----------
@@ -536,11 +538,14 @@ class Hosh:
         """Matrix addition modulo p, keeping unidiagonal"""
         cells = list(map(lambda x, y: (x + y) % self.p, self.cells, self.convert(other).cells))
         return Hosh(cells, version=self.version)
-        # REMINDER: these 2 codes produce different results!
+
+    def __sub__(self, other):
+        """Matrix subtraction modulo p, keeping unidiagonal"""
+        cells = list(map(lambda x, y: (x - y) % self.p, self.cells, self.convert(other).cells))
+        return Hosh(cells, version=self.version)
+        # REMINDER: the chosen implementation differs from the alternative bellow!
         # return Hosh.fromn((self.n + self.convert(other).n) % self.order, self.version)
 
-    # def __sub__(self, other):
-    #     return Hosh.fromn((self.n - self.convert(other).n) % self.order, version=self.version)
 
     def __str__(self):
         return self.sid if Hosh.shorter else self.id
