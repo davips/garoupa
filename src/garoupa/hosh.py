@@ -546,7 +546,6 @@ class Hosh:
         # REMINDER: the chosen implementation differs from the alternative bellow!
         # return Hosh.fromn((self.n + self.convert(other).n) % self.order, self.version)
 
-
     def __str__(self):
         return self.sid if Hosh.shorter else self.id
 

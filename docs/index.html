@@ -280,6 +280,8 @@ True
 True
 &gt;&gt;&gt; (x ** y) // y == x
 True
+&gt;&gt;&gt; f + e == e + f  # Alternative (always unordered, i.e., form an Abelian group) operation
+True
 </code></pre>
 <h2 id="parameters">Parameters</h2>
 <dl>
@@ -364,6 +366,8 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
     &gt;&gt;&gt; (x ** b&#34;1&#34;) * (y ** b&#34;2&#34;) == (y ** b&#34;2&#34;) * (x ** b&#34;1&#34;)
     True
     &gt;&gt;&gt; (x ** y) // y == x
+    True
+    &gt;&gt;&gt; f + e == e + f  # Alternative (always unordered, i.e., form an Abelian group) operation
     True
 
     Parameters
@@ -796,11 +800,13 @@ UT40_4 is recommended and default, since it is the most compatible with other sy
         &#34;&#34;&#34;Matrix addition modulo p, keeping unidiagonal&#34;&#34;&#34;
         cells = list(map(lambda x, y: (x + y) % self.p, self.cells, self.convert(other).cells))
         return Hosh(cells, version=self.version)
-        # REMINDER: these 2 codes produce different results!
-        # return Hosh.fromn((self.n + self.convert(other).n) % self.order, self.version)
 
-    # def __sub__(self, other):
-    #     return Hosh.fromn((self.n - self.convert(other).n) % self.order, version=self.version)
+    def __sub__(self, other):
+        &#34;&#34;&#34;Matrix subtraction modulo p, keeping unidiagonal&#34;&#34;&#34;
+        cells = list(map(lambda x, y: (x - y) % self.p, self.cells, self.convert(other).cells))
+        return Hosh(cells, version=self.version)
+        # REMINDER: the chosen implementation differs from the alternative bellow!
+        # return Hosh.fromn((self.n + self.convert(other).n) % self.order, self.version)
 
     def __str__(self):
         return self.sid if Hosh.shorter else self.id
