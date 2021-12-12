@@ -105,7 +105,7 @@ class Hosh:
     True
     >>> (x ** y) // y == x
     True
-    >>> f + e == e + f  # Alternative (always unordered, i.e., form an Abelian group) operation
+    >>> f + e - x == ø - x + e + f  # Alternative (always unordered, i.e., form an Abelian group) operation
     True
 
     Parameters

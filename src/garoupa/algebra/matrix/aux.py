@@ -24,19 +24,22 @@
 def ncclasses(n, p):
     """Number of conjugacy classes
 
+    https://groupprops.subwiki.org/wiki/Number_of_conjugacy_classes_in_unitriangular_matrix_group_of_fixed_degree_over_a_finite_field_is_polynomial_function_of_field_size
+
     Usage:
 
-    >>> for n in range(3, 5):
+    >>> for n in range(3, 6):
     ...     print(ncclasses(n, 2**32-5))
     18446744035054845971
     158456324493573097642216390441
+    1701411826681876079633263602195392105401
     """
     if n == 3:
         return p ** 2 + p - 1
     elif n == 4:
         return 2 * (p ** 3) + p ** 2 - 2 * p
-    # elif n == 5:
-    #     return 5 * (p ** 4) - 5 * (p ** 2) + 1
+    elif n == 5:
+        return 5 * (p ** 4) - 5 * (p ** 2) + 1
     # elif n == 6:
     #     return -1 + 4 * p + 5 * (p ** 2) - 15 * (p ** 3) - 5 * (p ** 4) + 12 * (p ** 5) + p ** 6
     # elif n == 7:
@@ -79,5 +82,5 @@ def ncclasses(n, p):
     #            + 57294120 * (q ** 11) + 32515314 * (q ** 12) + 14000495 * (q ** 13) \
     #            + 4635125 * (q ** 14) + 1195116 * (q ** 15) + 241436 * (q ** 16) \
     #            + 37778 * (q ** 17) + 4381 * (q ** 18) + 338 * (q ** 19) + 13 * (q ** 20)
-    else:
-        raise Exception("Only 3x3 ... 13x13 matrices have number of conjugacy classes implemented.")
+    else:  # pragma: no cover
+        raise Exception("Only 3x3, 4x4, 5x5 matrices have number of conjugacy classes implemented.")
