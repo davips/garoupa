@@ -12,6 +12,8 @@
 
 
 # GaROUPa - Identification based on group theory
+The identification module of this library is evolving at its successor library [hosh (code)](https://github.com/davips/hosh) / [hosh (package)](https://pypi.org/project/hosh).
+The algebra module exists only here.
  
 
 
