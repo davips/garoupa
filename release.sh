@@ -13,6 +13,19 @@ echo "----------------- tested -----------------------"
 echo; echo
 
 echo
+echo "----------------- gh workflow testing... -----------------------"
+read -p "press enter"
+sudo systemctl enable docker
+sudo systemctl start docker
+coverage xml
+act -j build
+sudo systemctl stop docker
+sudo systemctl disable docker
+echo "----------------- gh workflow -----------------------"
+echo; echo
+
+
+echo
 echo "----------------- docs/black... -----------------------"
 read -p "press enter"
 rm docs -rf
