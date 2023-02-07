@@ -9,7 +9,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5501845.svg)](https://doi.org/10.5281/zenodo.5501845)
 [![arXiv](https://img.shields.io/badge/arXiv-2109.06028-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2109.06028)
 [![API documentation](https://img.shields.io/badge/doc-API%20%28auto%29-a0a0a0.svg)](https://davips.github.io/garoupa)
-
+[![Downloads](https://static.pepy.tech/badge/garoupa)](https://pepy.tech/project/garoupa)
 
 # GaROUPa - Identification based on group theory
 The identification module of this library is evolving at its successor library [hosh (code)](https://github.com/davips/hosh) / [hosh (package)](https://pypi.org/project/hosh).
@@ -222,11 +222,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[3, 0, 1, 2], 3, dr2»	*	«[1, 2, 0, 3], 3, dr2»	=	«[0, 1, 3, 2], 1, dr0»
-«[1, 3, 0, 2], 3, ds3»	*	«[1, 0, 3, 2], 2, ds1»	=	«[3, 1, 2, 0], 0, dr2»
-«[2, 3, 0, 1], 2, ds7»	*	«[1, 0, 2, 3], 0, ds1»	=	«[3, 2, 0, 1], 2, dr2»
-«[2, 0, 3, 1], 2, ds3»	*	«[0, 1, 3, 2], 0, dr5»	=	«[2, 0, 1, 3], 2, ds2»
-«[1, 2, 0, 3], 0, dr5»	*	«[2, 0, 1, 3], 3, ds6»	=	«[0, 1, 2, 3], 3, ds3»
+«[0, 2, 1, 3], 1, ds3»	*	«[2, 3, 0, 1], 0, dr6»	=	«[1, 3, 0, 2], 1, ds1»
+«[0, 2, 1, 3], 1, dr3»	*	«[1, 3, 0, 2], 0, ds5»	=	«[2, 3, 0, 1], 1, ds0»
+«[1, 3, 0, 2], 0, ds3»	*	«[2, 0, 3, 1], 1, dr2»	=	«[0, 1, 2, 3], 1, ds1»
+«[3, 0, 1, 2], 3, ds3»	*	«[0, 1, 3, 2], 2, ds4»	=	«[3, 0, 2, 1], 0, dr3»
+«[0, 1, 2, 3], 3, dr5»	*	«[1, 0, 3, 2], 0, ds2»	=	«[1, 0, 3, 2], 3, ds3»
 """
 ```
 
@@ -236,7 +236,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[10, 6, 5, 4, 9, 8, 1, 7, 0, 2, 3, 11]
+[3, 1, 4, 2, 11, 6, 10, 7, 5, 9, 0, 8]
 """
 ```
 
@@ -358,9 +358,9 @@ for G in Gs:
     )
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          843/10000:  12.0 bits	~8.43 %
-    |D8×D8×D8×D8| = 65536:         396/10000:  16.0 bits	~3.96 %
- |D8×D8×D8×D8×D8| = 1048576:       164/10000:  20.0 bits	~1.64 %
+       |D8×D8×D8| = 4096:          812/10000:  12.0 bits	~8.12 %
+    |D8×D8×D8×D8| = 65536:         361/10000:  16.0 bits	~3.61 %
+ |D8×D8×D8×D8×D8| = 1048576:       169/10000:  20.0 bits	~1.69 %
 """
 ```
 
@@ -451,7 +451,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 28/01/2022 14:15:50
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 07/02/2023 14:56:44
 """
 ```
 
