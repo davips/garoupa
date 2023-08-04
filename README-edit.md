@@ -10,6 +10,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2109.06028-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2109.06028)
 [![API documentation](https://img.shields.io/badge/doc-API%20%28auto%29-a0a0a0.svg)](https://davips.github.io/garoupa)
 [![Downloads](https://static.pepy.tech/badge/garoupa)](https://pepy.tech/project/garoupa)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/garoupa)
 
 # GaROUPa - Identification based on group theory
 The identification module of this library is evolving at its successor library [hosh (code)](https://github.com/davips/hosh) / [hosh (package)](https://pypi.org/project/hosh).

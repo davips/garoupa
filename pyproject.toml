@@ -37,7 +37,6 @@ progress = "^1.6"
 pathos = "^0.2.8"
 #numpy = "^1.21.2"
 ipython = "^7.27.0"
-pypi-server = "^0.4.8"
 black = "^21.9b0"
 flake8 = "^4.0.1"
 
