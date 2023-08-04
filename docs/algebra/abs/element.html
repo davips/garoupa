@@ -166,7 +166,8 @@ class Element(ABC):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Element(ABC):
+<pre><code class="python">@dataclass
+class Element(ABC):
     i: int
     order: int
     _id = None
