@@ -19,7 +19,7 @@ experiments = ["bigfloat"]
 [tool.poetry.dependencies]
 python = ">=3.8"
 wheel = "^0.37.0"
-blake3 = "^0.2.0"
+blake3 = "^1.0.4"
 colored = "1.4.2"
 ansi2html = "1.6.0"
 #hosh = { version = "^2.0.0", optional = true }  #  not implemented yet
@@ -28,7 +28,7 @@ pathos = { version = "^0.2.8", optional = true }
 # numpy = { version = "^1.21.2", optional = true }
 bigfloat = { version = "^0.4.0", optional = true }
 
-[tool.poetry.dev-dependencies]
+[poetry.group.dev.dependencies]
 pdoc3 = "^0.10.0"
 autoreadme = "^0.2102.20"
 pytest = "^6.2.5"

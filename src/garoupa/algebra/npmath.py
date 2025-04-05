@@ -253,6 +253,16 @@ def int2bml(n, l, bits):
 
 
 def bm2intl(m, bits):
+    """
+    >>> from numpy import array, uint64
+    >>> m = array([[1, 0, 0, 0, 1],
+    ...     [0, 1, 1, 1, 0],
+    ...     [0, 0, 1, 0, 0],
+    ...     [0, 0, 0, 1, 0],
+    ...     [0, 0, 0, 0, 1]], dtype=uint64)
+    >>> bm2intl(m, 10)
+    112
+    """
     n = 0
     l = len(m)
     b = bits - 1
