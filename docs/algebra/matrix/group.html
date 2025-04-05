@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>garoupa.algebra.matrix.group API documentation</title>
-<meta name="description" content="" />
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
-<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
 </head>
 <body>
 <main>
@@ -22,297 +36,6 @@
 <h1 class="title">Module <code>garoupa.algebra.matrix.group</code></h1>
 </header>
 <section id="section-intro">
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">#  Copyright (c) 2021. Davi Pereira dos Santos
-#
-#  Functions based on Gabriel Dalforno code:
-#  gcd, lcm
-#
-#  This file is part of the garoupa project.
-#  Please respect the license - more about this in the section (*) below.
-#
-#  garoupa is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  garoupa is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with garoupa.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-#
-#  (*) Removing authorship by any means, e.g. by distribution of derived
-#  works or verbatim, obfuscated, compiled or rewritten versions of any
-#  part of this work is a crime and is unethical regarding the effort and
-#  time spent here.
-import sys
-from itertools import repeat, islice
-from math import inf
-from multiprocessing import Manager
-from multiprocessing import Value, Lock
-from random import Random
-from time import time
-
-from garoupa.algebra.abs.element import Element
-
-
-class Group:
-    _commuting_pairs, _comparisons, _interrupt = Value(&#34;i&#34;, 0), Value(&#34;i&#34;, 0), Value(&#34;i&#34;, 0)
-    _mutex = Lock()
-    _euler, _order_hist, _pi = None, None, None
-
-    def __init__(self, identity: Element, sorted: callable, seed: int = None):
-        self.identity, self.sorted, self.seed = identity, sorted, seed
-        self.bits = self.identity.bits
-        self.order = self.identity.order
-        self.name = self.__class__.__name__
-        if self.seed is None:
-            self.seed = int(time() * 1000000000)
-        self.rnd = Random(self.seed)
-
-    def sampled_commuting_freq(self, pairs=5_000, runs=1_000_000_000_000, exitonhit=False):
-        &#34;&#34;&#34;
-        Usage:
-
-        &gt;&gt;&gt; from garoupa.algebra.matrix import M
-        &gt;&gt;&gt; G = M(5, seed=0)
-        &gt;&gt;&gt; max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))
-        (272, 4000)
-        &#34;&#34;&#34;
-        import pathos.multiprocessing as mp
-        from progress.bar import Bar
-
-        def thread(idx):
-            A, B = self.replace(seed=idx + self.seed), self.replace(seed=idx + 1 + self.seed)
-            with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
-                comms = Group._commuting_pairs.value
-                n = Group._comparisons.value
-                for a, b in Bar(&#34;Processing&#34;, max=pairs).iter(islice(zip(A, B), 0, pairs)):
-                    if a * b == b * a:
-                        if exitonhit:
-                            with Group._interrupt.get_lock():
-                                Group._interrupt.value = 1
-                        with Group._commuting_pairs.get_lock():
-                            Group._commuting_pairs.value += 1
-                    with Group._commuting_pairs.get_lock(), Group._comparisons.get_lock():
-                        Group._comparisons.value += 1
-                        comms = Group._commuting_pairs.value
-                        n = Group._comparisons.value
-                    if Group._interrupt.value == 1:
-                        break
-                return comms, n
-
-        Group._commuting_pairs.value = 0
-        Group._comparisons.value = 0
-        Group._interrupt.value = 0
-        if runs == 1:
-            thread(0)
-        else:
-            last_total = -1
-            for comms, n in mp.ProcessingPool().imap(thread, range(0, 2 * runs, 2)):
-                with self._mutex:
-                    if n &gt; last_total:
-                        last_total = n
-                        yield comms, n
-
-    @property
-    def comm_degree(self):
-        raise Exception(
-            f&#34;Not implemented for groups from class {self.name}.&#34; &#34;HINT: Use sampled_comm_degree()&#34;, self.name
-        )
-
-    def __iter__(self):
-        raise Exception(&#34;Not implemented for groups of the class&#34;, self.name)
-
-    def sampled_orders(self, sample=100, width=10, limit=100, logfreq=10, exitonhit=False):
-        &#34;&#34;&#34;Histogram of element orders. Detect identity after many repetitions
-
-        Usage:
-
-        &gt;&gt;&gt; from garoupa.algebra.symmetric import S
-        &gt;&gt;&gt; tot = 0
-        &gt;&gt;&gt; list(S(6, seed=0).sampled_orders(sample=1, width=2))
-        [{(5, 8): 1}]
-        &gt;&gt;&gt; for hist in S(6, seed=0).sampled_orders(width=2):
-        ...     print(hist)
-        {(-1, 2): 1, (1, 4): 20, (3, 6): 45, (5, 8): 34}
-        &#34;&#34;&#34;
-        hist = Manager().dict()
-
-        def thread(a):
-            r = a
-            for i in range(1, limit + 1):
-                if r == self.identity:
-                    if exitonhit:
-                        with Group._interrupt.get_lock():
-                            Group._interrupt.value = 1
-                    bin = (i // width) * width + width // 2
-                    key = bin - width // 2 - 1, bin + width // 2
-                    with self._mutex:
-                        if key not in hist:
-                            hist[key] = 0
-                        hist[key] += 1
-                    break
-                if Group._interrupt.value == 1:
-                    break
-                r = r * a
-            if r != self.identity:
-                key = inf, inf
-                with self._mutex:
-                    if key not in hist:
-                        hist[key] = 0
-                    hist[key] += 1
-            # REMINDER: Python multithreading is really full of unneeded pitfalls:
-            #   local variable hist is copied to all threads;
-            #   the local variable will be untouched,
-            #   so we need to return it.
-            return hist
-
-        Group._interrupt.value = 0
-        last_total, previous = -1, 0
-        import pathos.multiprocessing as mp
-        from progress.bar import Bar
-
-        with Bar(&#34;Processing&#34;, max=sample, suffix=&#34;%(percent)f%%  %(index)d/%(max)d  ETA: %(eta)ds&#34;) as bar:
-            for h in mp.ProcessingPool().imap(thread, islice(self, 0, sample)):
-                bar.next()
-                now = bar.elapsed + 1
-                if now &gt; previous + logfreq:
-                    with self._mutex:
-                        tot = sum(h.values())
-                        if tot &gt; last_total:
-                            previous = now
-                            last_total = tot
-                            sys.stdout.write(&#34;\x1b[1A&#34;)  # &#34;\x1b[2K&#34;)
-                            yield dict(sorted(list(h.items())))
-        yield dict(sorted(list(h.items())))
-
-    def __invert__(self) -&gt; Element:
-        return next(iter(self))
-
-    def samplei(self):
-        return self.rnd.getrandbits(int(self.bits))
-
-    def __mul__(self, other):
-        from garoupa.algebra.product import Product
-
-        return Product(self, other)
-
-    def __xor__(self, other):
-        from garoupa.algebra.product import Product
-
-        return Product(*repeat(self, other))
-
-    __pow__ = __xor__
-
-    def replace(self, *args, **kwargs):
-        raise Exception(&#34;Not implemented for groups of the class&#34;, self.name)
-
-    @classmethod
-    def lcm(cls, a, b):
-        &#34;&#34;&#34;Least common multiple
-
-        Usage:
-
-        &gt;&gt;&gt; from garoupa.algebra.dihedral import D
-        &gt;&gt;&gt; D.lcm(32, 12)
-        96
-
-        Based on Gabriel Dalforno code.&#34;&#34;&#34;
-        return int((a * b) / cls.gcd(a, b))
-
-    @classmethod
-    def gcd(cls, a, b):
-        &#34;&#34;&#34;Greatest common divisor
-
-        Usage:
-
-        &gt;&gt;&gt; from garoupa.algebra.dihedral import D
-        &gt;&gt;&gt; D.gcd(32, 12)
-        4
-
-        Based on Gabriel Dalforno code.&#34;&#34;&#34;
-        if a == 0:
-            return b
-        return cls.gcd(b % a, a)
-
-    def compact_order_hist_lowmem(self, max_histsize, preserve_upto, initial_binsize=1):
-        raise Exception(f&#34;Method compact_order_hist_lowmem() not implemented for groups from class {self.name}.&#34;)
-
-    def compact_order_hist(self, binsize, preserve_upto=0, max_histsize=inf, hist=None):
-        &#34;&#34;&#34;Compact histogram of element orders.
-
-        Usage:
-
-        &gt;&gt;&gt; from garoupa.algebra.dihedral import D
-        &gt;&gt;&gt; (D(7) * D(19)).order_hist
-        {1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
-        &gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(1)
-        {1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
-        &gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(3)
-        {1: 160, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
-        &gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(10)
-        {2: 166, 14: 132, 38: 126, 133: 108}
-        &#34;&#34;&#34;
-        hist = hist or self.order_hist
-        result = {}
-        it = iter(hist.items())
-        c = 0
-        while True:
-            try:
-                k, v = next(it)
-                c += 1
-            except StopIteration:
-                result[0] = 0
-                return result
-            if k &gt; preserve_upto or c &gt;= max_histsize:
-                break
-            result[k] = v
-
-        while True:
-            binstart = k // binsize
-            acc = 0
-            binmiddle = 0
-            try:
-                while k // binsize == binstart:
-                    acc += v
-                    binmiddle += k * v
-                    k, v = next(it)
-            except StopIteration:
-                break
-            finally:
-                result[binmiddle // acc] = acc
-        return result
-
-    @property
-    def order_hist(self):
-        raise Exception(f&#34;Method order_hist() not implemented for groups from class {self.name}.&#34;)
-
-    @staticmethod
-    def _pi_core(hist):
-        p = 0
-        for order, freq in hist.items():
-            p += freq / order
-        return p / sum(hist.values())
-
-    @property
-    def pi(self):
-        &#34;&#34;&#34;Chance of stopping a repetition exactly at identity&#34;&#34;&#34;
-        if self._pi is None:
-            self._pi = self._pi_core(self.order_hist)
-        return self._pi
-
-    def pi_lowmem(self, max_histsize, preserve_upto=0, initial_binsize=1):
-        &#34;&#34;&#34;Approximmate Chance of stopping a repetition exactly at identity - memory-friendly&#34;&#34;&#34;
-        hist = self.compact_order_hist_lowmem(max_histsize, preserve_upto, initial_binsize=initial_binsize)
-        return self._pi_core(hist)</code></pre>
-</details>
 </section>
 <section>
 </section>
@@ -325,10 +48,9 @@ class Group:
 <dl>
 <dt id="garoupa.algebra.matrix.group.Group"><code class="flex name class">
 <span>class <span class="ident">Group</span></span>
-<span>(</span><span>identity: <a title="garoupa.algebra.abs.element.Element" href="../abs/element.html#garoupa.algebra.abs.element.Element">Element</a>, sorted: <built-in function callable>, seed: int = None)</span>
+<span>(</span><span>identity: <a title="garoupa.algebra.abs.element.Element" href="../abs/element.html#garoupa.algebra.abs.element.Element">Element</a>,<br>sorted: <built-in function callable>,<br>seed: int = None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -584,6 +306,7 @@ class Group:
         hist = self.compact_order_hist_lowmem(max_histsize, preserve_upto, initial_binsize=initial_binsize)
         return self._pi_core(hist)</code></pre>
 </details>
+<div class="desc"></div>
 <h3>Subclasses</h3>
 <ul class="hlist">
 <li><a title="garoupa.algebra.cyclic.z.Z" href="../cyclic/z.html#garoupa.algebra.cyclic.z.Z">Z</a></li>
@@ -608,25 +331,6 @@ class Group:
 4
 </code></pre>
 <p>Based on Gabriel Dalforno code.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def gcd(cls, a, b):
-    &#34;&#34;&#34;Greatest common divisor
-
-    Usage:
-
-    &gt;&gt;&gt; from garoupa.algebra.dihedral import D
-    &gt;&gt;&gt; D.gcd(32, 12)
-    4
-
-    Based on Gabriel Dalforno code.&#34;&#34;&#34;
-    if a == 0:
-        return b
-    return cls.gcd(b % a, a)</code></pre>
-</details>
 </dd>
 <dt id="garoupa.algebra.matrix.group.Group.lcm"><code class="name flex">
 <span>def <span class="ident">lcm</span></span>(<span>a, b)</span>
@@ -639,30 +343,12 @@ def gcd(cls, a, b):
 96
 </code></pre>
 <p>Based on Gabriel Dalforno code.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def lcm(cls, a, b):
-    &#34;&#34;&#34;Least common multiple
-
-    Usage:
-
-    &gt;&gt;&gt; from garoupa.algebra.dihedral import D
-    &gt;&gt;&gt; D.lcm(32, 12)
-    96
-
-    Based on Gabriel Dalforno code.&#34;&#34;&#34;
-    return int((a * b) / cls.gcd(a, b))</code></pre>
-</details>
 </dd>
 </dl>
 <h3>Instance variables</h3>
 <dl>
-<dt id="garoupa.algebra.matrix.group.Group.comm_degree"><code class="name">var <span class="ident">comm_degree</span></code></dt>
+<dt id="garoupa.algebra.matrix.group.Group.comm_degree"><code class="name">prop <span class="ident">comm_degree</span></code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -673,10 +359,10 @@ def comm_degree(self):
         f&#34;Not implemented for groups from class {self.name}.&#34; &#34;HINT: Use sampled_comm_degree()&#34;, self.name
     )</code></pre>
 </details>
-</dd>
-<dt id="garoupa.algebra.matrix.group.Group.order_hist"><code class="name">var <span class="ident">order_hist</span></code></dt>
-<dd>
 <div class="desc"></div>
+</dd>
+<dt id="garoupa.algebra.matrix.group.Group.order_hist"><code class="name">prop <span class="ident">order_hist</span></code></dt>
+<dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -685,10 +371,10 @@ def comm_degree(self):
 def order_hist(self):
     raise Exception(f&#34;Method order_hist() not implemented for groups from class {self.name}.&#34;)</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
-<dt id="garoupa.algebra.matrix.group.Group.pi"><code class="name">var <span class="ident">pi</span></code></dt>
+<dt id="garoupa.algebra.matrix.group.Group.pi"><code class="name">prop <span class="ident">pi</span></code></dt>
 <dd>
-<div class="desc"><p>Chance of stopping a repetition exactly at identity</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -700,6 +386,7 @@ def pi(self):
         self._pi = self._pi_core(self.order_hist)
     return self._pi</code></pre>
 </details>
+<div class="desc"><p>Chance of stopping a repetition exactly at identity</p></div>
 </dd>
 </dl>
 <h3>Methods</h3>
@@ -708,18 +395,6 @@ def pi(self):
 <span>def <span class="ident">compact_order_hist</span></span>(<span>self, binsize, preserve_upto=0, max_histsize=inf, hist=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Compact histogram of element orders.</p>
-<p>Usage:</p>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa.algebra.dihedral import D
-&gt;&gt;&gt; (D(7) * D(19)).order_hist
-{1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
-&gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(1)
-{1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
-&gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(3)
-{1: 160, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
-&gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(10)
-{2: 166, 14: 132, 38: 126, 133: 108}
-</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -769,12 +444,23 @@ def pi(self):
             result[binmiddle // acc] = acc
     return result</code></pre>
 </details>
+<div class="desc"><p>Compact histogram of element orders.</p>
+<p>Usage:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa.algebra.dihedral import D
+&gt;&gt;&gt; (D(7) * D(19)).order_hist
+{1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
+&gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(1)
+{1: 1, 2: 159, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
+&gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(3)
+{1: 160, 7: 6, 14: 114, 19: 18, 38: 126, 133: 108}
+&gt;&gt;&gt; (D(7) * D(19)).compact_order_hist(10)
+{2: 166, 14: 132, 38: 126, 133: 108}
+</code></pre></div>
 </dd>
 <dt id="garoupa.algebra.matrix.group.Group.compact_order_hist_lowmem"><code class="name flex">
 <span>def <span class="ident">compact_order_hist_lowmem</span></span>(<span>self, max_histsize, preserve_upto, initial_binsize=1)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -782,12 +468,12 @@ def pi(self):
 <pre><code class="python">def compact_order_hist_lowmem(self, max_histsize, preserve_upto, initial_binsize=1):
     raise Exception(f&#34;Method compact_order_hist_lowmem() not implemented for groups from class {self.name}.&#34;)</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="garoupa.algebra.matrix.group.Group.pi_lowmem"><code class="name flex">
 <span>def <span class="ident">pi_lowmem</span></span>(<span>self, max_histsize, preserve_upto=0, initial_binsize=1)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Approximmate Chance of stopping a repetition exactly at identity - memory-friendly</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -797,12 +483,12 @@ def pi(self):
     hist = self.compact_order_hist_lowmem(max_histsize, preserve_upto, initial_binsize=initial_binsize)
     return self._pi_core(hist)</code></pre>
 </details>
+<div class="desc"><p>Approximmate Chance of stopping a repetition exactly at identity - memory-friendly</p></div>
 </dd>
 <dt id="garoupa.algebra.matrix.group.Group.replace"><code class="name flex">
 <span>def <span class="ident">replace</span></span>(<span>self, *args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -810,17 +496,12 @@ def pi(self):
 <pre><code class="python">def replace(self, *args, **kwargs):
     raise Exception(&#34;Not implemented for groups of the class&#34;, self.name)</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="garoupa.algebra.matrix.group.Group.sampled_commuting_freq"><code class="name flex">
 <span>def <span class="ident">sampled_commuting_freq</span></span>(<span>self, pairs=5000, runs=1000000000000, exitonhit=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Usage:</p>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa.algebra.matrix import M
-&gt;&gt;&gt; G = M(5, seed=0)
-&gt;&gt;&gt; max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))
-(272, 4000)
-</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -870,21 +551,17 @@ def pi(self):
                     last_total = n
                     yield comms, n</code></pre>
 </details>
+<div class="desc"><p>Usage:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa.algebra.matrix import M
+&gt;&gt;&gt; G = M(5, seed=0)
+&gt;&gt;&gt; max(sorted(G.sampled_commuting_freq(pairs=1000, runs=4)))
+(272, 4000)
+</code></pre></div>
 </dd>
 <dt id="garoupa.algebra.matrix.group.Group.sampled_orders"><code class="name flex">
 <span>def <span class="ident">sampled_orders</span></span>(<span>self, sample=100, width=10, limit=100, logfreq=10, exitonhit=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Histogram of element orders. Detect identity after many repetitions</p>
-<p>Usage:</p>
-<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa.algebra.symmetric import S
-&gt;&gt;&gt; tot = 0
-&gt;&gt;&gt; list(S(6, seed=0).sampled_orders(sample=1, width=2))
-[{(5, 8): 1}]
-&gt;&gt;&gt; for hist in S(6, seed=0).sampled_orders(width=2):
-...     print(hist)
-{(-1, 2): 1, (1, 4): 20, (3, 6): 45, (5, 8): 34}
-</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -952,12 +629,21 @@ def pi(self):
                         yield dict(sorted(list(h.items())))
     yield dict(sorted(list(h.items())))</code></pre>
 </details>
+<div class="desc"><p>Histogram of element orders. Detect identity after many repetitions</p>
+<p>Usage:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from garoupa.algebra.symmetric import S
+&gt;&gt;&gt; tot = 0
+&gt;&gt;&gt; list(S(6, seed=0).sampled_orders(sample=1, width=2))
+[{(5, 8): 1}]
+&gt;&gt;&gt; for hist in S(6, seed=0).sampled_orders(width=2):
+...     print(hist)
+{(-1, 2): 1, (1, 4): 20, (3, 6): 45, (5, 8): 34}
+</code></pre></div>
 </dd>
 <dt id="garoupa.algebra.matrix.group.Group.samplei"><code class="name flex">
 <span>def <span class="ident">samplei</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -965,6 +651,7 @@ def pi(self):
 <pre><code class="python">def samplei(self):
     return self.rnd.getrandbits(int(self.bits))</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 </dl>
 </dd>
@@ -972,7 +659,6 @@ def pi(self):
 </section>
 </article>
 <nav id="sidebar">
-<h1>Index</h1>
 <div class="toc">
 <ul></ul>
 </div>
@@ -1007,7 +693,7 @@ def pi(self):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>

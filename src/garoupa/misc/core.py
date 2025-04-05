@@ -67,9 +67,9 @@ def cells_id_fromblob(blob, etype, nbytes, p):
     if etype == "unordered":
         n %= p
     elif etype == "hybrid":
-        n = (p + n) % p ** 4
+        n = (p + n) % p**4
     elif etype == "ordered":
-        n = (p ** 4 + n) % p ** 6
+        n = (p**4 + n) % p**6
     else:
         raise WrongEType("Unknown etype:", etype)
     cells = int2cells(n, p)

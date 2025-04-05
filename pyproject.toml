@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "garoupa"
-version = "3.250405.0"
+version = "3.250405.1"
 description = "Predictable operable hash-based identifiers and abstract algebra groups"
 authors = ["davips <dpsabc@gmail.com>"]
 license = "GPL"
@@ -27,6 +27,7 @@ progress = { version = "^1.6", optional = true }
 pathos = { version = "^0.2.8", optional = true }
 # numpy = { version = "^1.21.2", optional = true }
 bigfloat = { version = "^0.4.0", optional = true }
+setuptools = "^78.1.0"
 
 [poetry.group.dev.dependencies]
 pdoc3 = "^0.10.0"
@@ -44,6 +45,11 @@ flake8 = "^4.0.1"
 numpy = "^1.24.2"
 pytest = "^8.3.5"
 pytest-cov = "^6.1.1"
+pdoc3 = "^0.11.6"
+autoreadme = "^0.2302.3"
+progress = "^1.6"
+black = "^25.1.0"
+flake8 = "^7.2.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

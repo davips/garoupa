@@ -80,7 +80,7 @@ def cells2int(m, mod):
     -------
         Lexicographic rank of the element (at least according to the disposition of cells adopted here)
     """
-    return m[5] + m[4] * mod + m[3] * (mod ** 2) + m[2] * (mod ** 3) + m[1] * (mod ** 4) + m[0] * (mod ** 5)
+    return m[5] + m[4] * mod + m[3] * (mod**2) + m[2] * (mod**3) + m[1] * (mod**4) + m[0] * (mod**5)
 
 
 def cellsmul(a, b, mod):

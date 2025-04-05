@@ -1,1 +1,1 @@
-Update dependences
+Update python to 3.9 and blake3

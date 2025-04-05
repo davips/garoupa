@@ -35,11 +35,11 @@ def ncclasses(n, p):
     1701411826681876079633263602195392105401
     """
     if n == 3:
-        return p ** 2 + p - 1
+        return p**2 + p - 1
     elif n == 4:
-        return 2 * (p ** 3) + p ** 2 - 2 * p
+        return 2 * (p**3) + p**2 - 2 * p
     elif n == 5:
-        return 5 * (p ** 4) - 5 * (p ** 2) + 1
+        return 5 * (p**4) - 5 * (p**2) + 1
     # elif n == 6:
     #     return -1 + 4 * p + 5 * (p ** 2) - 15 * (p ** 3) - 5 * (p ** 4) + 12 * (p ** 5) + p ** 6
     # elif n == 7:

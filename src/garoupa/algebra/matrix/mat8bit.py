@@ -42,7 +42,7 @@ class Mat8bit(Element):
         >>> (a * b) * ~b == a
         True
         """
-        super().__init__(i, 2 ** 8)
+        super().__init__(i, 2**8)
         if i == self.i and _m is not None:
             self.m = _m
         else:

@@ -38,7 +38,7 @@ class Mat128bit(Element):
          [0 0 0 0 1 0]
          [0 0 0 0 0 1]]
         """
-        super().__init__(i, 2 ** 128)
+        super().__init__(i, 2**128)
         self.m = int2bm(i) if _m is None else _m
 
     def __mul__(self, other):

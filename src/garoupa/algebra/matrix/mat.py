@@ -50,7 +50,7 @@ class Mat(Element):
         True
         """
         self.cells = sum(range(1, n))
-        super().__init__(i, order=mod ** self.cells)
+        super().__init__(i, order=mod**self.cells)
         self.n, self.mod = n, mod
         self.m = int2ml(i, mod, n) if _m is None else _m
 

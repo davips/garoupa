@@ -152,19 +152,19 @@ def id2n(id, p):
         hexsize = len(id) // 4 - 1
         a = dec(id[:1], b16r)
         b = dec(id[2 : (hexsize + 2)], b16r)
-        n = a * 16 ** hexsize + b
+        n = a * 16**hexsize + b
         kind, lower, upper = "Unordered", 1, p - 1
     elif id[2] == "_":
         a = dec(id[:2], b64r)
         b = dec(id[3:], b16r)
         n = a * 16 ** (len(id) - 3) + b + p - 1
-        kind, lower, upper = "Hybrid", p, p ** 4 - 1
+        kind, lower, upper = "Hybrid", p, p**4 - 1
     elif "_" not in id:
         n = dec(id, b64r)
         if n == 0:
             return 0
-        n += p ** 4 - 1
-        kind, lower, upper = "Ordered", p ** 4, p ** 6 - 1
+        n += p**4 - 1
+        kind, lower, upper = "Ordered", p**4, p**6 - 1
     else:  # pragma: no cover
         raise Exception(f"Invalid position for '_' in id {id}")
     if not lower <= n <= upper:  # pragma: no cover
@@ -235,17 +235,17 @@ def n2id(num, digits, p):
     -------
 
     """
-    if num < 0 or num >= p ** 6:  # pragma: no cover
+    if num < 0 or num >= p**6:  # pragma: no cover
         raise Exception(f"Number {num} outside allowed range: [0;{p ** 6 - 1}]")
-    elif num >= p ** 4:
-        return enc(num - p ** 4 + 1, b64, digits)
+    elif num >= p**4:
+        return enc(num - p**4 + 1, b64, digits)
     elif num >= p:
         a, b = divmod(num - p + 1, 16 ** (digits - 3))
         return enc(a, b64, 2) + "_" + enc(b, b16, digits - 3)
     elif num > 0:
         hexsize = digits // 4 - 1
         # a, b = divmod(num, 2 ** (digits-2))
-        a, b = divmod(num, 16 ** hexsize)
+        a, b = divmod(num, 16**hexsize)
         # return enc(a, b64, 1) + "_" + enc(b, b2, digits - 2)
         return str(b16[a]) + "_" + enc(b, b16, hexsize) + (digits - hexsize - 2) * "_"
     elif num == 0:

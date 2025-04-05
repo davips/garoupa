@@ -50,7 +50,7 @@ class TestLdict(TestCase):
         with pytest.raises(WrongContent):
             Hosh(124124)
         with pytest.raises(ElementTooHigh):
-            Hosh.fromn(2 ** 241)
+            Hosh.fromn(2**241)
         with pytest.raises(WrongVersion):
             ø.convert(i64)
         with pytest.raises(WrongVersion):
@@ -78,6 +78,6 @@ class TestLdict(TestCase):
         self.assertEqual(+-c, -c)
 
         self.assertEqual(c * d, d * c)
-        self.assertEqual([0, 0, 10, 8, 10, 42], d ** c)
-        self.assertNotEqual(c ** d, d ** c)
-        self.assertEqual(c, c ** d // d)
+        self.assertEqual([0, 0, 10, 8, 10, 42], d**c)
+        self.assertNotEqual(c**d, d**c)
+        self.assertEqual(c, c**d // d)
