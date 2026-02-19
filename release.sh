@@ -79,4 +79,6 @@ echo "------------------- pushed ----------------------"
 echo; echo
 
 echo "------------------- publish ----------------------"
-poetry publish --build
+poetry build
+export POETRY_PYPI_TOKEN_PYPI=$(cat ~/git/token-pypi)
+poetry publish -u__token__
