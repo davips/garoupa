@@ -3,7 +3,7 @@
 <a href="https://pypi.org/project/garoupa">
 <img src="https://img.shields.io/pypi/v/garoupa.svg?label=release&color=blue&style=flat-square" alt="pypi">
 </a>
-![Python version](https://img.shields.io/badge/python-3.8%20%7C%203.9-blue.svg)
+![Python version](https://img.shields.io/badge/python->=3.8-blue.svg)
 [![license: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5501845.svg)](https://doi.org/10.5281/zenodo.5501845)
@@ -223,11 +223,11 @@ S4×Z5×D4
 for a, b in islice(zip(G, G), 0, 5):
     print(a, "*", b, "=", a * b, sep="\t")
 """
-«[3, 2, 0, 1], 1, ds2»	*	«[3, 0, 2, 1], 1, dr3»	=	«[1, 3, 0, 2], 2, ds3»
-«[2, 3, 0, 1], 0, dr7»	*	«[0, 3, 1, 2], 3, ds1»	=	«[2, 1, 3, 0], 3, ds0»
-«[1, 2, 0, 3], 0, dr6»	*	«[1, 0, 3, 2], 0, ds7»	=	«[2, 1, 3, 0], 0, ds1»
-«[2, 3, 0, 1], 1, ds1»	*	«[2, 0, 1, 3], 0, ds0»	=	«[0, 2, 3, 1], 1, dr1»
-«[3, 0, 2, 1], 2, dr3»	*	«[1, 0, 2, 3], 2, ds2»	=	«[0, 3, 2, 1], 4, ds1»
+«[3, 2, 0, 1], 3, ds0»	*	«[2, 1, 0, 3], 1, dr3»	=	«[0, 2, 3, 1], 4, ds1»
+«[2, 0, 1, 3], 2, dr1»	*	«[2, 0, 1, 3], 3, ds4»	=	«[1, 2, 0, 3], 0, ds1»
+«[3, 0, 2, 1], 0, dr4»	*	«[3, 1, 0, 2], 1, dr3»	=	«[1, 0, 3, 2], 1, dr3»
+«[1, 3, 0, 2], 1, ds0»	*	«[3, 0, 1, 2], 1, dr0»	=	«[2, 1, 3, 0], 2, ds0»
+«[1, 3, 0, 2], 0, dr6»	*	«[1, 0, 3, 2], 1, dr7»	=	«[3, 1, 2, 0], 1, dr1»
 """
 ```
 
@@ -237,7 +237,7 @@ for a, b in islice(zip(G, G), 0, 5):
 G = S(12)
 print(~G)
 """
-[6, 1, 9, 11, 5, 8, 2, 7, 0, 3, 10, 4]
+[5, 1, 9, 2, 3, 4, 7, 11, 8, 6, 0, 10]
 """
 ```
 
@@ -359,9 +359,9 @@ for G in Gs:
     )
 """
            |M3%4| = 64:            2560/4096:  6.0 bits	62.5 %
-       |D8×D8×D8| = 4096:          826/10000:  12.0 bits	~8.26 %
-    |D8×D8×D8×D8| = 65536:         395/10000:  16.0 bits	~3.95 %
- |D8×D8×D8×D8×D8| = 1048576:       139/10000:  20.0 bits	~1.39 %
+       |D8×D8×D8| = 4096:          892/10000:  12.0 bits	~8.92 %
+    |D8×D8×D8×D8| = 65536:         372/10000:  16.0 bits	~3.72 %
+ |D8×D8×D8×D8×D8| = 1048576:       159/10000:  20.0 bits	~1.59 %
 """
 ```
 
@@ -452,7 +452,7 @@ for hist in G.sampled_orders(sample=sample, limit=limit):
 --------------------------------------------------------------
 {(-1, 10): 9, (9, 20): 7, (19, 30): 9, (inf, inf): 75}
 
-bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 19/02/2026 13:40:36
+bits: 21.38  Pc: 4.11e-03   a^<30=0: 25/100 = 2.50e-01 D5×D7×D11×D13×D17 0.125 19/02/2026 14:05:50
 """
 ```
 
